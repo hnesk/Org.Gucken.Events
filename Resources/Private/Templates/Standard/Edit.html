@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+<f:section name="content">
+	<h2>Edit an event</h2>
+	<div id="content">
+		<f:form action="update" name="event" object="{event}">
+			<f:render partial="Event/Form" arguments="{event:event,locations:locations}"/>
+		</f:form>
+	</div>
+</f:section>
+<f:section name="right">---</f:section>

@@ -1,0 +1,38 @@
+<dl>
+	<dt>
+        <label for="externalIdentifiers">External Identifiers:</label>
+    </dt>
+    <dd>             
+        <ol>            
+            <f:for each="{location.externalIdentifiers}" as="externalIdentifier" key="i">
+                <li>
+                    <f:form.select class="externalIdentifierScheme" property="externalIdentifiers.{i}.scheme" options="{externalIdentifiers}" />                    
+                    <f:form.hidden property="externalIdentifiers.{i}" value="{externalIdentifier}"/>
+                    <span class="selectHolder" data-url="{f:uri.action(action:'lookup',format:'html',arguments:{location:location, position:i, type:externalIdentifier.scheme})}">
+                        {externalIdentifier.id}
+                    </span>
+                </li>                                        
+            </f:for>
+            <li>
+                <f:form.select class="externalIdentifierScheme" property="externalIdentifiers.{location.externalIdentifiers -> f:count()}.scheme"  options="{externalIdentifiers}" />
+                <f:form.textfield property="externalIdentifiers.{location.externalIdentifiers -> f:count()}.id" />
+                <f:form.hidden property="externalIdentifiers.{location.externalIdentifiers -> f:count()}.location" value="{location}"/>
+            </li>                        
+        </ol>
+    </dd>            
+    <dt>
+        <label for="keywords_{location.keywords -> f:count()}_keyword">Keywords:</label>
+    </dt>
+    <dd>             
+        <ol>            
+            <f:for each="{location.keywords}" as="keyword" key="i">
+                <li>{keyword}</li>                                 
+            </f:for> 
+            <li class="autoadd" data-autoadd='{"selector":"input.autoadd-listen","event":"change"}'>
+                <f:form.textfield property="keywords.{location.keywords -> f:count()}.keyword" id="keywords_{location.keywords -> f:count()}_keyword" class="autoadd-listen" />
+                <f:form.hidden  property="keywords.{location.keywords -> f:count()}.location" value="{location}" />
+				<f:form.hidden  property="keywords.{location.keywords -> f:count()}.locationId" value="{location.name}{location.url}" />
+            </li>                        
+        </ol>
+    </dd>            
+</dl>

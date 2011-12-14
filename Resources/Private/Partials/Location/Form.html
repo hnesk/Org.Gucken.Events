@@ -1,0 +1,31 @@
+<dl>
+    <dt>
+        <label for="name">Name:</label>
+    </dt>
+    <dd>
+        <f:form.textfield id="name" property="name" />
+    </dd>
+    <dt>
+        Address
+    </dt>
+    <dd>
+        <dl>
+            <dt>
+                <label for="address_streetAddress">Street</label>
+            </dt>
+            <dd>
+                <f:form.textfield id="address_streetAddress" property="address.streetAddress" />
+            </dd>
+            
+            <dt>
+                <label for="address_postalCode">Postalcode</label> /
+                <label for="address_addressLocality">City</label>
+            </dt>
+            <dd>
+                <f:form.textfield id="address_postalCode" property="address.postalCode" />
+                <f:form.textfield id="address_addressLocality" property="address.addressLocality" />
+            </dd>
+            
+        </dl>
+    </dd>        
+</dl>

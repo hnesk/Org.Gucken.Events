@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+
+<f:section name="content">
+	<h2>Config</h2>
+        <f:for each="{settings}" key="key1" as="config1">
+            <ul>
+                <li>
+                    <f:link.action action="settings" arguments="{key:{0:key1}}">
+                        {key1} ({config1 -> f:count()})
+                    </f:link.action>
+                        <f:if condition="{key1} == {key.0}">
+                        <f:if condition="{config1 -> f:count()} > 0">
+                        <ul>
+                            <f:for each="{config1}" key="key2" as="config2">
+                                <li>
+                                    <f:link.action action="settings" arguments="{key:{0:key1,1:key2}}">
+                                        {key2} ({config2 -> f:count()})
+                                    </f:link.action>
+                                    <f:if condition="{key2} == {key.1}">
+                                    <f:if condition="{config2 -> f:count()} > 0">
+                                        <ul>
+                                            <f:for each="{config2}" key="key3" as="config3">
+                                                <li>
+                                                    <f:link.action action="settings" arguments="{key:{0:key1,1:key2,2:key3}}">
+                                                        {key3} ({config3 -> f:count()})
+                                                    </f:link.action>
+                                                    <f:if condition="{key3} == {key.2}">
+                                                    <f:if condition="{config3 -> f:count()} > 0">
+                                                        <ul>
+                                                            <f:for each="{config3}" key="key4" as="config4">
+                                                                <li>
+                                                                    <f:link.action action="settings" arguments="{key:{0:key1,1:key2,2:key3,3:key4}}">
+                                                                        {key4} ({config4 -> f:count()})
+                                                                    </f:link.action>
+                                                                    <f:if condition="{key4} == {key.3}">
+                                                                    <f:if condition="{config4 -> f:count()} > 0">
+                                                                        <ul>
+                                                                            <f:for each="{config4}" key="key5" as="config5">
+                                                                                <li>
+                                                                                    <f:link.action action="settings" arguments="{key:{0:key1,1:key2,2:key3,3:key4,4:key5}}">
+                                                                                        {key5} ({config5 -> f:count()})
+                                                                                    </f:link.action>
+                                                                                    <f:if condition="{key5} == {key.4}">
+                                                                                    <f:if condition="{config5 -> f:count()} > 0">
+                                                                                        <f:debug>{config5}</f:debug>
+                                                                                    </f:if>
+                                                                                    </f:if>
+                                                                                </li>
+                                                                            </f:for>
+                                                                        </ul>
+                                                                    </f:if>
+                                                                    </f:if>
+
+                                                                </li>
+                                                            </f:for>
+                                                        </ul>
+                                                    </f:if>
+                                                    </f:if>
+                                                </li>
+                                            </f:for>
+                                        </ul>
+                                    </f:if>
+                                    </f:if>
+                                </li>
+                            </f:for>
+                        </ul>
+                    </f:if>
+                    </f:if>
+                </li>
+            </ul>
+        </f:for>
+
+</f:section>
+
+<f:section name="right">---</f:section>

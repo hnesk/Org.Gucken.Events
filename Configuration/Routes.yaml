@@ -1,0 +1,12 @@
+#                                                                        #
+# Default subroutes configuration for the Events package                 #
+#                                                                        #
+
+-
+  name: 'Login'
+  uriPattern:    'event/login'
+  defaults:
+    '@package':    'Org.Gucken.Events'
+    '@controller': 'Login'
+    '@action':     'index'
+    '@format':     'html'

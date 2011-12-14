@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+
+<f:section name="content">
+	<h2>Quellen</h2>
+	<f:link.action action="all" controller="Import" arguments="{redirect:'{f:uri.action(action:\"index\")}'}">Import all</f:link.action>
+	<table class="sourcelist">
+		<thead>
+			<tr>				
+				<th>Name</th>				
+				<th>Implementierung</th>
+				<th>Aktionen</th>
+			</tr>
+		</thead>
+		<tbody>
+		<f:for each="{sources}" as="source">
+			<f:cycle values="{0:' odd', 1: ''}" as="zebraClass">
+				<tr class="vevent{zebraClass}">
+					<td class="name {f:if(condition:source.active,then:'',else:'inactive')}"><f:link.action action="view" arguments="{source : source}">{source.name}</f:link.action></td>
+					<td class="implementation">{source.implementationClass}</td>
+					<td class="actions">
+						<f:link.action action="edit" arguments="{source : source}">Edit</f:link.action>
+						<f:link.action action="source" controller="Import" arguments="{source:source, redirect:'{f:uri.action(action:\"index\")}'}">Import</f:link.action>
+					</td>
+				</tr>
+			</f:cycle>
+		</f:for>
+		</tbody>
+	</table>
+	<f:link.action action="add">add a source</f:link.action>
+</f:section>
+
+<f:section name="right">
+    <f:render partial="Account/Login" />
+</f:section>

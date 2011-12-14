@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="de-DE" lang="de-DE">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Kommende Veranstaltungen: Veranstaltungskalender für Bielefeld</title>
+	<f:base />
+
+	<link rel="stylesheet"  type="text/css" media="all" href="{f:uri.resource(path:'css/layout.css')}" />
+	<link rel="stylesheet"  type="text/css" media="all" href="{f:uri.resource(path:'css/jquery.cluetip.css')}" />
+	<link rel="stylesheet"  type="text/css" media="all" href="{f:uri.resource(path:'css/ui/unity/jquery-ui-1.8.16.custom.css')}" />
+        
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="{f:uri.resource(path:'js/jquery.hoverIntent.js')}"></script>
+	<script type="text/javascript" src="{f:uri.resource(path:'js/jquery.cluetip.js')}"></script>
+    <script type="text/javascript" src="{f:uri.resource(path:'js/init.js')}"></script>
+
+</head>
+<body>
+<div id="page_margins">
+	<div id="page">
+
+		<div id="header">
+			<div id="topnav">
+				<a id="navigation" name="navigation"></a>
+				<f:render partial="Navigation" />
+			</div>
+			<h1><a href="/">bielefeld<span>.</span>gucken<span>.</span>org</a></h1>
+			<h2><a href="/">Veranstaltungskalender für Bielefeld und drumherum</a></h2>
+		</div>
+
+		<!-- begin: main content area #main -->
+		<div class="hideboth" id="main">
+			<!-- begin: #col2 second float column -->
+			<div id="col2" class="frame">
+				<div id="col2_content" class="clearfix">
+					<f:render section="right" />
+				</div>
+				<div class="ftop"></div><div class="fright"></div><div class="fbottom"></div><div class="fleft"></div><div class="ftopleft"></div><div class="ftopright"></div><div class="fbottomright"></div><div class="fbottomleft"></div>
+			</div>
+
+			<!-- end: #col2 -->
+
+			<!-- begin: #col3 static column -->
+			<div id="col3" class="frame">
+				<div id="col3_content" class="clearfix">
+					<div class="content">
+						<f:flashMessages />
+						<f:render section="content" />
+					</div>
+				</div>
+				<div id="ie_clearing">&nbsp;</div>
+				<!-- rahmen von daniel -->
+				<div class="ftop"></div><div class="fright"></div><div class="fbottom"></div><div class="fleft"></div><div class="ftopleft"></div><div class="ftopright"></div><div class="fbottomright"></div><div class="fbottomleft"></div>
+			</div>
+			<!-- end: #col3 -->
+
+		</div>
+		<!-- end: #main -->
+
+		<!-- begin: #footer -->
+		<div id="footer" class="frame">
+                        ---
+			<div class="ftop"></div><div class="fright"></div><div class="fbottom"></div><div class="fleft"></div><div class="ftopleft"></div><div class="ftopright"></div><div class="fbottomright"></div><div class="fbottomleft"></div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

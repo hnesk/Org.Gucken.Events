@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+
+<f:section name="content">
+    <h2>Veranstaltungstypen</h2>
+
+    <table class="daylist">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Keywords</th>
+            </tr>
+        </thead>
+        <tbody>
+        <f:for each="{types}" as="type">
+            <f:cycle values="{0:' odd', 1: ''}" as="zebraClass">
+                <tr class="vevent{zebraClass}">
+                    <td class="name">
+                        <f:link.action action="edit" arguments="{type:type}">{type.title}</f:link.action>
+                    </td>
+                    <td class="keywords">
+						<f:for each="{type.keywords}" as="keyword" iteration="i">{keyword}{f:if(condition:i.isLast,then:'',else:', ')}</f:for>
+                    </td>
+                </tr>
+            </f:cycle>
+        </f:for>
+        </tbody>
+    </table>
+    <f:link.action action="add">add a location</f:link.action>
+</f:section>
+
+<f:section name="right">---</f:section>

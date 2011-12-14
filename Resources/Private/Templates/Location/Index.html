@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+
+<f:section name="content">
+    <h2>Orte</h2>
+
+    <table class="daylist">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Ort</th>
+            </tr>
+        </thead>
+        <tbody>
+        <f:for each="{locations}" as="location">
+            <f:cycle values="{0:' odd', 1: ''}" as="zebraClass">
+                <tr class="vevent{zebraClass}">
+                    <td class="name">
+                        <f:link.action action="edit" arguments="{location:location}">{location.name}</f:link.action>
+                    </td>
+                    <td class="city">
+                        {location.address.addressLocality}
+                    </td>
+                </tr>
+            </f:cycle>
+        </f:for>
+        </tbody>
+    </table>
+    <f:link.action action="add">add a location</f:link.action>
+</f:section>
+
+<f:section name="right">---</f:section>

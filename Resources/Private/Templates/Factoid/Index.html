@@ -1,0 +1,57 @@
+{namespace e=Org\Gucken\Events\ViewHelpers}
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+
+<f:section name="content">
+    <h2>Faktoide</h2>
+	<f:form action="multiple">
+		<table class="factoidlist">
+			<thead>
+				<tr>
+					<th><f:form.select name="action" options="{0:'---',delete:'x',diff:'?'}" /><f:form.submit value=">"/></th>
+					<th>Datum</th>
+					<th>Title</th>
+					<th>Ort</th>
+					<th>Typ</th>
+					<th>Quelle</th>
+					<th>Importiert am</th>
+				</tr>
+			</thead>
+			<tbody>
+			<f:for each="{factoids}" as="factoid">
+				<f:cycle values="{0:'odd', 1: ''}" as="zebraClass">
+					<tr class="factoid {zebraClass}">
+						<td style="background-color:#{factoid.fuzzyIdentity -> f:format.crop(maxCharacters:6,append:'')}">
+							<input type="checkbox"  name="arguments[][__identity]" id="action_{e:identifier(object:factoid)}" value="{e:identifier(object:factoid)}" />							
+							<f:link.action class="button trash" action="delete" arguments="{factoid:factoid}">delete</f:link.action>
+							<f:link.action class="button details" action="detail" arguments="{factoid:factoid}" title="{factoid.title}">details</f:link.action>
+						</td>						
+						<td class="startDateTime">
+							{factoid.startDateTime -> f:format.date(format:'d.m.')}&nbsp;{factoid.startDateTime -> f:format.date(format:'H:i')}
+						</td>                    
+						<td class="title">
+							<f:link.external uri="{factoid.url}">{factoid.title -> f:format.crop(maxCharacters:50,append:'…')}</f:link.external>
+						</td>
+						<td class="location">
+							{factoid.location.name}
+						</td>
+						<td class="type">
+							{factoid.type.title}
+						</td>						
+						<td class="source">
+							{factoid.source.name}
+						</td>
+						<td class="location">
+							{factoid.importDateTime -> f:format.date(format:'d.m. H:i')}
+						</td>						
+					</tr>
+				</f:cycle>
+			</f:for>
+			</tbody>
+		</table>
+	</f:form>
+    <f:link.action action="add">add a location</f:link.action>
+</f:section>
+
+<f:section name="right">---</f:section>

@@ -1,0 +1,8 @@
+<ul>
+	<f:security.ifHasRole role="User">
+		<li><f:link.action action="add" controller="Standard">add event</f:link.action></li>
+	</f:security.ifHasRole>
+	<f:security.ifAccess resource="F3_Events_RestrictedActions">
+		<li><f:link.action action="index" controller="Admin">Admin</f:link.action></li>
+	</f:security.ifAccess>
+</ul>

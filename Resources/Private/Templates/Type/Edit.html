@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+<f:section name="content">
+    <h2>Edit a type</h2>
+    <div id="content">
+        <f:form action="update" name="type" object="{type}">
+            <f:render partial="Type/Form" arguments="{type:type}"/>
+            <f:render partial="Type/FormRelated" arguments="{type:type}"/>									
+            <f:form.submit name="submit" value="Save & back" />
+            <f:form.submit name="redirectButton[{f:uri.action(action:'edit',arguments:{type : type})}]" value="Save & continue" />
+        </f:form>
+    </div>
+</f:section>
+<f:section name="right">---</f:section>

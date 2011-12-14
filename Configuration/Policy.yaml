@@ -1,0 +1,16 @@
+#                                                                        #
+# Security policy definition                                             #
+#                                                                        #
+# This file contains the security policy configuration for the           #
+# Events package                                                           #
+
+resources:
+  methods:
+    F3_Events_RestrictedActions: 'method(Org\Gucken\Events\Controller\AdminController->.*Action())'
+roles:
+  Administrator: [User]
+  User: [Everybody]
+acls:
+  Administrator:
+    methods:
+      F3_Events_RestrictedActions: GRANT

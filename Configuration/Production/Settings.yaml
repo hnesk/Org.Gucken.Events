@@ -1,0 +1,13 @@
+#                                                                        #
+# Security policy definition                                             #
+#                                                                        #
+# Settings for the Events package                                        #
+Settings:
+  Org:
+    Gucken:
+      Events:
+        this: prod
+Org:
+  Gucken:
+    Events:
+      this: prod

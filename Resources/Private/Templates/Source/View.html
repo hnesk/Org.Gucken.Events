@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+<f:section name="content">
+    <h2>Source: {source.name}</h2>
+    <div id="content">
+        <dl>
+            <dt>Name:</dt>
+            <dd>{source.name}</dd>
+
+            <dt>Implementation</dt>
+            <dd>{source.implementationClass}</dd>
+
+            <dt>Parameters</dt>
+            <f:for each="{source.parameterProperties}" key="key" as="property">
+                <dd><strong>{key}:</strong> {property}</dd>
+            </f:for>
+
+            <dt>Events:</dt>
+            <dd>
+                <ul>
+                    <f:for each="{eventsAndDuplicates}" as="eventAndDuplicates">
+                        <f:alias map="{eventFactoid:eventAndDuplicates.factoid, duplicates:eventAndDuplicates.duplicates}">
+                            <li>
+                                <h5>
+                                    <f:link.external uri="{eventFactoid.url}">
+                                    {eventFactoid.startDateTime -> f:format.date(format:'d.m.y H:i')}:
+                                    {eventFactoid.title}
+                                    </f:link.external>
+                                </h5>
+                                <p><b>{eventFactoid.shortDescription}</b></p>
+                                <pre>{eventFactoid.description}</pre>
+                                <pre>{eventFactoid.location.name}</pre>
+                            </li>
+                        </f:alias>
+                    </f:for>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+</f:section>
+<f:section name="right">---</f:section>

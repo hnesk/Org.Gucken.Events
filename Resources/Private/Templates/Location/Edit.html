@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+<f:section name="content">
+    <h2>Edit a location</h2>
+    <div id="content">
+        <f:form action="update" name="location" object="{location}">
+            <f:render partial="Location/Form" arguments="{location:location}"/>
+            <f:render partial="Location/FormRelated" arguments="{location:location,externalIdentifiers:externalIdentifiers}"/>			
+            <f:form.submit name="submit" value="Save & back" />
+            <f:form.submit name="redirectButton[{f:uri.action(action:'edit',arguments:{location : location})}]" value="Save & continue" />            
+        </f:form>
+    </div>
+</f:section>
+<f:section name="right">---</f:section>

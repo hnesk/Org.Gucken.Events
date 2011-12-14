@@ -1,0 +1,19 @@
+#                                                                        #
+# Security policy definition                                             #
+#                                                                        #
+# Settings for the Events package                                        #
+TYPO3:
+  FLOW3:
+    security:
+      authentication:
+        providers:
+          DefaultProvider:
+            providerClass: PersistedUsernamePasswordProvider
+            entryPoint:
+              WebRedirect:
+                uri: org.gucken.events/login/index
+              
+Org:
+  Gucken:
+    Events:
+      this: that

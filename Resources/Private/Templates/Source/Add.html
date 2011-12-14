@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+<f:section name="content">
+    <h2>Add a Source</h2>
+    <div id="content">
+        <f:form action="save" name="source" object="{source}">
+            <f:render partial="Source/Form" arguments="{source:source,types:types,implementations:implementations}"/>
+            <f:form.submit value="Save" />
+        </f:form>
+    </div>
+</f:section>
+<f:section name="right">
+    <f:render partial="Account/Login" />
+</f:section>

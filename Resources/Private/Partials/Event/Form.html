@@ -1,0 +1,33 @@
+<dl>
+	<dt>
+		<label for="title">Title:</label>
+	</dt>
+	<dd>
+		<f:form.textfield id="title" property="title" />
+	</dd>
+
+	<dt>
+		<label for="date">Date:</label>
+	</dt>
+	<dd>
+		<input type="text" name="event[date][date]" id="date" value="{event.date -> f:format.date(format:'d.m.Y')}"/>
+		<f:form.hidden name="event[date][dateFormat]" value="d.m.Y" />
+		<!--<input type="text" name="event[date][time]" id="time" value="{event.date -> f:format.date(format:'H:i')}"/>-->
+		<f:form.select id="time" name="event[date][time]" options="{2000: '20:00', 2030: '20:30', 2100: '21:00', 2130: '21:30'}" value="{event.date -> f:format.date(format:'Hi')}" />
+		<f:form.hidden name="event[date][timeFormat]" value="Hi" />
+	</dd>
+
+	<dt>
+		<label for="location">Location:</label>
+	</dt>
+	<dd>
+		<f:form.select id="location" property="location" options="{locations}" />
+	</dd>
+
+	<dt>
+		And then
+	</dt>
+	<dd>
+		<f:form.submit value="Save" />
+	</dd>
+</dl>
