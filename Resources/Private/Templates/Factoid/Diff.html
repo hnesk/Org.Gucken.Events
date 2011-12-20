@@ -1,8 +1,0 @@
-{namespace e=Org\Gucken\Events\ViewHelpers}
-<f:for each="{factoids}" as="factoid" iteration="i">
-	<f:if condition="{i.isFirst}">
-		<f:then></f:then>
-		<f:else><e:diff old="{factoids.0}" new="{factoid}" ignoredProperties="proof,importDateTime" /></f:else>
-	</f:if>
-	
-</f:for>
