@@ -256,6 +256,13 @@ class EventSource {
         return $implementation;
     }
 
+	/**
+	 * @return ImportLogEntry
+	 */
+	public function createLogEntry() {
+		return new ImportLogEntry($this, new \DateTime());
+	}
+
     public function __toString() {
         return $this->getName() . ' (' . $this->getImplementationClass().')';
     }

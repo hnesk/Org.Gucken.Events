@@ -21,38 +21,57 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
         'startDateTime' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING,
 		'source' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING,
     );
+
+	/**
+	 * @param \DateTime $startDateTime 
+	 * @param \DateTime $endDateTime  
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 */	
+	public function findUnassignedBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null) {
+		return $this->_findBetween($startDateTime, $endDateTime, true);
+	}
 	
 	
 	/**
-	 *
 	 * @param \DateTime $startDateTime 
-	 * 
-	 */
-	public function findAfter(\DateTime $startDateTime = null) {
-		$startDateTime = $startDateTime ?: new \DateTime();
-		$query = $this->createQuery();
-		return $query->matching($query->greaterThanOrEqual('startDateTime', $startDateTime))->execute();
+	 * @param \DateTime $endDateTime  
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 */	
+	public function findBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null) {
+		return $this->_findBetween($startDateTime, $endDateTime);
 	}
 	
 	/**
 	 *
 	 * @param \DateTime $startDateTime 
-	 * 
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
 	 */
-	public function findBetween(\DateTime $startDateTime = null, $endDateTime = null) {
+	public function findAfter(\DateTime $startDateTime = null) {
+		return $this->_findBetween($startDateTime);
+	}
+	
+	/**
+	 * @param \DateTime $startDateTime 
+	 * @param \DateTime $endDateTime  
+	 * @param boolean $unassignedOnly
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 */
+	protected function _findBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null, $unassignedOnly = false) {
 		$startDateTime = $startDateTime ?: new \DateTime();
-		if (empty($endDateTime)) {
-			$endDateTime = clone $startDateTime;
-			$endDateTime->modify('+1 month');
+		
+		$query = $this->createQuery();		
+		$conditions = array();		
+		$conditions[] = $query->greaterThanOrEqual('startDateTime', $startDateTime);
+		if (!empty($endDateTime)) {
+			$conditions[] = $query->lessThanOrEqual('startDateTime', $endDateTime);
 		}
-				
-		$query = $this->createQuery();
-		return $query->matching($query->logicalAnd(
-			$query->greaterThanOrEqual('startDateTime', $startDateTime),
-			$query->lessThanOrEqual('startDateTime', $endDateTime),
-			$query->equals('event',  NULL),
-			$query->equals('shouldSkip',  false)
-		))->execute();
+		
+		if ($unassignedOnly) {
+			$conditions[] = $query->equals('event',  NULL);
+			$conditions[] = $query->equals('shouldSkip',  false);
+		}
+		
+		return $query->matching($query->logicalAnd($conditions))->execute();
 	}
 	
 	

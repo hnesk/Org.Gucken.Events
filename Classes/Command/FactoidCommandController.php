@@ -47,12 +47,6 @@ class FactoidCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
      */
     protected $sourceRepository;
 
-    /**
-     * @FLOW3\Inject
-     * @var \Org\Gucken\Events\Domain\Repository\EventFactoidRepository
-     */
-    protected $factoidRepository;
-	
 	
     /**
      * Import factoids from given source
@@ -98,16 +92,6 @@ class FactoidCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
            
     }
 
-	/**
-	 * 
-	 */
-	public function identityCommand() {
-		foreach ($this->factoidRepository->findAll() as $factoid) {
-			/* @var $factoid EventFactoid */
-			$factoid->regenerateFuzzyIdentity();
-			$this->factoidRepository->update($factoid);
-		}
-	}
 	
 }
 

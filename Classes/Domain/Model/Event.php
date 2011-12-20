@@ -69,6 +69,13 @@ class Event {
 	protected $types;
 	
 	/**
+	 * The type
+	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink>
+	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
+	 */
+	protected $links;	
+	
+	/**
 	 * The identity of the imported factoids this event is based on
 	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventFactoidIdentity>
 	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
@@ -311,6 +318,46 @@ class Event {
     public function getFactoidIdentitys() {
         return clone $this->factoidIdentitys;
     }
+	
+    /**
+     * Setter for links
+     *
+     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink> $links
+     * @return void
+     */
+    public function setLinks(\Doctrine\Common\Collections\Collection $links) {
+        $this->links = $links;
+    }
+
+	/**
+	 * add a link
+	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link 
+	 */
+    public function addLink(\Org\Gucken\Events\Domain\Model\EventLink $link = null) {
+		if ($link) {
+			$this->links->add($link);
+		}
+    }
+
+    /**
+     * removes a link
+     *
+     * @param \Org\Gucken\Events\Domain\Model\EventLink $link
+     * @return void
+     */
+    public function removeLink(\Org\Gucken\Events\Domain\Model\EventLink $link) {
+        $this->links->removeElement($link);
+    }
+
+    /**
+     * Getter for links
+     *
+     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLinks> 
+     */
+    public function getLinks() {
+        return clone $this->links;
+    }
+	
 	
 	/**
 	 *

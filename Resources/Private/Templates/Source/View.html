@@ -19,20 +19,18 @@
             <dt>Events:</dt>
             <dd>
                 <ul>
-                    <f:for each="{eventsAndDuplicates}" as="eventAndDuplicates">
-                        <f:alias map="{eventFactoid:eventAndDuplicates.factoid, duplicates:eventAndDuplicates.duplicates}">
-                            <li>
-                                <h5>
-                                    <f:link.external uri="{eventFactoid.url}">
-                                    {eventFactoid.startDateTime -> f:format.date(format:'d.m.y H:i')}:
-                                    {eventFactoid.title}
-                                    </f:link.external>
-                                </h5>
-                                <p><b>{eventFactoid.shortDescription}</b></p>
-                                <pre>{eventFactoid.description}</pre>
-                                <pre>{eventFactoid.location.name}</pre>
-                            </li>
-                        </f:alias>
+                    <f:for each="{source.eventFactoids}" as="eventFactoid">
+						<li>
+							<h5>
+								<f:link.external uri="{eventFactoid.url}">
+								{eventFactoid.startDateTime -> f:format.date(format:'d.m.y H:i')}:
+								{eventFactoid.title}
+								</f:link.external>
+							</h5>
+							<p><b>{eventFactoid.shortDescription}</b></p>
+							<pre>{eventFactoid.description}</pre>
+							<pre>{eventFactoid.location.name}</pre>
+						</li>
                     </f:for>
                 </ul>
             </dd>

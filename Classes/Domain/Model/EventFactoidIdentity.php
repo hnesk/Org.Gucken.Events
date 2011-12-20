@@ -227,7 +227,7 @@ class EventFactoidIdentity {
 	 *
 	 * @param boolean $shouldSkip 
 	 */
-	public function setSkip($shouldSkip) {
+	public function setShouldSkip($shouldSkip) {
 		$this->shouldSkip = $shouldSkip;
 	} 
 	

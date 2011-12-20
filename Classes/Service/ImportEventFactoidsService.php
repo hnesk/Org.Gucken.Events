@@ -23,6 +23,14 @@ class ImportEventFactoidsService {
      * @FLOW3\Inject
      */
     protected $eventSourceRepository;
+	
+    /**
+     *
+     * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
+     * @FLOW3\Inject
+     */
+    protected $importLogRepository;
+	
 
 	/**
 	 * @var array
@@ -55,22 +63,33 @@ class ImportEventFactoidsService {
     public function importSource(Model\EventSource $source) {		
         $importCount = 0;
         $duplicateCount = 0;
+		$errors = array();
 		
-		$eventFactoids = $source->getEventFactoids();
-        foreach ($eventFactoids as $eventFactoid) {
-            /* @var $eventFactoid Model\EventFactoid */   			
-			$eventFactoidIdentity = $this->eventFactoidIdentityRepository->findOrCreateByEventFactoid($eventFactoid);
-			$persistedFactoid = $eventFactoidIdentity->addFactoidIfNotExists($eventFactoid);
-			
-			if ($persistedFactoid !== $eventFactoid) {
-				$duplicateCount++;
-			} else {
-				$importCount++;
+		try {
+			$eventFactoids = $source->getEventFactoids();
+			foreach ($eventFactoids as $eventFactoid) {
+				/* @var $eventFactoid Model\EventFactoid */   			
+				$eventFactoidIdentity = $this->eventFactoidIdentityRepository->findOrCreateByEventFactoid($eventFactoid);
+				$persistedFactoid = $eventFactoidIdentity->addFactoidIfNotExists($eventFactoid);
+
+				if ($persistedFactoid !== $eventFactoid) {
+					$duplicateCount++;
+				} else {
+					$importCount++;
+				}
+
+				$this->eventFactoidIdentityRepository->persist($eventFactoidIdentity);						
 			}
-			
-			$this->eventFactoidIdentityRepository->persist($eventFactoidIdentity);
-						
-        }
+		} catch(\Exception $e) {
+			$errors[] = $e->getMessage();
+		}
+		
+		$importLog = $source->createLogEntry();
+		$importLog->setMessages(implode(PHP_EOL, $errors));
+		$importLog->setImportCount($importCount);
+		$importLog->setDuplicateCount($duplicateCount);
+		$this->importLogRepository->add($importLog);
+		
         return $importCount;
     }
 

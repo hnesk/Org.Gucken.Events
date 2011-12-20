@@ -47,15 +47,7 @@ class SourceController extends BaseController {
      * @FLOW3\Inject
      */
     protected $sourceRepository;
-    
-    /**
-     *
-     * @var \Org\Gucken\Events\Domain\Repository\EventFactoidRepository
-     * @FLOW3\Inject
-     */
-    protected $eventFactoidRepository;
-    
-
+        
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\TypeRepository

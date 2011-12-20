@@ -27,290 +27,94 @@ use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
- * An Event
+ * An Event link
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
  */
-class Event {
+class EventLink {
 
-	/**
-	 * The title
-	 * @var string
-	 */
-	protected $title;
-
-	/**
-	 * The start date and time
-	 * @var \DateTime
-	 */
-	protected $startDateTime;
-	
-	/**
-	 * The end date and time
-	 * @var \DateTime
-	 */
-	protected $endDateTime;
-	
-
-	/**
-	 * The location
-	 * @var \Org\Gucken\Events\Domain\Model\Location
-	 * @ORM\ManyToOne
-	 */
-	protected $location;		
-	
 	/**
 	 * The type
-	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
-	 * @ORM\ManyToMany
-	 */
-	protected $types;
-	
-	/**
-	 * The identity of the imported factoids this event is based on
-	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventFactoidIdentity>
-	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
-	 */	
-	protected $factoidIdentitys;
-	
-	
-	/**
-	 * Markdown version of the description
-	 * 
-	 * @ORM\Column(type="text") 
 	 * @var string
 	 */
-	protected $description;
+	protected $type;
 	
 	/**
-	 * Markdown version of the description
-	 * 
-	 * @ORM\Column(type="text") 
-	 * @var string
+	 *
+	 * @var Org\Gucken\Events\Domain\Model\Event
+	 * @ORM\ManyToOne(inversedBy="links")
 	 */
-	protected $shortDescription;
+	protected $event;
+	
+	/**
+	 *
+	 * @var Org\Gucken\Events\Domain\Model\EventFactoid
+	 * @ORM\OneToOne
+	 */
+	protected $factoid;
 
 	/**
-	 * The url
-	 * 
 	 * @var string
 	 */
 	protected $url;
-	
-	
+		
+
 	/**
+	 * Get the event link type
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\Day\Factory
-	 * @FLOW3\Inject
+	 * @return string The event link type
 	 */
-	protected $dayFactory;
-	
-	public function __construct() {
-		$this->types = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->factoidIdentitys = new \Doctrine\Common\Collections\ArrayCollection();
+	public function getType() {
+		return $this->type;
 	}
 
 	/**
-	 * Get the Event's title
+	 * Sets this event link type
 	 *
-	 * @return string The Event's title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
-
-	/**
-	 * Sets this Event's title
-	 *
-	 * @param string $title The Event's title
+	 * @param string $title The event link type
 	 * @return void
 	 */
-	public function setTitle($title) {
-		$this->title = $title;
+	public function setType($type) {
+		$this->type = $type;
 	}
 
+
 	/**
-	 * Get the Event's date
+	 * Get the Event
 	 *
-	 * @return \DateTime The Event's start date
+	 * @return \Org\Gucken\Events\Domain\Model\Event The Event
 	 */
-	public function getStartDateTime() {
-		return $this->startDateTime;
+	public function getEvent() {
+		return $this->event;
 	}
 
 	/**
-	 * Sets this Event's start date
 	 *
-	 * @param \DateTime $startDateTime The Event's date
+	 * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid 
 	 * @return void
 	 */
-	public function setStartDateTime(\DateTime $startDateTime) {
-		$this->startDateTime = $startDateTime;
-	}
+	public function setFactoid(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid) {
+		$this->factoid = $factoid;
+	}	
 	
 	/**
-	 * Get the Event's end date
-	 *
-	 * @return \DateTime The Event's end date
+	 * @return \Org\Gucken\Events\Domain\Model\EventFactoid 
 	 */
-	public function getEndDateTime() {
-		return $this->endDateTime;
+	public function getFactoid() {
+		return $this->factoid;
 	}
 
 	/**
-	 * Sets this Event's end date
 	 *
-	 * @param \DateTime $endDateTime The Event's end date
+	 * @param \Org\Gucken\Events\Domain\Model\Event $event The Event
 	 * @return void
 	 */
-	public function setEndDateTime(\DateTime $endDateTime = null) {
-		$this->endDateTime = $endDateTime;
-	}
+	public function setEvent(\Org\Gucken\Events\Domain\Model\Event $event) {
+		$this->event= $event;
+	}	
 	
-
-	/**
-	 * @return Org\Gucken\Events\Domain\Model\Day
-	 */
-	public function getDay() {
-		return $this->dayFactory->build($this->startDateTime);
-	}
-
-
-	/**
-	 * Get the Event's location
-	 *
-	 * @return \Org\Gucken\Events\Domain\Model\Location The Event's location
-	 */
-	public function getLocation() {
-		return $this->location;
-	}
-
-	/**
-	 * Sets this Event's location
-	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Location $location The Event's location
-	 * @return void
-	 */
-	public function setLocation(\Org\Gucken\Events\Domain\Model\Location $location) {
-		$this->location = $location;
-	}
-	
-	
-	/**
-	 *
-	 * @param string $description 
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
-	
-	/**
-	 *
-	 * @return string 
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-	
-	/**
-	 *
-	 * @param string $shortDescription 
-	 */
-	public function setShortDescription($shortDescription) {
-		$this->shortDescription = $shortDescription;
-	}
-	
-	/**
-	 *
-	 * @return string 
-	 */
-	public function getShortDescription() {
-		return $this->shortDescription;
-	}
-	
-	
-    /**
-     * Setter for types
-     *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Types> $types
-     * @return void
-     */
-    public function setTypes(\Doctrine\Common\Collections\Collection $types) {
-        $this->types = $types;
-    }
-
-    /**
-     * Adds a type
-     *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
-     * @return void
-     */
-    public function addType(\Org\Gucken\Events\Domain\Model\Type $type = null) {
-		if ($type) {
-			$this->types->add($type);
-		}
-    }
-
-    /**
-     * removes a type
-     *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
-     * @return void
-     */
-    public function removeType(\Org\Gucken\Events\Domain\Model\Type $type) {
-        $this->types->removeElement($type);
-    }
-
-    /**
-     * Getter for types
-     *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type> 
-     */
-    public function getTypes() {
-        return clone $this->types;
-    }
-
-	
-    /**
-     * Setter for factoid identities
-     *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventFactoidIdentities> $factoidIdentities
-     * @return void
-     */
-    public function setFactoidIdentitys(\Doctrine\Common\Collections\Collection $factoidIdentitys) {
-        $this->factoidIdentitys = $factoidIdentitys;
-    }
-
-    /**
-     * Adds a type
-     *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
-     * @return void
-     */
-    public function addFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
-        $this->factoidIdentitys->add($factoidIdentity);
-    }
-
-    /**
-     * removes a type
-     *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
-     * @return void
-     */
-    public function removeFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
-        $this->factoidIdentitys->removeElement($factoidIdentity);
-    }
-
-    /**
-     * Getter for types
-     *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventFactoidIdentitys> 
-     */
-    public function getFactoidIdentitys() {
-        return clone $this->factoidIdentitys;
-    }
 	
 	/**
 	 *
@@ -333,7 +137,7 @@ class Event {
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->getTitle().' '.$this->getStartDateTime()->format('d.m.Y H:i'). ($this->location ? ' @ '.$this->location->getName() : '');
+		return $this->getUrl();
 	}
 }
 ?>

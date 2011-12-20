@@ -66,18 +66,32 @@ class FactoidConvertController extends BaseController {
     public function indexAction() {   
 		$startDateTime = new \DateTime();
 		$startDateTime->modify('-1 days');
-        $this->view->assign('identities', $this->identityRepository->findBetween($startDateTime));
-		$this->view->assign('events', $this->eventRepository->findBetween($startDateTime));
+		$endDateTime = clone $startDateTime;
+		$endDateTime->modify('+1 month');
+        $this->view->assign('identities', $this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime));
+		$this->view->assign('events', $this->eventRepository->findBetween($startDateTime, $endDateTime));
     }
 	
 	/**
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
 	 */
-	public function deleteAction(EventFactoidIdentity $identity) {
+	public function deleteAction(EventFactoidIdentity $identity) {		
 		$this->identityRepository->remove($identity);
 		$this->addNotice('Removed Identity "'.$identity.'"');
 		$this->redirect('index');
 	}
+
+	/**
+	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
+	 */
+	public function skipAction(EventFactoidIdentity $identity) {		
+		$identity->setShouldSkip(true);
+		$this->identityRepository->update($identity);
+		$this->addNotice('Skipped Identity "'.$identity.'"');
+		$this->redirect('index');
+	}
+	
+	
 	
 	/**
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
