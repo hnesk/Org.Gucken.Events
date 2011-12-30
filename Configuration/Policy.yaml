@@ -5,12 +5,30 @@
 # Events package                                                           #
 
 resources:
-  methods:
-    F3_Events_RestrictedActions: 'method(Org\Gucken\Events\Controller\AdminController->.*Action())'
-roles:
-  Administrator: [User]
+  methods:    
+    Org_Gucken_Events_Controller_Admin: 'class(Org\Gucken\Events\Controller\AdminController)'
+    Org_Gucken_Events_Controller_Source: 'class(Org\Gucken\Events\Controller\SourceController)'
+    Org_Gucken_Events_Controller_Import: 'class(Org\Gucken\Events\Controller\ImportController)'
+    Org_Gucken_Events_Controller_FactoidConvert: 'class(Org\Gucken\Events\Controller\FactoidConvertController)'
+    Org_Gucken_Events_Actions_Create: 'method(Org\Gucken\Events\Controller\.*Controller->(add|save)Action())'
+    Org_Gucken_Events_Actions_Modify: 'method(Org\Gucken\Events\Controller\.*Controller->(edit|update)Action())'
+    Org_Gucken_Events_Actions_Delete: 'method(Org\Gucken\Events\Controller\.*Controller->deleteAction())'
+roles:  
+  Administrator: [ImportEditor]
+  ImportEditor: [Editor]
+  Editor: [User]
   User: [Everybody]
-acls:
+acls:  
   Administrator:
     methods:
-      F3_Events_RestrictedActions: GRANT
+      Org_Gucken_Events_Actions_Delete: GRANT
+  ImportEditor:
+    methods:
+      Org_Gucken_Events_Controller_Admin: GRANT
+      Org_Gucken_Events_Controller_Source: GRANT
+      Org_Gucken_Events_Controller_Import: GRANT
+      Org_Gucken_Events_Controller_FactoidConvert: GRANT
+  Editor:
+    methods:
+      Org_Gucken_Events_Actions_Create: GRANT
+      Org_Gucken_Events_Actions_Modify: GRANT      

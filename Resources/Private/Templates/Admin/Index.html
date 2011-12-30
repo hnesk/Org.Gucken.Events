@@ -2,7 +2,23 @@
 <f:layout name="Admin.html" />
 
 <f:section name="content">
-    <div id="eventgrid"></div>
+	<f:security.ifAccess resource="Org_Gucken_Events_Controller_Source">
+		<f:then>
+			<div class="sources">
+				<h3><f:link.action action="index" controller="Source">Sources</f:link.action></h3>		
+			</div>
+		</f:then>
+		<f:else>
+			ne
+		</f:else>
+	</f:security.ifAccess>
+	
+		<f:security.ifAuthenticated>
+			<f:then>
+				<f:link.action action="logout" controller="Account">Logout</f:link.action>
+			</f:then>
+		</f:security.ifAuthenticated>
+	
 </f:section>
 <f:section name="right">---</f:section>
 

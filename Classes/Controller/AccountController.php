@@ -1,9 +1,8 @@
 <?php
+namespace Org\Gucken\Events\Controller;
 
-namespace Org\Gucken\Events;
-
-/* *
- * This script belongs to the FLOW3 package "Events".          *
+/*                                                                        *
+ * This script belongs to the FLOW3 package "Events".                     *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License as published by the *
@@ -22,33 +21,35 @@ namespace Org\Gucken\Events;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \TYPO3\FLOW3\Package\Package as BasePackage;
+use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
- * The Events Package
+ * Login controller for the Events package 
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Package extends BasePackage {
+class AccountController extends BaseController {
 
-    /**
-     * Invokes custom PHP code directly after the package manager has been initialized.
-     *
-     * @param \TYPO3\FLOW3\Core\Bootstrap $bootstrap The current bootstrap
-     * @return void
-     */
-    public function boot(\TYPO3\FLOW3\Core\Bootstrap $bootstrap) {
-        require_once $this->packagePath.'Resources/Private/PHP/pickup/app/init.php';
-		
-		$dispatcher = $bootstrap->getSignalSlotDispatcher();
-		
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'importStarted', 'Org\Gucken\Events\Service\ImportLogService', 'importStarted');
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'factoidImported', 'Org\Gucken\Events\Service\ImportLogService', 'factoidImported');
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'exceptionThrown', 'Org\Gucken\Events\Service\ImportLogService', 'exceptionThrown');
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'importFinished', 'Org\Gucken\Events\Service\ImportLogService', 'importFinished');
-		
-    }
-
+	/**
+	 * The authentication manager
+	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
+	 * @FLOW3\Inject
+	 */
+	protected $authenticationManager;
+	
+	
+	/**
+	 * Index action show login form
+	 *
+	 * @return void
+	 */
+	public function indexAction() {
+	}
+	
+	public function logoutAction() {
+		$this->authenticationManager->logout();
+		$this->addNotice('Logged out');
+		$this->redirect('index', 'standard');
+	}
 }
-
 ?>

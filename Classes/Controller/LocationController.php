@@ -116,18 +116,7 @@ class LocationController extends BaseController {
     public function initializeUpdateAction() {
 		$this->allowForProperty('location', 'address', self::MODIFICATION);
 		$this->allowForProperty('location', 'externalIdentifiers.*', self::EVERYTHING);
-		$this->allowForProperty('location', 'keywords.*', self::CREATION);
-		/*
-		 * Thats missing in allowForProperty
-        foreach ($locationData['externalIdentifiers'] as $key => $externalIdentifierData) {
-            if (empty($externalIdentifierData['__identity'])) {
-                $locationPropertyMapping->allowCreationForSubProperty('externalIdentifiers.'.$key);
-            } else {
-                $locationPropertyMapping->allowModificationForSubProperty('externalIdentifiers.'.$key);
-            }
-        } 		 
-		 */               
-        
+		$this->allowForProperty('location', 'keywords.*', self::CREATION);        
     }
     
     /**

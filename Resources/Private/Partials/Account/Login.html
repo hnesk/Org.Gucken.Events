@@ -1,16 +1,15 @@
 {namespace e=Org\Gucken\Events\ViewHelpers}
-<f:link.action controller="Admin" action="index">zum Adminbereich</f:link.action>
 <f:security.ifHasRole role="User">
 	<f:then>
 		<e:account as="account">
 			<dl>
 				<dt>Logged in as {account.accountIdentifier}</dt>
-				<dd><f:link.action action="logout" controller="Login">Logout</f:link.action></dd>
+				<dd><f:link.action action="logout" controller="Account">Logout</f:link.action></dd>
 			</dl>
 		</e:account>
 	</f:then>
 	<f:else>
-                <f:form package="TYPO3.FLOW3" subpackage="Security\Authentication" controller="Authentication" action="authenticate"  method="post" name="loginform">
+		<f:form package="TYPO3.FLOW3" subpackage="Security\Authentication" controller="Authentication" action="authenticate"  method="post" name="loginform">
 			<dl>
 				<dt class="username">
 					<label for="login_username">User:</label>

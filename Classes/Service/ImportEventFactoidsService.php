@@ -32,25 +32,16 @@ class ImportEventFactoidsService {
     protected $importLogRepository;
 	
 
-	/**
-	 * @var array
-	 */
-	protected $errors;
 	
     /**
      *
      * @return int
      */
     public function import() {
-		$this->errors = array();
         $cnt = 0;
         foreach ($this->eventSourceRepository->findAllActive() as $source) {
-			try {
-				/* @var $source Model\EventSource */
-				$cnt += $this->importSource($source);
-			} catch (\Exception $e) {
-				$this->errors[] = $e;
-			}
+			/* @var $source Model\EventSource */
+			$cnt += $this->importSource($source);
         }
         return $cnt;
     }
@@ -60,46 +51,60 @@ class ImportEventFactoidsService {
      * @param Model\EventSource $source
      * @return int
      */
-    public function importSource(Model\EventSource $source) {		
-        $importCount = 0;
-        $duplicateCount = 0;
-		$errors = array();
-		
+    public function importSource(Model\EventSource $source) {
+		$importCount = 0;
+		$this->emitImportStarted($source);
 		try {
-			$eventFactoids = $source->getEventFactoids();
-			foreach ($eventFactoids as $eventFactoid) {
-				/* @var $eventFactoid Model\EventFactoid */   			
+			foreach ($source->getEventFactoids() as $eventFactoid) {
+				/* @var $eventFactoid Model\EventFactoid */
 				$eventFactoidIdentity = $this->eventFactoidIdentityRepository->findOrCreateByEventFactoid($eventFactoid);
 				$persistedFactoid = $eventFactoidIdentity->addFactoidIfNotExists($eventFactoid);
+				$this->eventFactoidIdentityRepository->persist($eventFactoidIdentity);
 
-				if ($persistedFactoid !== $eventFactoid) {
-					$duplicateCount++;
-				} else {
-					$importCount++;
-				}
-
-				$this->eventFactoidIdentityRepository->persist($eventFactoidIdentity);						
+				$isNewFactoid = $persistedFactoid === $eventFactoid;
+				$importCount += $isNewFactoid;
+				$this->emitFactoidImported($source, $eventFactoidIdentity, $persistedFactoid, $isNewFactoid);
 			}
-		} catch(\Exception $e) {
-			$errors[] = $e->getMessage();
+		} catch(\Exception $exception) {
+			$this->emitExceptionThrown($source, $exception);
 		}
-		
-		$importLog = $source->createLogEntry();
-		$importLog->setMessages(implode(PHP_EOL, $errors));
-		$importLog->setImportCount($importCount);
-		$importLog->setDuplicateCount($duplicateCount);
-		$this->importLogRepository->add($importLog);
-		
+
+		$this->emitImportFinished($source);
+
         return $importCount;
     }
+	
+	/**
+	 * @param Model\EventSource $source
+	 * @FLOW3\Signal
+	 */
+	protected function emitImportStarted(Model\EventSource $source) {}	
+	
 
 	/**
-	 * @return array
+	 * @param Model\EventSource $source
+	 * @param Model\EventFactoidIdentity $identity
+	 * @param Model\EventFactoid $factoid
+	 * @param boolean $isNewFactoid
+	 * @FLOW3\Signal
 	 */
-	public function getErrors() {
-		return $this->errors;
-	}
+	protected function emitFactoidImported(Model\EventSource $source, Model\EventFactoidIdentity $identity, Model\EventFactoid $factoid, $isNewFactoid) {}		
+
+	/**
+	 * @param Model\EventSource $source
+	 * @param \Exception $e
+	 * @FLOW3\Signal
+	 */
+	protected function emitExceptionThrown(Model\EventSource $source, $e) {}	
 	
+	
+	/**
+	 * @param Model\EventSource $source
+	 * @FLOW3\Signal
+	 */
+	protected function emitImportFinished(Model\EventSource $source) {}	
+	
+		
 }
 
 

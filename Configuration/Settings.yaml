@@ -11,7 +11,7 @@ TYPO3:
             providerClass: PersistedUsernamePasswordProvider
             entryPoint:
               WebRedirect:
-                uri: org.gucken.events/login/index
+                uri: org.gucken.events/account/index
               
 Org:
   Gucken:

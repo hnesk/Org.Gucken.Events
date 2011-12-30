@@ -167,9 +167,9 @@ class EventSource {
     public function setImplementationClass($implementationClass) {
         if (!\class_exists($implementationClass)) {
             throw new \TYPO3\FLOW3\AOP\Exception\InvalidArgumentException('Argument needs to be a class name, "' . $implementationClass . '" given', 1314480311);
-        }
+        }		
         if (!$this->reflectionService->isClassImplementationOf($implementationClass, 'Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface')) {
-            throw new \TYPO3\FLOW3\AOP\Exception\InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, "' . $implementationClass . '" given', 1314480281);
+            throw new \TYPO3\FLOW3\AOP\Exception\InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, ' . $implementationClass . ' given', 1314480281);
         }
         $this->implementationClass = $implementationClass;
     }

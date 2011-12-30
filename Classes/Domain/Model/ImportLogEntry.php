@@ -24,10 +24,17 @@ class ImportLogEntry {
 	protected $source;
 
 	/**
-	 * The date
+	 * The start date
 	 * @var \DateTime
 	 */
-	protected $date;
+	protected $startTime;
+	
+	/**
+	 * The end date
+	 * @var \DateTime
+	 */
+	protected $endTime;
+	
 
 	/**
 	 * The number of imported items
@@ -44,17 +51,25 @@ class ImportLogEntry {
 
 	/**
 	 * The messages
-	 * @var string
+	 * @var array
 	 */
 	protected $messages;
+	
+	/**
+	 * The errors
+	 * @var array
+	 */
+	protected $errors;
+	
 
-
-	public function __construct(EventSource $source, \DateTime $date = null, $imported = 0, $duplicates = 0, $messages = '') {
+	public function __construct(EventSource $source, \DateTime $startTime = null, \DateTime $endTime = null, $imported = 0, $duplicates = 0, $messages = array(), $errors = array()) {
 		$this->setSource($source);
-		$this->setDate($date ? $date : new \DateTime());
+		$this->setStartTime($startTime ? $startTime : new \DateTime());
+		$this->setEndTime($endTime);
 		$this->setImportCount($imported);
 		$this->setDuplicateCount($duplicates);
 		$this->setMessages($messages);
+		$this->setErrors($errors);
 	}
 	
 	/**
@@ -81,8 +96,8 @@ class ImportLogEntry {
 	 *
 	 * @return \DateTime The Import history's date
 	 */
-	public function getDate() {
-		return $this->date;
+	public function getStartTime() {
+		return $this->startTime;
 	}
 
 	/**
@@ -91,9 +106,29 @@ class ImportLogEntry {
 	 * @param \DateTime $date The Import history's date
 	 * @return void
 	 */
-	public function setDate($date) {
-		$this->date = $date;
+	public function setStartTime($startTime) {
+		$this->startTime = $startTime;
 	}
+	
+	/**
+	 * Get the Import history's end date
+	 *
+	 * @return \DateTime The Import history's end date
+	 */
+	public function getEndTime() {
+		return $this->endTime;
+	}
+
+	/**
+	 * Sets this Import history's end date
+	 *
+	 * @param \DateTime $date The Import history's end date
+	 * @return void
+	 */
+	public function setEndTime($endTime) {
+		$this->endTime = $endTime;
+	}
+
 
 	/**
 	 * Get the Import history's number of imported items
@@ -115,6 +150,16 @@ class ImportLogEntry {
 	}
 	
 	/**
+	 * Increment this Import history's number of imported items
+	 *
+	 * @param integer $by increment
+	 * @return void
+	 */
+	public function incrementImportCount($by = 1) {
+		$this->importCount += $by;
+	}	
+	
+	/**
 	 * Get the Import history's number of duplicated items
 	 *
 	 * @return integer The Import history's number of duplicated items
@@ -131,13 +176,23 @@ class ImportLogEntry {
 	 */
 	public function setDuplicateCount($duplicateCount) {
 		$this->duplicateCount = $duplicateCount;
-	}
+	}	
+
+	/**
+	 * Increment this Import history's number of duplicate items
+	 *
+	 * @param integer $by increment
+	 * @return void
+	 */
+	public function incrementDuplicateCount($by = 1) {
+		$this->duplicateCount += $by;
+	}	
 	
 
 	/**
 	 * Get the Import history's messages
 	 *
-	 * @return string The Import history's messages
+	 * @return array The Import history's messages
 	 */
 	public function getMessages() {
 		return $this->messages;
@@ -146,12 +201,47 @@ class ImportLogEntry {
 	/**
 	 * Sets this Import history's messages
 	 *
-	 * @param string $messages The Import history's messages
+	 * @param array $messages The Import history's messages
 	 * @return void
 	 */
-	public function setMessages($messages) {
+	public function setMessages(array $messages) {
 		$this->messages = $messages;
 	}
 
+	/**
+	 *
+	 * @param type $message 
+	 */
+	public function addMessage($message) {
+		$this->messages[] = $message;
+	}
+	
+	/**
+	 * Get the Import history's errors
+	 *
+	 * @return array The Import history's errors
+	 */
+	public function getErrors() {
+		return $this->errors;
+	}
+
+	/**
+	 * Sets this Import history's errors
+	 *
+	 * @param array $messages The Import history's errors
+	 * @return void
+	 */
+	public function setErrors(array $errors) {
+		$this->errors = $errors;
+	}
+
+	/**
+	 *
+	 * @param string $error
+	 */
+	public function addError($error) {
+		$this->errors[] = $error;
+	}
+	
 }
 ?>

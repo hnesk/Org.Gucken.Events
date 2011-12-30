@@ -17,27 +17,6 @@ use Doctrine\Common\Annotations\Annotation as DoctrineAnnotation;
  * @Annotation
  * @DoctrineAnnotation\Target("METHOD")
  */
-final class Deprecated {
-	/**
-	 * @var string
-	 */
-	public $comment;
-
-	/**
-	 * @param array $values
-	 */
-	public function __construct(array $values) {
-		$this->comment = isset($values['value']) ? $values['value'] : (isset($values['comment']) ? $values['comment'] : '[No comment given]');
-	}
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getComment() {
-		return $this->comment;
-	}
-	
-}
+final class WritePermission{}
 
 ?>
