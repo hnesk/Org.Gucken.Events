@@ -21,7 +21,7 @@ namespace Org\Gucken\Events\Controller;
  *                                                                        *
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
-
+use Org\Gucken\Events\Domain\Model\Event;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
 use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
 
@@ -64,8 +64,7 @@ class FactoidConvertController extends BaseController {
      * @return void
      */
     public function indexAction() {   
-		$startDateTime = new \DateTime();
-		$startDateTime->modify('-1 days');
+		$startDateTime = new \DateTime('-14 days');
 		$endDateTime = clone $startDateTime;
 		$endDateTime->modify('+1 month');
         $this->view->assign('identities', $this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime));
@@ -91,6 +90,14 @@ class FactoidConvertController extends BaseController {
 		$this->redirect('index');
 	}
 	
+	/**
+	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
+	 * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid
+	 */
+	public function detailFactoidAction(EventFactoidIdentity $identity, EventFactoid $factoid) {
+		$this->view->assign('factoid', $factoid);
+		$this->view->assign('identity', $identity);
+	}
 	
 	
 	/**
@@ -119,6 +126,15 @@ class FactoidConvertController extends BaseController {
 		$this->redirect('index');
     }
 	
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
+	 */
+    public function mergeAction(Event $event, EventFactoidIdentity $identity) {        
+		$event = $this->convertService->merge($event, $identity);
+		$this->addNotice('Merged "'.$identity.'" to"'.$event.'"');
+		$this->redirect('index');
+    }
 	
 	
 }

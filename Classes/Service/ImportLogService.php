@@ -61,7 +61,7 @@ class ImportLogService {
 		} else {
 			$importLog->incrementDuplicateCount();
 		}
-		$importLog->addMessage((string)$identity . ' with ' . ($isNewFactoid ? 'new ' : '') . 'factoid' . $factoid . 'imported');
+		$importLog->addMessage((string)$identity . ' with ' . ($isNewFactoid ? 'new ' : '') . 'factoid "' . $factoid . '" imported');
 	}		
 	
 	/**

@@ -2,6 +2,11 @@
 
 namespace Org\Gucken\Events\Utility;
 
+use TYPO3\FLOW3\Annotations as FLOW3;
+
+/**
+ * @FLOW3\Scope("singleton") 
+ */
 class Algorithms {
 	/*
 	  Paul's Simple Diff Algorithm v 0.1

@@ -29,15 +29,7 @@ namespace Org\Gucken\Events\Controller;
  */
 class AdminController extends BaseController {
 	/**
-	 * Index action
-	 *
-	 * @return void
-	 */
-	public function badAction() {
-	}
-
-	/**
-	 * Index action
+	 * Index action, shows the admin dashboard
 	 *
 	 * @return void
 	 */

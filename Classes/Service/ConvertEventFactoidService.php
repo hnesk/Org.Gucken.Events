@@ -7,7 +7,9 @@ use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Repository;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
-
+/**
+ * @FLOW3\Scope("singleton") 
+ */
 class ConvertEventFactoidService {
 	
     /**
@@ -44,18 +46,21 @@ class ConvertEventFactoidService {
 	 * @return Model\Event
 	 */
     public function convert(Model\EventFactoidIdentity $identity) {
-		$event = new Model\Event();
-		$event->addFactoidIdentity($identity);		
-		$event->setLocation($identity->getLocation());
-		$event->setStartDateTime($identity->getStartDateTime());
+		$event = new Model\Event();			
 		
 		$factoid = $identity->getFactoid();
+		$source = $identity->getSource();		
 		
+		$event->addFactoidIdentity($identity);		
+		$event->setLocation($identity->getLocation());
+		$event->setStartDateTime($identity->getStartDateTime());			
+				
 		$event->setEndDateTime($factoid->getEndDateTime());
 		$event->setDescription($factoid->getDescription());
 		$event->setShortDescription($factoid->getShortDescription());
 		$event->setTitle($factoid->getTitle());
-		$event->addType($factoid->getType());		
+		$event->addType($factoid->getType());					
+		$event->addLink($source->convertLink($factoid));
 		
 		$this->eventRepository->add($event);
 		
@@ -70,16 +75,32 @@ class ConvertEventFactoidService {
 	 * @return Model\Event
 	 */
     public function merge(Model\Event $event, Model\EventFactoidIdentity $identity) {
-		$event->addFactoidIdentity($identity);		
-		$event->setLocation($identity->getLocation());
-		$event->setStartDateTime($identity->getStartDateTime());
-		
 		$factoid = $identity->getFactoid();		
-		$event->setEndDateTime($factoid->getEndDateTime());
-		$event->setDescription($factoid->getDescription());
-		$event->setShortDescription($factoid->getShortDescription());
-		$event->setTitle($factoid->getTitle());
+		$source = $identity->getSource();		
+		
+		$event->addFactoidIdentity($identity);		
+		
+		if (!$event->getLocation()) {
+			$event->setLocation($identity->getLocation());
+		}
+		if (!$event->getStartDateTime()) {
+			$event->setStartDateTime($identity->getStartDateTime());
+		}		
+		if (!$event->getEndDateTime()) {
+			$event->setEndDateTime($factoid->getEndDateTime());
+		}
+		if (!$event->getDescription()) {
+			$event->setDescription($factoid->getDescription());
+		}
+		if (!$event->getShortDescription()) {
+			$event->setShortDescription($factoid->getShortDescription());
+		}
+		if (!$event->getTitle()) {
+			$event->setTitle($factoid->getTitle());
+		}
+		
 		$event->addType($factoid->getType());		
+		$event->addLink($source->convertLink($factoid));
 		
 		$this->eventRepository->update($event);
 		return $event;
