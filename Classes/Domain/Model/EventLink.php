@@ -32,15 +32,13 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="type", type="string")
+ * 
  */
-class EventLink {
-
-	/**
-	 * The type
-	 * @var string
-	 */
-	protected $type;
+abstract class EventLink {
 	
+	#@ORM\DiscriminatorMap({"person" = "Person", "employee" = "Employee"})
 	/**
 	 *
 	 * @var Org\Gucken\Events\Domain\Model\Event
@@ -67,17 +65,7 @@ class EventLink {
 	 * @return string The event link type
 	 */
 	public function getType() {
-		return $this->type;
-	}
-
-	/**
-	 * Sets this event link type
-	 *
-	 * @param string $title The event link type
-	 * @return void
-	 */
-	public function setType($type) {
-		$this->type = $type;
+		return get_class($this);
 	}
 
 
@@ -113,23 +101,28 @@ class EventLink {
 	 */
 	public function setEvent(\Org\Gucken\Events\Domain\Model\Event $event) {
 		$this->event= $event;
-	}	
+	}		
 	
 	
 	/**
-	 *
-	 * @param string $url 
+	 * @return string
+	 */
+	public function getUrl() {
+		return $this->url;
+	}
+	
+	/**
+	 * @param string $url
 	 */
 	public function setUrl($url) {
 		$this->url = $url;
 	}
 	
 	/**
-	 *
 	 * @return string
 	 */
-	public function getUrl() {
-		return $this->url;
+	public function getIcon() {
+		return 'web.png';
 	}
 
 	/**

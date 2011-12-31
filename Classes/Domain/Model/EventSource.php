@@ -70,6 +70,13 @@ class EventSource {
      * @var Org\Gucken\Rad\Service\ReflectionService
      */
     protected $repositoryReflectionService;
+	
+    /**
+     * @FLOW3\Inject
+     * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
+     */
+    protected $importLogEntryRepository;
+	
     
 
     /**
@@ -159,6 +166,30 @@ class EventSource {
 	public function convertLocation(EventFactoid $factoid) {
 		return $this->getCanConvertLocation() ? $this->getImplementation()->convertLocation($factoid) : null;
 	}
+
+	
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function getCanConvertLink() {
+		return method_exists($this->getImplementation(), 'convertLink');
+	}
+	
+	/**
+	 *
+	 * @return EventLink
+	 */
+	public function convertLink(EventFactoid $factoid) {
+		$link = null;
+		/* @var $link EventLink */
+		if ($this->getCanConvertLink()) {
+			$link = $this->getImplementation()->convertLink($factoid);			
+			$link->setFactoid($factoid);
+		}
+		return $link;
+	}
+	
 
     /**
      * @param string
@@ -255,6 +286,11 @@ class EventSource {
         }                 
         return $implementation;
     }
+	
+	public function getLogEntries(\DateTime $start = null) {		
+		$start = $start ? : new \DateTime('-2 weeks');			
+		return $this->importLogEntryRepository->findBySourceAndDate($this, $start);
+	}
 
 	/**
 	 * @return ImportLogEntry

@@ -75,15 +75,23 @@ class LastFm implements EventSourceInterface {
     
 	/**
 	 *
+	 * @param Model\EventFactoid $factoid
+	 * @return \Org\Gucken\Events\Domain\Model\LastFmEventLink 
+	 */
+	public function convertLink(Model\EventFactoid $factoid) {
+		$link = new Model\LastFmEventLink();
+		$link->setUrl($factoid->getUrl());
+		return $link;
+	}
+	/**
+	 *
 	 * @param Model\EventFactoid $factoid 
 	 */
 	public function convertLocation(Model\EventFactoid $factoid) {
 		$location = null;
-		$proof = $factoid->getProof();
-		if (!empty($proof)) {
-			$proofXml = \Type\Xml\Factory::fromXmlString($proof);
-			$venueXml = $proofXml->css('venue')->asXml()->first();
-			$venue = \Lastfm\Type\Venue\Factory::fromTypeXml($venueXml);
+		$proofXml = $factoid->getProofAsXml();
+		if (!empty($proofXml)) {		
+			$venue = \Lastfm\Type\Venue\Factory::fromTypeXml($proofXml->css('venue')->asXml()->first());
 			/* @var $venue \Lastfm\Type\Venue */
 			
 			$location = new Model\Location();

@@ -69,7 +69,7 @@ class Event {
 	protected $types;
 	
 	/**
-	 * The type
+	 * Links to the original sources
 	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink>
 	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
 	 */
@@ -117,6 +117,7 @@ class Event {
 	public function __construct() {
 		$this->types = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->factoidIdentitys = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->links = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**
@@ -335,6 +336,7 @@ class Event {
 	 */
     public function addLink(\Org\Gucken\Events\Domain\Model\EventLink $link = null) {
 		if ($link) {
+			$link->setEvent($this);
 			$this->links->add($link);
 		}
     }

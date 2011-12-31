@@ -338,6 +338,18 @@ class EventFactoid {
     public function getProof() {
         return $this->proof;
     }	
+	
+	/**
+	 * @return \Type\Xml
+	 */
+	public function getProofAsXml() {
+		$proofXml = null;
+		$proof = $this->getProof();
+		if (!empty($proof)) {
+			$proofXml = \Type\Xml\Factory::fromXmlString($proof);
+		}
+		return $proofXml;
+	}
 
 	/**
 	 *
@@ -374,7 +386,7 @@ class EventFactoid {
 	 * @return string
 	 */
 	public function __toString() {
-		return $this->getStartDateTime()->format('d.M. H:i').' '.$this->getTitle();
+		return $this->getTitle();
 	}
 
 }

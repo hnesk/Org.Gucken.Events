@@ -65,6 +65,19 @@ class AbstractEventSource  {
 		return $this->locationRepository;
 	}
 	
+	/**
+	 *
+	 * @param Model\EventFactoid $factoid
+	 * @return \Org\Gucken\Events\Domain\Model\WebEventLink 
+	 */
+	public function convertLink(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid) {
+		$link = new \Org\Gucken\Events\Domain\Model\WebEventLink();
+		$link->setUrl($factoid->getUrl());
+		return $link;
+	}
+	
+	
+	
 }
 
 ?>

@@ -15,7 +15,40 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  */
 class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 
-	// add customized methods here
+
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+	 * @param \DateTime $start
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 */
+	public function findBySourceAndDate(\Org\Gucken\Events\Domain\Model\EventSource $source, \DateTime $start) {
+		$query = $this->createQuery();
+		$conditions = array(
+			$query->equals('source', $source),
+			$query->greaterThanOrEqual('startTime', $start),
+		);
+		return $query->matching($query->logicalAnd($conditions))->execute();
+	}
+	
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+	 * @param \DateTime $start
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 */
+	public function findWithErrorsBySourceAndDate(\Org\Gucken\Events\Domain\Model\EventSource $source, \DateTime $start) {
+		$query = $this->createQuery();
+		$conditions = array(
+			$query->equals('source', $source),
+			$query->greaterThanOrEqual('startTime', $start),
+			$query->logicalNot($query->equals('errors', ''))
+		);
+		return $query->matching($query->logicalAnd($conditions))->execute();
+	}
+	
+	
+	
 
 }
 ?>

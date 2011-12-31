@@ -68,7 +68,7 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 		
 		if ($unassignedOnly) {
 			$conditions[] = $query->equals('event',  NULL);
-			$conditions[] = $query->equals('shouldSkip',  false);
+			$conditions[] = $query->equals('shouldSkip',  NULL);
 		}
 		
 		return $query->matching($query->logicalAnd($conditions))->execute();

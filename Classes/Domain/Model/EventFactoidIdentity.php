@@ -246,10 +246,9 @@ class EventFactoidIdentity {
 	 */
 	public function __toString() {
 		return 
-			$this->getStartDateTime()->format('d.M.Y H:i').
-			' from '.($this->getSource() ? $this->getSource()->getName() : '[unknown]').
-			' at '.($this->getLocation() ? $this->getLocation()->getName() : '[unknown]') .
-			' with '.$this->factoids->count().' Factoids';
+			$this->getStartDateTime()->format('d.m.Y H:i').
+			' @'.($this->getLocation() ? $this->getLocation()->getName() : '[unknown]') .
+			' #'.$this->factoids->count();
 	}
 
 }
