@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<f:layout name="Page.html" />
+
+<f:section name="content">
+	<h2>{event.startDateTime -> f:format.date(format:'d.m H:i')}, {event.title} @ {event.location.name}, {event.location.address.addressLocality}</h2>
+	<div id="content">
+		<h4>{event.shortDescription}</h4>
+		<p>{event.description}</p>
+		<ul>
+			<f:for each="{event.links}" as="link">
+				<li>{link}</li>
+			</f:for>
+		</ul>
+	</div>
+</f:section>
+<f:section name="right">---</f:section>

@@ -229,3 +229,14 @@ div.events-and-factoids > div.factoids {
 	float:right;
 	width:49%;
 }
+/*
+.tooltip {
+	display:none;
+	border:1px solid #ccc;
+	border-radius: 5px;
+	background-color:#fff;
+}
+*/
+.ui-cluetip-content {
+	overflow-y:auto;
+}

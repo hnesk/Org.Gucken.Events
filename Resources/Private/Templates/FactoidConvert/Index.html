@@ -13,7 +13,7 @@
 					<div class="item event {zebraClass}">
 						<div class="head">
 							<span class="startdatetime">{event.startDateTime -> f:format.date(format:'d.m. H:i')}</span>
-							<f:link.action class="title" action="show" controller="standard" title="{event.title}">{event.title -> f:format.crop(maxCharacters:40,append:'…')}</f:link.action>							
+							<f:link.action class="title" action="show" controller="standard" arguments="{event:event}" title="{event.title}">{event.title -> f:format.crop(maxCharacters:40,append:'…')}</f:link.action>							
 							<span class="location">{event.location.name}</span>
 						</div>
 						<f:if condition="1 == 0">
@@ -63,7 +63,7 @@
 						<f:for each="{identity.factoids}" as="factoid">						
 							<div class="factoid">
 								<f:link.action class="button trash" controller="factoidConvert" action="deleteFactoid" arguments="{identity:identity,factoid:factoid}">delete</f:link.action>
-								<f:link.action class="button details" controller="factoid" action="detail" arguments="{factoid:factoid}" title="{factoid.title}">details</f:link.action>
+								<f:link.action class="button details" controller="factoidConvert" action="detailFactoid" arguments="{identity:identity,factoid:factoid}" title="{factoid.title}">details</f:link.action>
 								<f:link.external class="title" uri="{factoid.url}" title="{factoid.title}">{factoid.title -> f:format.crop(maxCharacters:40,append:'…')}</f:link.external>
 								<span class="type">{factoid.type.title}</span>
 								<span class="importdatetime">{factoid.importDateTime -> f:format.date(format:'d.m. H:i')}</span>							

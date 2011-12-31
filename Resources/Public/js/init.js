@@ -31,6 +31,17 @@ jQuery(document).ready(function() {
 		}
 	});
 	
+	jQuery('a.tooltipTrigger').cluetip({
+		local:true,
+		arrows: true,    // if true, displays arrow on appropriate side of clueTip
+		dropShadow:false,     // set to false if you don't want the drop-shadow effect on the clueTip
+		width:600,
+		height:400,
+		sticky:true,    
+		closePosition: 'title',
+		closeText: 'X'		
+	});	
+	
 	
 	jQuery('.autoadd').each(function() {
 		var $self = jQuery(this);		

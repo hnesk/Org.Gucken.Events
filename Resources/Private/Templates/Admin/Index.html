@@ -8,10 +8,15 @@
 				<h3><f:link.action action="index" controller="Source">Sources</f:link.action></h3>		
 			</div>
 		</f:then>
-		<f:else>
-			ne
-		</f:else>
 	</f:security.ifAccess>
+	<f:security.ifAccess resource="Org_Gucken_Events_Controller_FactoidConvert">
+		<f:then>
+			<div class="sources">
+				<h3><f:link.action action="index" controller="FactoidConvert">Convert Factoids</f:link.action></h3>		
+			</div>
+		</f:then>
+	</f:security.ifAccess>
+	
 	
 		<f:security.ifAuthenticated>
 			<f:then>

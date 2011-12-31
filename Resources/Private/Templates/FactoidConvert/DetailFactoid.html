@@ -1,0 +1,26 @@
+{namespace e=Org\Gucken\Events\ViewHelpers}
+<?xml version="1.0" encoding="UTF-8"?>
+<dl>
+	<dt>Title</dt>
+	<dd>{factoid.title}</dd>
+	
+	<dt>StartDateTime</dt>
+	<dd>{factoid.startDateTime -> f:format.date(format:'d.m.Y H:i')}</dd>
+	
+	<dt>EndDateTime</dt>
+	<dd>{factoid.endDateTime -> f:format.date(format:'d.m.Y H:i')}</dd>
+
+	<dt>url</dt>
+	<dd>{factoid.url}</dd>
+
+	<dt>shortDescription</dt>
+	<dd>{factoid.shortDescription}</dd>
+
+	<dt>description</dt>
+	<dd>{factoid.description}</dd>
+
+	<dt>importDateTime</dt>
+	<dd>{factoid.importDateTime -> f:format.date(format:'d.m.Y H:i')}</dd>
+	
+	
+</dl>

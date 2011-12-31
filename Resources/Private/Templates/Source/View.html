@@ -1,3 +1,4 @@
+{namespace e=Org\Gucken\Events\ViewHelpers}
 <?xml version="1.0" encoding="UTF-8"?>
 <f:layout name="Page.html" />
 
@@ -15,7 +16,52 @@
             <f:for each="{source.parameterProperties}" key="key" as="property">
                 <dd><strong>{key}:</strong> {property}</dd>
             </f:for>
-
+			
+            <dt>Log:</dt>
+            <dd>
+                <table>
+					<thead>
+						<tr>
+							<th>Date</th>
+							<th>Imported</th>
+							<th>Duplicates</th>
+							<th>Messages</th>
+							<th>Errors</th>
+						</tr>
+					</thead>
+					<tbody>
+						<f:for each="{source.logEntries}" as="logEntry">
+							<tr>
+								<td>{logEntry.startTime -> f:format.date(format:'d.m.y H:i')}</td>
+								<td>{logEntry.importCount}</td>
+								<td>{logEntry.duplicateCount}</td>
+								<td>
+									<a rel="#messages_{e:identifier(object:logEntry)}" title="Messages" class="tooltipTrigger">
+										<f:count subject="{logEntry.messages}" />
+									</a>
+									<ul class="tooltip" id="messages_{e:identifier(object:logEntry)}">
+										<f:for each="{logEntry.messages}" as="line">
+											<li>{line}</li>
+										</f:for>
+									</ul>
+								</td>
+								<td>
+									<a rel="#errors_{e:identifier(object:logEntry)}" title="Errors" class="tooltipTrigger">
+										<f:count subject="{logEntry.errors}" />
+									</a>
+									<ul class="tooltip" id="errors_{e:identifier(object:logEntry)}">
+										<f:for each="{logEntry.errors}" as="line">
+											<li>{line}</li>
+										</f:for>
+									</ul>
+								</td>
+							</tr>
+						</f:for>						
+					</tbody>
+				</table>
+			</dd>
+			
+			
             <dt>Events:</dt>
             <dd>
                 <ul>
