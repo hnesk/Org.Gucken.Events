@@ -1,36 +1,47 @@
 jQuery(document).ready(function() {
-    jQuery('.externalIdentifierScheme').change(function() {
-        var $selectHolder = jQuery(this).nextAll('span.selectHolder').first();
-        $selectHolder.load($selectHolder.data('url'));
-    });
-	jQuery('.button.trash').button({
-		text:false,
-		icons: {primary: "ui-icon-trash"},
-	});
-	jQuery('.button.details').button({
-		text:false,
-		icons: {primary: "ui-icon-info"},
-	});
-	jQuery('.button.convert').button({
-		text:false,
-		icons: {primary: "ui-icon-arrowthick-1-w"},
+
+	jQuery('#ajax-indicator').ajaxStart(function() {
+		jQuery(this).text('Ajax loading');
 	});
 	
-		
-    jQuery('a.details').cluetip({
-		attribute:'href',
-		arrows: true,    // if true, displays arrow on appropriate side of clueTip
-		dropShadow:false,     // set to false if you don't want the drop-shadow effect on the clueTip
-		sticky:true,    // keep visible until manually closed
-		width:400,
-		ajaxCache : true,
-		closePosition: 'title',
-		closeText: 'X',
-		ajaxSettings: {
-			cache:true
-		}
+	jQuery('#ajax-indicator').ajaxStop(function() {
+		jQuery(this).text('...');
 	});
 	
+
+	var initButtons = function() {
+		jQuery('.externalIdentifierScheme').change(function() {
+			var $selectHolder = jQuery(this).nextAll('span.selectHolder').first();
+			$selectHolder.load($selectHolder.data('url'));
+		});
+		jQuery('.button.trash').button({
+			text:false,
+			icons: {primary: "ui-icon-trash"},
+		});
+		jQuery('.button.details').button({
+			text:false,
+			icons: {primary: "ui-icon-info"},
+		});
+		jQuery('.button.convert').button({
+			text:false,
+			icons: {primary: "ui-icon-arrowthick-1-w"},
+		});
+
+
+		jQuery('a.details').cluetip({
+			attribute:'href',
+			arrows: true,    // if true, displays arrow on appropriate side of clueTip
+			dropShadow:false,     // set to false if you don't want the drop-shadow effect on the clueTip
+			sticky:true,    // keep visible until manually closed
+			width:400,
+			ajaxCache : true,
+			closePosition: 'title',
+			closeText: 'X',
+			ajaxSettings: {
+				cache:true
+			}
+		});
+	}
 	jQuery('a.tooltipTrigger').cluetip({
 		local:true,
 		arrows: true,    // if true, displays arrow on appropriate side of clueTip
@@ -42,6 +53,64 @@ jQuery(document).ready(function() {
 		closeText: 'X'		
 	});	
 	
+	jQuery('.factoids .identity').draggable({
+		handle:'span.grip', 
+		revert:true,
+		distance:20
+	});
+
+	var update = function(data) {
+		// update dom
+		if(data.update) {
+			$.each(data.update, function(id, html) {
+				console.log('update',id,html);
+				$('#'+id).html(html);
+			});
+		}
+		if(data.replace) {
+			$.each(data.replace, function(id, html) {
+				console.log('replace',id,html);
+				$('#'+id).replaceWith(html);
+			});
+		}
+		initButtons();
+	};
+	
+	initButtons();	
+	
+	jQuery('.identities').droppable({
+		accept: '.identity',
+		activeClass: "dropaccept",
+		hoverClass: "drophover",
+		drop: function( event, ui ) {
+			var $identity = jQuery(ui.draggable);
+			$identity.appendTo(this);
+			//jQuery('.ui-draggable').draggable('disable');			
+			jQuery.ajax({
+				url: $identity.data('mergeurl'),
+				data: {event:jQuery(this).parents('.event').data('identity')},
+				success:update,
+				dataType:'json'
+			});
+			
+			
+		}		
+	});
+		
+	
+	jQuery('.events').droppable({
+		accept: '.identity',
+		greedy:true,
+		activeClass: "dropaccept",
+		hoverClass: "drophover",
+		drop: function( event, ui ) {
+			jQuery(ui.draggable).appendTo(this);
+			jQuery('.ui-draggable').draggable('disable');
+			var convertActionLink = $(ui.draggable).find('a.convert').first().attr('href');
+			window.location.href = convertActionLink;
+		}		
+	});
+		
 	
 	jQuery('.autoadd').each(function() {
 		var $self = jQuery(this);		
@@ -72,9 +141,6 @@ jQuery(document).ready(function() {
 				$focusElement = $newElement.find(data.selector).first();
 				$focusElement.focus();
 				$focusElement.val('');
-
-				
-				//window.setTimeout(function(el) {console.log('delay',el);el.focus();}, 1000, $newElement);
 			});						
 		});
 		$prototype = $self.clone(true,true);

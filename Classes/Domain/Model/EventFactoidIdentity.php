@@ -40,11 +40,11 @@ class EventFactoidIdentity {
     protected $source;
 	
     /**
-     * The source
-     * @var \Org\Gucken\Events\Domain\Model\Event
-	 * @ORM\ManyToOne(inversedBy="factoidIdentitys")
+     * The link 
+     * @var \Org\Gucken\Events\Domain\Model\EventLink
+	 * @ORM\OneToOne
      */
-    protected $event;
+    protected $link;
 	
 	/**
 	 *
@@ -113,6 +113,31 @@ class EventFactoidIdentity {
     public function getSource() {
         return $this->source;
     }
+	
+	/**
+	 *
+	 * @return \Org\Gucken\Events\Domain\Model\EventLink
+	 */
+	public function createLink() {
+		$this->setLink($this->source->convertLink($this));
+		return $this->getLink();
+		new \TYPO3\FLOW3\Persistence\Doctrine\PersistenceManager();
+	}
+	/**
+	 * @return \Org\Gucken\Events\Domain\Model\EventLink
+	 */
+	public function getLink() {
+		return $this->link;
+	}
+	
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link 
+	 */
+	public function setLink(\Org\Gucken\Events\Domain\Model\EventLink $link) {
+		$this->link = $link;
+	}
+	
 
     /**
      * Sets this Event factoid's source
@@ -123,21 +148,6 @@ class EventFactoidIdentity {
     public function setSource($source) {
         $this->source = $source;
     }
-	
-	/**
-	 * @param Event
-	 */
-	public function setEvent(Event $event) {
-		$this->event = $event;
-	}
-	
-	/**
-	 *
-	 * @return Event
-	 */
-	public function getEvent() {
-		return $this->event;
-	}
 	
 	
 	/**

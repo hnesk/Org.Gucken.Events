@@ -74,14 +74,7 @@ class Event {
 	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
 	 */
 	protected $links;	
-	
-	/**
-	 * The identity of the imported factoids this event is based on
-	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventFactoidIdentity>
-	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
-	 */	
-	protected $factoidIdentitys;
-	
+		
 	
 	/**
 	 * Markdown version of the description
@@ -260,6 +253,21 @@ class Event {
 			$this->types->add($type);
 		}
     }
+	
+    /**
+     * Adds a type
+     *
+     * @param \Org\Gucken\Events\Domain\Model\Type $type
+     * @return void
+     */
+    public function addTypeIfNotExists(\Org\Gucken\Events\Domain\Model\Type $type = null) {
+		if ($type) {
+			if (!$this->types->contains($type)) {
+				$this->types->add($type);
+			}
+		}
+    }
+	
 
     /**
      * removes a type
@@ -281,44 +289,6 @@ class Event {
     }
 
 	
-    /**
-     * Setter for factoid identities
-     *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventFactoidIdentities> $factoidIdentities
-     * @return void
-     */
-    public function setFactoidIdentitys(\Doctrine\Common\Collections\Collection $factoidIdentitys) {
-        $this->factoidIdentitys = $factoidIdentitys;
-    }
-
-    /**
-     * Adds a type
-     *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
-     * @return void
-     */
-    public function addFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
-        $this->factoidIdentitys->add($factoidIdentity);
-    }
-
-    /**
-     * removes a type
-     *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
-     * @return void
-     */
-    public function removeFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
-        $this->factoidIdentitys->removeElement($factoidIdentity);
-    }
-
-    /**
-     * Getter for types
-     *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventFactoidIdentitys> 
-     */
-    public function getFactoidIdentitys() {
-        return clone $this->factoidIdentitys;
-    }
 	
     /**
      * Setter for links
@@ -385,4 +355,5 @@ class Event {
 		return $this->getTitle().' '.$this->getStartDateTime()->format('d.m.Y H:i'). ($this->location ? ' @ '.$this->location->getName() : '');
 	}
 }
+
 ?>

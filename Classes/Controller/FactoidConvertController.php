@@ -56,20 +56,20 @@ class FactoidConvertController extends BaseController {
 	 * @FLOW3\Inject
 	 */
 	protected $convertService;
-        
-
+	        
     /**
      * Index action
      *
      * @return void
      */
-    public function indexAction() {   
-		$startDateTime = new \DateTime('-14 days');
+    public function indexAction() {   		
+		$startDateTime = new \DateTime('-1 day');
 		$endDateTime = clone $startDateTime;
 		$endDateTime->modify('+1 month');
         $this->view->assign('identities', $this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime));
 		$this->view->assign('events', $this->eventRepository->findBetween($startDateTime, $endDateTime));
     }
+	
 	
 	/**
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
@@ -127,13 +127,14 @@ class FactoidConvertController extends BaseController {
     }
 	
 	/**
-	 *
+	 * @param \Org\Gucken\Events\Domain\Model\Event $event
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
 	 */
     public function mergeAction(Event $event, EventFactoidIdentity $identity) {        
 		$event = $this->convertService->merge($event, $identity);
-		$this->addNotice('Merged "'.$identity.'" to"'.$event.'"');
-		$this->redirect('index');
+		$this->addNotice('Merged "'.$identity.'" to "'.$event.'"');
+		$this->view->assign('event',$event);
+		$this->view->assign('identity',$identity);
     }
 	
 	

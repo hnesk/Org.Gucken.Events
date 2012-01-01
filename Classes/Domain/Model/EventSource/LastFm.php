@@ -75,12 +75,13 @@ class LastFm implements EventSourceInterface {
     
 	/**
 	 *
-	 * @param Model\EventFactoid $factoid
+	 * @param Model\EventFactoidIdentity $factoidIdentity
+	 * @param \Org\Gucken\Events\Domain\Model\EventLink if set link will be updated else created
 	 * @return \Org\Gucken\Events\Domain\Model\LastFmEventLink 
 	 */
-	public function convertLink(Model\EventFactoid $factoid) {
-		$link = new Model\LastFmEventLink();
-		$link->setUrl($factoid->getUrl());
+	public function convertLink(Model\EventFactoidIdentity $factoidIdentity, $link = null) {
+		$link = $link ?: new Model\LastFmEventLink();
+		$link->setUrl($factoidIdentity->getFactoid()->getUrl());
 		return $link;
 	}
 	/**

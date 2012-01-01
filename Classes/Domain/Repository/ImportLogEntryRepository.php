@@ -1,16 +1,14 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
-/*                                                                        *
- * This script belongs to the FLOW3 package "Org.Gucken.Events".          *
- *                                                                        *
- *                                                                        */
-
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
  * A repository for import log entries
  *
+ * @package Org.Gucken.Events
+ * @subpackage Domain
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @FLOW3\Scope("singleton")
  */
 class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {

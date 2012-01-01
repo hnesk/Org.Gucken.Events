@@ -2,16 +2,12 @@
 
 namespace Org\Gucken\Events\Domain\Repository;
 
-/* *
- * This script belongs to the FLOW3 package "Org.Gucken.Events".          *
- *                                                                        *
- *                                                                        */
-
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
  * A repository for EventFactoids
+ * @package Org.Gucken.Events
+ * @subpackage Domain
  *
  * @FLOW3\Scope("singleton")
  */
@@ -67,7 +63,7 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 		}
 		
 		if ($unassignedOnly) {
-			$conditions[] = $query->equals('event',  NULL);
+			$conditions[] = $query->equals('link',  NULL);
 			$conditions[] = $query->equals('shouldSkip',  NULL);
 		}
 		

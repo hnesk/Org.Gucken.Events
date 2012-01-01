@@ -1,6 +1,14 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
+/**
+ * A heap to compare scorable objects
+ *
+ * @package Org.Gucken.Events
+ * @subpackage Domain
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * 
+ */
 class ScoreHeap extends \SplHeap {
 	
 	/**

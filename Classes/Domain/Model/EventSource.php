@@ -176,16 +176,17 @@ class EventSource {
 		return method_exists($this->getImplementation(), 'convertLink');
 	}
 	
+	
 	/**
-	 *
+	 * @param EventFactoidIdentity $factoidIdentity
 	 * @return EventLink
 	 */
-	public function convertLink(EventFactoid $factoid) {
+	public function convertLink(EventFactoidIdentity $factoidIdentity) {
 		$link = null;
 		/* @var $link EventLink */
 		if ($this->getCanConvertLink()) {
-			$link = $this->getImplementation()->convertLink($factoid);			
-			$link->setFactoid($factoid);
+			$link = $this->getImplementation()->convertLink($factoidIdentity);			
+			$link->setFactoidIdentity($factoidIdentity);
 		}
 		return $link;
 	}
@@ -199,7 +200,8 @@ class EventSource {
         if (!\class_exists($implementationClass)) {
             throw new \TYPO3\FLOW3\AOP\Exception\InvalidArgumentException('Argument needs to be a class name, "' . $implementationClass . '" given', 1314480311);
         }		
-        if (!$this->reflectionService->isClassImplementationOf($implementationClass, 'Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface')) {
+		$implementation = $this->objectManager->get($implementationClass);
+		if (!$implementation instanceof \Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface) {
             throw new \TYPO3\FLOW3\AOP\Exception\InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, ' . $implementationClass . ' given', 1314480281);
         }
         $this->implementationClass = $implementationClass;

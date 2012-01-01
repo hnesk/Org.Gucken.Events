@@ -53,7 +53,7 @@ a{color:#f93;text-decoration:none}#footer{margin-top:1.2em;color:#666;background
 @media
 all{html
 *{font-size:100.01%}body{font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;font-size:75.00%;color:#333}h1,h2,h3,h4,h5,h6{font-family:Georgia,Times,"Times New Roman",serif;font-size:150%;display:block;font-weight:normal;padding:0px
-2px 0px 2px;color:#000}.content{overflow:hidden;line-height:1.75em}h1{font-size:200%}h2{font-size:150%;border-bottom:1px solid #ddd;margin-top:1em}h2
+2px 0px 2px;color:#000}.content{overflow:hidden;line-height:1.75em}h1{font-size:200%}h2{font-size:150%;margin-top:1em}h2
 .headside{float:right;margin-top:3px;font-size:75%}h3{font-size:140%;border-bottom:1px solid #ddd;margin-top:0.8em}h3
 .headside{float:right;margin-top:1px;font-size:75%;color:#d70}h4{font-size:133.33%}h5{font-size:116.67%}h6{font-size:116.67%;font-style:italic}.removeIcon{background-color:#ddd;background-repeat:no-repeat;background-position:1px 0px;background-image:url(http://static.gucken.org/typo3/sysext/t3skin/icons/gfx/closedok.gif);padding:2px
 5px 2px 20px;font-family:'Trebuchet MS',Verdana,Helvetica,Arial,sans-serif;line-height:1em}a.removeIcon{color:#336 !important}p{text-indent:0em;line-height:1.75em;margin:1em
@@ -174,11 +174,15 @@ div.events-and-factoids div.item {
 	border-radius:5px;
 }
 
+div.events-and-factoids div.events > div.item {
+	background-color:none;
+}
+
 div.events-and-factoids div.item div.head {	
 	background-color:#ddd;
 	
 	border:0px;
-	border-bottom:1px solid #eee;
+	border-bottom:1px solid #333;
 	border-radius:5px;	
 	padding:2px 0 0 5px
 }
@@ -239,4 +243,31 @@ div.events-and-factoids > div.factoids {
 */
 .ui-cluetip-content {
 	overflow-y:auto;
+}
+
+span.grip {
+	cursor:move;
+}
+
+div.identities {
+	padding:5px 1px 5px 10px;
+	background-color:#999;
+}
+.dropaccept {
+	color:#eee;
+	background-color:#666;
+}
+
+.drophover {
+	color:#fff;
+	background-color:#333;	
+}
+
+.events.dropaccept {
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.events a.convert {
+	display:none; 
 }

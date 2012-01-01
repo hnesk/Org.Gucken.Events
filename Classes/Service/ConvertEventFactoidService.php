@@ -49,36 +49,34 @@ class ConvertEventFactoidService {
 		$event = new Model\Event();			
 		
 		$factoid = $identity->getFactoid();
-		$source = $identity->getSource();		
 		
-		$event->addFactoidIdentity($identity);		
+		$event->addLink($identity->createLink());
 		$event->setLocation($identity->getLocation());
 		$event->setStartDateTime($identity->getStartDateTime());			
 				
 		$event->setEndDateTime($factoid->getEndDateTime());
 		$event->setDescription($factoid->getDescription());
-		$event->setShortDescription($factoid->getShortDescription());
+		$event->setShortDescription($factoid->getShortDescription());		
 		$event->setTitle($factoid->getTitle());
-		$event->addType($factoid->getType());					
-		$event->addLink($source->convertLink($factoid));
+		$event->setUrl($factoid->getUrl());
 		
+		$event->addTypeIfNotExists($factoid->getType());					
+				
 		$this->eventRepository->add($event);
-		
-		$identity->setEvent($event);
 		$this->eventFactoidIdentityRepository->update($identity);
+		
 		return $event;
     }
 	
 	/**
-	 *
+	 * @param Model\Event $event
 	 * @param Model\EventFactoidIdentity $identity
 	 * @return Model\Event
 	 */
     public function merge(Model\Event $event, Model\EventFactoidIdentity $identity) {
 		$factoid = $identity->getFactoid();		
-		$source = $identity->getSource();		
 		
-		$event->addFactoidIdentity($identity);		
+		$event->addLink($identity->createLink());				
 		
 		if (!$event->getLocation()) {
 			$event->setLocation($identity->getLocation());
@@ -98,11 +96,15 @@ class ConvertEventFactoidService {
 		if (!$event->getTitle()) {
 			$event->setTitle($factoid->getTitle());
 		}
+		if (!$event->getUrl()) {
+			$event->setUrl($factoid->getUrl());
+		}
 		
-		$event->addType($factoid->getType());		
-		$event->addLink($source->convertLink($factoid));
+		
+		$event->addTypeIfNotExists($factoid->getType());
 		
 		$this->eventRepository->update($event);
+		$this->eventFactoidIdentityRepository->update($identity);
 		return $event;
     }
 	

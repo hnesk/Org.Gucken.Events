@@ -30,17 +30,21 @@
 							<f:cycle values="{0:'odd', 1: ''}" as="zebraClass">
 								<tr class="vevent {zebraClass}">
 									<td class="time">
-										<abbr class="dtstart" title="{event.date -> f:format.date(format:'Y-m-d\TH:i:sO')}">
-											{event.date -> f:format.date(format:'H:i:s')}
+										<abbr class="dtstart" title="{event.startDateTime -> f:format.date(format:'Y-m-d\TH:i:sO')}">
+											{event.startDateTime -> f:format.date(format:'H:i')}
 										</abbr>
 									</td>
 									<td class="title summary">
-										<a class="url" href="#">
+										<f:link.action class="url" action="show" arguments="{event:event}">
 											<span title="{event.title}">{event.title}</span>
-										</a>
+										</f:link.action>
 										<f:link.action action="edit" arguments="{event:event}">#</f:link.action>
 									</td>
-									<td class="type">...</td>
+									<td class="type">
+										<f:for each="{event.types}" as="type">
+											{type}
+										</f:for>
+									</td>
 									<td class="location">{event.location.name} {event.location.address.addressLocality}</td>
 								</tr>
 							</f:cycle>

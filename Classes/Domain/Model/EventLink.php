@@ -36,22 +36,20 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @ORM\DiscriminatorColumn(name="type", type="string")
  * 
  */
-abstract class EventLink {
-	
-	#@ORM\DiscriminatorMap({"person" = "Person", "employee" = "Employee"})
+abstract class EventLink {	
 	/**
 	 *
-	 * @var Org\Gucken\Events\Domain\Model\Event
+	 * @var \Org\Gucken\Events\Domain\Model\Event
 	 * @ORM\ManyToOne(inversedBy="links")
 	 */
 	protected $event;
 	
 	/**
 	 *
-	 * @var Org\Gucken\Events\Domain\Model\EventFactoid
+	 * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
 	 * @ORM\OneToOne
 	 */
-	protected $factoid;
+	protected $factoidIdentity;
 
 	/**
 	 * @var string
@@ -67,7 +65,15 @@ abstract class EventLink {
 	public function getType() {
 		return get_class($this);
 	}
-
+	
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\Event $event The Event
+	 * @return void
+	 */
+	public function setEvent(\Org\Gucken\Events\Domain\Model\Event $event) {
+		$this->event= $event;
+	}			
 
 	/**
 	 * Get the Event
@@ -80,29 +86,19 @@ abstract class EventLink {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid 
+	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoid 
 	 * @return void
 	 */
-	public function setFactoid(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid) {
-		$this->factoid = $factoid;
+	public function setFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
+		$this->factoidIdentity = $factoidIdentity;
 	}	
 	
 	/**
-	 * @return \Org\Gucken\Events\Domain\Model\EventFactoid 
+	 * @return \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
 	 */
-	public function getFactoid() {
-		return $this->factoid;
+	public function getFactoidIdentity() {
+		return $this->factoidIdentity;
 	}
-
-	/**
-	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Event $event The Event
-	 * @return void
-	 */
-	public function setEvent(\Org\Gucken\Events\Domain\Model\Event $event) {
-		$this->event= $event;
-	}		
-	
 	
 	/**
 	 * @return string
