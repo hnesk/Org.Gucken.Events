@@ -82,11 +82,12 @@ class FactoidCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
     public function showCommand($name, $filter = '') {
            $source = $this->sourceRepository->findOneByName($name);
            /* @var $source \Org\Gucken\Events\Domain\Model\EventSource */
-           foreach ($source->getEventFactoids() as $factoid) {
+		   
+           foreach ($source->getImplementation()->getEvents() as $factoid) {
                if ($filter && strpos($factoid->getTitle(),$filter) === false) {
                    continue;                   
                }
-               \TYPO3\FLOW3\var_dump($factoid);
+               var_dump($factoid->getNativeValue());
            }
            
            
