@@ -121,7 +121,6 @@ class EventFactoidIdentity {
 	public function createLink() {
 		$this->setLink($this->source->convertLink($this));
 		return $this->getLink();
-		new \TYPO3\FLOW3\Persistence\Doctrine\PersistenceManager();
 	}
 	/**
 	 * @return \Org\Gucken\Events\Domain\Model\EventLink
@@ -134,7 +133,7 @@ class EventFactoidIdentity {
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link 
 	 */
-	public function setLink(\Org\Gucken\Events\Domain\Model\EventLink $link) {
+	public function setLink(\Org\Gucken\Events\Domain\Model\EventLink $link = null) {
 		$this->link = $link;
 	}
 	

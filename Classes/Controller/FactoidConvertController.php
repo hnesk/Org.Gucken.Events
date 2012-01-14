@@ -65,7 +65,7 @@ class FactoidConvertController extends BaseController {
     public function indexAction() {   		
 		$startDateTime = new \DateTime('-1 day');
 		$endDateTime = clone $startDateTime;
-		$endDateTime->modify('+1 month');
+		$endDateTime->modify('+20 days');
         $this->view->assign('identities', $this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime));
 		$this->view->assign('events', $this->eventRepository->findBetween($startDateTime, $endDateTime));
     }

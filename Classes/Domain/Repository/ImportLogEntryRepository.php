@@ -13,7 +13,22 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  */
 class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 
+	protected $defaultOrderings = array(
+		'startTime' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING
+	);
 
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 */
+	public function findLastBySource(\Org\Gucken\Events\Domain\Model\EventSource $source) {		
+		$query = $this->createQuery();
+		return $query->matching($query->equals('source', $source))
+				->setLimit(1)->execute()->getFirst();
+	}
+	
+	
 	/**
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
@@ -24,8 +39,10 @@ class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 		$query = $this->createQuery();
 		$conditions = array(
 			$query->equals('source', $source),
-			$query->greaterThanOrEqual('startTime', $start),
 		);
+		if ($start) {
+			$query->greaterThanOrEqual('startTime', $start);			
+		}
 		return $query->matching($query->logicalAnd($conditions))->execute();
 	}
 	

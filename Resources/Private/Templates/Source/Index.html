@@ -11,6 +11,8 @@
 				<th>Name</th>				
 				<th>Implementierung</th>
 				<th>Aktionen</th>
+				<th>Letzter Import: Datum</th>				
+				<th>Letzter Import: Anzahl</th>	
 			</tr>
 		</thead>
 		<tbody>
@@ -23,6 +25,12 @@
 						<f:link.action action="edit" arguments="{source : source}">Edit</f:link.action>
 						<f:link.action action="source" controller="Import" arguments="{source:source, redirect:'{f:uri.action(action:\"index\")}'}">Import</f:link.action>
 					</td>
+					<td class="logStartTime">
+						{source.lastLogEntry.startTime -> f:format.date(format:'d.m.y H:i')}
+					</td>
+					<td class="logImportCount">
+						{source.lastLogEntry.importCount}
+					</td>						
 				</tr>
 			</f:cycle>
 		</f:for>

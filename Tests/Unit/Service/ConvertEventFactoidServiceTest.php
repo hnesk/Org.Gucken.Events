@@ -9,34 +9,47 @@ use Org\Gucken\Events\Service\ConvertEventFactoidService;
 class ConvertEventFactoidServiceTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
 	
 	/**
+	 *
+	 * @var Org\Gucken\Events\Service\ConvertEventFactoidService
+	 */
+	protected $service;
+	
+	public function setUp() {
+		$eventRepository = $this->getMock('Org\Gucken\Events\Domain\Repository\EventRepository');
+		$eventRepository->expects($this->once())->method('add');
+		
+		$identityRepository = $this->getMock('Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository');
+		$identityRepository->expects($this->once())->method('update');		
+		
+		$this->service = new ConvertEventFactoidService();
+		$this->service->injectEventRepository($eventRepository);
+		$this->service->injectFactoidIdentityRepository($identityRepository);		
+	}
+	
+	public function tearDown() {
+		$this->service = null;
+	}
+		
+	/**
 	 * @test 
 	 */
 	public function convertTransfersIdentityData() {
-		$eventRepository = $this->getMock('Org\Gucken\Events\Domain\Repository\EventRepository');
-		$eventRepository->expects($this->once())->method('add');
-		$service = new ConvertEventFactoidService();
-		$service->injectEventRepository($eventRepository);
 		
 		$identity = $this->buildIdentity();
-		$event = $service->convert($identity);
-		
+		$event = $this->service->convert($identity);
+						
 		$this->assertSame($identity->getStartDateTime(),$event->getStartDateTime(), 'startDateTime is not the same');
 		$this->assertSame($identity->getLocation(),$event->getLocation(), 'Location is not the same');		
-		$this->assertSame($identity,$event->getFactoidIdentitys()->first(), 'factoidIdentity is not the same');		
 	}
 	
 	/**
 	 * @test 
 	 */
 	public function convertTransfersFactoidData() {
-		$eventRepository = $this->getMock('Org\Gucken\Events\Domain\Repository\EventRepository');
-		$eventRepository->expects($this->once())->method('add');
-		$service = new ConvertEventFactoidService();
-		$service->injectEventRepository($eventRepository);
 		
 		$identity = $this->buildIdentity();
 		
-		$event = $service->convert($identity);
+		$event = $this->service->convert($identity);
 		
 		$factoid = $identity->getFactoid();
 		
@@ -47,7 +60,7 @@ class ConvertEventFactoidServiceTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
 		$this->assertSame($factoid->getType(),$event->getTypes()->first());
 		
 	}
-	
+
 	
 	/**
 	 *

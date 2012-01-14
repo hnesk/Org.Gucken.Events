@@ -324,7 +324,7 @@ class Event {
     /**
      * Getter for links
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLinks> 
+     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink> 
      */
     public function getLinks() {
         return clone $this->links;

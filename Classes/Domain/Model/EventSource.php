@@ -75,21 +75,31 @@ class EventSource {
      * @FLOW3\Inject
      * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
      */
-    protected $importLogEntryRepository;
-	
-    
+    protected $importLogEntryRepository;	   
 
     /**
      * @var \TYPO3\FLOW3\Reflection\ReflectionService
-     * @FLOW3\Inject
      */
     protected $reflectionService;
+	
     /**
-     *
      * @var \TYPO3\FLOW3\Object\ObjectManager
-     * @FLOW3\Inject
      */
     protected $objectManager;
+
+	/**
+	 * @param \TYPO3\FLOW3\Reflection\ReflectionService $reflectionService 
+	 */
+	public function injectReflectionService(\TYPO3\FLOW3\Reflection\ReflectionService $reflectionService) {
+		$this->reflectionService = $reflectionService;
+	}	
+	
+	/**
+	 * @param \TYPO3\FLOW3\Object\ObjectManagerInterface $objectManager 
+	 */
+	public function injectObjectManager(\TYPO3\FLOW3\Object\ObjectManagerInterface $objectManager) {
+		$this->objectManager = $objectManager;
+	}
 
     /**
      * Get the source name
@@ -173,7 +183,7 @@ class EventSource {
 	 * @return boolean
 	 */
 	public function getCanConvertLink() {
-		return method_exists($this->getImplementation(), 'convertLink');
+		return $this->getImplementationClass()  && method_exists($this->getImplementation(), 'convertLink');
 	}
 	
 	
@@ -288,7 +298,20 @@ class EventSource {
         }                 
         return $implementation;
     }
+
+	/**
+	 *
+	 * @return ImportLogEntry 
+	 */
+	public function getLastLogEntry() {		
+		return $this->importLogEntryRepository->findLastBySource($this);
+	}
 	
+	/**
+	 *
+	 * @param \DateTime $start
+	 * @return array
+	 */
 	public function getLogEntries(\DateTime $start = null) {		
 		$start = $start ? : new \DateTime('-2 weeks');			
 		return $this->importLogEntryRepository->findBySourceAndDate($this, $start);
