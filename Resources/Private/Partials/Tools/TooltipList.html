@@ -1,0 +1,16 @@
+{namespace e=Org\Gucken\Events\ViewHelpers}
+<f:if condition="{list}">
+	<f:then>
+		<a rel="#errors_{e:objectHash(object:list)}" title="{title}" class="tooltipTrigger">
+			<f:count subject="{list}" />
+		</a>
+		<ul class="tooltip" id="errors_{e:objectHash(object:list)}">
+			<f:for each="{list}" as="line">
+				<li><pre>{line}</pre></li>
+			</f:for>
+		</ul>								
+	</f:then>
+	<f:else>
+		<f:count subject="{list}" />
+	</f:else>
+</f:if>

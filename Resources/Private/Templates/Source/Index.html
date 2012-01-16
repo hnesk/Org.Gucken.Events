@@ -1,3 +1,4 @@
+{namespace e=Org\Gucken\Events\ViewHelpers}
 <?xml version="1.0" encoding="UTF-8"?>
 <f:layout name="Page.html" />
 
@@ -11,8 +12,9 @@
 				<th>Name</th>				
 				<th>Implementierung</th>
 				<th>Aktionen</th>
-				<th>Letzter Import: Datum</th>				
-				<th>Letzter Import: Anzahl</th>	
+				<th>Import: Datum</th>				
+				<th>Import: #</th>
+				<th>Import: Fehler</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -31,6 +33,10 @@
 					<td class="logImportCount">
 						{source.lastLogEntry.importCount}
 					</td>						
+					<td class="logImportError">
+						<f:render partial="Tools/TooltipList" arguments="{list:source.lastLogEntry.errors,title:'Errors'}" />
+					</td>						
+				
 				</tr>
 			</f:cycle>
 		</f:for>

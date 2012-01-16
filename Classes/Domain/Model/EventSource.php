@@ -312,8 +312,8 @@ class EventSource {
 	 * @param \DateTime $start
 	 * @return array
 	 */
-	public function getLogEntries(\DateTime $start = null) {		
-		$start = $start ? : new \DateTime('-2 weeks');			
+	public function getLogEntries() {		
+		$start = new \DateTime('-2 weeks');			
 		return $this->importLogEntryRepository->findBySourceAndDate($this, $start);
 	}
 

@@ -41,7 +41,7 @@ class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 			$query->equals('source', $source),
 		);
 		if ($start) {
-			$query->greaterThanOrEqual('startTime', $start);			
+			$conditions[] = $query->greaterThanOrEqual('startTime', $start);			
 		}
 		return $query->matching($query->logicalAnd($conditions))->execute();
 	}

@@ -49,7 +49,7 @@ class ExternalLocationIdentifier {
      * The external Id
      * 
      * @var string
-     * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=255 })     * 
+     * @FLOW3\Validate(type="StringLength", options={ "minimum"=0, "maximum"=255 })     * 
      */
     protected $id;
     

@@ -70,9 +70,9 @@ class ImportLogService {
 	 * @param \Exception $e 
 	 */
 	public function exceptionThrown(Model\EventSource $source, $e) {
-		$this->systemLogger->log($e->getCode().' '.$e->getMessage. ' in '.$e->getTraceAsString());
+		$this->systemLogger->log($e->getCode().' '.$e->getMessage(). ' in '.$e->getTraceAsString());
 		$importLog = $this->logBySource[spl_object_hash($source)];
-		$importLog->addError($e->getCode().' '.$e->getMessage. ' in '.$e->getTraceAsString());
+		$importLog->addError($e->getCode().' '.$e->getMessage(). ' in '.$e->getTraceAsString());
 	}	
 	
 	/**
