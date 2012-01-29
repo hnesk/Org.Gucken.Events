@@ -11,8 +11,8 @@ jQuery(document).ready(function() {
 
 	var initButtons = function() {
 		jQuery('.externalIdentifierScheme').change(function() {
-			var $selectHolder = jQuery(this).nextAll('span.selectHolder').first();
-			$selectHolder.load($selectHolder.data('url'));
+			var $selectHolder = jQuery(this).nextAll('span.selectHolder').first();			
+			$selectHolder.load($selectHolder.data('url'), {type:$(this).val()});
 		});
 		jQuery('.button.trash').button({
 			text:false,

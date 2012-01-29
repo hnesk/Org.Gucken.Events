@@ -7,16 +7,42 @@
 	</dd>
 
 	<dt>
-		<label for="date">Date:</label>
+		<label for="startDateTime">Date:</label>
 	</dt>
 	<dd>
-		<input type="text" name="event[date][date]" id="date" value="{event.date -> f:format.date(format:'d.m.Y')}"/>
-		<f:form.hidden name="event[date][dateFormat]" value="d.m.Y" />
-		<!--<input type="text" name="event[date][time]" id="time" value="{event.date -> f:format.date(format:'H:i')}"/>-->
-		<f:form.select id="time" name="event[date][time]" options="{2000: '20:00', 2030: '20:30', 2100: '21:00', 2130: '21:30'}" value="{event.date -> f:format.date(format:'Hi')}" />
-		<f:form.hidden name="event[date][timeFormat]" value="Hi" />
+		<input type="date" name="event[startDateTime][date]" id="startDateTime" size="10" maxlength="10" value="{event.startDateTime -> f:format.date(format:'d.m.Y')}"/>
+		<f:form.hidden name="event[startDateTime][dateFormat]" value="d.m.Y" />
+		<input type="time" name="event[startDateTime][time]" id="startDateTime_time" size="5" maxlength="5" value="{event.startDateTime -> f:format.date(format:'H:i')}"/>
+		<!-- <f:form.select id="time" name="event[startDateTime][time]" options="{2000: '20:00', 2030: '20:30', 2100: '21:00', 2130: '21:30'}" value="{event.startDateTime -> f:format.date(format:'Hi')}" />-->
+		<f:form.hidden name="event[startDateTime][timeFormat]" value="H:i" />
 	</dd>
 
+	<dt>
+		<label for="endDateTime">End Date:</label>
+	</dt>
+	<dd>
+		<input type="date" name="event[endDateTime][date]" id="endDateTime" size="10" maxlength="10" value="{event.endDateTime -> f:format.date(format:'d.m.Y')}"/>
+		<f:form.hidden name="event[endDateTime][dateFormat]" value="d.m.Y" />
+		<input type="text" name="event[endDateTime][time]" id="endDateTime_time" size="5" maxlength="5" value="{event.endDateTime -> f:format.date(format:'H:i')}"/>
+		<!-- <f:form.select id="time" name="event[endDateTime][time]" options="{2000: '20:00', 2030: '20:30', 2100: '21:00', 2130: '21:30'}" value="{event.endDateTime -> f:format.date(format:'Hi')}" />-->
+		<f:form.hidden name="event[endDateTime][timeFormat]" value="H:i" />
+	</dd>
+
+	
+	<dt>
+		<label for="shortDescription">Short Description:</label>
+	</dt>
+	<dd>
+		<f:form.textarea cols="20" rows="3" id="shortDescription" property="shortDescription" />
+	</dd>
+
+	<dt>
+		<label for="description">Description:</label>
+	</dt>
+	<dd>
+		<f:form.textarea cols="20" rows="3" id="description" property="description" />
+	</dd>
+	
 	<dt>
 		<label for="location">Location:</label>
 	</dt>
@@ -24,6 +50,31 @@
 		<f:form.select id="location" property="location" options="{locations}" />
 	</dd>
 
+	<dt>
+		<label for="types">Types:</label>
+	</dt>
+	<dd>
+		<f:form.select id="types" property="types" options="{types}" multiple="true" size="12"/>
+	</dd>
+
+	
+	<dt>
+		<label for="url">Link:</label>
+	</dt>
+	<dd>
+		<f:form.textfield id="url" property="url" />
+	</dd>
+
+	<dt>
+		<label for="links">Links:</label>
+	</dt>
+	<dd>
+		<f:for each="{event.links}" as="link">
+			<li>{link}</li>
+		</f:for>
+	</dd>
+	
+	
 	<dt>
 		And then
 	</dt>

@@ -9,6 +9,7 @@ resources:
     Org_Gucken_Events_Controller_Admin: 'class(Org\Gucken\Events\Controller\AdminController)'
     Org_Gucken_Events_Controller_Source: 'class(Org\Gucken\Events\Controller\SourceController)'
     Org_Gucken_Events_Controller_Import: 'class(Org\Gucken\Events\Controller\ImportController)'
+    Org_Gucken_Events_Controller_Type: 'class(Org\Gucken\Events\Controller\TypeController)'
     Org_Gucken_Events_Controller_Location: 'class(Org\Gucken\Events\Controller\LocationController)'
     Org_Gucken_Events_Controller_FactoidConvert: 'class(Org\Gucken\Events\Controller\FactoidConvertController)'
     Org_Gucken_Events_Actions_Create: 'method(Org\Gucken\Events\Controller\.*Controller->(add|save)Action())'
@@ -30,6 +31,7 @@ acls:
       Org_Gucken_Events_Controller_Import: GRANT
       Org_Gucken_Events_Controller_Location: GRANT
       Org_Gucken_Events_Controller_FactoidConvert: GRANT      
+      Org_Gucken_Events_Controller_Type: GRANT      
   Editor:
     methods:
       Org_Gucken_Events_Actions_Create: GRANT

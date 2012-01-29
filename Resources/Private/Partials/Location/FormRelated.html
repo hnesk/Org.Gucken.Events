@@ -6,17 +6,18 @@
         <ol>            
             <f:for each="{location.externalIdentifiers}" as="externalIdentifier" key="i">
                 <li>
-                    <f:form.select class="externalIdentifierScheme" property="externalIdentifiers.{i}.scheme" options="{externalIdentifiers}" />                    
-                    <f:form.hidden property="externalIdentifiers.{i}" value="{externalIdentifier}"/>
-                    <span class="selectHolder" data-url="{f:uri.action(action:'lookup',format:'html',arguments:{location:location, position:i, type:externalIdentifier.scheme})}">
-                        {externalIdentifier.id}
-                    </span>
+					<a href="{externalIdentifier.url}">{externalIdentifier}</a>
                 </li>                                        
             </f:for>
-            <li>
-                <f:form.select class="externalIdentifierScheme" property="externalIdentifiers.{location.externalIdentifiers -> f:count()}.scheme"  options="{externalIdentifiers}" />
-                <f:form.textfield property="externalIdentifiers.{location.externalIdentifiers -> f:count()}.id" />
-                <f:form.hidden property="externalIdentifiers.{location.externalIdentifiers -> f:count()}.location" value="{location}"/>
+            <li>	
+				<f:alias map="{i:location.externalIdentifierCount}">		
+					<f:form.select class="externalIdentifierScheme" property="externalIdentifiers.{i}.__type"  options="{externalIdentifiers}" />
+					<f:form.textfield property="externalIdentifiers.{i}.id" />
+					<f:form.hidden property="externalIdentifiers.{i}.location" value="{location}"/>
+					<span class="selectHolder" data-url="{f:uri.action(action:'lookup',format:'html',arguments:{location:location, position:i, type:''})}">
+						{externalIdentifier.id}
+					</span>
+				</f:alias>	
             </li>                        
         </ol>
     </dd>            

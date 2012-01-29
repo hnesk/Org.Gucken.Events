@@ -2,14 +2,63 @@
 	<li>
 		<f:link.action action="index" controller="Admin">			
 			<f:security.ifAuthenticated>
-				<f:then>Admin</f:then>
-				<f:else>Login</f:else>
+				<f:then>
+					Admin					
+				</f:then>
+				<f:else>
+					Login
+				</f:else>
 			</f:security.ifAuthenticated>						
 		</f:link.action>
 		<f:security.ifAuthenticated>
-			<f:then>
-				<f:link.action action="logout" controller="Account">Logout</f:link.action>
-			</f:then>
+			<ul>
+				<f:security.ifAccess resource="Org_Gucken_Events_Controller_Source">
+					<f:then>
+						<li>
+							<f:link.action action="index" controller="Source">Sources</f:link.action>
+						</li>
+					</f:then>
+				</f:security.ifAccess>
+				<f:comment>
+					<f:security.ifAccess resource="Org_Gucken_Events_Controller_Import">
+						<f:then>
+							<li>
+								<f:link.action action="index" controller="Import">Import</f:link.action>
+							</li>
+						</f:then>
+					</f:security.ifAccess>				
+				</f:comment>
+				<f:security.ifAccess resource="Org_Gucken_Events_Controller_FactoidConvert">
+					<f:then>
+						<li>
+							<f:link.action action="index" controller="FactoidConvert">Convert Factoids</f:link.action>
+						</li>
+					</f:then>
+				</f:security.ifAccess>
+				<f:security.ifAccess resource="Org_Gucken_Events_Controller_Location">
+					<f:then>
+						<li>
+							<f:link.action action="index" controller="Location">Locations</f:link.action>
+						</li>
+					</f:then>
+				</f:security.ifAccess>
+				<f:security.ifAccess resource="Org_Gucken_Events_Controller_Type">
+					<f:then>
+						<li>
+							<f:link.action action="index" controller="Type">Type</f:link.action>
+						</li>
+					</f:then>
+				</f:security.ifAccess>	
+				
+			</ul>
 		</f:security.ifAuthenticated>
 	</li>
+	<f:security.ifAuthenticated>
+		<f:then>
+			<li>
+				<f:link.action action="logout" controller="Account">Logout</f:link.action>
+			</li>
+		</f:then>
+	</f:security.ifAuthenticated>
+	
 </ul>

@@ -320,6 +320,11 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     public function getExternalIdentifiers() {
         return clone $this->externalIdentifiers;
     }
+	
+	public function getExternalIdentifierCount() {
+		return count($this->externalIdentifiers);
+	}
+	
 
     /**
      * Setter for keywords
@@ -417,7 +422,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 	 */
 	public function removeEmptyExternalIdentifier() {
         foreach ($this->externalIdentifiers as $key =>$externalIdentifier) {
-            if (trim($externalIdentifier->getScheme()) === '') {
+            if (trim($externalIdentifier->getSchemeLabel()) === '') {
                 $this->externalIdentifiers->remove($key);
             }
         }

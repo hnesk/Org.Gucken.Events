@@ -43,6 +43,7 @@ class EventFactoidIdentity {
      * The link 
      * @var \Org\Gucken\Events\Domain\Model\EventLink
 	 * @ORM\OneToOne
+	 * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $link;
 	

@@ -53,7 +53,7 @@ class DateTimeConverter extends \TYPO3\FLOW3\Property\TypeConverter\DateTimeConv
 	 * @return void
 	 */
 	protected function overrideTimeIfSpecified(\DateTime $date, array $source) {
-		if (!isset($source['time']) || !is_string($source['time'])) {
+		if (!isset($source['time']) || !is_string($source['time']) || strlen(trim($source['time']))===0) {
 			return parent::overrideTimeIfSpecified($date, $source);
 		}
 

@@ -46,20 +46,14 @@ class StandardController extends BaseController {
 	 */
 	protected $locationRepository;
 
-	/**
-	 *
-	 * @var \TYPO3\FLOW3\Reflection\ReflectionService
-	 * @FLOW3\Inject
-	 */
-	protected $reflectionService;
-
 
 	/**
 	 *
-	 * @var \TYPO3\FLOW3\Object\ObjectManager
+	 * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
 	 * @FLOW3\Inject
 	 */
-	protected $objectManager;
+	protected $typeRepository;
+	
 
 	/**
 	 * Index action
@@ -91,6 +85,7 @@ class StandardController extends BaseController {
 	public function addAction(Event $event = null) {
 		$this->view->assign('event', $event);
 		$this->view->assign('locations', $this->locationRepository->findAll());
+		$this->view->assign('types', $this->typeRepository->findAll());
 	}
 
 	/**
@@ -102,6 +97,7 @@ class StandardController extends BaseController {
 	public function editAction(Event $event = null) {
 		$this->view->assign('event', $event);
 		$this->view->assign('locations', $this->locationRepository->findAll());
+		$this->view->assign('types', $this->typeRepository->findAll());
 	}
 
 
@@ -111,7 +107,7 @@ class StandardController extends BaseController {
 	 */
 	public function createAction(Event $event) {
 		$this->eventRepository->add($event);
-		$this->flashMessageContainer->add('Event created');
+		$this->addNotice('Event created');
 		$this->redirect('index');
 	}
 
@@ -121,11 +117,20 @@ class StandardController extends BaseController {
 	 */
 	public function updateAction(Event $event) {
 		$this->eventRepository->update($event);
-		$this->flashMessageContainer->add('Event updated');
+		$this->addNotice('Event updated');
 		$this->redirect('index');
 	}
 
 
+	/**
+	 *
+	 * @param Org\Gucken\Events\Domain\Model\Event $event 
+	 */
+	public function deleteAction(Event $event) {
+		$this->eventRepository->remove($event);
+		$this->addNotice($event. ' deleted');
+		$this->redirect('index');
+	}
 }
 
 ?>

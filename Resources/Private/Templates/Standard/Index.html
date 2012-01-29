@@ -1,3 +1,4 @@
+{namespace m=Org\Gucken\Markdown\ViewHelpers}
 <?xml version="1.0" encoding="UTF-8"?>
 <f:layout name="Page.html" />
 
@@ -35,10 +36,13 @@
 										</abbr>
 									</td>
 									<td class="title summary">
-										<f:link.action class="url" action="show" arguments="{event:event}">
-											<span title="{event.title}">{event.title}</span>
-										</f:link.action>
-										<f:link.action action="edit" arguments="{event:event}">#</f:link.action>
+										<f:security.ifAccess resource="Org_Gucken_Events_Actions_Modify">
+											<f:link.action action="edit" arguments="{event:event}">~</f:link.action>
+										</f:security.ifAccess>
+										<f:security.ifAccess resource="Org_Gucken_Events_Actions_Delete">
+											<f:link.action action="delete" arguments="{event:event}">-</f:link.action>
+										</f:security.ifAccess>
+										<f:link.action class="url" action="show" arguments="{event:event}"><span title="{event.title}">{event.title}</span></f:link.action>
 									</td>
 									<td class="type">
 										<f:for each="{event.types}" as="type">

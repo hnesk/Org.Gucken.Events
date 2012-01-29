@@ -3,8 +3,8 @@
 	<div class="head">
 		<span class="grip ui-icon ui-icon-grip-dotted-vertical"> </span>
 		<!-- <input type="checkbox"  name="arguments[][__identity]" id="action_{e:identifier(object:identity)}" value="{e:identifier(object:identity)}" />-->		
-		<f:link.action class="button trash" controller="factoidConvert" action="skip" arguments="{identity:identity}">delete</f:link.action>
-		<f:link.action class="button convert" controller="factoidConvert" action="convert" arguments="{identity:identity}">convert</f:link.action>
+		<f:link.action class="button trash" controller="factoidConvert" action="skip" arguments="{identity:identity}" section="d{identity.startDateTime -> f:format.date(format:'Ymd')}">delete</f:link.action>
+		<f:link.action class="button convert" controller="factoidConvert" action="convert" arguments="{identity:identity}" section="d{identity.startDateTime -> f:format.date(format:'Ymd')}">convert</f:link.action>
 		<span class="startdatetime">{identity.startDateTime -> f:format.date(format:'d.m. H:i')}</span>
 		<span class="location">
 			<f:if condition="{identity.location}">
@@ -21,7 +21,7 @@
 	</div>
 	<f:for each="{identity.factoids}" as="factoid">						
 		<div class="factoid">
-			<f:link.action class="button trash" controller="factoidConvert" action="deleteFactoid" arguments="{identity:identity,factoid:factoid}">delete</f:link.action>
+			<f:link.action class="button trash" controller="factoidConvert" action="deleteFactoid" arguments="{identity:identity,factoid:factoid}" name="d{identity.startDateTime -> f:format.date(format:'Ymd')}">delete</f:link.action>
 			<f:link.action class="button details" controller="factoidConvert" action="detailFactoid" arguments="{identity:identity,factoid:factoid}" title="{factoid.title}">details</f:link.action>
 			<f:link.external class="title" uri="{factoid.url}" title="{factoid.title}">{factoid.title -> f:format.crop(maxCharacters:40,append:'…')}</f:link.external>
 			<span class="type">{factoid.type.title}</span>

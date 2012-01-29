@@ -29,10 +29,9 @@ class LocationRepository extends \TYPO3\FLOW3\Persistence\Repository {
     public function findOneByExternalId($scheme, $id) {
         $query = $this->createQuery();
         $query->matching($query->logicalAnd(
-            $query->equals('externalIdentifiers.scheme', $scheme),
-            $query->equals('externalIdentifiers.id', $id)
+        #    $query->equals('externalIdentifiers.scheme', $scheme),
+            $query->equals('externalIdentifiers.id', (string)$id)
         ));
-        #echo $query->getDoctrineQuery()->getSQL();die();
                 
         return $query->execute()->getFirst();
     }

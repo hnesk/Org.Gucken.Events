@@ -32,7 +32,8 @@ use Org\Gucken\Events\Domain\Model;
 class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	const CREATION = 1;
 	const MODIFICATION = 2;
-	const EVERYTHING = 3;
+	const OVERRIDE = 4;
+	const EVERYTHING = 7;
 
 	/**
      * Name of the argument to pass redirect information
@@ -82,6 +83,48 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
             parent::redirect($actionName, $controllerName, $packageKey, $arguments, $delay, $statusCode, $format);
         }
     }
+
+	/**
+	 * Shortcut for easier setting of property mapping configuration for nested objects 
+	 * 
+	 * @param string $argument
+	 * @param string $propertyPath
+	 * @param int $propertyFlags allow creation and/or modification, bitfield of self::CREATION / self::MODIFICATION
+	 */
+	protected function preprocessProperty($argument,$propertyPath, $callback) {
+		$data = $this->request->getArgument($argument);		
+		$propertyPathParts = explode('.', $propertyPath);
+		$data = $this->_preprocessProperty($data, $propertyPathParts, $callback);
+		$this->request->setArgument($argument,$data);
+	}
+	
+	private function _preprocessProperty($data, $propertyPathParts, $callback) {
+		$currentProperty = array_shift($propertyPathParts);
+
+		// * = recursive call for all keys
+		if ($currentProperty === '*') {
+			foreach ($data as $currentProperty => $subData) {
+				$data[$currentProperty] = $this->_preprocessProperty($subData, $propertyPathParts, $callback);					
+				if (!isset($data[$currentProperty])) {
+					unset($data[$currentProperty]);
+				}				
+			}
+		} 
+		// recursive call for given property
+		else if (!empty($currentProperty)) {
+			$subData = isset($data[$currentProperty]) ? $data[$currentProperty] : array();
+			$data[$currentProperty] = $this->_preprocessProperty($subData, $propertyPathParts, $callback);					
+			if (!isset($data[$currentProperty])) {
+				unset($data[$currentProperty]);
+			}
+		} else {
+			if (!$callback($data)) {
+				$data = null;
+			}
+		}					
+		return $data;
+	}
+	
 	
 	/**
 	 * Shortcut for easier setting of property mapping configuration for nested objects 
@@ -131,6 +174,10 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 			if ($propertyFlags && self::MODIFICATION) {	
 				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter', \TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED, TRUE);
 			}			
+			if ($propertyFlags && self::OVERRIDE) {	
+				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter', \TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_OVERRIDE_TARGET_TYPE_ALLOWED, TRUE);
+			}			
+		
 		} 								
 	}
 	

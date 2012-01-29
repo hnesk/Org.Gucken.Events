@@ -1,11 +1,21 @@
+{namespace m=Org\Gucken\Markdown\ViewHelpers}
 <?xml version="1.0" encoding="UTF-8"?>
 <f:layout name="Page.html" />
 
 <f:section name="content">
-	<h2>{event.startDateTime -> f:format.date(format:'d.m H:i')}, {event.title} @ {event.location.name}, {event.location.address.addressLocality}</h2>
+	<h2>
+		<f:security.ifAccess resource="Org_Gucken_Events_Actions_Modify">
+			<f:link.action action="edit" arguments="{event:event}">~</f:link.action>
+		</f:security.ifAccess>
+		<f:security.ifAccess resource="Org_Gucken_Events_Actions_Delete">
+			<f:link.action action="delete" arguments="{event:event}">-</f:link.action>
+		</f:security.ifAccess>		
+		{event.startDateTime -> f:format.date(format:'d.m H:i')}, {event.title} @ {event.location.name}, {event.location.address.addressLocality}
+	</h2>
+	
 	<div id="content">
 		<h4>{event.shortDescription}</h4>
-		<p>{event.description}</p>
+		<m:markdown>{event.description}</m:markdown>
 		<ul>
 			<f:for each="{event.types}" as="type">
 				<li>{type}</li>

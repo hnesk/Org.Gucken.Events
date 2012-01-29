@@ -48,6 +48,7 @@ abstract class EventLink {
 	 *
 	 * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
 	 * @ORM\OneToOne
+	 * 
 	 */
 	protected $factoidIdentity;
 

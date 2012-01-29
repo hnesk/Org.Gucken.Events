@@ -31,19 +31,10 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="scheme", type="string")
  */
-class ExternalLocationIdentifier {
-    const LASTFM = 'lastfm';
-    const FACEBOOK = 'facebook';
-        
-    /**
-     * The scheme  (lastfm, facebook, ...)
-     * 
-     * @var string
-     * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=10 })
-     * @ORM\Column(length=10)
-     */
-    protected $scheme;
+abstract class ExternalLocationIdentifier {
 
     /**
      * The external Id
@@ -59,6 +50,12 @@ class ExternalLocationIdentifier {
      * @ORM\ManyToOne(inversedBy="externalIdentifiers")
      */
     protected $location;
+	
+	/**
+	 *
+	 * @var string
+	 */
+	protected $label;
 
     /**
      *
@@ -66,25 +63,17 @@ class ExternalLocationIdentifier {
      * @param string $id 
      * @param Org\Gucken\Events\Domain\Model\Location $location 
      */
-    public function __construct($scheme, $id, \Org\Gucken\Events\Domain\Model\Location $location) {
-        $this->scheme = $scheme;
+    public function __construct($id = 0, \Org\Gucken\Events\Domain\Model\Location $location = null, $label = '') {
         $this->id = $id;
         $this->location = $location;
-    }
-
-    /**
-     * Get the Id scheme
-     *
-     * @return string 
-     */
-    public function getScheme() {
-        return $this->scheme;
+		$this->label = $label;
     }
     
-    public function setScheme($scheme) {
-        $this->scheme = $scheme;
-    }
-    
+	abstract public function getSchemeLabel();
+	
+	abstract public function getCandidates(Location $location);
+	
+	abstract public function getUrl(); 
 
     /**
      * Get the Location's id in the scheme
@@ -119,13 +108,29 @@ class ExternalLocationIdentifier {
     public function setLocation(\Org\Gucken\Events\Domain\Model\Location $location) {
         $this->location = $location;
     }
-    
+	
+	/**
+	 *
+	 * @return string
+	 */
+	public function getLabel() {
+		return $this->label;
+	}
+
+	/**
+	 *
+	 * @param string $label 
+	 */
+	public function setLabel($label) {
+		$this->label = $label;
+	}
+
     /**
      *
      * @return string
      */
     public function __toString() {
-        return $this->getScheme() . ':' . $this->getId();
+        return $this->getSchemeLabel() . ':' . $this->getId();
     }
 
 }

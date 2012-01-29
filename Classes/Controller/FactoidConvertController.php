@@ -59,15 +59,52 @@ class FactoidConvertController extends BaseController {
 	        
     /**
      * Index action
-     *
-     * @return void
-     */
-    public function indexAction() {   		
-		$startDateTime = new \DateTime('-1 day');
-		$endDateTime = clone $startDateTime;
-		$endDateTime->modify('+20 days');
-        $this->view->assign('identities', $this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime));
-		$this->view->assign('events', $this->eventRepository->findBetween($startDateTime, $endDateTime));
+	 *
+	 * @param string $startDateTime
+	 * @param string $endDateTime 
+	 * @return void
+	 */
+    public function indexAction($startDateTime = null, $endDateTime = null) {   		
+		$startDateTime = $startDateTime ? new \DateTime($startDateTime) : new \DateTime('today');
+		if ($endDateTime) {
+			$endDateTime = new \DateTime($endDateTime);
+		} else {
+			$endDateTime = clone $startDateTime;
+			$endDateTime->modify('+21 days');
+			
+		}
+		
+		
+		$result = array();
+		$dateTime = clone $startDateTime;
+		while ($dateTime->getTimestamp() < $endDateTime->getTimestamp()) {
+			$tomorrow = clone $dateTime;
+			$tomorrow->modify('+1 day');
+			$result[$dateTime->format('Ymd')] = array(
+				'date' => clone $dateTime,
+				'startDateTime' => $dateTime->format('Y-m-d'),
+				'endDateTime' => $tomorrow->format('Y-m-d'),
+				'identities' => array(),
+				'events' => array(),
+			);
+			$dateTime = $tomorrow;
+		}	
+		
+		foreach ($this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime) as $identity) {
+			/* @var $identity EventFactoidIdentity */
+			$result[$identity->getStartDateTime()->format('Ymd')]['identities'][] = $identity;
+		}		
+		
+		foreach ($this->eventRepository->findBetween($startDateTime, $endDateTime) as $event) {
+			/* @var $event Event */
+			$result[$event->getStartDateTime()->format('Ymd')]['events'][] = $event;
+		}
+		
+		
+		
+		$this->view->assign('eventsAndIdentities',$result);
+        #$this->view->assign('identities', $this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime));
+		#$this->view->assign('events', $this->eventRepository->findBetween($startDateTime, $endDateTime));
     }
 	
 	

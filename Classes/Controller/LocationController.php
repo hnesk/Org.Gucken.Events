@@ -42,7 +42,15 @@ class LocationController extends BaseController {
      * @FLOW3\Inject
      */
     protected $locationRepository;
-        
+	
+    /**
+     *
+     * @var \Org\Gucken\Events\Domain\Model\ExternalLocationIdentifierFactory
+     * @FLOW3\Inject
+     */	
+	protected $identifierFactory;
+
+
 
     /**
      * Index action
@@ -57,15 +65,12 @@ class LocationController extends BaseController {
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Location $location
-     * @param int $position
      * @param string $type 
+	 * @param int $position
      */
-    public function lookupAction(Location $location, $position, $type) {
-        if ($type === ExternalLocationIdentifier::LASTFM) {
-            $lookup = $location->getName().' '.$location->getAddress()->getAddressLocality();            
-            $this->view->assign('venues', Venue\Collection\Factory::fromString($lookup)->toArray('strval', function($v) {return ''.$v->getId();}));
-            $this->view->assign('position',$position);
-        }        
+    public function lookupAction(Location $location,  $type, $position) {
+		$this->view->assign('externalIdentifierCandidates', $this->identifierFactory->getCandidatesForLocation($type, $location));
+		$this->view->assign('position',$position);
     }
 
     /**
@@ -107,16 +112,30 @@ class LocationController extends BaseController {
      * @param Org\Gucken\Events\Domain\Model\Location $location
      * @return void
      */
-    public function editAction($location) {
+    public function editAction(\Org\Gucken\Events\Domain\Model\Location $location) {
         $this->view->assign('location', $location);
-        $this->view->assign('externalIdentifiers', $this->getExternalIdentifiers());
+		$externalIdentifiers = $this->identifierFactory->getIdentifierOptions();
+        $this->view->assign('externalIdentifiers', $externalIdentifiers);
+		$this->view->assign('nextExternalIdentifiersCount', count($location->getExternalIdentifiers()) - 1);
     }
     
     
     public function initializeUpdateAction() {
+		/*
+		$location = $this->request->getArgument('location');
+		foreach ($location['externalIdentifiers'] as $i => $externalIdentifier) {
+			if ($externalIdentifier['__type'] === '') {
+				unset($location['externalIdentifiers'][$i]);
+			}
+		}
+		$this->request->setArgument('location',$location);
+		*/
+		$this->preprocessProperty('location', 'externalIdentifiers.*', function($externalIdentifier) {
+			return $externalIdentifier['__type'] !== '' ? $externalIdentifier : null;			
+		});
 		$this->allowForProperty('location', 'address', self::MODIFICATION);
 		$this->allowForProperty('location', 'externalIdentifiers.*', self::EVERYTHING);
-		$this->allowForProperty('location', 'keywords.*', self::CREATION);        
+		$this->allowForProperty('location', 'keywords.*', self::CREATION);   
     }
     
     /**
@@ -129,13 +148,7 @@ class LocationController extends BaseController {
         $this->redirect('index');
     }
     
-    protected function getExternalIdentifiers() {
-        return array(
-            '' => '---',
-            'facebook' => 'Facebook',
-            'lastfm' => 'Last.fm'
-        );
-    }
+
     
 
 }
