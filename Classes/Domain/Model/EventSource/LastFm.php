@@ -101,7 +101,7 @@ class LastFm implements EventSourceInterface {
 
 			$location = new Model\Location();
 			$location->setName($venue->getName());
-			$location->setUrl($venue->getUrl());
+			$location->setUrl((string)$venue->getUrl());
 			$location->setAddress(new Model\PostalAddress(
 					(string) $venue->getStreet(),
 					(string) $venue->getPostalCode(),

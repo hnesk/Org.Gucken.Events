@@ -82,6 +82,7 @@ class TypeController extends BaseController {
 	
     public function initializeUpdateAction() {		
 		$this->allowForProperty('type', 'keywords.*', self::CREATION);
+		$this->preprocessProperty('type', 'keywords.*', 'keyword');
     }
     
     /**
@@ -89,7 +90,6 @@ class TypeController extends BaseController {
      * @param Org\Gucken\Events\Domain\Model\Type $type 
      */
     public function updateAction(Type $type) {
-		$type->removeEmptyRelations();
         $this->typeRepository->update($type);
         $this->redirect('index');
     }

@@ -18,12 +18,6 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  */
 class EventFactoid {
 
-	/**
-	 *
-	 * @var array
-	 * @FLOW3\Transient
-	 */
-	static $identityProperties = array('startDateTime', 'endDateTime', 'title', 'shortDescription', 'description', 'source', 'location', 'type', 'url');
 	
     /**
      * The title
@@ -373,7 +367,7 @@ class EventFactoid {
 	 * @return bool
 	 */
 	public function equals(EventFactoid $factoid) {
-		foreach (self::$identityProperties as $identityProperty) {
+		foreach (array('startDateTime', 'endDateTime', 'title', 'shortDescription', 'description', 'source', 'location', 'type', 'url') as $identityProperty) {
 			if ($this->$identityProperty != $factoid->$identityProperty) {
 				return false;
 			}

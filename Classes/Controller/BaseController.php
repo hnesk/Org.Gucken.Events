@@ -93,6 +93,13 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	 */
 	protected function preprocessProperty($argument,$propertyPath, $callback) {
 		$data = $this->request->getArgument($argument);		
+		if (!is_callable($callback)) {
+			if (!is_string($callback)) {
+				throw new \InvalidArgumentException('callback must be callable or a property name');
+			}
+			$requiredKey = (string)$callback;
+			$callback = function($argument) use ($requiredKey) {return trim($argument[$requiredKey]) !== '' ? $argument : null;};
+		}
 		$propertyPathParts = explode('.', $propertyPath);
 		$data = $this->_preprocessProperty($data, $propertyPathParts, $callback);
 		$this->request->setArgument($argument,$data);
@@ -118,6 +125,9 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 				unset($data[$currentProperty]);
 			}
 		} else {
+			if (is_string($callback)) {
+				
+			} else 
 			if (!$callback($data)) {
 				$data = null;
 			}

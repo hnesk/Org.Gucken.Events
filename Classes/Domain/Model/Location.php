@@ -48,7 +48,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 
     /**
      * The url
-     * @var \TYPO3\FLOW3\Property\DataType\Uri
+     * @var string
      */
     protected $url;
 
@@ -150,7 +150,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Get the Location's url
      *
-     * @return \TYPO3\FLOW3\Property\DataType\Uri The Location's url
+     * @return string The Location's url
      */
     public function getUrl() {
         return $this->url;
@@ -159,7 +159,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Sets this Location's url
      *
-     * @param \TYPO3\FLOW3\Property\DataType\Uri $url The Location's url
+     * @param string $url The Location's url
      * @return void
      */
     public function setUrl($url) {

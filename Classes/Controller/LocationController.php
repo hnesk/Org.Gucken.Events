@@ -51,6 +51,7 @@ class LocationController extends BaseController {
 	protected $identifierFactory;
 
 
+	
 
     /**
      * Index action
@@ -110,6 +111,7 @@ class LocationController extends BaseController {
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Location $location
+	 * @FLOW3\IgnoreValidation("location")
      * @return void
      */
     public function editAction(\Org\Gucken\Events\Domain\Model\Location $location) {
@@ -121,18 +123,8 @@ class LocationController extends BaseController {
     
     
     public function initializeUpdateAction() {
-		/*
-		$location = $this->request->getArgument('location');
-		foreach ($location['externalIdentifiers'] as $i => $externalIdentifier) {
-			if ($externalIdentifier['__type'] === '') {
-				unset($location['externalIdentifiers'][$i]);
-			}
-		}
-		$this->request->setArgument('location',$location);
-		*/
-		$this->preprocessProperty('location', 'externalIdentifiers.*', function($externalIdentifier) {
-			return $externalIdentifier['__type'] !== '' ? $externalIdentifier : null;			
-		});
+		$this->preprocessProperty('location', 'externalIdentifiers.*', '__type');
+		$this->preprocessProperty('location', 'keywords.*', 'keyword');
 		$this->allowForProperty('location', 'address', self::MODIFICATION);
 		$this->allowForProperty('location', 'externalIdentifiers.*', self::EVERYTHING);
 		$this->allowForProperty('location', 'keywords.*', self::CREATION);   
