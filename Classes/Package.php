@@ -39,6 +39,7 @@ class Package extends BasePackage {
      */
     public function boot(\TYPO3\FLOW3\Core\Bootstrap $bootstrap) {
         require_once $this->packagePath.'Resources/Private/PHP/pickup/app/init.php';
+		require_once $this->packagePath.'Resources/Private/PHP/ToDate/bootstrap.php';
 		
 		$dispatcher = $bootstrap->getSignalSlotDispatcher();
 		

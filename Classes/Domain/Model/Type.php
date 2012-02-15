@@ -66,6 +66,7 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 		$this->title = $title;
 		$this->pluralTitle = $pluralTitle;
 		$this->description = $description;
+		$this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
 	}
 
 	/**

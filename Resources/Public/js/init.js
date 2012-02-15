@@ -1,11 +1,11 @@
 jQuery(document).ready(function() {
 
 	jQuery('#ajax-indicator').ajaxStart(function() {
-		jQuery(this).text('Ajax loading');
+		jQuery(this).text('loading...');
 	});
 	
 	jQuery('#ajax-indicator').ajaxStop(function() {
-		jQuery(this).text('...');
+		jQuery(this).text(' ');
 	});
 	
 		jQuery('.identities').droppable({
@@ -52,47 +52,33 @@ jQuery(document).ready(function() {
 		});
 		jQuery('.button.trash').button({
 			text:false,
-			icons: {primary: "ui-icon-trash"},
+			icons: {primary: "ui-icon-trash"}
 		});
 		jQuery('.button.details').button({
 			text:false,
-			icons: {primary: "ui-icon-info"},
+			icons: {primary: "ui-icon-info"}
 		});
 		jQuery('.button.convert').button({
 			text:false,
-			icons: {primary: "ui-icon-arrowthick-1-w"},
+			icons: {primary: "ui-icon-arrowthick-1-w"}
 		});
 
-
-		jQuery('a.details').cluetip({
-			attribute:'href',
-			arrows: true,    // if true, displays arrow on appropriate side of clueTip
-			dropShadow:false,     // set to false if you don't want the drop-shadow effect on the clueTip
-			sticky:true,    // keep visible until manually closed
-			width:400,
-			ajaxCache : true,
-			closePosition: 'title',
-			closeText: 'X',
-			ajaxSettings: {
-				cache:true
-			}
-		});
 	}
 	
 	initButtons();	
 	
-	jQuery('a.tooltipTrigger').cluetip({
-		local:true,
-		arrows: true,    // if true, displays arrow on appropriate side of clueTip
-		dropShadow:false,     // set to false if you don't want the drop-shadow effect on the clueTip
-		width:600,
-		height:400,
-		sticky:true,    
-		closePosition: 'title',
-		closeText: 'X'		
-	});	
+	jQuery('a[rel=popover]').popover({
+		content: function () {
+			var selector = jQuery('a[rel=popover]').attr('href');
+			return jQuery(selector).html();			
+		},
+		placement:'left',
+		trigger:'manual'
+	}).click(function() {
+		console.log(this);
+		$(this).popover('toggle');
+	});
 	
-
 	var update = function(data) {
 		// update dom
 		if(data.update) {
@@ -109,10 +95,6 @@ jQuery(document).ready(function() {
 		}
 		initButtons();
 	};
-	
-	
-		
-	
 		
 	
 	jQuery('.autoadd').each(function() {

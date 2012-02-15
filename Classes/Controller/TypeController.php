@@ -31,7 +31,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class TypeController extends BaseController {
+class TypeController extends AbstractAdminController {
     	
     /**
      *
@@ -80,6 +80,9 @@ class TypeController extends BaseController {
     }
 
 	
+	/**
+	 * @return void 
+	 */
     public function initializeUpdateAction() {		
 		$this->allowForProperty('type', 'keywords.*', self::CREATION);
 		$this->preprocessProperty('type', 'keywords.*', 'keyword');
@@ -93,7 +96,18 @@ class TypeController extends BaseController {
         $this->typeRepository->update($type);
         $this->redirect('index');
     }
-    
+
+	
+    /**
+     *
+     * @param Org\Gucken\Events\Domain\Model\Type $type 
+     */
+    public function deleteAction(Type $type) {
+        $this->typeRepository->remove($type);
+		$this->addNotice($type . ' wurde gelöscht');
+        $this->redirect('index');
+    }
+	
 }
 
 ?>

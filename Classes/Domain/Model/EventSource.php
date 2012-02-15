@@ -101,6 +101,22 @@ class EventSource {
 		$this->objectManager = $objectManager;
 	}
 
+	
+	
+	/**
+	 * @var \TYPO3\FLOW3\Validation\ValidatorResolver
+	 */
+	protected $validatorResolver;
+
+	/**
+	 * Injects the validator resolver
+	 *
+	 * @param \TYPO3\FLOW3\Validation\ValidatorResolver $validatorResolver
+	 * @return void
+	 */
+	public function injectValidatorResolver(\TYPO3\FLOW3\Validation\ValidatorResolver $validatorResolver) {
+		$this->validatorResolver = $validatorResolver;
+	}	
     /**
      * Get the source name
      *
@@ -295,9 +311,20 @@ class EventSource {
         // configure object
         foreach ($this->getParameterProperties() as $key => $property) {
             \TYPO3\FLOW3\Reflection\ObjectAccess::setProperty($implementation, $key, $property);
-        }                 
+        }                 				
         return $implementation;
     }
+	
+	/**
+	 *
+	 * @return \TYPO3\FLOW3\Error\Result
+	 */
+	public function validate() {
+		$implementation = $this->getImplementation();
+		$validator = $this->validatorResolver->getBaseValidatorConjunction(get_class($implementation));
+		return $validator->validate($implementation);		
+
+	}
 
 	/**
 	 *

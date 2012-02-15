@@ -34,7 +34,7 @@ use Lastfm\Type\Venue as Venue;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class LocationController extends BaseController {
+class LocationController extends AbstractAdminController {
     	
     /**
      *
@@ -49,9 +49,6 @@ class LocationController extends BaseController {
      * @FLOW3\Inject
      */	
 	protected $identifierFactory;
-
-
-	
 
     /**
      * Index action
@@ -137,6 +134,16 @@ class LocationController extends BaseController {
     public function updateAction(Location $location) {
 		$location->removeEmptyRelations();
         $this->locationRepository->update($location);
+        $this->redirect('index');
+    }
+    
+    /**
+     *
+     * @param Org\Gucken\Events\Domain\Model\Location $location 
+     */
+    public function deleteAction(Location $location) {
+        $this->locationRepository->remove($location);
+		$this->addNotice($location . ' wurde gelöscht');
         $this->redirect('index');
     }
     

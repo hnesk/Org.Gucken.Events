@@ -33,11 +33,32 @@ class AccountController extends BaseController {
 	/**
 	 * The authentication manager
 	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
-	 * @FLOW3\Inject
 	 */
 	protected $authenticationManager;
 	
 	
+	/**
+	 * @var \TYPO3\FLOW3\Security\Context
+	 */
+	protected $securityContext;	
+	
+	/**
+	 *
+	 * @param \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface $authenticationManager 
+	 */
+	public function injectAuthenticationManager(\TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface $authenticationManager) {
+		$this->authenticationManager = $authenticationManager;
+	}
+	
+	/**
+	 *
+	 * @param \TYPO3\FLOW3\Security\Context $securityContext 
+	 */
+	public function injectSecurityContext(\TYPO3\FLOW3\Security\Context $securityContext) {
+		$this->securityContext = $securityContext;
+	}
+
+		
 	/**
 	 * Index action show login form
 	 *
@@ -46,9 +67,52 @@ class AccountController extends BaseController {
 	public function indexAction() {
 	}
 	
+	/**
+	 * Calls the authentication manager to authenticate all active tokens
+	 * and redirects to the original intercepted request on success if there
+	 * is one stored in the security context. If no intercepted request is
+	 * found, the function simply returns.
+	 *
+	 * If authentication fails, the result of calling the defined
+	 * $errorMethodName is returned.
+	 *
+	 * @return string
+	 */
+	public function authenticateAction() {
+		$authenticated = FALSE;
+		try {
+			$this->authenticationManager->authenticate();
+			$authenticated = TRUE;
+		} catch (\TYPO3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
+		}
+		
+
+		if ($authenticated) {
+			$storedRequest = $this->securityContext->getInterceptedRequest();
+			if ($storedRequest !== NULL) {
+				$packageKey = $storedRequest->getControllerPackageKey();
+				$subpackageKey = $storedRequest->getControllerSubpackageKey();
+				if ($subpackageKey !== NULL) $packageKey .= '\\' . $subpackageKey;
+				$this->redirect($storedRequest->getControllerActionName(), $storedRequest->getControllerName(), $packageKey, $storedRequest->getArguments());
+			} else {
+				$this->redirect('index','admin');
+			}
+		} else {
+			#$this->getControllerContext()->getRequest();
+			return call_user_func(array($this, $this->errorMethodName));
+		}
+	}
+	public function getErrorFlashMessage() {
+		return new \TYPO3\FLOW3\Error\Error('Falscher Benutzername und/oder Passwort');
+		
+	}
+
+
+
+
 	public function logoutAction() {
 		$this->authenticationManager->logout();
-		$this->addNotice('Logged out');
+		$this->addNotice('Du hast Dich abgemeldet.');
 		$this->redirect('index', 'standard');
 	}
 }

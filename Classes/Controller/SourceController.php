@@ -32,7 +32,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class SourceController extends BaseController {
+class SourceController extends AbstractAdminController {
 
     /**
      *
@@ -92,9 +92,19 @@ class SourceController extends BaseController {
      * @param Org\Gucken\Events\Domain\Model\EventSource $source
      */
     public function saveAction(Model\EventSource $source) {
-        $this->sourceRepository->add($source);
-		$this->redirect('edit', NULL, NULL, array('source'=>$source));
-        #$this->redirect('index');
+		$errors = $source->validate();
+		/* @var $errors \TYPO3\FLOW3\Error\Result */
+		if ($errors->hasErrors()) {
+			foreach ($errors->getFlattenedErrors() as $errorArray) {
+				foreach ($errorArray as $error) {
+					$this->flashMessageContainer->addMessage($error);
+				}
+			}
+			$this->errorAction();
+		} else {		
+			$this->sourceRepository->add($source);
+			$this->redirect('edit', NULL, NULL, array('source'=>$source));
+		}
     }
 
 
@@ -114,12 +124,34 @@ class SourceController extends BaseController {
      * @param Org\Gucken\Events\Domain\Model\EventSource $source
      */
     public function updateAction(Model\EventSource $source) {
-        $this->sourceRepository->update($source);
-        $this->redirect('index');
-        
+		$errors = $source->validate();
+		/* @var $errors \TYPO3\FLOW3\Error\Result */
+		if ($errors->hasErrors()) {
+			foreach ($errors->getFlattenedErrors() as $errorArray) {
+				foreach ($errorArray as $error) {
+					$this->flashMessageContainer->addMessage($error);
+				}
+			}
+			$this->errorAction();
+		} else {
+			$this->sourceRepository->update($source);
+			$this->redirect('index');
+		}         
     }
     
-    
+	/**
+	 *
+	 * @param Org\Gucken\Events\Domain\Model\EventSource $source
+	 */
+	public function deleteAction(Model\EventSource $source) {
+        $this->sourceRepository->remove($source);
+		$this->addNotice($source . ' wurde gelöscht');
+        $this->redirect('index');
+    }	
+
+	
+	
+	
     /**
      * gets an array of class names implementing EventSourceImplementation
      *
@@ -151,7 +183,8 @@ class SourceController extends BaseController {
         return $implementations;
     }
 
-
+	
+	
 
 }
 

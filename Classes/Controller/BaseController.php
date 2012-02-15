@@ -73,11 +73,14 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
         $redirectUri = null;        
         if (count($redirectArgumentArray->getValue()) > 0) {            
-            $redirectUri = $this->request->getBaseUri() . \key($redirectArgumentArray->getValue());
+			$redirectUri = \key($redirectArgumentArray->getValue());
         } else if ($redirectArgument->getValue()) {
-            $redirectUri = $this->request->getBaseUri() . $redirectArgument->getValue();            
+            $redirectUri = $redirectArgument->getValue();            
         } 
         if ($redirectUri) {
+			if (strpos($redirectUri,'https://') === false && strpos($redirectUri,'http://') === false) { 
+				$redirectUri = $this->request->getBaseUri() . $redirectUri;
+			}
             $this->redirectToUri($redirectUri, $delay, $statusCode);            
         } else {
             parent::redirect($actionName, $controllerName, $packageKey, $arguments, $delay, $statusCode, $format);
@@ -125,14 +128,17 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 				unset($data[$currentProperty]);
 			}
 		} else {
-			if (is_string($callback)) {
-				
-			} else 
-			if (!$callback($data)) {
-				$data = null;
-			}
+			$data = $callback($data);
 		}					
 		return $data;
+	}
+	
+	public function initializeView(\TYPO3\FLOW3\MVC\View\ViewInterface $view) {
+		/* @var $view \TYPO3\Fluid\View\TemplateView */
+		$currentView = $this->settings['view'];
+		$view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
+		$view->setTemplateRootPath($this->settings['views'][$currentView]['templateRootPath']);
+		$view->setPartialRootPath($this->settings['views'][$currentView]['partialRootPath']);
 	}
 	
 	
