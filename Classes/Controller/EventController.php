@@ -31,13 +31,28 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class StandardController extends BaseController {
+class EventController extends AbstractAdminController {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\EventRepository
 	 * @FLOW3\Inject
 	 */
 	protected $eventRepository;
+
+	/**
+	 *
+	 * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
+	 * @FLOW3\Inject
+	 */
+	protected $locationRepository;
+
+
+	/**
+	 *
+	 * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
+	 * @FLOW3\Inject
+	 */
+	protected $typeRepository;
 	
 
 	/**
@@ -60,6 +75,62 @@ class StandardController extends BaseController {
 		$this->view->assign('event', $event);
 	}
 	
+
+	/**
+	 *
+	 * @param Org\Gucken\Events\Domain\Model\Event $event 
+	 * @FLOW3\IgnoreValidation({"event"})         
+	 * @return void
+	 */
+	public function addAction(Event $event = null) {
+		$this->view->assign('event', $event);
+		$this->view->assign('locations', $this->locationRepository->findAll());
+		$this->view->assign('types', $this->typeRepository->findAll());
+	}
+
+	/**
+	 *
+	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 * @FLOW3\IgnoreValidation({"event"})         
+	 * @return void
+	 */
+	public function editAction(Event $event = null) {
+		$this->view->assign('event', $event);
+		$this->view->assign('locations', $this->locationRepository->findAll());
+		$this->view->assign('types', $this->typeRepository->findAll());
+	}
+
+
+	/**
+	 *
+	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 */
+	public function createAction(Event $event) {
+		$this->eventRepository->add($event);
+		$this->addNotice('Veranstaltung "'.$event.'" erstellt');
+		$this->redirect('index');
+	}
+
+	/**
+	 *
+	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 */
+	public function updateAction(Event $event) {
+		$this->eventRepository->update($event);
+		$this->addNotice('Veranstaltung "'.$event.'" aktualisiert');
+		$this->redirect('index');
+	}
+
+
+	/**
+	 *
+	 * @param Org\Gucken\Events\Domain\Model\Event $event 
+	 */
+	public function deleteAction(Event $event) {
+		$this->eventRepository->remove($event);
+		$this->addNotice('Veranstaltung "'.$event.'" gelöscht');
+		$this->redirect('index');
+	}
 }
 
 ?>

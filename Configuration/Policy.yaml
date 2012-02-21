@@ -11,10 +11,11 @@ resources:
     Org_Gucken_Events_Controller_Import: 'class(Org\Gucken\Events\Controller\ImportController)'
     Org_Gucken_Events_Controller_Type: 'class(Org\Gucken\Events\Controller\TypeController)'
     Org_Gucken_Events_Controller_Location: 'class(Org\Gucken\Events\Controller\LocationController)'
+    Org_Gucken_Events_Controller_Event: 'class(Org\Gucken\Events\Controller\EventController)'
     Org_Gucken_Events_Controller_FactoidConvert: 'class(Org\Gucken\Events\Controller\FactoidConvertController)'
     Org_Gucken_Events_Actions_Create: 'method(Org\Gucken\Events\Controller\.*Controller->(add|save)Action())'
     Org_Gucken_Events_Actions_Modify: 'method(Org\Gucken\Events\Controller\.*Controller->(edit|update)Action())'
-    Org_Gucken_Events_Actions_Delete: 'method(Org\Gucken\Events\Controller\.*Controller->deleteAction())'
+    Org_Gucken_Events_Actions_Delete: 'method(Org\Gucken\Events\Controller\.*Controller->delete.*Action())'
 roles:  
   Administrator: [ImportEditor]
   ImportEditor: [Editor]
@@ -34,5 +35,6 @@ acls:
       Org_Gucken_Events_Controller_Type: GRANT      
   Editor:
     methods:
+      Org_Gucken_Events_Controller_Event: GRANT
       Org_Gucken_Events_Actions_Create: GRANT
       Org_Gucken_Events_Actions_Modify: GRANT      

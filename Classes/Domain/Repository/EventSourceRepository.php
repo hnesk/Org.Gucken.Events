@@ -1,6 +1,7 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
+use TYPO3\FLOW3\Persistence\QueryInterface;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
@@ -13,6 +14,10 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @FLOW3\Scope("singleton")
  */
 class EventSourceRepository extends \TYPO3\FLOW3\Persistence\Repository {
+	protected $defaultOrderings = array(
+		'name' => QueryInterface::ORDER_ASCENDING
+	);
+	
 	/**
 	 *
 	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 

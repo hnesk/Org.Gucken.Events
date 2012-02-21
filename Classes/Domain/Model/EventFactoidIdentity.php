@@ -36,6 +36,7 @@ class EventFactoidIdentity {
      * The source
      * @var \Org\Gucken\Events\Domain\Model\EventSource
      * @ORM\ManyToOne
+	 * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $source;
 	
@@ -162,7 +163,13 @@ class EventFactoidIdentity {
 	 */
 	public function getFactoids() {
 		return $this->factoids;
-	}					
+	}
+	
+	public function getSortedFactoids() {		
+		$factoids = $this->factoids->toArray();
+		usort($factoids, function (EventFactoid $a, EventFactoid $b) { return $b->getImportDateTime()->getTimestamp() -  $a->getImportDateTime()->getTimestamp(); });
+		return new \Doctrine\Common\Collections\ArrayCollection($factoids);
+	}
 	
 	/**
 	 *

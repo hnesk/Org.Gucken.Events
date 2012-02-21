@@ -15,6 +15,4 @@ foreach ($it as $date) {
 
 
 
-
-
 ?>

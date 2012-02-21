@@ -23,6 +23,8 @@ namespace Org\Gucken\Events\Controller;
  *                                                                        */
 
 use Org\Gucken\Events\Domain\Model;
+use TYPO3\FLOW3\Annotations as FLOW3;
+
 
 /**
  * Standard controller for the Events package 
@@ -48,6 +50,25 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
      */
     protected $redirectArgumentArrayName = 'redirectButton';
     
+	
+	
+	/**
+	 * @var \TYPO3\FLOW3\Log\SystemLoggerInterface
+	 * @FLOW3\Inject
+	 */
+	protected $systemLogger;
+	
+	
+	/**
+	 *
+	 * @param string  $message
+	 * @param int $severity
+	 * @param array $additionalData
+	 * @return string 
+	 */
+	protected function log($message, $severity = LOG_INFO , $additionalData = array()) {
+		$this->systemLogger->log($message, $severity, $additionalData);
+	}
     
     /**
      * Overriden to allow passsing of the redirect parameter
@@ -132,15 +153,7 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 		}					
 		return $data;
 	}
-	
-	public function initializeView(\TYPO3\FLOW3\MVC\View\ViewInterface $view) {
-		/* @var $view \TYPO3\Fluid\View\TemplateView */
-		$currentView = $this->settings['view'];
-		$view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
-		$view->setTemplateRootPath($this->settings['views'][$currentView]['templateRootPath']);
-		$view->setPartialRootPath($this->settings['views'][$currentView]['partialRootPath']);
-	}
-	
+
 	
 	/**
 	 * Shortcut for easier setting of property mapping configuration for nested objects 

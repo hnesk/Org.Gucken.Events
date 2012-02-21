@@ -20,6 +20,7 @@ class ImportLogEntry {
 	 * The source
 	 * @var \Org\Gucken\Events\Domain\Model\EventSource
 	 * @ORM\ManyToOne
+	 * @ORM\JoinColumn(onDelete="CASCADE")
 	 */
 	protected $source;
 

@@ -34,8 +34,9 @@ use Lastfm\Type\Venue as Venue;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
 class FactoidConvertController extends AbstractAdminController {
-        
-    /**
+     
+
+	/**
      *
      * @var \Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository
      * @FLOW3\Inject
@@ -56,7 +57,8 @@ class FactoidConvertController extends AbstractAdminController {
 	 * @FLOW3\Inject
 	 */
 	protected $convertService;
-	        
+		
+	
     /**
      * Index action
 	 *
@@ -64,16 +66,40 @@ class FactoidConvertController extends AbstractAdminController {
 	 * @param string $endDateTime 
 	 * @return void
 	 */
-    public function indexAction($startDateTime = null, $endDateTime = null) {   		
-		$startDateTime = $startDateTime ? new \DateTime($startDateTime) : new \DateTime('today');
-		if ($endDateTime) {
-			$endDateTime = new \DateTime($endDateTime);
-		} else {
-			$endDateTime = clone $startDateTime;
-			$endDateTime->modify('+21 days');
-			
-		}
+    public function indexAction($startDateTime = 'today', $endDateTime = null) {   		
+		$endDateTime = $endDateTime ?: '+21 days';
+		$eventsAndIdentities = $this->getEventsAndIdentitiesGroupedByDay($startDateTime, $endDateTime);
 		
+		$this->view->assign('eventsAndIdentities', $eventsAndIdentities);
+    }
+	
+	
+	/**
+	 *
+	 * @param \DateTime $date
+	 * @param \DateTime $referenceDate
+	 * @return \DateTime 
+	 */
+	protected function createDate($date, \DateTime $referenceDate = null) {
+		if (is_object($date) && $date instanceof \DateTime) {
+			return $date;
+		} else if (is_string($date) && is_null($referenceDate)) {
+			return new \DateTime($date);
+		} else {
+			$result = clone $referenceDate;
+			$result->modify($date);
+			return $result;			
+		} 
+	}
+	/**
+	 *
+	 * @param string $startDateTime
+	 * @param string $endDateTime
+	 * @return array
+	 */
+	protected function getEventsAndIdentitiesGroupedByDay($startDateTime, $endDateTime = null) {
+		$startDateTime = $this->createDate($startDateTime);
+		$endDateTime = $this->createDate($endDateTime, $startDateTime);
 		
 		$result = array();
 		$dateTime = clone $startDateTime;
@@ -99,13 +125,8 @@ class FactoidConvertController extends AbstractAdminController {
 			/* @var $event Event */
 			$result[$event->getStartDateTime()->format('Ymd')]['events'][] = $event;
 		}
-		
-		
-		
-		$this->view->assign('eventsAndIdentities',$result);
-        #$this->view->assign('identities', $this->identityRepository->findUnassignedBetween($startDateTime, $endDateTime));
-		#$this->view->assign('events', $this->eventRepository->findBetween($startDateTime, $endDateTime));
-    }
+		return $result;
+	}
 	
 	
 	/**
@@ -113,7 +134,7 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
 	public function deleteAction(EventFactoidIdentity $identity) {		
 		$this->identityRepository->remove($identity);
-		$this->addNotice('Removed Identity "'.$identity.'"');
+		$this->addNotice('Faktoid-ID "'.$identity.'" gelöscht');
 		$this->redirect('index');
 	}
 
@@ -123,19 +144,21 @@ class FactoidConvertController extends AbstractAdminController {
 	public function skipAction(EventFactoidIdentity $identity) {		
 		$identity->setShouldSkip(true);
 		$this->identityRepository->update($identity);
-		$this->addNotice('Skipped Identity "'.$identity.'"');
-		$this->redirect('index');
+		$this->addNotice('Faktoid-ID "'.$identity.'" wird ignoriert');		
+
+		$this->view->assign('identity',$identity);
+				
+		$this->redirectIfHtml('index');
 	}
 	
 	/**
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid
 	 */
-	public function detailFactoidAction(EventFactoidIdentity $identity, EventFactoid $factoid) {
+	public function detailFactoidAction(EventFactoidIdentity $identity, EventFactoid $factoid) {		
 		$this->view->assign('factoid', $factoid);
 		$this->view->assign('identity', $identity);
-	}
-	
+	}	
 	
 	/**
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
@@ -143,14 +166,18 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
 	public function deleteFactoidAction(EventFactoidIdentity $identity, EventFactoid $factoid) {
 		$identity->removeFactoid($factoid);
-		$this->addNotice('Removed '.$factoid->getTitle());
+		$this->addNotice('Faktoid '.$factoid.' gelöscht');
 		if ($identity->hasFactoids()) {			
 			$this->identityRepository->update($identity);			
 		} else {
 			$this->identityRepository->remove($identity);
-			$this->addNotice('Removed the identity, too');
+			$this->addNotice('Zugehörige Faktoid-ID auch');
 		}
-		$this->redirect('index');
+		
+		$this->view->assign('factoid', $factoid);
+		$this->view->assign('identity', $identity);
+		
+		$this->redirectIfHtml('index');
 	}
 
 	/**
@@ -158,9 +185,13 @@ class FactoidConvertController extends AbstractAdminController {
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity
 	 */
     public function convertAction(EventFactoidIdentity $identity) {        
-		$event = $this->convertService->convert($identity);
-		$this->addNotice('Created event "'.$event.'"');
-		$this->redirect('index');
+		$event = $this->convertService->convert($identity);		
+		$this->addNotice('Veranstaltung "'.$event.'" erstellt.');
+				
+		$this->view->assign('events',$this->eventRepository->findOn($identity->getStartDateTime()));
+		$this->view->assign('identity',$identity);
+		
+		$this->redirectIfHtml('index');
     }
 	
 	/**
@@ -169,12 +200,11 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
     public function mergeAction(Event $event, EventFactoidIdentity $identity) {        
 		$event = $this->convertService->merge($event, $identity);
-		$this->addNotice('Merged "'.$identity.'" to "'.$event.'"');
+		$this->addNotice('Faktoid-ID "'.$identity.'" mit Event "'.$event.'" zusammengefasst');
 		$this->view->assign('event',$event);
 		$this->view->assign('identity',$identity);
     }
-	
-	
+
 }
 
 ?>

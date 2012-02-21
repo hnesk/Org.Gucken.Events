@@ -63,7 +63,9 @@ class ConvertEventFactoidService {
 		$event->addTypeIfNotExists($factoid->getType());					
 				
 		$this->eventRepository->add($event);
+		$this->eventRepository->persistAll();
 		$this->eventFactoidIdentityRepository->update($identity);
+		$this->eventFactoidIdentityRepository->persistAll();
 		
 		return $event;
     }

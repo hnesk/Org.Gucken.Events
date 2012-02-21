@@ -29,7 +29,11 @@ class IdentifierViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelp
 	 * @return string
 	 */
 	protected function render($object) {
-		return $this->persistenceManager->getIdentifierByObject($object);
+		if (is_null($object)) {
+			return '';
+		} else {
+			return $this->persistenceManager->getIdentifierByObject($object);
+		}
 	}
 
 }

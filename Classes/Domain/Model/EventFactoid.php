@@ -70,12 +70,6 @@ class EventFactoid {
      */
     protected $description;
 
-    /**
-     * The source
-     * @var \Org\Gucken\Events\Domain\Model\EventSource
-     * @ORM\ManyToOne
-     */
-    protected $source;
 
     /**
      *
@@ -96,6 +90,14 @@ class EventFactoid {
      * @ORM\ManyToOne(inversedBy="factoids")
 	 */
 	protected $identity;
+	
+
+	/**
+	 *
+	 * @var Org\Gucken\Events\Domain\Model\EventSource
+     * @FLOW3\Transient
+	 */
+	protected $source;
 	
 	
 	/**
@@ -287,7 +289,7 @@ class EventFactoid {
      * @return \Org\Gucken\Events\Domain\Model\EventSource The Event factoid's source
      */
     public function getSource() {
-        return $this->source;
+        return $this->identity ? $this->identity->getSource() : $this->source;
     }
 
     /**

@@ -125,6 +125,10 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 		}
 	}
 	
+	public function persistAll() {
+		$this->persistenceManager->persistAll();
+	}
+	
 	
     
 
