@@ -1,0 +1,5 @@
+<phpunit bootstrap="/home/jk/Projekte/pickup/app/init.php" colors="true" verbose="true" strict="true">
+    <testsuite name="all">
+        <directory>./app/</directory>
+    </testsuite>
+</phpunit>

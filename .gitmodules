@@ -1,3 +1,0 @@
-[submodule "Resources/Private/PHP/pickup"]
-	path = Resources/Private/PHP/pickup
-	url = ssh://gitosis@gucken.org/pickup.git

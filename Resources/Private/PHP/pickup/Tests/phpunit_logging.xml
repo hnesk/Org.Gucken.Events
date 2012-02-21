@@ -1,0 +1,35 @@
+<phpunit bootstrap="../app/init.php" colors="false" verbose="true" strict="true">
+    <testsuite name="all">
+        <directory>./app</directory>
+    </testsuite>
+    <logging>        
+        <log type="coverage-html" target="../Testreports/report" charset="UTF-8" yui="true" highlight="true" lowUpperBound="35" highLowerBound="70">
+            <filter>
+                <whitelist addUncoveredFilesFromWhitelist="true">
+                    <directory suffix=".php">../app</directory>
+                </whitelist>
+            </filter>
+        </log>
+        <log type="coverage-xml" target="../Testreports/coverage.xml">
+            <filter>
+                <whitelist addUncoveredFilesFromWhitelist="true">
+                    <directory suffix=".php">../app/</directory>
+                </whitelist>
+            </filter>
+        </log>
+        <log type="testdox-html" target="../Testreports/testdox.html">
+            <filter>
+                <whitelist addUncoveredFilesFromWhitelist="true">
+                    <directory suffix=".php">../app/</directory>
+                </whitelist>
+            </filter>
+        </log>
+        <log type="testdox-text" target="../Testreports/testdox.txt">
+            <filter>
+                <whitelist addUncoveredFilesFromWhitelist="true">
+                    <directory suffix=".php">../app/</directory>
+                </whitelist>
+            </filter>
+        </log>            
+    </logging>
+</phpunit>
