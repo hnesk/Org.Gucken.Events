@@ -60,6 +60,14 @@ class TypeController extends AbstractAdminController {
     public function addAction(Type $type = null) {
         $this->view->assign('type', $type);
     }
+	/**
+	 * @return void 
+	 */
+    public function initializeSaveAction() {		
+		$this->allowForProperty('type', 'keywords.*', self::CREATION);
+		$this->preprocessProperty('type', 'keywords.*', 'keyword');
+    }
+    
 
     /**
      *

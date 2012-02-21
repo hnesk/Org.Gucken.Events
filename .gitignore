@@ -1,6 +1,5 @@
 Resources/Private/PHP/pickup/impulse.db
 Resources/Private/PHP/pickup/app/scenarios
-Resources/Private/PHP/pickup/app/config/server.php
 Resources/Private/PHP/pickup/app/Domain/Extractor
 Resources/Private/PHP/pickup/app/Domain/
 Resources/Private/PHP/pickup/data/registry.php
