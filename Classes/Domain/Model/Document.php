@@ -89,7 +89,7 @@ class Document  {
 
     /**
      * The content as text
-	 * @ORM\Column(type="text") 
+	 * @ORM\Column(type="text", columnDefinition="LONGBLOB NOT NULL") 
      * @var string
      */
     protected $content;

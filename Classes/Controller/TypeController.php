@@ -83,7 +83,7 @@ class TypeController extends AbstractAdminController {
      * @param Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function editAction($type) {
+    public function editAction($type) {		
         $this->view->assign('type', $type);
     }
 

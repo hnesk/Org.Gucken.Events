@@ -133,10 +133,16 @@ class LastFm implements EventSourceInterface {
 	 * @param \Lastfm\Type\Event $event
 	 * @return \Type\Record 
 	 */
-	public function getEvent(\Lastfm\Type\Event $event) {
+	public function getEvent(\Lastfm\Type\Event $event) {		
+		$date = $event->getStartTime();
+		// if no time is given, last.fm has random times, an ok indicator is that there are seconds (with a failure rate of 1/60)
+		if (!$date->getSecond()->equals(0)) {
+			// concerts start at 8 pm, don't they?
+			$date = $date->timed('20:00:00');
+		}
 		return new \Type\Record(array(
 				'title' => $event->getTitle(),
-				'date' => $event->getStartTime(),
+				'date' => $date,
 				'short' => (string) $event->getArtists()->join(', '),
 				'description' => $event->getDescription()->formattedText()->normalizeParagraphs(),
 				'type' => $this->type,

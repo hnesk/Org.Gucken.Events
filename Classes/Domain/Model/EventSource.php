@@ -248,17 +248,21 @@ class EventSource {
     public function getParameterProperties() {
         $properties = array();
         foreach ($this->getParameterHints() as $key => $type) {                        
-            if (!empty($this->parameters[$key])) {
-                $rawValue = $this->parameters[$key];
-                $repository = $this->repositoryReflectionService->getRepositoryFor($type);
-                if ($repository && $repository->findByIdentifier($rawValue)) {
-                    $value = $this->propertyMapper->convert($rawValue, $type);
-                } else if (\TYPO3\FLOW3\Utility\TypeHandling::isLiteral($type)) {
-                    $value = $rawValue;                    
-                } else {
-                    $value = $this->propertyMapper->convert($rawValue, $type);
-                }
-            } else {
+            if (!empty($this->parameters[$key]) && !is_null($this->parameters[$key])) {
+				try {
+					$rawValue = $this->parameters[$key];
+					$repository = $this->repositoryReflectionService->getRepositoryFor($type);
+					if ($repository && $repository->findByIdentifier($rawValue)) {
+						$value = $this->propertyMapper->convert($rawValue, $type);
+					} else if (\TYPO3\FLOW3\Utility\TypeHandling::isLiteral($type)) {
+						$value = $rawValue;                    
+					} else {
+						$value = $this->propertyMapper->convert($rawValue, $type);
+					}
+				} catch (\Exception $e) {
+					$value = '';
+				}
+			} else {
                 if (\TYPO3\FLOW3\Utility\TypeHandling::isLiteral($type)) {
                     $value = '';
                 } else {
@@ -310,7 +314,9 @@ class EventSource {
         $implementation = $this->objectManager->get($this->getImplementationClass());
         // configure object
         foreach ($this->getParameterProperties() as $key => $property) {
-            \TYPO3\FLOW3\Reflection\ObjectAccess::setProperty($implementation, $key, $property);
+			try {
+				\TYPO3\FLOW3\Reflection\ObjectAccess::setProperty($implementation, $key, $property);
+			} catch (\Exception $e) {}
         }                 				
         return $implementation;
     }
