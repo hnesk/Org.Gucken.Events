@@ -217,6 +217,14 @@ class Xml extends \Type\Base implements \ArrayAccess {
             return $this->element->ownerDocument;
         }
     }
+	
+	/**
+	 *
+	 * @return \Type\Xml 
+	 */
+	public function getDocument() {
+		return new Xml($this->getDomDocument(), $this->defaultNamespacePrefix, $this->getBaseUri());
+	}
 
     /**
      *
@@ -267,6 +275,15 @@ class Xml extends \Type\Base implements \ArrayAccess {
     public function asPrettyXmlString($options = null) {
         return \Util\String::prettyPrintXml($this->asXmlString($options));
     }
+	
+	public function debug($return = false) {
+		$output = '<pre>'.htmlspecialchars($this->asPrettyXmlString()).'</pre>';
+		if ($return) {
+			return $output;
+		} else {
+			echo $output;
+		}
+	}
 
     /**
      * Returns this element as a XML-String Object
