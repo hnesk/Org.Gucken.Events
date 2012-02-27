@@ -493,6 +493,14 @@ class String extends \Type\Base {
             return new String($string);
         }
     }
+	
+	public function equals($string) {
+		return $this->value == (string)$string;
+	}
+	
+	public function is() {
+		return $this->normalizeSpace()->length() > 0;
+	}
 
     /**
      *

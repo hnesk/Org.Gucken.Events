@@ -257,6 +257,16 @@ class Url extends \Type\Base {
             return new String($values[$k]);
         }
     }
+	
+	/**
+	 *
+	 * @return \Type\Json 
+	 */
+    public function getQueryObject() {
+        \parse_str($this->query,$values);
+		return new Json($values);
+    }
+	
 
 
     public function getFragment() {

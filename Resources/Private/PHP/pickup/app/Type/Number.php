@@ -62,6 +62,7 @@ class Number extends \Type\Base {
         return new Number($this->value / $divisor);
     }
 
+	
     public function isGreaterThan($number) {
         return ($this->value > (string)$number);
     }
@@ -78,6 +79,7 @@ class Number extends \Type\Base {
     public function isPositive() {
         return $this->isGreaterThan(0);
     }
+	
 
 
 

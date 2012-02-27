@@ -121,6 +121,10 @@ class XPath extends \Type\Base implements \IteratorAggregate {
         }
         return $stringList;
     }
+	
+	public function is()  {
+        return $this->_query()->length > 0;
+	}
 
     /**
      * @return \Type\Url\Collection

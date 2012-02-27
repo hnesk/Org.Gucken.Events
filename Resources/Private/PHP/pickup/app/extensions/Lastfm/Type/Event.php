@@ -125,7 +125,7 @@ class Event extends \Type\Base {
     
     /**
      *
-     * @return Date
+     * @return \Type\Date
      */
     public function getStartTime() {
         return $this->startTime;

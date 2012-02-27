@@ -21,6 +21,10 @@ class Base {
         return $this->value;
     }
 
+	public function equals($other) {
+		return $this->__toString() == (string)$other;
+	} 
+	
     /**
      * 
      * @return boolean
