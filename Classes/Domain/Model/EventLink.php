@@ -67,6 +67,11 @@ abstract class EventLink {
 		return get_class($this);
 	}
 	
+	public function getClass() {
+		$qualifiedType = explode('\\',$this->getType());
+		return strtolower(end($qualifiedType));
+	}
+	
 	/**
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\Event $event The Event

@@ -23,7 +23,7 @@
 		</ul>
 		<ul>
 			<f:for each="{event.links}" as="link">
-				<li>{link}</li>
+				<li class="link {link.class}"><a href="{link.url}">{link}</a></li>
 			</f:for>
 		</ul>
 	</div>

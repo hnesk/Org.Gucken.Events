@@ -188,8 +188,10 @@ class FactoidConvertController extends AbstractAdminController {
 		$event = $this->convertService->convert($identity);		
 		$this->addNotice('Veranstaltung "'.$event.'" erstellt.');
 				
-		$this->view->assign('events',$this->eventRepository->findOn($identity->getStartDateTime()));
-		$this->view->assign('identity',$identity);
+		$currentDate = $identity->getStartDateTime();
+		$this->view->assign('events',$this->eventRepository->findOn($currentDate));
+		$this->view->assign('identities',$this->identityRepository->findUnassignedOn($currentDate));
+		$this->view->assign('currentDate',$currentDate);
 		
 		$this->redirectIfHtml('index');
     }
@@ -203,8 +205,28 @@ class FactoidConvertController extends AbstractAdminController {
 		$this->addNotice('Faktoid-ID "'.$identity.'" mit Event "'.$event.'" zusammengefasst');
 		$this->view->assign('event',$event);
 		$this->view->assign('identity',$identity);
+		
+		$this->redirectIfHtml('index');
+
     }
 
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link 
+	 */
+    public function unlinkAction(\Org\Gucken\Events\Domain\Model\EventLink $link) {        
+		$unlinkedIdentity = $this->convertService->unlink($link);
+		$this->addNotice('Faktoid-ID "'.$unlinkedIdentity.'" von Event gelöst');
+		
+		$currentDate = $link->getEvent()->getStartDateTime();
+		$this->view->assign('events',$this->eventRepository->findOn($currentDate));
+		$this->view->assign('identities',$this->identityRepository->findUnassignedOn($currentDate));
+		$this->view->assign('currentDate',$currentDate);
+		
+		$this->redirectIfHtml('index');
+    }
+	
+	
 }
 
 ?>

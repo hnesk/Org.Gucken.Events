@@ -1,4 +1,5 @@
 {namespace m=Org\Gucken\Markdown\ViewHelpers}
+{namespace e=Org\Gucken\Events\ViewHelpers}
 <?xml version="1.0" encoding="UTF-8"?>
 <f:layout name="Page.html" />
 
@@ -9,11 +10,11 @@
 	<dl class="calendarList vcalender clearfix">
 		<f:groupedFor each="{events}" as="eventsToday" groupBy="day" groupKey="day">
 			<dt class="calendarSheet">
-				{day.date -> f:format.date(format:'D')}
+				{day.date -> e:format.strftime(format:'%a')}
 				<span>, der </span>
-				<b>{day.date -> f:format.date(format:'d')}</b>
+				<b>{day.date -> e:format.strftime(format:'%d')}</b>
 				<span>. </span>
-				<em>{day.date -> f:format.date(format:'M')}</em>
+				<em>{day.date -> e:format.strftime(format:'%b')}</em>
 				<span>.</span>
 			</dt>
 			<dd>

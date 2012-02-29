@@ -78,7 +78,7 @@ class Facebook implements EventSourceInterface {
 	 *
 	 * @param Model\EventFactoidIdentity $factoidIdentity
 	 * @param \Org\Gucken\Events\Domain\Model\EventLink if set link will be updated else created
-	 * @return \Org\Gucken\Events\Domain\Model\LastFmEventLink 
+	 * @return \Org\Gucken\Events\Domain\Model\EventLink 
 	 */
 	public function convertLink(Model\EventFactoidIdentity $factoidIdentity, $link = null) {
 		$link = $link ? : new Model\FacebookEventLink();

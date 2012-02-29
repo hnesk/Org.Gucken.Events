@@ -106,10 +106,31 @@ class ConvertEventFactoidService {
 		$event->addTypeIfNotExists($factoid->getType());
 		
 		$this->eventRepository->update($event);
+		$this->eventRepository->persistAll();
 		$this->eventFactoidIdentityRepository->update($identity);
+		$this->eventFactoidIdentityRepository->persistAll();
 		return $event;
     }
 	
+	
+	/**
+	 *
+	 * @param Model\EventLink $link
+	 * @return Model\EventFactoidIdentity
+	 */
+	public function unlink(Model\EventLink $link) {
+		$event = $link->getEvent();
+		$identity = $link->getFactoidIdentity();
+		
+		$event->removeLink($link);
+		#$identity->setLink(null);
+		
+		$this->eventRepository->update($event);
+		$this->eventRepository->persistAll();
+		#$this->eventFactoidIdentityRepository->update($identity);
+		#$this->eventFactoidIdentityRepository->persistAll();
+		return $identity;
+	}
 
 	
 }

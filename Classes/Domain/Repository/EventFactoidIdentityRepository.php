@@ -26,6 +26,19 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 	public function findUnassignedBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null) {
 		return $this->_findBetween($startDateTime, $endDateTime, true);
 	}
+
+	/**
+	 * @param \DateTime $day
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 */
+	public function findUnassignedOn(\DateTime $day = null) {
+		$day = $day ? clone $day : new \DateTime();
+		$day->setTime(0,0,0);
+		$nextDay = clone $day;
+		$nextDay->modify('+1 day');
+		return $this->_findBetween($day, $nextDay, true);
+	}	
+	
 	
 	
 	/**
