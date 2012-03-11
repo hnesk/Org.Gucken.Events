@@ -40,7 +40,7 @@ class String extends \Type\Base {
      *
      * @param int $start
      * @param int $length
-     * @return String
+     * @return \Type\String
      */
     public function substring($start, $length=null) {
         $value = \mb_substr($this->value, $start, !\is_null($length) ? $length : \PHP_INT_MAX, 'utf-8');
@@ -50,7 +50,7 @@ class String extends \Type\Base {
     /**
      *
      * @param string $charlist
-     * @return String
+     * @return \Type\String
      */
     public function trim($charlist = null) {
         $value = $charlist ? \trim($this->value, (string) $charlist) : \trim($this->value);
@@ -63,7 +63,7 @@ class String extends \Type\Base {
      * @param string $from
      * @param string $to
      * @param int|null $limit
-     * @return String
+     * @return \Type\String
      */
     public function replace($from, $to, $limit = null) {
         $limit = \is_null($limit) ? PHP_INT_MAX : $limit;
@@ -75,7 +75,7 @@ class String extends \Type\Base {
      *
      * @param string $from
      * @param int|null $limit
-     * @return String
+     * @return \Type\String
      */
     public function remove($from, $limit = null) {
         return $this->replace($from, '', $limit);
@@ -93,7 +93,7 @@ class String extends \Type\Base {
     /**
      * Implements normalize-space like in xpath
      * @see http://www.w3.org/TR/xpath/#function-normalize-space
-     * @return String
+     * @return \Type\String
      */
     public function normalizeSpaceKeepBreaks() {
         return new String(trim(preg_replace('#[\n\r][\s\p{Zs}]+#',PHP_EOL,preg_replace('#[\xA0\x20\t]+#', ' ', $this->value))));
@@ -102,7 +102,7 @@ class String extends \Type\Base {
     /**
      * The idea of normalizeSpace taken to paragraph level 
      * @see http://www.w3.org/TR/xpath/#function-normalize-space
-     * @return String
+     * @return \Type\String
      */
     public function normalizeParagraphs() {
         return $this->explode("\n")->map(function(String $string) {
@@ -120,7 +120,7 @@ class String extends \Type\Base {
     
     /**
      * replaces 3 or more linefeeds with 2 linefeeds
-     * @return String
+     * @return \Type\String
      */
     public function removeExcessiveEmptyLines() {
         return $this->pregReplace("#\n{2,}#", "\n\n")->trim();
@@ -182,7 +182,7 @@ class String extends \Type\Base {
     /**
      *
      * @param string $separator
-     * @return String
+     * @return \Type\String
      */
     public function toSeparated($separator = '_') {
         return new String(\Util\String::camelCaseToSeparated($this->value, $separator));
@@ -190,7 +190,7 @@ class String extends \Type\Base {
 
     /**
      *
-     * @return String
+     * @return \Type\String
      */
     public function toNamespace() {
         return new String(\Util\String::camelCaseToNamespace($this->value));
@@ -227,7 +227,7 @@ class String extends \Type\Base {
      * @see http://www.w3.org/TR/xpath/#function-substring-before
      * @param String $delimiter
      * @param boolean $keepThisNotFound should the original string be returned if there is no match for the delimiter
-     * @return String
+     * @return \Type\String
      */
     public function substringBefore($delimiter, $keepThisIfNotFound = false) {
         $delimiter = self::createString($delimiter);
@@ -262,7 +262,7 @@ class String extends \Type\Base {
      * @param string $delimiter the delimiter used for splitting and merging
      * @param int $offset
      * @param int $length
-     * @return String
+     * @return \Type\String
      */
     public function cut($delimiter=',', $offset=0, $length = null) {
         $parts = \explode($delimiter, $this->value);
@@ -292,7 +292,7 @@ class String extends \Type\Base {
     /**
      *
      * @param string $string
-     * @return String
+     * @return \Type\String
      */
     public function append($string) {
         return new String($this->value . $string);
@@ -302,7 +302,7 @@ class String extends \Type\Base {
      * Returns a human-readable and human-useful ascii representation (locale dependent "ä" => "ae")
      * 
      * @param string $transliterationLocale locale to use for transliteration 
-     * @return String
+     * @return \Type\String
      */
     public function ascii($transliterationLocale = 'de_DE.UTF-8') {
         return $this->iconv('UTF-8', 'ASCII//TRANSLIT', $transliterationLocale);
@@ -314,7 +314,7 @@ class String extends \Type\Base {
      * @param string $inCharset
      * @param string $outCharset
      * @param string $transliterationLocale locale to use if transliteration is needed
-     * @return String
+     * @return \Type\String
      */
     public function iconv($inCharset, $outCharset, $transliterationLocale ='de_DE.UTF-8') {
         $oldLocale = setlocale(LC_ALL, $transliterationLocale);
@@ -326,7 +326,7 @@ class String extends \Type\Base {
     /**
      * Returns the subpart of the string that is in $set
      * @param String|string|array $set Set of phrases to match (array or comma separated)
-     * @return String
+     * @return \Type\String
      */
     public function find($set) {
         $set = \array_map(
@@ -364,7 +364,7 @@ class String extends \Type\Base {
     /**
      *
      * @param string $string
-     * @return String
+     * @return \Type\String
      */
     public function translate($from, $to) {
         return new String(\strtr($this->value, $from, $to));
@@ -373,7 +373,7 @@ class String extends \Type\Base {
     /**
      *
      * @param string $joinChar
-     * @return String
+     * @return \Type\String
      */
     public function tokenize($joinChar = '-') {
         return $this->ascii()->toLower()->replaceNonTokenCharacters()->normalizeSpace()->translate(' ', $joinChar);
@@ -382,18 +382,25 @@ class String extends \Type\Base {
     /**
      *
      * @param string $string
-     * @return String
+     * @return \Type\String
      */
     public function prepend($string) {
         return new String($string . $this->value);
     }
 
 
-
+	/**
+	 *
+	 * @return \Type\String 
+	 */
     public function fixPseudoWindows1252Encoding() {
         return new String(\Util\String::fixPseudoWindows1252Enconding($this->value));
     }
-
+	
+	/**
+	 *
+	 * @return \Type\Number
+	 */
     public function asNumber() {
         return \Type\Number\Factory::fromTypeString($this);
         
@@ -401,7 +408,7 @@ class String extends \Type\Base {
     /**
      *
      * @param string $format
-     * @return Date
+     * @return \Type\Date
      */
     public function asDate($format = '%Y-%m-%dT%H:%M:%S', $defaults = null, $offset = 0, $midnightHour = 0, $rangeStart=PHP_INT_MAX, $rangeEnd=PHP_INT_MAX) {
         $parser = new Date\Parser((string) $format, $defaults, $offset, $midnightHour, $rangeStart, $rangeEnd);
@@ -422,7 +429,7 @@ class String extends \Type\Base {
      * @param string $separator separator between the expandend matches (defaults to ' ')
      * @param string $replacementStartMarker start marker for a match
      * @param string $replacementEndMarker end marker for a match
-     * @return String
+     * @return \Type\String
      */
     public function expandRanges($expression, $replace = '_item', $separator=' ') {
         return new String(\Util\String::expandRanges(
@@ -435,7 +442,7 @@ class String extends \Type\Base {
     
     /**
      *
-     * @return String\Collection
+     * @return \Type\String\Collection
      */
     public function asKeywords() {
         return $this->toLower()->pregReplace('#[^[:alpha:]]+#ui', ' ')->normalizeSpace()->explode(' ')->unique();
@@ -470,7 +477,7 @@ class String extends \Type\Base {
      *
      * @param string $regularExpression
      * @param string $replace
-     * @return String\Collection
+     * @return \Type\String\Collection
      */
     public function eachMatch($regularExpression, $replace='$0') {
         $result = new String\Collection();
@@ -484,7 +491,7 @@ class String extends \Type\Base {
 
     /**
      * @param String|string $string
-     * @return String
+     * @return \Type\String
      */
     public static function createString($string) {
         if ($string instanceof String) {
@@ -494,10 +501,20 @@ class String extends \Type\Base {
         }
     }
 	
+	/**
+	 *
+	 * @param Strig $string
+	 * @return boolean
+	 */
 	public function equals($string) {
 		return $this->value == (string)$string;
 	}
 	
+	/**
+	 * !is_empty
+	 * 
+	 * @return booelan
+	 */
 	public function is() {
 		return $this->normalizeSpace()->length() > 0;
 	}
@@ -505,7 +522,7 @@ class String extends \Type\Base {
     /**
      *
      * @param string $string
-     * @return String
+     * @return \Type\String
      */
     public static function cast($string) {
         try {

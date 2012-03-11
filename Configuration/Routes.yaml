@@ -1,12 +1,42 @@
 #                                                                        #
 # Default subroutes configuration for the Events package                 #
-#                                                                        #
+#
+-
+  name: 'Home'
+  uriPattern: ''
+  defaults:
+    '@package':    'Org.Gucken.Events'
+    '@controller': 'Standard'
+    '@action':     'index'
+    '@format':     'html'
+-
+  name: 'Event'
+  uriPattern: 'veranstaltungen/{event}'
+  routeParts:
+    event:
+      objectType: 'Org\Gucken\Events\Domain\Model\Event'
+      uriPattern: '{startDateTime:Y}/{startDateTime:m}/{startDateTime:d}/{title}'      
+  defaults:
+    '@controller': 'Standard'
+    '@action':     'show'    
+-
+  name: 'Admin'
+  uriPattern: 'admin/{@controller}/{@action}.{@format}'
+  defaults:
+    '@controller': 'Admin'
+    '@action':     'index'   
+  appendExceedingArguments: true
 
 -
   name: 'Login'
-  uriPattern:    'event/login'
+  uriPattern:    'account/login'
   defaults:
-    '@package':    'Org.Gucken.Events'
-    '@controller': 'Login'
+    '@controller': 'Account'
     '@action':     'index'
-    '@format':     'html'
+
+-
+  name: 'Logout'
+  uriPattern:    'account/logout'
+  defaults:
+    '@controller': 'Account'
+    '@action':     'logout'

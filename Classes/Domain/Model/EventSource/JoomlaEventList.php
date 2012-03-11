@@ -88,7 +88,7 @@ class JoomlaEventList extends AbstractEventSource implements EventSourceInterfac
 		$title = $xml->css('dl.event_info dd.title')->asString()->first()->normalizeSpace();
 		return new \Type\Record(array(
 				'title' => $title,
-				'date' => $date->asDate('%d.%m.%Y %H[:.]%M h'),
+				'date' => $date->asDate('%d.%m.%Y( %H[:.]%M h)?'),
 				#'end' => $date->asDate('%d.%m.%Y.+\s*-\s*%H[:.]%\s*h$'),
 				'location' => $this->getLocation(),
 				'type' => $this->getType(),

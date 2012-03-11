@@ -288,6 +288,14 @@ class Event {
         return clone $this->types;
     }
 
+    /**
+     * Getter for type
+     *
+     * @return \Org\Gucken\Events\Domain\Model\Type
+     */
+    public function getType() {
+        return $this->types->first();
+    }
 	
 	
     /**

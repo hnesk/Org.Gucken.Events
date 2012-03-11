@@ -202,7 +202,7 @@ class Date extends \Type\Base {
      *
      * @param string $format
      * @param null|string|array $locale
-     * @return String
+     * @return \Type\String
      */
     public function strftime($format = '%Y-%m-%d %H:%M:%S', $locale = null) {
         $oldLocale = null;
@@ -218,7 +218,7 @@ class Date extends \Type\Base {
 
     /**
      *
-     * @return Number
+     * @return \Type\Number
      */
     public function getYear() {
         return new Number($this->date->format('Y'));
@@ -226,7 +226,7 @@ class Date extends \Type\Base {
 
     /**
      *
-     * @return Number
+     * @return \Type\Number
      */
     public function getMonth() {
         return new Number($this->date->format('m'));
@@ -235,7 +235,7 @@ class Date extends \Type\Base {
     /**
      *
      * @param null|string|array $locale
-     * @return String
+     * @return \Type\String
      */
     public function getMonthStringLong($locale = 'de_DE.UTF-8') {
         return $this->strftime(self::MONTH_LONG, $locale);
@@ -244,7 +244,7 @@ class Date extends \Type\Base {
     /**
      *
      * @param null|string|array $locale
-     * @return String
+     * @return \Type\String
      */
     public function getMonthStringShort($locale = null) {
         return $this->strftime(self::MONTH_SHORT, $locale);
@@ -252,7 +252,7 @@ class Date extends \Type\Base {
 
     /**
      *
-     * @return Number
+     * @return \Type\Number
      */
     public function getDay() {
         return new Number($this->date->format('d'));

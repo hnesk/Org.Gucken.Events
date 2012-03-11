@@ -20,6 +20,23 @@ class Factory {
 	 * @var array
 	 */
 	protected $daysBuild = array();
+		
+	/**
+	 *
+	 * @var array
+	 */
+	protected $settings = array();
+	
+	/**
+	 *
+	 * @var int
+	 */
+	protected $midnightHour = 0;
+	
+	public function injectSettings($settings) {
+		$this->settings = $settings;
+		$this->midnightHour = (int)$this->settings['midnightHour'];
+	}
 
 	/**
 	 * builds a Day, unique by Date
@@ -28,6 +45,8 @@ class Factory {
 	 */
 	public function build(\DateTime $date = null) {
 		$date = $date ?: new \DateTime();
+		$date = clone $date;
+		$date->modify('-'.$this->midnightHour.' hours');
 		$key = $date->format('Y-m-d').'|'.$date->getTimezone()->getName();
 		if (!isset($this->daysBuild[$key])) {
 			$this->daysBuild[$key] = new Day($date);

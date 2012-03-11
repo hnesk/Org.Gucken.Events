@@ -11,11 +11,12 @@ TYPO3:
             providerClass: PersistedUsernamePasswordProvider
             entryPoint:
               WebRedirect:
-                uri: org.gucken.events/account/index
+                uri: account/login
               
 Org:
   Gucken:
     Events:
+      midnightHour: 5
       view: default
       views:         
         default:

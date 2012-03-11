@@ -14,10 +14,16 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  */
 class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	
+	
+	protected $midnightHour = 0;
+	
     protected $defaultOrderings = array(
         'startDateTime' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING,
     );
 	
+	public function injectSettings($settings) {
+		$this->midnightHour = $settings['midnightHour'];
+	}
 	
 	/**
 	 * @param \DateTime $day
@@ -25,6 +31,7 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	 */
 	public function findOn(\DateTime $day = null) {
 		$day = $day ? clone $day : new \DateTime();
+		$day->modify('+'.$this->midnightHour.' hours');
 		$day->setTime(0,0,0);
 		$nextDay = clone $day;
 		$nextDay->modify('+1 day');
@@ -38,7 +45,8 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
 	 */
 	public function findBetween(\DateTime $startDateTime = null, $endDateTime = null) {
-		$startDateTime = $startDateTime ?: new \DateTime();
+		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
+		$startDateTime->modify('+'.$this->midnightHour.' hours');
 		if (empty($endDateTime)) {
 			$endDateTime = clone $startDateTime;
 			$endDateTime->modify('+1 month');
@@ -58,7 +66,8 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
 	 */
 	public function findAfter(\DateTime $startDateTime = null) {
-		$startDateTime = $startDateTime ?: new \DateTime();
+		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
+		$startDateTime->modify('+'.$this->midnightHour.' hours');
 		$query = $this->createQuery();		
 		return $query->matching($query->greaterThanOrEqual('startDateTime', $startDateTime))->execute();
 	}

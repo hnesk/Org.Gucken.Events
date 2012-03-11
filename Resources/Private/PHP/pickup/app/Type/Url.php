@@ -74,7 +74,7 @@ class Url extends \Type\Base {
     public function __construct($context='', $relative=null) {
         $this->set($context);
         if ($relative) {
-            $this->resolve(self::cast($relative));
+            $this->_resolve(self::cast($relative));
         }
     }
 
@@ -87,7 +87,16 @@ class Url extends \Type\Base {
         return $this;
     }
 
-    protected function resolve(Url $newUrl) {
+	/**
+	 *
+	 * @param string $relative
+	 * @return \Type\Url 
+	 */
+	public function resolve($relative) {
+		return new Url($this, $relative);
+	}
+	
+    protected function _resolve(Url $newUrl) {
         if (($newUrl->getScheme()->is() && !$this->sameParts($newUrl,self::SCHEME)) || ($newUrl->getHost()->is() && !$this->sameParts($newUrl,self::HOST))) {
             $this->set($newUrl);
         } else {
@@ -268,7 +277,10 @@ class Url extends \Type\Base {
     }
 	
 
-
+	/**
+	 *
+	 * @return \Type\String 
+	 */
     public function getFragment() {
         return new String($this->fragment);
     }

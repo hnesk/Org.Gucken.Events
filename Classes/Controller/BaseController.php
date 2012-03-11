@@ -219,6 +219,56 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
         $this->flashMessageContainer->addMessage(new \TYPO3\FLOW3\Error\Notice($message));
     }
 
+	/**
+	 * Overridden to allow template switching
+	 * 
+	 * $this->initializeView($view) has to be called before $view->canRender()
+	 *
+	 * @return \TYPO3\FLOW3\MVC\View\ViewInterface the resolved view
+	 * @api
+	 */
+	protected function resolveView() {
+		$viewObjectName = $this->resolveViewObjectName();		
+		if ($viewObjectName !== FALSE) {
+			$view = $this->objectManager->get($viewObjectName);
+			$this->initializeView($view);
+			if ($view->canRender($this->controllerContext) === FALSE) {
+				unset($view);
+			}
+		}
+		if (!isset($view) && $this->defaultViewObjectName != '') {
+			$view = $this->objectManager->get($this->defaultViewObjectName);
+			$this->initializeView($view);
+			if ($view->canRender($this->controllerContext) === FALSE) {
+				unset($view);
+			}
+		}
+		if (!isset($view)) {
+			$view = $this->objectManager->get('TYPO3\FLOW3\MVC\View\NotFoundView');
+			$view->assign('errorMessage', 'No template was found. View could not be resolved for action "' . $this->request->getControllerActionName() . '"');
+		}
+		$view->setControllerContext($this->controllerContext);
+		
+		return $view;
+	}
+	
+	
+	
+	/**
+	 * Overriden to allow template switching 
+	 * 
+	 * @param \TYPO3\FLOW3\MVC\View\ViewInterface $view 
+	 */
+	public function initializeView(\TYPO3\FLOW3\MVC\View\ViewInterface $view) {
+		/* @var $view \TYPO3\Fluid\View\TemplateView */		
+		$currentView = $this->settings['view'];
+		$view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
+		$view->setTemplateRootPath($this->settings['views'][$currentView]['templateRootPath']);
+		$view->setPartialRootPath($this->settings['views'][$currentView]['partialRootPath']);
+	}
+	
+	
+	
 }
 
 ?>
