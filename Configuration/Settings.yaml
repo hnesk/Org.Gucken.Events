@@ -12,19 +12,16 @@ TYPO3:
             entryPoint:
               WebRedirect:
                 uri: account/login
-              
+
 Org:
   Gucken:
     Events:
       midnightHour: 5
       view: default
-      views:         
+      views:
         default:
           layoutRootPath: resource://Org.Gucken.Events/Private/Layouts
           templateRootPath: resource://Org.Gucken.Events/Private/Templates
           partialRootPath: resource://Org.Gucken.Events/Private/Partials
-        bielefeld:
-          layoutRootPath: resource://Org.Gucken.Bielefeld/Private/Layouts
-          templateRootPath: resource://Org.Gucken.Bielefeld/Private/Templates
-          partialRootPath: resource://Org.Gucken.Bielefeld/Private/Partials
-          
+          partialRootPath: resource://Org.Gucken.Events/Private/Partials
+          skinPackage: Org.Gucken.Events

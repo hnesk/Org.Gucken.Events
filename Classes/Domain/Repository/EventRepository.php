@@ -31,8 +31,8 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	 */
 	public function findOn(\DateTime $day = null) {
 		$day = $day ? clone $day : new \DateTime();
-		$day->modify('+'.$this->midnightHour.' hours');
 		$day->setTime(0,0,0);
+		$day->modify('+'.$this->midnightHour.' hours');
 		$nextDay = clone $day;
 		$nextDay->modify('+1 day');
 		return $this->findBetween($day, $nextDay);
@@ -46,6 +46,7 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	 */
 	public function findBetween(\DateTime $startDateTime = null, $endDateTime = null) {
 		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
+		$startDateTime->setTime(0,0,0);
 		$startDateTime->modify('+'.$this->midnightHour.' hours');
 		if (empty($endDateTime)) {
 			$endDateTime = clone $startDateTime;
@@ -67,6 +68,7 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	 */
 	public function findAfter(\DateTime $startDateTime = null) {
 		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
+		$startDateTime->setTime(0, 0, 0);
 		$startDateTime->modify('+'.$this->midnightHour.' hours');
 		$query = $this->createQuery();		
 		return $query->matching($query->greaterThanOrEqual('startDateTime', $startDateTime))->execute();

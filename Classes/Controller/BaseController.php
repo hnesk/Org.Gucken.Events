@@ -27,7 +27,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
 
 
 /**
- * Standard controller for the Events package 
+ * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
@@ -49,27 +49,27 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
      * @var string
      */
     protected $redirectArgumentArrayName = 'redirectButton';
-    
-	
-	
+
+
+
 	/**
 	 * @var \TYPO3\FLOW3\Log\SystemLoggerInterface
 	 * @FLOW3\Inject
 	 */
 	protected $systemLogger;
-	
-	
+
+
 	/**
 	 *
 	 * @param string  $message
 	 * @param int $severity
 	 * @param array $additionalData
-	 * @return string 
+	 * @return string
 	 */
 	protected function log($message, $severity = LOG_INFO , $additionalData = array()) {
 		$this->systemLogger->log($message, $severity, $additionalData);
 	}
-    
+
     /**
      * Overriden to allow passsing of the redirect parameter
      */
@@ -77,11 +77,11 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
         if (!empty($this->redirectArgumentName)) {
             $this->arguments->addNewArgument($this->redirectArgumentName,'string',false, '');
         }
-        
+
         if (!empty($this->redirectArgumentArrayName)) {
             $this->arguments->addNewArgument($this->redirectArgumentArrayName,'array',false, array());
         }
-        
+
         parent::initializeAction();
     }
 
@@ -92,31 +92,31 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
         $redirectArgument = $this->arguments[$this->redirectArgumentName];
         /* @var $redirectArgument \TYPO3\FLOW3\MVC\Controller\Argument */
 
-        $redirectUri = null;        
-        if (count($redirectArgumentArray->getValue()) > 0) {            
+        $redirectUri = null;
+        if (count($redirectArgumentArray->getValue()) > 0) {
 			$redirectUri = \key($redirectArgumentArray->getValue());
         } else if ($redirectArgument->getValue()) {
-            $redirectUri = $redirectArgument->getValue();            
-        } 
+            $redirectUri = $redirectArgument->getValue();
+        }
         if ($redirectUri) {
-			if (strpos($redirectUri,'https://') === false && strpos($redirectUri,'http://') === false) { 
+			if (strpos($redirectUri,'https://') === false && strpos($redirectUri,'http://') === false) {
 				$redirectUri = $this->request->getBaseUri() . $redirectUri;
 			}
-            $this->redirectToUri($redirectUri, $delay, $statusCode);            
+            $this->redirectToUri($redirectUri, $delay, $statusCode);
         } else {
             parent::redirect($actionName, $controllerName, $packageKey, $arguments, $delay, $statusCode, $format);
         }
     }
 
 	/**
-	 * Shortcut for easier setting of property mapping configuration for nested objects 
-	 * 
+	 * Shortcut for easier setting of property mapping configuration for nested objects
+	 *
 	 * @param string $argument
 	 * @param string $propertyPath
 	 * @param int $propertyFlags allow creation and/or modification, bitfield of self::CREATION / self::MODIFICATION
 	 */
 	protected function preprocessProperty($argument,$propertyPath, $callback) {
-		$data = $this->request->getArgument($argument);		
+		$data = $this->request->getArgument($argument);
 		if (!is_callable($callback)) {
 			if (!is_string($callback)) {
 				throw new \InvalidArgumentException('callback must be callable or a property name');
@@ -128,49 +128,49 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 		$data = $this->_preprocessProperty($data, $propertyPathParts, $callback);
 		$this->request->setArgument($argument,$data);
 	}
-	
+
 	private function _preprocessProperty($data, $propertyPathParts, $callback) {
 		$currentProperty = array_shift($propertyPathParts);
 
 		// * = recursive call for all keys
 		if ($currentProperty === '*') {
 			foreach ($data as $currentProperty => $subData) {
-				$data[$currentProperty] = $this->_preprocessProperty($subData, $propertyPathParts, $callback);					
+				$data[$currentProperty] = $this->_preprocessProperty($subData, $propertyPathParts, $callback);
 				if (!isset($data[$currentProperty])) {
 					unset($data[$currentProperty]);
-				}				
+				}
 			}
-		} 
+		}
 		// recursive call for given property
 		else if (!empty($currentProperty)) {
 			$subData = isset($data[$currentProperty]) ? $data[$currentProperty] : array();
-			$data[$currentProperty] = $this->_preprocessProperty($subData, $propertyPathParts, $callback);					
+			$data[$currentProperty] = $this->_preprocessProperty($subData, $propertyPathParts, $callback);
 			if (!isset($data[$currentProperty])) {
 				unset($data[$currentProperty]);
 			}
 		} else {
 			$data = $callback($data);
-		}					
+		}
 		return $data;
 	}
 
-	
+
 	/**
-	 * Shortcut for easier setting of property mapping configuration for nested objects 
-	 * 
+	 * Shortcut for easier setting of property mapping configuration for nested objects
+	 *
 	 * @param string $argument
 	 * @param string $propertyPath
 	 * @param int $propertyFlags allow creation and/or modification, bitfield of self::CREATION / self::MODIFICATION
 	 */
 	protected function allowForProperty($argument,$propertyPath, $propertyFlags = self::EVERYTHING) {
-		$data = $this->request->getArgument($argument);		
-        $propertyMappingConfiguration = $this->arguments[$argument]->getPropertyMappingConfiguration();		
-		/* @var $propertyMapping \TYPO3\FLOW3\MVC\Controller\MvcPropertyMappingConfiguration */		
-		
+		$data = $this->request->getArgument($argument);
+        $propertyMappingConfiguration = $this->arguments[$argument]->getPropertyMappingConfiguration();
+		/* @var $propertyMapping \TYPO3\FLOW3\MVC\Controller\MvcPropertyMappingConfiguration */
+
 		$propertyPathParts = explode('.', $propertyPath);
 		$this->applyAllowForProperty($propertyMappingConfiguration, $data, $propertyPathParts, $propertyFlags);
 	}
-	
+
 	/**
 	 *
 	 * @param \TYPO3\FLOW3\MVC\Controller\MvcPropertyMappingConfiguration $propertyMappingConfiguration
@@ -188,9 +188,9 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 		if ($currentProperty === '*') {
 			foreach ($data as $currentProperty => $subData) {
 				$subPropertyMappingConfiguration = $propertyMappingConfiguration->forProperty($currentProperty);
-				$this->applyAllowForProperty($subPropertyMappingConfiguration, $subData, $subPropertyPathParts, $propertyFlags);					
+				$this->applyAllowForProperty($subPropertyMappingConfiguration, $subData, $subPropertyPathParts, $propertyFlags);
 			}
-		} 
+		}
 		// recursive call for given property
 		else if (!empty($currentProperty)) {
 			$subPropertyMappingConfiguration = $propertyMappingConfiguration->forProperty($currentProperty);
@@ -200,35 +200,35 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 			if ($propertyFlags && self::CREATION) {
 				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter', \TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, TRUE);
 			}
-			if ($propertyFlags && self::MODIFICATION) {	
+			if ($propertyFlags && self::MODIFICATION) {
 				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter', \TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED, TRUE);
-			}			
-			if ($propertyFlags && self::OVERRIDE) {	
+			}
+			if ($propertyFlags && self::OVERRIDE) {
 				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter', \TYPO3\FLOW3\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_OVERRIDE_TARGET_TYPE_ALLOWED, TRUE);
-			}			
-		
-		} 								
+			}
+
+		}
 	}
-	
-    
+
+
     /**
      *
-     * @param string $message 
+     * @param string $message
      */
-    public function addNotice($message) {        
+    public function addNotice($message) {
         $this->flashMessageContainer->addMessage(new \TYPO3\FLOW3\Error\Notice($message));
     }
 
 	/**
 	 * Overridden to allow template switching
-	 * 
+	 *
 	 * $this->initializeView($view) has to be called before $view->canRender()
 	 *
 	 * @return \TYPO3\FLOW3\MVC\View\ViewInterface the resolved view
 	 * @api
 	 */
 	protected function resolveView() {
-		$viewObjectName = $this->resolveViewObjectName();		
+		$viewObjectName = $this->resolveViewObjectName();
 		if ($viewObjectName !== FALSE) {
 			$view = $this->objectManager->get($viewObjectName);
 			$this->initializeView($view);
@@ -248,27 +248,28 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 			$view->assign('errorMessage', 'No template was found. View could not be resolved for action "' . $this->request->getControllerActionName() . '"');
 		}
 		$view->setControllerContext($this->controllerContext);
-		
+
 		return $view;
 	}
-	
-	
-	
+
+
+
 	/**
-	 * Overriden to allow template switching 
-	 * 
-	 * @param \TYPO3\FLOW3\MVC\View\ViewInterface $view 
+	 * Overriden to allow template switching
+	 *
+	 * @param \TYPO3\FLOW3\MVC\View\ViewInterface $view
 	 */
 	public function initializeView(\TYPO3\FLOW3\MVC\View\ViewInterface $view) {
-		/* @var $view \TYPO3\Fluid\View\TemplateView */		
+		/* @var $view \TYPO3\Fluid\View\TemplateView */
 		$currentView = $this->settings['view'];
 		$view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
 		$view->setTemplateRootPath($this->settings['views'][$currentView]['templateRootPath']);
 		$view->setPartialRootPath($this->settings['views'][$currentView]['partialRootPath']);
+		$view->assign('skinPackage', $this->settings['views'][$currentView]['skinPackage']);
 	}
-	
-	
-	
+
+
+
 }
 
 ?>

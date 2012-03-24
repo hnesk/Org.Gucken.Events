@@ -15,17 +15,18 @@
   routeParts:
     event:
       objectType: 'Org\Gucken\Events\Domain\Model\Event'
-      uriPattern: '{startDateTime:Y}/{startDateTime:m}/{startDateTime:d}/{title}'      
+      uriPattern: '{startDateTime:Y}/{startDateTime:m}/{startDateTime:d}/{title}'
   defaults:
     '@controller': 'Standard'
-    '@action':     'show'    
+    '@action':     'show'
+
 -
-  name: 'Admin'
-  uriPattern: 'admin/{@controller}/{@action}.{@format}'
+  name: 'static'
+  uriPattern:    'meta/{@action}(.{@format})'
   defaults:
-    '@controller': 'Admin'
-    '@action':     'index'   
-  appendExceedingArguments: true
+    '@controller': 'Static'
+    '@format': 'html'
+
 
 -
   name: 'Login'
@@ -40,3 +41,11 @@
   defaults:
     '@controller': 'Account'
     '@action':     'logout'
+
+-
+  name: 'Admin'
+  uriPattern: 'admin/{@controller}/{@action}.{@format}'
+  defaults:
+    '@controller': 'Admin'
+    '@action':     'index'
+  appendExceedingArguments: true
