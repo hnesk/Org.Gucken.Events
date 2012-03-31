@@ -27,7 +27,7 @@ use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
- * Standard controller for the Events package 
+ * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
@@ -38,7 +38,7 @@ class StandardController extends BaseController {
 	 * @FLOW3\Inject
 	 */
 	protected $eventRepository;
-	
+
 
 	/**
 	 * Index action
@@ -49,17 +49,25 @@ class StandardController extends BaseController {
 		$events = $this->eventRepository->findBetween(new \DateTime('today'), new \DateTime('+14 days'));
 		$this->view->assign('events', $events);
 	}
-	
+
 
 	/**
 	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event 
+	 * @param Org\Gucken\Events\Domain\Model\Event $event
 	 * @return void
 	 */
 	public function showAction(Event $event) {
 		$this->view->assign('event', $event);
+		if ($this->isHtmlRequest()) {
+			return $this->view->render('show');
+		} else {
+			return $this->view->render('single');
+		}
+
 	}
-	
+
+
+
 }
 
 ?>

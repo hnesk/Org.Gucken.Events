@@ -269,6 +269,14 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	}
 
 
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function isHtmlRequest() {
+		return in_array('text/html',$this->environment->getAcceptedFormats());
+	}
+
 
 }
 

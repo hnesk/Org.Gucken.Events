@@ -23,7 +23,7 @@ namespace Org\Gucken\Events\Controller;
 
 
 /**
- * Standard controller for the Events package 
+ * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
@@ -31,11 +31,11 @@ abstract class AbstractAdminController extends BaseController {
 	/**
 	 */
 	public function redirectIfHtml($actionName, $controllerName = NULL, $packageKey = NULL, array $arguments = NULL, $delay = 0, $statusCode = 303, $format = NULL) {
-		if (in_array('text/html',$this->environment->getAcceptedFormats())) {
+		if ($this->isHtmlRequest()) {
 			$this->redirect($actionName, $controllerName, $packageKey, $arguments, $delay, $statusCode, $format);
 		}
-		
+
 	}
-		
+
 }
 ?>

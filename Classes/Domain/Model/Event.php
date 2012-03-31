@@ -46,67 +46,74 @@ class Event {
 	 * @var \DateTime
 	 */
 	protected $startDateTime;
-	
+
 	/**
 	 * The end date and time
 	 * @var \DateTime
 	 */
 	protected $endDateTime;
-	
+
 
 	/**
 	 * The location
 	 * @var \Org\Gucken\Events\Domain\Model\Location
 	 * @ORM\ManyToOne
 	 */
-	protected $location;		
-	
+	protected $location;
+
 	/**
 	 * The type
 	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
 	 * @ORM\ManyToMany
 	 */
 	protected $types;
-	
+
 	/**
 	 * Links to the original sources
 	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink>
 	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
 	 */
-	protected $links;	
-		
-	
+	protected $links;
+
+
 	/**
 	 * Markdown version of the description
-	 * 
-	 * @ORM\Column(type="text") 
+	 *
+	 * @ORM\Column(type="text")
 	 * @var string
 	 */
 	protected $description;
-	
+
 	/**
 	 * Markdown version of the description
-	 * 
-	 * @ORM\Column(type="text") 
+	 *
+	 * @ORM\Column(type="text")
 	 * @var string
 	 */
 	protected $shortDescription;
 
 	/**
 	 * The url
-	 * 
+	 *
 	 * @var string
 	 */
 	protected $url;
-	
-	
+
+	/**
+	 *
+	 * @var \Org\Gucken\Events\Domain\Model\Image
+	 * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
+	 */
+	protected $image;
+
+
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Model\Day\Factory
 	 * @FLOW3\Inject
 	 */
 	protected $dayFactory;
-	
+
 	public function __construct() {
 		$this->types = new \Doctrine\Common\Collections\ArrayCollection();
 		$this->factoidIdentitys = new \Doctrine\Common\Collections\ArrayCollection();
@@ -150,7 +157,7 @@ class Event {
 	public function setStartDateTime(\DateTime $startDateTime) {
 		$this->startDateTime = $startDateTime;
 	}
-	
+
 	/**
 	 * Get the Event's end date
 	 *
@@ -169,7 +176,7 @@ class Event {
 	public function setEndDateTime(\DateTime $endDateTime = null) {
 		$this->endDateTime = $endDateTime;
 	}
-	
+
 
 	/**
 	 * @return Org\Gucken\Events\Domain\Model\Day
@@ -197,41 +204,41 @@ class Event {
 	public function setLocation(\Org\Gucken\Events\Domain\Model\Location $location) {
 		$this->location = $location;
 	}
-	
-	
+
+
 	/**
 	 *
-	 * @param string $description 
+	 * @param string $description
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
 	}
-	
+
 	/**
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getDescription() {
 		return $this->description;
 	}
-	
+
 	/**
 	 *
-	 * @param string $shortDescription 
+	 * @param string $shortDescription
 	 */
 	public function setShortDescription($shortDescription) {
 		$this->shortDescription = $shortDescription;
 	}
-	
+
 	/**
 	 *
-	 * @return string 
+	 * @return string
 	 */
 	public function getShortDescription() {
 		return $this->shortDescription;
 	}
-	
-	
+
+
     /**
      * Setter for types
      *
@@ -253,7 +260,7 @@ class Event {
 			$this->types->add($type);
 		}
     }
-	
+
     /**
      * Adds a type
      *
@@ -267,7 +274,7 @@ class Event {
 			}
 		}
     }
-	
+
 
     /**
      * removes a type
@@ -282,7 +289,7 @@ class Event {
     /**
      * Getter for types
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type> 
+     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
      */
     public function getTypes() {
         return clone $this->types;
@@ -296,8 +303,8 @@ class Event {
     public function getType() {
         return $this->types->first();
     }
-	
-	
+
+
     /**
      * Setter for links
      *
@@ -310,7 +317,7 @@ class Event {
 
 	/**
 	 * add a link
-	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link 
+	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link
 	 */
     public function addLink(\Org\Gucken\Events\Domain\Model\EventLink $link = null) {
 		if ($link) {
@@ -332,21 +339,21 @@ class Event {
     /**
      * Getter for links
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink> 
+     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink>
      */
     public function getLinks() {
         return clone $this->links;
     }
-	
-	
+
+
 	/**
 	 *
-	 * @param string $url 
+	 * @param string $url
 	 */
 	public function setUrl($url) {
 		$this->url = $url;
 	}
-	
+
 	/**
 	 *
 	 * @return string
@@ -354,6 +361,23 @@ class Event {
 	public function getUrl() {
 		return $this->url;
 	}
+
+	/**
+	 *
+	 * @return \Org\Gucken\Events\Domain\Model\Image
+	 */
+	public function getImage() {
+		return $this->image;
+	}
+
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\Image $image
+	 */
+	public function setImage(\Org\Gucken\Events\Domain\Model\Image $image) {
+		$this->image = $image;
+	}
+
 
 	/**
 	 *
