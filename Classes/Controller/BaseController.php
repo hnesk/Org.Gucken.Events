@@ -31,7 +31,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
+class BaseController extends \TYPO3\FLOW3\Mvc\Controller\ActionController {
 	const CREATION = 1;
 	const MODIFICATION = 2;
 	const OVERRIDE = 4;
@@ -88,9 +88,9 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
     protected function redirect($actionName, $controllerName = NULL, $packageKey = NULL, array $arguments = NULL, $delay = 0, $statusCode = 303, $format = NULL) {
         $redirectArgumentArray = $this->arguments[$this->redirectArgumentArrayName];
-        /* @var $redirectArgumentArray \TYPO3\FLOW3\MVC\Controller\Argument */
+        /* @var $redirectArgumentArray \TYPO3\FLOW3\Mvc\Controller\Argument */
         $redirectArgument = $this->arguments[$this->redirectArgumentName];
-        /* @var $redirectArgument \TYPO3\FLOW3\MVC\Controller\Argument */
+        /* @var $redirectArgument \TYPO3\FLOW3\Mvc\Controller\Argument */
 
         $redirectUri = null;
         if (count($redirectArgumentArray->getValue()) > 0) {
@@ -165,7 +165,7 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	protected function allowForProperty($argument,$propertyPath, $propertyFlags = self::EVERYTHING) {
 		$data = $this->request->getArgument($argument);
         $propertyMappingConfiguration = $this->arguments[$argument]->getPropertyMappingConfiguration();
-		/* @var $propertyMapping \TYPO3\FLOW3\MVC\Controller\MvcPropertyMappingConfiguration */
+		/* @var $propertyMapping \TYPO3\FLOW3\Mvc\Controller\MvcPropertyMappingConfiguration */
 
 		$propertyPathParts = explode('.', $propertyPath);
 		$this->applyAllowForProperty($propertyMappingConfiguration, $data, $propertyPathParts, $propertyFlags);
@@ -173,7 +173,7 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\MVC\Controller\MvcPropertyMappingConfiguration $propertyMappingConfiguration
+	 * @param \TYPO3\FLOW3\Mvc\Controller\MvcPropertyMappingConfiguration $propertyMappingConfiguration
 	 * @param array $data
 	 * @param array $subPropertyPathParts
 	 * @param int $propertyFlags allow creation and/or modification, bitfield of self::CREATION / self::MODIFICATION
@@ -224,7 +224,7 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	 *
 	 * $this->initializeView($view) has to be called before $view->canRender()
 	 *
-	 * @return \TYPO3\FLOW3\MVC\View\ViewInterface the resolved view
+	 * @return \TYPO3\FLOW3\Mvc\View\ViewInterface the resolved view
 	 * @api
 	 */
 	protected function resolveView() {
@@ -244,7 +244,7 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 			}
 		}
 		if (!isset($view)) {
-			$view = $this->objectManager->get('TYPO3\FLOW3\MVC\View\NotFoundView');
+			$view = $this->objectManager->get('TYPO3\FLOW3\Mvc\View\NotFoundView');
 			$view->assign('errorMessage', 'No template was found. View could not be resolved for action "' . $this->request->getControllerActionName() . '"');
 		}
 		$view->setControllerContext($this->controllerContext);
@@ -257,9 +257,9 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	/**
 	 * Overriden to allow template switching
 	 *
-	 * @param \TYPO3\FLOW3\MVC\View\ViewInterface $view
+	 * @param \TYPO3\FLOW3\Mvc\View\ViewInterface $view
 	 */
-	public function initializeView(\TYPO3\FLOW3\MVC\View\ViewInterface $view) {
+	public function initializeView(\TYPO3\FLOW3\Mvc\View\ViewInterface $view) {
 		/* @var $view \TYPO3\Fluid\View\TemplateView */
 		$currentView = $this->settings['currentView'];
 		$view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);

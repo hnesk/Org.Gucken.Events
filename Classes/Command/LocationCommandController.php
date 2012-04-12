@@ -30,7 +30,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LocationCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandController {
+class LocationCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandController {
     
     
     /**

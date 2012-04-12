@@ -31,7 +31,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AccountCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandController {
+class AccountCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandController {
 
 	/**
 	 * @var \TYPO3\FLOW3\Security\AccountRepository
@@ -130,7 +130,7 @@ class AccountCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
 		if (\is_null($existingAccount)) {
 			return 'Account with identifier "' . $identifier . '" not found' . PHP_EOL;
 		}
-		$existingAccount->setCredentialsSource($this->hashService->generateSaltedMd5($password));		
+		$existingAccount->setCredentialsSource($this->hashService->generateSaltedMd5($password));
 		$this->accountRepository->update($existingAccount);
 
 		return 'Account "'.$existingAccount->getAccountIdentifier() . '": ' .
@@ -141,7 +141,7 @@ class AccountCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
 	 * Grant roles to an existing user
 	 *
 	 * <code>./flow3_dev event:user:grant --identifier hnesk User Administrator</code>
-	 * 
+	 *
 	 * @param string $identifier
 	 * @param string $authenticationProviderName
 	 * @return string
@@ -229,7 +229,7 @@ class AccountCommandController extends \TYPO3\FLOW3\MVC\Controller\CommandContro
 	 */
 	public function listCommand($filterRole = null) {
 		$accounts = $this->accountRepository->findAll();
-		$message = 
+		$message =
 			\str_pad('Account Identifier', 20) . "\t" .
 			\str_pad('Creation Date', 20). "\t" .
 			\str_pad('Expiration Date', 20). "\t" .
