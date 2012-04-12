@@ -9,10 +9,10 @@ TYPO3:
       authentication:
         providers:
           DefaultProvider:
-            providerClass: PersistedUsernamePasswordProvider
-            entryPoint:
-              WebRedirect:
-                uri: account/login
+            provider: PersistedUsernamePasswordProvider
+            entryPoint: 'WebRedirect'
+            entryPointOptions:
+              uri: 'account/login'
 
 Org:
   Gucken:

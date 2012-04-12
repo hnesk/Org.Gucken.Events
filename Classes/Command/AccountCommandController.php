@@ -25,13 +25,14 @@ namespace Org\Gucken\Events\Command;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\FLOW3\Cli\CommandController as CommandController;
 
 /**
  * Command controller for User Management
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class AccountCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandController {
+class AccountCommandController extends CommandController {
 
 	/**
 	 * @var \TYPO3\FLOW3\Security\AccountRepository

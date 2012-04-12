@@ -22,32 +22,33 @@ namespace Org\Gucken\Events\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \Org\Gucken\Events\Domain\Model\Type as Type;
-use \Org\Gucken\Events\Domain\Model\Location as Location;
-use \Org\Gucken\Events\Domain\Model\PostalAddress as PostalAddress;
-use \Org\Gucken\Events\Domain\Model\GeoCoordinates as GeoCoordinates;
+use Org\Gucken\Events\Domain\Model\Type as Type;
+use Org\Gucken\Events\Domain\Model\Location as Location;
+use Org\Gucken\Events\Domain\Model\PostalAddress as PostalAddress;
+use Org\Gucken\Events\Domain\Model\GeoCoordinates as GeoCoordinates;
 use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\FLOW3\Cli\CommandController as CommandController;
 
 /**
  * Command controller for the Importer
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FactoidCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandController {
-    
+class FactoidCommandController extends CommandController {
+
     /**
      * @FLOW3\Inject
      * @var \Org\Gucken\Events\Service\ImportEventFactoidsService
      */
     protected $importService;
-    
+
     /**
      * @FLOW3\Inject
      * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
      */
     protected $sourceRepository;
 
-	
+
     /**
      * Import factoids from given source
      * @param $name string
@@ -64,36 +65,36 @@ class FactoidCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandContro
         }
         return $message.PHP_EOL;
     }
-    
+
     /**
      * Imports factoids from all sources
      * @return string
      */
     public function importAllCommand() {
         $count = $this->importService->import();
-        $this->outputLine('imported %d Factoids',array($count));        
+        $this->outputLine('imported %d Factoids',array($count));
     }
-    
+
     /**
      * Show factoids for one source
      * @param string $name source name
-     * @param string $filter optionally filter by title 
+     * @param string $filter optionally filter by title
      */
     public function showCommand($name, $filter = '') {
            $source = $this->sourceRepository->findOneByName($name);
            /* @var $source \Org\Gucken\Events\Domain\Model\EventSource */
-		   
+
            foreach ($source->getImplementation()->getEvents() as $factoid) {
                if ($filter && strpos($factoid->getTitle(),$filter) === false) {
-                   continue;                   
+                   continue;
                }
                var_dump($factoid->getNativeValue());
            }
-           
-           
+
+
     }
 
-	
+
 }
 
 ?>

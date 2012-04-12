@@ -22,17 +22,18 @@ namespace Org\Gucken\Events\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \Org\Gucken\Events\Domain\Model\Location as Location;
+use Org\Gucken\Events\Domain\Model\Location as Location;
 use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\FLOW3\Cli\CommandController as CommandController;
 
 /**
  * Command controller for the Importer
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LocationCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandController {
-    
-    
+class LocationCommandController extends CommandController {
+
+
     /**
      * @FLOW3\Inject
      * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
@@ -41,18 +42,18 @@ class LocationCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandContr
 
     /**
      * Search locations by keywords
-	 * 
-     * @param string $searchString 
+	 *
+     * @param string $searchString
      */
     public function searchCommand($searchString) {
         $location = $this->locationRepository->findOneByKeywordString($searchString);
 		$this->outputLocation($location);
     }
-	
+
     /**
      * Search locations by keywords
-	 * 
-     * @param string $searchString 
+	 *
+     * @param string $searchString
      */
     public function listCommand() {
         $locations = $this->locationRepository->findAll();
@@ -60,18 +61,18 @@ class LocationCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandContr
 			$this->outputLocation($location);
 		}
     }
-	
-	
+
+
 	protected function outputLocation($location) {
 		if ($location) {
 			$this->outputLine(sprintf(
 					'%-30s: %-50s',
 					$location->getName().' '.$location->getAddress()->getAddressLocality(),
 					implode(', ', $location->getKeywords()->toArray())
-			));		
+			));
 		}
 	}
-    
+
 }
 
 ?>

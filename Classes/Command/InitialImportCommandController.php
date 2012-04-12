@@ -22,19 +22,20 @@ namespace Org\Gucken\Events\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \Org\Gucken\Events\Domain\Model\Type as Type;
-use \Org\Gucken\Events\Domain\Model\Location as Location;
-use \Org\Gucken\Events\Domain\Model\PostalAddress as PostalAddress;
-use \Org\Gucken\Events\Domain\Model\GeoCoordinates as GeoCoordinates;
+use Org\Gucken\Events\Domain\Model\Type as Type;
+use Org\Gucken\Events\Domain\Model\Location as Location;
+use Org\Gucken\Events\Domain\Model\PostalAddress as PostalAddress;
+use Org\Gucken\Events\Domain\Model\GeoCoordinates as GeoCoordinates;
 
 use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\FLOW3\Cli\CommandController as CommandController;
 
 /**
  * Command controller for the Importer
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class InitialImportCommandController extends \TYPO3\FLOW3\Mvc\Controller\CommandController {
+class InitialImportCommandController extends CommandController {
 
 	/**
 	 * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
@@ -49,8 +50,8 @@ class InitialImportCommandController extends \TYPO3\FLOW3\Mvc\Controller\Command
 	protected $typeRepository;
 
 
-        
-        
+
+
 
 	/**
 	 * Import types
