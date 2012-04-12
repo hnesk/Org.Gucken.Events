@@ -33,13 +33,14 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  */
 class StaticController extends AbstractAdminController {
 
-	public function impressumAction() {
-
+	/**
+	 *
+	 * @param string $page
+	 */
+	public function indexAction($page) {
+		return $this->view->render($page);
 	}
 
-	public function kontaktAction() {
-
-	}
 }
 
 ?>

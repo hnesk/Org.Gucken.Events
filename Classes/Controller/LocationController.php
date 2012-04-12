@@ -30,40 +30,58 @@ use TYPO3\FLOW3\Annotations as FLOW3;
 use Lastfm\Type\Venue as Venue;
 
 /**
- * Standard controller for the Events package 
+ * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
 class LocationController extends AbstractAdminController {
-    	
+
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
      * @FLOW3\Inject
      */
     protected $locationRepository;
-	
+
     /**
      *
      * @var \Org\Gucken\Events\Domain\Model\ExternalLocationIdentifierFactory
      * @FLOW3\Inject
-     */	
+     */
 	protected $identifierFactory;
 
-    /**
-     * Index action
-     *
-     * @return void
-     */
-    public function indexAction() {
-        $locations = $this->locationRepository->findAll();
+	/**
+	 *
+	 * @var \Org\Gucken\Events\Domain\Model\BackendSession
+	 * @FLOW3\Inject
+	 */
+	protected $backendSession;
+
+
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest
+	 * @param string $orderColumn
+	 * @param string $orderDirection
+	 * @param boolean $reset
+	 */
+    public function indexAction(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null, $reset = false) {
+		if ($reset) {
+			$searchRequest = $this->backendSession->setLocationSearchRequest();
+		} else {
+			$searchRequest = $this->backendSession->updateLocationSearchRequest($searchRequest, $orderColumn, $orderDirection);
+		}
+
+		$locations = $this->locationRepository->findBySearchRequest($searchRequest);
+
         $this->view->assign('locations', $locations);
+		$this->view->assign('searchRequest', $searchRequest);
     }
-    
+
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Location $location
-     * @param string $type 
+     * @param string $type
 	 * @param int $position
      */
     public function lookupAction(Location $location,  $type, $position) {
@@ -80,11 +98,11 @@ class LocationController extends AbstractAdminController {
     public function addAction(Location $location = null) {
         $this->view->assign('location', $location);
     }
-	
+
 	/**
 	 * @param Org\Gucken\Events\Domain\Model\EventSource $source
 	 * @param Org\Gucken\Events\Domain\Model\EventFactoid $factoid
-	 * 
+	 *
 	 */
 	public function addFromSourceAction(EventSource $source, EventFactoid $factoid) {
 		$location = $source->convertLocation($factoid);
@@ -94,13 +112,14 @@ class LocationController extends AbstractAdminController {
 
     public function initializeSaveAction() {
 		$this->allowForProperty('location', 'address',self::CREATION);
-    }    
-	
+    }
+
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Location $location
      */
     public function saveAction(Location $location) {
+		$location->setReviewed(true);
         $this->locationRepository->add($location);
         $this->redirect('index');
     }
@@ -117,38 +136,39 @@ class LocationController extends AbstractAdminController {
         $this->view->assign('externalIdentifiers', $externalIdentifiers);
 		$this->view->assign('nextExternalIdentifiersCount', count($location->getExternalIdentifiers()) - 1);
     }
-    
-    
+
+
     public function initializeUpdateAction() {
 		$this->preprocessProperty('location', 'externalIdentifiers.*', '__type');
 		$this->preprocessProperty('location', 'keywords.*', 'keyword');
 		$this->allowForProperty('location', 'address', self::MODIFICATION);
 		$this->allowForProperty('location', 'externalIdentifiers.*', self::EVERYTHING);
-		$this->allowForProperty('location', 'keywords.*', self::CREATION);   
+		$this->allowForProperty('location', 'keywords.*', self::CREATION);
     }
-    
+
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location 
+     * @param Org\Gucken\Events\Domain\Model\Location $location
      */
     public function updateAction(Location $location) {
 		$location->removeEmptyRelations();
+		$location->setReviewed(true);
         $this->locationRepository->update($location);
         $this->redirect('index');
     }
-    
+
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location 
+     * @param Org\Gucken\Events\Domain\Model\Location $location
      */
     public function deleteAction(Location $location) {
         $this->locationRepository->remove($location);
 		$this->addNotice($location . ' wurde gelöscht');
         $this->redirect('index');
     }
-    
 
-    
+
+
 
 }
 

@@ -10,7 +10,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @package Org.Gucken.Events
  * @subpackage Domain
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * 
+ *
  * @FLOW3\Scope("singleton")
  */
 class LocationRepository extends \TYPO3\FLOW3\Persistence\Repository {
@@ -18,7 +18,7 @@ class LocationRepository extends \TYPO3\FLOW3\Persistence\Repository {
     protected $defaultOrderings = array(
         'name' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING
     );
-    
+
 
     /**
      *
@@ -32,28 +32,77 @@ class LocationRepository extends \TYPO3\FLOW3\Persistence\Repository {
         #    $query->equals('externalIdentifiers.scheme', $scheme),
             $query->equals('externalIdentifiers.id', (string)$id)
         ));
-                
+
         return $query->execute()->getFirst();
     }
-    
 
     /**
      *
-     * @param string $keyword 
+     * @param sring $address
+     * @return \Org\Gucken\Events\Domain\Model\Location
+     */
+    public function findOneByExactAdress($address) {
+		foreach ($this->findAll() as $location) {
+			if ($address === (string) $location) {
+				return $location;
+			}
+		}
+		return NULL;
+    }
+
+
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest
+	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 */
+	public function findBySearchRequest(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest) {
+		$query = $this->createQuery();
+		$query = $searchRequest->apply($query);
+		return $query->execute();
+	}
+
+
+    /**
+     *
+     * @param string $keyword
      * @return \Org\Gucken\Events\Domain\Model\Location
      */
     public function findOneByKeywordString($string) {
+		$sortedResults = $this->getResultHeapByKeywordString($string);
+		return $sortedResults->isEmpty() ? null : $sortedResults->top();
+    }
+
+
+    /**
+     *
+     * @param string $keyword
+     * @return \Org\Gucken\Events\Domain\Model\Location
+     */
+    public function findByKeywordString($string, $minScore = 1) {
+		$sortedResults = $this->getResultHeapByKeywordString($string);
+		return $sortedResults->getBest($minScore);
+    }
+
+    /**
+     *
+     * @param string $string
+     * @return ScoreHeap
+     */
+    protected function getResultHeapByKeywordString($string) {
 		$keywords = string($string)->asKeywords()->getNativeValue();
-		
-        $query = $this->createQuery();		
+
+        $query = $this->createQuery();
         $results = $query->matching($query->in('keywords.keyword', $keywords))->execute();
-		
+
 		$sortedResults = new ScoreHeap($keywords);
 		foreach ($results as $result) {
 			$sortedResults->insert($result);
 		}
-		return $sortedResults->isEmpty() ? null : $sortedResults->top();
+
+		return $sortedResults;
     }
+
 
 }
 

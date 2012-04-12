@@ -15,10 +15,12 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="model", type="string")
  */
 class EventFactoid {
 
-	
+
     /**
      * The title
      * @var string
@@ -66,7 +68,7 @@ class EventFactoid {
     /**
      * The description
      * @var string
-     * @ORM\Column(type="text") 
+     * @ORM\Column(type="text")
      */
     protected $description;
 
@@ -74,7 +76,7 @@ class EventFactoid {
     /**
      *
      * @var string
-     * @ORM\Column(type="text")          
+     * @ORM\Column(type="text", nullable = true)
      */
     protected $proof;
 
@@ -83,14 +85,20 @@ class EventFactoid {
      * @var \DateTime
      */
     protected $importDateTime;
-	
+
 	/**
 	 *
 	 * @var Org\Gucken\Events\Domain\Model\EventFactoidIdentity
      * @ORM\ManyToOne(inversedBy="factoids")
 	 */
 	protected $identity;
-	
+
+    /**
+     * The location details varying by event (Room, etc)
+     * @var string
+     */
+    protected $locationDetail;
+
 
 	/**
 	 *
@@ -98,11 +106,11 @@ class EventFactoid {
      * @FLOW3\Transient
 	 */
 	protected $source;
-	
-	
+
+
 	/**
 	 *
-	 * @param \Type\Record $record 
+	 * @param \Type\Record $record
 	 */
     public function __construct(\Type\Record $record = null) {
 		if ($record) {
@@ -117,6 +125,7 @@ class EventFactoid {
 					$description = $description->markdown()->normalizeSpaceKeepBreaks();
 				}
 			}
+			$this->setLocationDetail((string) $record->getNative('locationDetail'));
 			$this->setDescription((string) $description);
 			$this->setType($record->getNative('type'));
 			$this->setLocation($record->getNative('location'));
@@ -168,6 +177,7 @@ class EventFactoid {
         }
         $this->startDateTime = $startDateTime;
     }
+
 
     /**
      * Get the Event factoid's end date time
@@ -333,8 +343,8 @@ class EventFactoid {
      */
     public function getProof() {
         return $this->proof;
-    }	
-	
+    }
+
 	/**
 	 * @return \Type\Xml
 	 */
@@ -349,12 +359,12 @@ class EventFactoid {
 
 	/**
 	 *
-	 * @param EventFactoidIdentity $identity 
+	 * @param EventFactoidIdentity $identity
 	 */
 	public function setIdentity(EventFactoidIdentity $identity) {
 		$this->identity = $identity;
 	}
-	
+
 	/**
 	 *
 	 * @return EventFactoidIdentity
@@ -362,6 +372,23 @@ class EventFactoid {
 	public function getIdentity() {
 		return $this->identity;
 	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getLocationDetail() {
+		return $this->locationDetail;
+	}
+
+	/**
+	 *
+	 * @param string $locationDetail
+	 */
+	public function setLocationDetail($locationDetail) {
+		$this->locationDetail = $locationDetail;
+	}
+
 
 	/**
 	 *

@@ -27,93 +27,54 @@ use Doctrine\ORM\Mapping as ORM;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
- * An Event
+ * A user entered event proposal
  *
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @FLOW3\Scope("prototype")
  * @FLOW3\Entity
  */
-class Image {
+class EventProposal extends EventFactoid {
 
 	/**
-	 * The title
+	 *
 	 * @var string
+	 * @FLOW3\Validate(type="NotEmpty")
 	 */
-	protected $title;
+	protected $locationText;
 
-	/**
-	 * The oringal image
-	 * @var \TYPO3\FLOW3\Resource\Resource
-	 * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
-	 */
-	protected $original;
-
-	/**
-	 * a thumb
-	 * @var \TYPO3\FLOW3\Resource\Resource
-	 * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
-	 */
-	protected $thumb;
-
-
-	/**
-	 * Get the image title
-	 *
-	 * @return string The image title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
-
-	/**
-	 * Sets this images title
-	 *
-	 * @param string $title The image title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
 
 	/**
 	 *
-	 * @return \TYPO3\FLOW3\Resource\Resource
+	 * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
+	 * @FLOW3\Inject
 	 */
-	public function getOriginal() {
-		return $this->original;
-	}
+	protected $sourceRepository;
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Resource\Resource $original
 	 */
-	public function setOriginal(\TYPO3\FLOW3\Resource\Resource $original) {
-		$this->original = $original;
+	public function initializeObject() {
+		$this->setSource($this->sourceRepository->findOneByCode('manual'));
+
 	}
 
 	/**
-	 *
-	 * @return \TYPO3\FLOW3\Resource\Resource
-	 */
-	public function getThumb() {
-		return $this->thumb;
-	}
-
-	/**
-	 *
-	 * @param \TYPO3\FLOW3\Resource\Resource $thumb
-	 */
-	public function setThumb(\TYPO3\FLOW3\Resource\Resource $thumb) {
-		$this->thumb = $thumb;
-	}
-
-    /**
 	 *
 	 * @return string
 	 */
-	public function __toString() {
-		return $this->original->getFileName();
+	public function getLocationText() {
+		return $this->locationText;
 	}
+
+	/**
+	 *
+	 * @param string $locationText
+	 */
+	public function setLocationText($locationText) {
+		$this->locationText = $locationText;
+	}
+
+
+
 }
 
 ?>

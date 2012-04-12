@@ -52,12 +52,13 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
      */
     protected $url;
 
+
     /**
-     * The image
-     * @var \TYPO3\FLOW3\Resource\Resource
-     * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
+     * Is this location reviewed
+     * @var boolean
      */
-    protected $image;
+    protected $reviewed;
+
 
     /**
      * The address
@@ -78,13 +79,13 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
      * @ORM\OneToMany(mappedBy="location", cascade={"all"}, orphanRemoval=true)
      */
     protected $externalIdentifiers;
-    
+
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection<\Org\Gucken\Events\Domain\Model\LocationKeyword>
      * @ORM\OneToMany(mappedBy="location", cascade={"all"}, orphanRemoval=true)
      */
     protected $keywords;
-    
+
 
     /**
      * The fax number
@@ -103,6 +104,12 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
      * @var string
      */
     protected $email;
+
+	/**
+	 *
+	 * @var string
+	 */
+	protected $code;
 
     public function __construct() {
         $this->externalIdentifiers = new \Doctrine\Common\Collections\ArrayCollection();
@@ -164,25 +171,6 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
      */
     public function setUrl($url) {
         $this->url = $url;
-    }
-
-    /**
-     * Get the Location's image
-     *
-     * @return \TYPO3\FLOW3\Resource\Resource The Location's image
-     */
-    public function getImage() {
-        return $this->image;
-    }
-
-    /**
-     * Sets this Location's image
-     *
-     * @param \TYPO3\FLOW3\Resource\Resource $image The Location's image
-     * @return void
-     */
-    public function setImage($image) {
-        $this->image = $image;
     }
 
     /**
@@ -283,7 +271,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Setter for extenal identifiers
      *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier> $externalIdentifiers 
+     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier> $externalIdentifiers
      * @return void
      */
     public function setExternalIdentifiers(\Doctrine\Common\Collections\Collection $externalIdentifiers) {
@@ -315,16 +303,20 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Getter for location indentifiers
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier> 
+     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier>
      */
     public function getExternalIdentifiers() {
         return clone $this->externalIdentifiers;
     }
-	
+
+	/**
+	 *
+	 * @return int
+	 */
 	public function getExternalIdentifierCount() {
 		return count($this->externalIdentifiers);
 	}
-	
+
 
     /**
      * Setter for keywords
@@ -346,7 +338,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
         #$keyword->setLocation($this);
         $this->keywords->add($keyword);
     }
-	
+
     /**
      * Adds a keyword
      *
@@ -356,7 +348,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     public function addKeywordAsString($keyword) {
         $this->addKeyword(new LocationKeyword($keyword, $this, $this->getName()));
     }
-	
+
 
     /**
      * removes a keyword
@@ -371,12 +363,30 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Getter for location keywords
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\LocationKeyword> 
+     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\LocationKeyword>
      */
     public function getKeywords() {
         return clone $this->keywords;
     }
-	
+
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getCode() {
+		return $this->code;
+	}
+
+	/**
+	 *
+	 * @param string $code
+	 */
+	public function setCode($code) {
+		$this->code = $code;
+	}
+
+
     /**
      * Getter for location keywords as an plain array
      *
@@ -389,10 +399,10 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 		}
 		return $keywords;
     }
-	
+
 	/**
 	 *
-	 * @param array $keywords 
+	 * @param array $keywords
 	 * @return float
 	 */
 	public function score(array $keywordLookup) {
@@ -404,7 +414,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 		}
 		return $score;
 	}
-	
+
 
 	/**
 	 * Helper function to remove empty keywords
@@ -416,7 +426,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
             }
         }
 	}
-	
+
 	/**
 	 * Helper function to remove empty keywords
 	 */
@@ -427,15 +437,44 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
             }
         }
 	}
-	
+
+	/**
+	 *
+	 */
 	public function removeEmptyRelations() {
 		$this->removeEmptyExternalIdentifier();
 		$this->removeEmptyKeywords();
 	}
-	
-    
+
+
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function isReviewed() {
+		return $this->reviewed;
+	}
+
+
+	/**
+	 *
+	 * @return boolean
+	 */
+	public function getReviewed() {
+		return $this->reviewed;
+	}
+
+	/**
+	 *
+	 * @param boolean $reviewed
+	 */
+	public function setReviewed($reviewed) {
+		$this->reviewed = $reviewed;
+	}
+
+
     /**
-     * 
+     *
      * @return string
      */
     public function __toString() {

@@ -22,9 +22,10 @@
 
 -
   name: 'static'
-  uriPattern:    'meta/{@action}(.{@format})'
+  uriPattern:    'meta/{page}(.{@format})'
   defaults:
     '@controller': 'Static'
+    '@action': 'index'
     '@format': 'html'
 
 

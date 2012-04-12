@@ -65,7 +65,7 @@ class DateTimeConverter extends \TYPO3\FLOW3\Property\TypeConverter\DateTimeConv
 
 		$time = \DateTime::createFromFormat($timeFormat, $timeAsString);
 		if (!$time) {
-			throw new \TYPO3\FLOW3\Property\Exception\InvalidFormatException('Could not convert "'.$timeAsString.'" to a time specification in format "'.$timeFormat.'"', 1309383873);
+			throw new \TYPO3\FLOW3\Property\Exception\TypeConverterException('Could not convert "'.$timeAsString.'" to a time specification in format "'.$timeFormat.'"', 1309383873);
 		}
 		$date->setTime($time->format('H'), $time->format('i'), $time->format('s'));
 	}

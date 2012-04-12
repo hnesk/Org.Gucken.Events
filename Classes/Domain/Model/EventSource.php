@@ -46,63 +46,79 @@ class EventSource {
      */
     protected $parameters;
 
-    
+
     /**
      * The name of the class implementing the event fetching
      * @var string
      */
     protected $implementationClass;
-	
+
 	/**
 	 *
 	 * @var boolean
 	 */
 	protected $active;
 
-    /**
+	/**
+	 *
+	 * @var string
+	 */
+	protected $code;
+
+
+	/**
+	 *
+	 * @var string
+	 */
+	protected $style;
+
+
+	/**
      * @FLOW3\Inject
      * @var \TYPO3\FLOW3\Property\PropertyMapper
      */
     protected $propertyMapper;
-    
+
     /**
      * @FLOW3\Inject
      * @var Org\Gucken\Rad\Service\ReflectionService
      */
     protected $repositoryReflectionService;
-	
+
     /**
      * @FLOW3\Inject
      * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
      */
-    protected $importLogEntryRepository;	   
+    protected $importLogEntryRepository;
 
     /**
      * @var \TYPO3\FLOW3\Reflection\ReflectionService
      */
     protected $reflectionService;
-	
+
     /**
      * @var \TYPO3\FLOW3\Object\ObjectManager
      */
     protected $objectManager;
 
+
+
 	/**
-	 * @param \TYPO3\FLOW3\Reflection\ReflectionService $reflectionService 
+	 * @param \TYPO3\FLOW3\Reflection\ReflectionService $reflectionService
 	 */
 	public function injectReflectionService(\TYPO3\FLOW3\Reflection\ReflectionService $reflectionService) {
 		$this->reflectionService = $reflectionService;
-	}	
-	
+	}
+
 	/**
-	 * @param \TYPO3\FLOW3\Object\ObjectManagerInterface $objectManager 
+	 * @param \TYPO3\FLOW3\Object\ObjectManagerInterface $objectManager
 	 */
 	public function injectObjectManager(\TYPO3\FLOW3\Object\ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
 
-	
-	
+
+
 	/**
 	 * @var \TYPO3\FLOW3\Validation\ValidatorResolver
 	 */
@@ -116,7 +132,7 @@ class EventSource {
 	 */
 	public function injectValidatorResolver(\TYPO3\FLOW3\Validation\ValidatorResolver $validatorResolver) {
 		$this->validatorResolver = $validatorResolver;
-	}	
+	}
     /**
      * Get the source name
      *
@@ -159,16 +175,16 @@ class EventSource {
     public function getParameter($key) {
         return $this->parameters[$key];
     }
-	
-	
+
+
 	/**
 	 *
-	 * @param boolean $active 
+	 * @param boolean $active
 	 */
 	public function setActive($active) {
-		$this->active = (boolean)$active;		
+		$this->active = (boolean)$active;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -176,7 +192,7 @@ class EventSource {
 	public function isActive() {
 		return (boolean)$this->active;
 	}
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -193,7 +209,7 @@ class EventSource {
 		return $this->getCanConvertLocation() ? $this->getImplementation()->convertLocation($factoid) : null;
 	}
 
-	
+
 	/**
 	 *
 	 * @return boolean
@@ -201,8 +217,8 @@ class EventSource {
 	public function getCanConvertLink() {
 		return $this->getImplementationClass()  && method_exists($this->getImplementation(), 'convertLink');
 	}
-	
-	
+
+
 	/**
 	 * @param EventFactoidIdentity $factoidIdentity
 	 * @return EventLink
@@ -211,12 +227,12 @@ class EventSource {
 		$link = null;
 		/* @var $link EventLink */
 		if ($this->getCanConvertLink()) {
-			$link = $this->getImplementation()->convertLink($factoidIdentity);			
+			$link = $this->getImplementation()->convertLink($factoidIdentity);
 			$link->setFactoidIdentity($factoidIdentity);
 		}
 		return $link;
 	}
-	
+
 
     /**
      * @param string
@@ -225,7 +241,7 @@ class EventSource {
     public function setImplementationClass($implementationClass) {
         if (!\class_exists($implementationClass)) {
             throw new \TYPO3\FLOW3\AOP\Exception\InvalidArgumentException('Argument needs to be a class name, "' . $implementationClass . '" given', 1314480311);
-        }		
+        }
 		$implementation = $this->objectManager->get($implementationClass);
 		if (!$implementation instanceof \Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface) {
             throw new \TYPO3\FLOW3\AOP\Exception\InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, ' . $implementationClass . ' given', 1314480281);
@@ -240,6 +256,38 @@ class EventSource {
         return $this->implementationClass;
     }
 
+	/**
+	 *
+	 * @return string
+	 */
+	public function getCode() {
+		return $this->code;
+	}
+
+	/**
+	 *
+	 * @param string $code
+	 */
+	public function setCode($code) {
+		$this->code = $code;
+	}
+
+	/**
+	 *
+	 * @return string
+	 */
+	public function getStyle() {
+		return $this->style;
+	}
+
+	/**
+	 *
+	 * @param string $style
+	 */
+	public function setStyle($style) {
+		$this->style = $style;
+	}
+
 
     /**
      *
@@ -247,7 +295,7 @@ class EventSource {
      */
     public function getParameterProperties() {
         $properties = array();
-        foreach ($this->getParameterHints() as $key => $type) {                        
+        foreach ($this->getParameterHints() as $key => $type) {
             if (!empty($this->parameters[$key]) && !is_null($this->parameters[$key])) {
 				try {
 					$rawValue = $this->parameters[$key];
@@ -255,7 +303,7 @@ class EventSource {
 					if ($repository && $repository->findByIdentifier($rawValue)) {
 						$value = $this->propertyMapper->convert($rawValue, $type);
 					} else if (\TYPO3\FLOW3\Utility\TypeHandling::isLiteral($type)) {
-						$value = $rawValue;                    
+						$value = $rawValue;
 					} else {
 						$value = $this->propertyMapper->convert($rawValue, $type);
 					}
@@ -303,7 +351,7 @@ class EventSource {
             $eventFactoids[] = $eventFactoid;
         }
         return $eventFactoids;
-    }    
+    }
 
     /**
      *
@@ -317,10 +365,10 @@ class EventSource {
 			try {
 				\TYPO3\FLOW3\Reflection\ObjectAccess::setProperty($implementation, $key, $property);
 			} catch (\Exception $e) {}
-        }                 				
+        }
         return $implementation;
     }
-	
+
 	/**
 	 *
 	 * @return \TYPO3\FLOW3\Error\Result
@@ -328,25 +376,25 @@ class EventSource {
 	public function validate() {
 		$implementation = $this->getImplementation();
 		$validator = $this->validatorResolver->getBaseValidatorConjunction(get_class($implementation));
-		return $validator->validate($implementation);		
+		return $validator->validate($implementation);
 
 	}
 
 	/**
 	 *
-	 * @return ImportLogEntry 
+	 * @return ImportLogEntry
 	 */
-	public function getLastLogEntry() {		
+	public function getLastLogEntry() {
 		return $this->importLogEntryRepository->findLastBySource($this);
 	}
-	
+
 	/**
 	 *
 	 * @param \DateTime $start
 	 * @return array
 	 */
-	public function getLogEntries() {		
-		$start = new \DateTime('-2 weeks');			
+	public function getLogEntries() {
+		$start = new \DateTime('-2 weeks');
 		return $this->importLogEntryRepository->findBySourceAndDate($this, $start);
 	}
 

@@ -2,6 +2,7 @@
 # Security policy definition                                             #
 #                                                                        #
 # Settings for the Events package                                        #
+
 TYPO3:
   FLOW3:
     security:
@@ -17,7 +18,7 @@ Org:
   Gucken:
     Events:
       midnightHour: 5
-      view: default
+      currentView: default
       views:
         default:
           layoutRootPath: resource://Org.Gucken.Events/Private/Layouts

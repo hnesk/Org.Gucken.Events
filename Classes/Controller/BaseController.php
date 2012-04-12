@@ -261,7 +261,7 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	 */
 	public function initializeView(\TYPO3\FLOW3\MVC\View\ViewInterface $view) {
 		/* @var $view \TYPO3\Fluid\View\TemplateView */
-		$currentView = $this->settings['view'];
+		$currentView = $this->settings['currentView'];
 		$view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
 		$view->setTemplateRootPath($this->settings['views'][$currentView]['templateRootPath']);
 		$view->setPartialRootPath($this->settings['views'][$currentView]['partialRootPath']);
@@ -274,7 +274,20 @@ class BaseController extends \TYPO3\FLOW3\MVC\Controller\ActionController {
 	 * @return boolean
 	 */
 	public function isHtmlRequest() {
-		return in_array('text/html',$this->environment->getAcceptedFormats());
+		return in_array('html',$this->environment->getAcceptedFormats());
+	}
+
+	/**
+	 *
+	 * @param array $collection
+	 * @param string  $label
+	 * @return array
+	 */
+	public function addDummyEntry($collection, $label = '---') {
+		if ($collection instanceof \TYPO3\FLOW3\Persistence\QueryResultInterface) {
+			$collection = $collection->toArray();
+		}
+		return array('' => $label) + $collection;
 	}
 
 

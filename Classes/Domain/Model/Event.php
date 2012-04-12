@@ -38,18 +38,22 @@ class Event {
 	/**
 	 * The title
 	 * @var string
+	 * @FLOW3\Validate(type="NotEmpty")
 	 */
 	protected $title;
 
 	/**
 	 * The start date and time
 	 * @var \DateTime
+	 * @FLOW3\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
+	 * @FLOW3\Validate(type="NotEmpty")
 	 */
 	protected $startDateTime;
 
 	/**
 	 * The end date and time
 	 * @var \DateTime
+	 * @FLOW3\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
 	 */
 	protected $endDateTime;
 
@@ -58,13 +62,22 @@ class Event {
 	 * The location
 	 * @var \Org\Gucken\Events\Domain\Model\Location
 	 * @ORM\ManyToOne
+	 * @FLOW3\Validate(type="NotEmpty")
 	 */
 	protected $location;
+
+	/**
+	 * Event specific location details
+	 *
+	 * @var string
+	 */
+	protected $locationDetail;
 
 	/**
 	 * The type
 	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
 	 * @ORM\ManyToMany
+	 * @FLOW3\Validate(type="NotEmpty")
 	 */
 	protected $types;
 
@@ -101,8 +114,9 @@ class Event {
 
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\Image
+	 * @var \TYPO3\Media\Domain\Model\Image
 	 * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
+	 *
 	 */
 	protected $image;
 
@@ -364,7 +378,7 @@ class Event {
 
 	/**
 	 *
-	 * @return \Org\Gucken\Events\Domain\Model\Image
+	 * @return \TYPO3\Media\Domain\Model\Image
 	 */
 	public function getImage() {
 		return $this->image;
@@ -372,9 +386,9 @@ class Event {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Image $image
+	 * @param \TYPO3\Media\Domain\Model\Image $image
 	 */
-	public function setImage(\Org\Gucken\Events\Domain\Model\Image $image) {
+	public function setImage(\TYPO3\Media\Domain\Model\Image $image) {
 		$this->image = $image;
 	}
 
