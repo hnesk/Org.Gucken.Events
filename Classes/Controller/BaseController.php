@@ -100,7 +100,7 @@ class BaseController extends \TYPO3\FLOW3\Mvc\Controller\ActionController {
         }
         if ($redirectUri) {
 			if (strpos($redirectUri,'https://') === false && strpos($redirectUri,'http://') === false) {
-				$redirectUri = $this->request->getBaseUri() . $redirectUri;
+				$redirectUri = $this->request->getHttpRequest()->getBaseUri() . $redirectUri;
 			}
             $this->redirectToUri($redirectUri, $delay, $statusCode);
         } else {
