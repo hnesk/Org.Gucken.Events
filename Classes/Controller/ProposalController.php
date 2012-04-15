@@ -122,7 +122,7 @@ class ProposalController extends BaseController {
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity
 	 */
-	public function displayFinished(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
+	public function displayFinishedAction(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
 		$this->view->assign('identity', $factoidIdentity);
 	}
 

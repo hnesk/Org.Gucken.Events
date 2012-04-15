@@ -27,19 +27,19 @@ use Org\Gucken\Events\Domain\Model\TypeKeyword;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
- * Standard controller for the Events package 
+ * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
 class TypeController extends AbstractAdminController {
-    	
+
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
      * @FLOW3\Inject
      */
     protected $typeRepository;
-        
+
 
     /**
      * Index action
@@ -50,7 +50,7 @@ class TypeController extends AbstractAdminController {
         $types = $this->typeRepository->findAll();
         $this->view->assign('types', $types);
     }
-    
+
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Type $type
@@ -61,13 +61,12 @@ class TypeController extends AbstractAdminController {
         $this->view->assign('type', $type);
     }
 	/**
-	 * @return void 
+	 * @return void
 	 */
-    public function initializeSaveAction() {		
+    public function initializeSaveAction() {
 		$this->allowForProperty('type', 'keywords.*', self::CREATION);
 		$this->preprocessProperty('type', 'keywords.*', 'keyword');
     }
-    
 
     /**
      *
@@ -83,39 +82,39 @@ class TypeController extends AbstractAdminController {
      * @param Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function editAction($type) {		
+    public function editAction($type) {
         $this->view->assign('type', $type);
     }
 
-	
+
 	/**
-	 * @return void 
+	 * @return void
 	 */
-    public function initializeUpdateAction() {		
+    public function initializeUpdateAction() {
 		$this->allowForProperty('type', 'keywords.*', self::CREATION);
 		$this->preprocessProperty('type', 'keywords.*', 'keyword');
     }
-    
+
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Type $type 
+     * @param Org\Gucken\Events\Domain\Model\Type $type
      */
     public function updateAction(Type $type) {
         $this->typeRepository->update($type);
         $this->redirect('index');
     }
 
-	
+
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Type $type 
+     * @param Org\Gucken\Events\Domain\Model\Type $type
      */
     public function deleteAction(Type $type) {
         $this->typeRepository->remove($type);
 		$this->addNotice($type . ' wurde gelöscht');
         $this->redirect('index');
     }
-	
+
 }
 
 ?>
