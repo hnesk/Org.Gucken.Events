@@ -23,7 +23,7 @@ namespace Org\Gucken\Events\Controller;
 
 
 /**
- * Standard controller for the Events package 
+ * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
@@ -34,6 +34,8 @@ class AdminController extends AbstractAdminController {
 	 * @return void
 	 */
 	public function indexAction() {
+
+
 	}
 }
 ?>

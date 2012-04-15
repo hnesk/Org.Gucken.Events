@@ -58,6 +58,11 @@ class BaseController extends \TYPO3\FLOW3\Mvc\Controller\ActionController {
 	 */
 	protected $systemLogger;
 
+	/**
+	 * @FLOW3\Inject
+	 * @var \TYPO3\FLOW3\Utility\Environment
+	 */
+	protected $environment;
 
 	/**
 	 *
