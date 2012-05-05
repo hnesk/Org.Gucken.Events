@@ -40,6 +40,12 @@ class BackendSession {
 
 	/**
 	 *
+	 * @var \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 */
+	protected $factoidSearchRequest;
+
+	/**
+	 *
 	 * @var \Org\Gucken\Events\Domain\Model\LocationSearchRequest
 	 */
 	protected $locationSearchRequest;
@@ -101,6 +107,35 @@ class BackendSession {
 	public function updateLocationSearchRequest(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $locationSearchRequest = null, $orderColumn = 'title', $orderDirection = '') {
 		return $this->setLocationSearchRequest($this->getLocationSearchRequest()->update($locationSearchRequest, $orderColumn, $orderDirection));
 	}
+
+	/**
+	 *
+	 * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 */
+	public function getFactoidSearchRequest() {
+		return $this->factoidSearchRequest ?: new \Org\Gucken\Events\Domain\Model\EventSearchRequest();
+	}
+
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest
+	 */
+	public function setFactoidSearchRequest(\Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest = null) {
+		$this->factoidSearchRequest = $factoidSearchRequest ?: new \Org\Gucken\Events\Domain\Model\EventSearchRequest();
+		return $this->factoidSearchRequest;
+	}
+
+	/**
+	 *
+	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest
+	 * @param string $orderColumn
+	 * @param string $orderDirection
+	 * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 */
+	public function updateFactoidSearchRequest(\Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest = null, $orderColumn = '', $orderDirection = '') {
+		return $this->setFactoidSearchRequest($this->getFactoidSearchRequest()->update($factoidSearchRequest, $orderColumn, $orderDirection));
+	}
+
 
 }
 ?>

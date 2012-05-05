@@ -1,5 +1,21 @@
 <?php
 require_once 'init.php';
+require_once '../../SG-iCalendar/SG_iCal.php';
+
+$cal = url('https://www.google.com/calendar/ical/webmistress%40fraze.de/public/basic.ics')->load()->getContent();
+/*
+$icsFile = BASE_PATH.'/../Tests/fixtures/Calendar/fraze.ics';
+$icsContent = file_get_contents($icsFile);
+
+$cal = \Type\Calendar\Factory::fromString($icsContent);
+*/
+foreach ($cal->getEvents() as $event) {
+	echo $event.PHP_EOL;
+}
+
+die();
+
+
 
 
 #print_r(App::instance()->getConfig());
@@ -61,7 +77,7 @@ print_r($source->getEvents()->getNativeValue());
 
 #$zaz = new Domain\Extractor\Event\PopSecret();
 #print_r($zaz->getEvents()->getNativeValue());
-        
+
 #print_r($bielefeldAtLastFm->getEvents());
 
 #$bielefeldAtFacebook = new Domain\Extractor\Event\Facebook();

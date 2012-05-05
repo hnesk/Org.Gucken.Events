@@ -90,7 +90,7 @@ class Xml extends \Type\Base implements \ArrayAccess {
     }
 
     /**
-     * 
+     *
      * @return array<Namespace-Prefix => Namespace>
      */
     public function getDocumentNamespaces($recursive = false) {
@@ -112,7 +112,7 @@ class Xml extends \Type\Base implements \ArrayAccess {
     }
 
     /**
-     * 
+     *
      * @return string Default Namespace
      */
     public function getDefaultNamespace() {
@@ -146,8 +146,8 @@ class Xml extends \Type\Base implements \ArrayAccess {
         $stylesheet = Xml\Factory::fromXmlFile(\BASE_PATH . 'transformations/text.xsl');
         return $this->transformToString($stylesheet, $parameters);
     }
-	
-	
+
+
     /**
      *
      * @param Xml $stylesheet
@@ -217,10 +217,10 @@ class Xml extends \Type\Base implements \ArrayAccess {
             return $this->element->ownerDocument;
         }
     }
-	
+
 	/**
 	 *
-	 * @return \Type\Xml 
+	 * @return \Type\Xml
 	 */
 	public function getDocument() {
 		return new Xml($this->getDomDocument(), $this->defaultNamespacePrefix, $this->getBaseUri());
@@ -240,7 +240,7 @@ class Xml extends \Type\Base implements \ArrayAccess {
 
     /**
      * decapsulate a <[CDATA[]> encapsulated piece of html
-     * 
+     *
      * @return Xml
      */
     public function decapsulateCdataAsHtml() {
@@ -249,7 +249,7 @@ class Xml extends \Type\Base implements \ArrayAccess {
 
     /**
      * decapsulate a <[CDATA[]> encapsulated piece of xml
-     * 
+     *
      * @return Xml
      */
     public function decapsulateCdataAsXml() {
@@ -258,7 +258,7 @@ class Xml extends \Type\Base implements \ArrayAccess {
 
     /**
      * Returns this element as an XML string
-     * 
+     *
      * @param array $options
      * @return string
      */
@@ -268,14 +268,14 @@ class Xml extends \Type\Base implements \ArrayAccess {
 
     /**
      * Returns this element as an XML string
-     * 
+     *
      * @param array $options
      * @return string
      */
     public function asPrettyXmlString($options = null) {
         return \Util\String::prettyPrintXml($this->asXmlString($options));
     }
-	
+
 	public function debug($return = false) {
 		$output = '<pre>'.htmlspecialchars($this->asPrettyXmlString()).'</pre>';
 		if ($return) {
@@ -290,7 +290,7 @@ class Xml extends \Type\Base implements \ArrayAccess {
 
      * @autocomplete
      * @param int $options
-     * @return String
+     * @return \Type\String
      */
     public function asString($options = null) {
         return new String($this->asXmlString($options));

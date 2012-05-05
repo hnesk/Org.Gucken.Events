@@ -18,28 +18,28 @@ class AbstractEventSource  {
 	 * @Events\Configurable
      * @var \Type\Url
      */
-    protected $url;	
-	
-	
+    protected $url;
+
+
     /**
      * @FLOW3\Inject
      * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
      */
-    protected $locationRepository;	
+    protected $locationRepository;
 
-	
+
     /**
      * @FLOW3\Inject
      * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
      */
-    protected $typeRepository;	
+    protected $typeRepository;
 
     /**
      *
      * @return \Type\Url
      */
     public function getUrl() {
-        return $this->url;
+        return url($this->url);
     }
 
     /**
@@ -48,7 +48,7 @@ class AbstractEventSource  {
     public function setUrl($url) {
         $this->url = new Url($url);
     }
-		
+
 	/**
 	 *
 	 * @return \Org\Gucken\Events\Domain\Repository\TypeRepository
@@ -56,7 +56,7 @@ class AbstractEventSource  {
 	public function getTypeRepository() {
 		return $this->typeRepository;
 	}
-	
+
 	/**
 	 *
 	 * @return \Org\Gucken\Events\Domain\Repository\TypeRepository
@@ -64,7 +64,7 @@ class AbstractEventSource  {
 	public function getLocationRepository() {
 		return $this->locationRepository;
 	}
-	
+
 	/**
 	 *
 	 * @param Model\EventFactoidIdentity $factoidIdentity
@@ -76,9 +76,9 @@ class AbstractEventSource  {
 		$link->setUrl($factoidIdentity->getFactoid()->getUrl());
 		return $link;
 	}
-	
-	
-	
+
+
+
 }
 
 ?>

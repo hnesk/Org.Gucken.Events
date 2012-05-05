@@ -1,0 +1,1843 @@
+BEGIN:VCALENDAR
+PRODID:-//Google Inc//Google Calendar 70.9054//EN
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Termine Frauenkulturzentrum
+X-WR-TIMEZONE:Europe/Berlin
+X-WR-CALDESC:Hier könnt ihr diverse Termine des Frauenkulturzentrums Bielef
+ eld einsehen!
+BEGIN:VTIMEZONE
+TZID:Europe/Berlin
+X-LIC-LOCATION:Europe/Berlin
+BEGIN:DAYLIGHT
+TZOFFSETFROM:+0100
+TZOFFSETTO:+0200
+TZNAME:CEST
+DTSTART:19700329T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=-1SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:+0200
+TZOFFSETTO:+0100
+TZNAME:CET
+DTSTART:19701025T030000
+RRULE:FREQ=YEARLY;BYMONTH=10;BYDAY=-1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+DTSTART:20120509T150000Z
+DTEND:20120523T160000Z
+DTSTAMP:20120418T213912Z
+UID:5i14m5s1le5pntdgbqtah2cgvc@google.com
+CLASS:PUBLIC
+CREATED:20120417T181159Z
+DESCRIPTION:Die Wanderausstellung "Die Hälfte des Himmels\, 99 Frauen & Du"
+  zum Thema Frauen und Gewalt gastiert in Bielefeld!\nVeranstalter sind die 
+ Bielefelder Mädchen- und Frauenprojekte in Kooperation mit der VHS Bielefel
+ d & der Gleichstellungsstelle der Stadt Bielefeld.\nDie Ausstellungseröffnu
+ ng findet am Mittwoch\, den 9. Mai 2012 um 17 Uhr (Einlass ab 15 Uhr) im Hi
+ storischen Saal der Ravensberger Spinnerei statt.\n\nDie Ausstellung läuft 
+ vom 09.-23.Mai 2012\, die Öffnungszeiten sind täglich 10-18 Uhr\, der Eintr
+ itt ist frei.\n\nMehr Informationen auf der <a href="http://web.me.com/hael
+ fte.des.himmels/" target="_blank">Website der Ausstellung</a>
+LAST-MODIFIED:20120417T181248Z
+LOCATION:Historischen Saal der Ravensberger Spinnerei\, Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ausstellung "Die Hälfte des Himmels\, 99 Frauen & Du" (RaSpi)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120430T200000Z
+DTEND:20120430T213000Z
+DTSTAMP:20120418T213912Z
+UID:n857u3a0domfslp2qrlhc0s8d8@google.com
+CREATED:20120329T205935Z
+DESCRIPTION:Der Partyklassiker im Frauenkulturzentrum!\nLasst uns zusammen 
+ zur guter Musik und leckeren Getränken in den Mai tanzen!\nStart: 22.00 Uhr
+ \nOpen end!
+LAST-MODIFIED:20120329T205935Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Walpurgisnacht-Party / Tanz in den Mai
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120427T170000Z
+DTEND:20120427T183000Z
+DTSTAMP:20120418T213912Z
+UID:218nfii1rkabjco35fddmtqfr4@google.com
+CREATED:20120328T124400Z
+DESCRIPTION:Wichtig: Da die Zukunft des FraZes akut bedroht ist\, möchten w
+ ir alle Mitfrauen bitten\, heute zur Mitfrauenversammlung zu kommen. Es müs
+ sen wichtige Sachen besprochen werden! Bitte weitersagen! Dringend!
+LAST-MODIFIED:20120328T124400Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Mitfrauenversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120411T170000Z
+DTEND:20120411T183000Z
+DTSTAMP:20120418T213912Z
+UID:utqj142p8g63ttgr00cn2hklfo@google.com
+CREATED:20120306T091701Z
+DESCRIPTION:Offen für alle Frauen\, die sich für's FraZe interessieren und 
+ mitreden möchten. Hier habt ihr u.a. die Möglichkeit\, das Frauenkulturzent
+ rum und das Programm aktiv mitzugestalten und eure eigenen Ideen einzubring
+ en. \n\nWichtig: Da die Zukunft des FraZes akut bedroht ist\, möchten wir a
+ lle Interessentinnen bitten\, heute zur Hausversammlung zu kommen. Es werde
+ n dringend Helferinnen gesucht und es müssen wichtige Sachen besprochen wer
+ den! Bitte weitersagen! Dringend!
+LAST-MODIFIED:20120328T123625Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung (Achtung dringend!)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120414T200000Z
+DTEND:20120414T213000Z
+DTSTAMP:20120418T213912Z
+UID:k19gamojnpinkslkjmqkco231o@google.com
+CREATED:20120306T091019Z
+DESCRIPTION:Untergrund Party\nIn Erinnerung an die ehemalige Womens Club Di
+ sco feiern wir mit euch untergrund.\nMit wechselnden DJanes und Getränkespe
+ cials.\n\nHeute an den Turntables: The Ninette & Cord Sofa (Queers & Guitar
+ )\n\nStart: 22.00 Uhr\nOpen end!
+LAST-MODIFIED:20120321T100415Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Untergrund Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120321T190000Z
+DTEND:20120321T223000Z
+DTSTAMP:20120418T213912Z
+UID:ffhqgp7rnvm58iqh62ngjdjbk0@google.com
+CREATED:20120212T232717Z
+DESCRIPTION:Kneipenspecial "Bärlauchcremesuppe"\nHeute gibt es wieder Lecke
+ reien aus der FraZe-Küche. \nDiesmal: "Bärlauchcremesuppe"!\nneu: Ü40 Stamm
+ tisch\nAlle interessierten Frauen ab 40 sind wieder recht herzlich eingelad
+ en\, hier bekannte und neue Gleichgesinnte zu finden und über das Leben und
+  andere Widrigkeiten zu sinnieren...\nNatürlich kommen Frauen allen Alters 
+ ins Fraze\, aber hier seien auch ganz besonders auch die älteren angesproch
+ en! 
+LAST-MODIFIED:20120319T080229Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kneipenspecial "Bärlauchcremesuppe"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120215T190000Z
+DTEND:20120215T223000Z
+DTSTAMP:20120418T213912Z
+UID:8sdjv7ac2tn8rcq5qcva6ci4t0@google.com
+CLASS:PUBLIC
+CREATED:20120212T230526Z
+DESCRIPTION:Heute gibt es wieder Leckereien aus der FraZe-Küche. \nDiesmal:
+  "Ratatouille"!\nneu: Ü40 Stammtisch\nAlle interessierten Frauen ab 40 sind
+  wieder recht herzlich eingeladen\, hier bekannte und neue Gleichgesinnte z
+ u finden und über das Leben und andere Widrigkeiten zu sinnieren...\nNatürl
+ ich kommen Frauen allen Alters ins Fraze\, aber hier seien auch ganz besond
+ ers auch die älteren angesprochen! 
+LAST-MODIFIED:20120306T091333Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Kneipenspecial "Ratatouille"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120418T180000Z
+DTEND:20120418T213000Z
+DTSTAMP:20120418T213912Z
+UID:jar96fb1qtuebuheo6ohfdvbb0@google.com
+CREATED:20120306T091304Z
+DESCRIPTION:Kneipenspecial "gefüllte Teigtaschen"\nHeute gibt es wieder Lec
+ kereien aus der FraZe-Küche. \nDiesmal: "gefüllte Teigtaschen"!\nneu: Ü40 S
+ tammtisch\nAlle interessierten Frauen ab 40 sind wieder recht herzlich eing
+ eladen\, hier bekannte und neue Gleichgesinnte zu finden und über das Leben
+  und andere Widrigkeiten zu sinnieren...\nNatürlich kommen Frauen allen Alt
+ ers ins Fraze\, aber hier seien auch ganz besonders auch die älteren angesp
+ rochen! 
+LAST-MODIFIED:20120306T091304Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kneipenspecial "gefüllte Teigtaschen"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120422T130000Z
+DTEND:20120422T143000Z
+DTSTAMP:20120418T213912Z
+UID:ds7b0jkb4cth41eo3c9etqpn30@google.com
+CREATED:20120306T091041Z
+DESCRIPTION:Spielenachmittag bei Kaffee und Keksen\n\nMitspielerinnen gesuc
+ ht! Heute wollen wir die Spieleecke im FraZe durchstöbern und Kaffee und Ke
+ ksen nach Herzenslust unsere und eure Regelkenntnisse zu Themen wie Doppelk
+ opf\, Mensch-Ärgere-Dich-nicht\, Backgammon o.ä. auffrischen. Wer schon imm
+ er Mitspielerinnen gesucht hat\, um ein Spiel aus dem eigenen Schrank zu pr
+ obieren\, ist genauso eingeladen wie die erfahrene Backgammon-Spielerin! 
+LAST-MODIFIED:20120306T091041Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spielenachmittag
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120513T130000Z
+DTEND:20120513T143000Z
+DTSTAMP:20120418T213912Z
+UID:2k3etfsgpsplro38qq894qgdkc@google.com
+CREATED:20120306T090841Z
+DESCRIPTION:Spielenachmittag bei Kaffee und Keksen\n\nMitspielerinnen gesuc
+ ht! Heute wollen wir die Spieleecke im FraZe durchstöbern und Kaffee und Ke
+ ksen nach Herzenslust unsere und eure Regelkenntnisse zu Themen wie Doppelk
+ opf\, Mensch-Ärgere-Dich-nicht\, Backgammon o.ä. auffrischen. Wer schon imm
+ er Mitspielerinnen gesucht hat\, um ein Spiel aus dem eigenen Schrank zu pr
+ obieren\, ist genauso eingeladen wie die erfahrene Backgammon-Spielerin! 
+LAST-MODIFIED:20120306T090841Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spielenachmittag
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120512T200000Z
+DTEND:20120512T213000Z
+DTSTAMP:20120418T213912Z
+UID:eb1g4eavaeb8rd473jleknkr1k@google.com
+CREATED:20120306T090823Z
+DESCRIPTION:Untergrund Party\nIn Erinnerung an die ehemalige Womens Club Di
+ sco feiern wir mit euch untergrund.\nMit wechselnden DJanes und Getränkespe
+ cials.\n\nHeute an den Turntables: Esther (Rock\, "Am Zwinger-Musik") \n\nS
+ tart: 22.00 Uhr\nOpen end!
+LAST-MODIFIED:20120306T090823Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Untergrund Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120511T180000Z
+DTEND:20120511T200000Z
+DTSTAMP:20120418T213912Z
+UID:64urrngpu67hkcqguadot6f7ig@google.com
+CREATED:20120306T090801Z
+DESCRIPTION:Fraze-Kino: Wunschfilm"  \n\n
+LAST-MODIFIED:20120306T090801Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120516T180000Z
+DTEND:20120516T213000Z
+DTSTAMP:20120418T213912Z
+UID:j92nq711af7v2u1gbbjej3qfrc@google.com
+CREATED:20120306T090715Z
+DESCRIPTION:Kneipenspecial "veganes Chili"\nHeute gibt es wieder Leckereien
+  aus der FraZe-Küche. \nDiesmal: "Falafel mit Dip"!\nneu: Ü40 Stammtisch\nA
+ lle interessierten Frauen ab 40 sind wieder recht herzlich eingeladen\, hie
+ r bekannte und neue Gleichgesinnte zu finden und über das Leben und andere 
+ Widrigkeiten zu sinnieren...\nNatürlich kommen Frauen allen Alters ins Fraz
+ e\, aber hier seien auch ganz besonders auch die älteren angesprochen! 
+LAST-MODIFIED:20120306T090715Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kneipenspecial "Falafel m.Dip"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120409T090000Z
+DTEND:20120409T120000Z
+DTSTAMP:20120418T213912Z
+UID:750b74vc5e2n9gi9hvllhrfv1g@google.com
+CLASS:PUBLIC
+CREATED:20120218T093344Z
+DESCRIPTION:Alternativ oder zusätzlich zum familiären Osterfest gibt es heu
+ te Leckereien in gemütlicher Runde. Frühstücken\, Brunchen\, Kaffeetrinken\
+ , Plaudern in netter Atmospäre. Seid dabei!
+LAST-MODIFIED:20120218T093406Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Osterbrunch
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120410T170000Z
+DTEND:20120410T180000Z
+DTSTAMP:20120418T213912Z
+UID:6hpsanr7v1n2vajk54e8lft72s@google.com
+CREATED:20120214T151227Z
+DESCRIPTION:Meditation ist eine in vielen Religionen und Kulturen ausgeübte
+  spirituelle Praxis.\nDurch vielfältige Übungen soll sich der Geist beruhig
+ en und sammeln.\nEin Einstieg für interessierte Frauen ist jederzeit möglic
+ h!\nWer möchte\, kann sich eine Isomatte und dicke Socken mitbringen\, anso
+ nsten werden die normalen Stühle zum Sitzen genutzt.
+LAST-MODIFIED:20120214T151227Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Meditation
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120626T170000Z
+DTEND:20120626T180000Z
+DTSTAMP:20120418T213912Z
+UID:34sau0bipv2f76jacbock2b9sg@google.com
+CREATED:20120214T150020Z
+DESCRIPTION:Meditation ist eine in vielen Religionen und Kulturen ausgeübte
+  spirituelle Praxis.\nDurch vielfältige Übungen soll sich der Geist beruhig
+ en und sammeln.\nEin Einstieg für interessierte Frauen ist jederzeit möglic
+ h!\nWer möchte\, kann sich eine Isomatte und dicke Socken mitbringen\, anso
+ nsten werden die normalen Stühle zum Sitzen genutzt.
+LAST-MODIFIED:20120214T150020Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Meditation
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120515T170000Z
+DTEND:20120515T180000Z
+DTSTAMP:20120418T213912Z
+UID:71n7mb7uhvcd1evv77s8md3e1o@google.com
+CREATED:20120214T150004Z
+DESCRIPTION:Meditation ist eine in vielen Religionen und Kulturen ausgeübte
+  spirituelle Praxis.\nDurch vielfältige Übungen soll sich der Geist beruhig
+ en und sammeln.\nEin Einstieg für interessierte Frauen ist jederzeit möglic
+ h!\nWer möchte\, kann sich eine Isomatte und dicke Socken mitbringen\, anso
+ nsten werden die normalen Stühle zum Sitzen genutzt.
+LAST-MODIFIED:20120214T150004Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Meditation
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120207T180000Z
+DTEND:20120207T190000Z
+DTSTAMP:20120418T213912Z
+UID:s8p7131oovdpcdqne8ipcrp684@google.com
+CLASS:PUBLIC
+CREATED:20120214T145942Z
+DESCRIPTION:Meditation ist eine in vielen Religionen und Kulturen ausgeübte
+  spirituelle Praxis.\nDurch vielfältige Übungen soll sich der Geist beruhig
+ en und sammeln.\nEin Einstieg für interessierte Frauen ist jederzeit möglic
+ h!\nWer möchte\, kann sich eine Isomatte und dicke Socken mitbringen\, anso
+ nsten werden die normalen Stühle zum Sitzen genutzt.
+LAST-MODIFIED:20120214T145942Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Meditation
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111204T140000Z
+DTEND:20111204T153000Z
+DTSTAMP:20120418T213912Z
+UID:bu4kpepgfu3sr1a2tph1ufklmk@google.com
+CREATED:20120212T234823Z
+DESCRIPTION:Literaturcafe: "Burt Lancaster hat nie mit mir getanzt"\nDas Fr
+ auenkulturzentrum e.V. freut sich im Rahmen seines Literaturcafes die Biele
+ felder Autorin Ellen La Camp begrüßen zu dürfen. Sie wird u.a. aus ihrer Au
+ tobiografie „Burt Lancaster hat nie mit mir getanzt“ lesen!\n\nEintritt:2\,
+ 50€ 
+LAST-MODIFIED:20120212T234823Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spielenachmittag
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111231T210000Z
+DTEND:20111231T223000Z
+DTSTAMP:20120418T213912Z
+UID:6v3d612k66dsv44q7hut0gu1h0@google.com
+CLASS:PUBLIC
+CREATED:20120212T234654Z
+DESCRIPTION:Silvester-Party\nAlle Jahre wieder! Wir stoßen mit euch an und 
+ tanzen ins neue Jahr! 
+LAST-MODIFIED:20120212T234654Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Silvester-Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111221T190000Z
+DTEND:20111221T223000Z
+DTSTAMP:20120418T213912Z
+UID:t0ale2nhpiogn92ted0imteehc@google.com
+CREATED:20120212T234605Z
+DESCRIPTION:Kneipenspecial "X-Mas"\nHeute gibt es wieder Leckereien aus der
+  FraZe-Küche. Waffeln\, Lumumba\, Glühwein... wärmt euch bei uns auf!\nneu:
+  Ü40 Stammtisch\nAlle interessierten Frauen ab 40 sind wieder recht herzlic
+ h eingeladen\, hier bekannte und neue Gleichgesinnte zu finden und über das
+  Leben und andere Widrigkeiten zu sinnieren...\nNatürlich kommen Frauen all
+ en Alters ins Fraze\, aber hier seien auch ganz besonders auch die älteren 
+ angesprochen! 
+LAST-MODIFIED:20120212T234605Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ü40 Stammtisch
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111221T190000Z
+DTEND:20111221T223000Z
+DTSTAMP:20120418T213912Z
+UID:66a337ri785pi3dct6cq86ec5c@google.com
+CREATED:20120212T234458Z
+DESCRIPTION:Kneipenspecial "X-Mas"\nHeute gibt es wieder Leckereien aus der
+  FraZe-Küche. Waffeln\, Lumumba\, Glühwein... wärmt euch bei uns auf! \nneu
+ : Ü40 Stammtisch\nAlle interessierten Frauen ab 40 sind wieder recht herzli
+ ch eingeladen\, hier bekannte und neue Gleichgesinnte zu finden und über da
+ s Leben und andere Widrigkeiten zu sinnieren...\nNatürlich kommen Frauen al
+ len Alters ins Fraze\, aber hier seien auch ganz besonders auch die älteren
+  angesprochen! 
+LAST-MODIFIED:20120212T234458Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kneipenspecial "X-Mas"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111218T140000Z
+DTEND:20111218T153000Z
+DTSTAMP:20120418T213912Z
+UID:20bk2ogtmdr4uhvkh59jfsc2bg@google.com
+CREATED:20120212T234355Z
+DESCRIPTION:Spielenachmittag bei Kaffee und Keksen\n\nMitspielerinnen gesuc
+ ht! Heute wollen wir die Spieleecke im FraZe durchstöbern und Kaffee und Ke
+ ksen nach Herzenslust unsere und eure Regelkenntnisse zu Themen wie Doppelk
+ opf\, Mensch-Ärgere-Dich-nicht\, Backgammon o.ä. auffrischen. Wer schon imm
+ er Mitspielerinnen gesucht hat\, um ein Spiel aus dem eigenen Schrank zu pr
+ obieren\, ist genauso eingeladen wie die erfahrene Backgammon-Spielerin! 
+LAST-MODIFIED:20120212T234355Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spielenachmittag
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111214T190000Z
+DTEND:20111214T203000Z
+DTSTAMP:20120418T213912Z
+UID:1o48svggp0173g6isvqakph51s@google.com
+CREATED:20120212T234318Z
+DESCRIPTION:Offenes Kulturgruppen-Treffen\nFür alle\, die das Kulturleben i
+ m FraZe mitgestalten möchten. Ausstellungen\, Lesungen oder Partys – hier p
+ lanen & verwirklichen wir neue Kulturprojekte. Ein Einstieg ist jederzeit m
+ öglich! Kommt vorbei! 
+LAST-MODIFIED:20120212T234318Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kulturgruppen-Treffen
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111210T210000Z
+DTEND:20111210T223000Z
+DTSTAMP:20120418T213912Z
+UID:rppm2jticm3jrbq6l0mtphhji0@google.com
+CREATED:20120212T234258Z
+DESCRIPTION:Untergrund Party\nIn Erinnerung an die ehemalige Womens Club Di
+ sco feiern wir mit euch untergrund.\nMit wechselnden DJanes und Getränkespe
+ cials.\n\nHeute an den Turntables: Alkje&Care-Lynn\nAlternative\, Rock\, Po
+ p\, Electro-Pop\, Electro-Swing\, 70´Funk&Soul\, 80´Pop \n\nStart: 22.00 Uh
+ r\nOpen end!
+LAST-MODIFIED:20120212T234258Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Untergrund Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111209T190000Z
+DTEND:20111209T210000Z
+DTSTAMP:20120418T213912Z
+UID:pt8ptu218n3hu5modsv8v0j6bg@google.com
+CREATED:20120212T234156Z
+DESCRIPTION:Fraze-Kino: Wunschfilm"\nWelchen Film möchtet ihr sehen?       
+ \n"Jenseits der Stille" oder "Polarexpress"  \n\n
+LAST-MODIFIED:20120212T234156Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20111207T190000Z
+DTEND:20111207T203000Z
+DTSTAMP:20120418T213912Z
+UID:t4klni3rkq04ltajdaqjffj0dc@google.com
+CREATED:20120212T234118Z
+DESCRIPTION:Offen für alle Frauen\, die sich für's FraZe interessieren und 
+ mitreden möchten. Hier habt ihr u.a. die Möglichkeit\, das monatliche FraZe
+ -Programm aktiv mitzugestalten und eure eigenen Ideen einzubringen. Kommt e
+ infach vorbei!\nAchtung: wieder Dienstags! 
+LAST-MODIFIED:20120212T234118Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120120T190000Z
+DTEND:20120120T210000Z
+DTSTAMP:20120418T213912Z
+UID:s7sq7kf4iql76nj0quifiospqs@google.com
+CREATED:20120212T233957Z
+DESCRIPTION:Fraze-Kino: Wunschfilm"\nWelchen Film möchtet ihr sehen?  \n\n"
+ The kids are allright" oder "Kalender Girls"\n\nAchtung:\nDas FraZe Kino mu
+ ss heute leider ausfallen\, da unser Beamer aktuell kaputt ist. Wir hoffen\
+ , dass er schnell aus der Reparatur zurück ist. \n\n
+LAST-MODIFIED:20120212T233957Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120118T190000Z
+DTEND:20120118T223000Z
+DTSTAMP:20120418T213912Z
+UID:n2l9fielfklc6g7fu28t7iqiks@google.com
+CREATED:20120212T233804Z
+DESCRIPTION:Kneipenspecial "Eintopf" (Linsensuppe)\nHeute gibt es wieder Le
+ ckereien aus der FraZe-Küche. \nDiesmal: Linsensuppe!\nneu: Ü40 Stammtisch\
+ nAlle interessierten Frauen ab 40 sind wieder recht herzlich eingeladen\, h
+ ier bekannte und neue Gleichgesinnte zu finden und über das Leben und ander
+ e Widrigkeiten zu sinnieren...\nNatürlich kommen Frauen allen Alters ins Fr
+ aze\, aber hier seien auch ganz besonders auch die älteren angesprochen! 
+LAST-MODIFIED:20120212T233804Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ü40 Stammtisch
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120118T190000Z
+DTEND:20120118T223000Z
+DTSTAMP:20120418T213912Z
+UID:9puljqu8ajgrp7m9i3797hmudk@google.com
+CREATED:20120212T233720Z
+DESCRIPTION:Kneipenspecial "Eintopf" (Linsensuppe)\nHeute gibt es wieder Le
+ ckereien aus der FraZe-Küche. Diesmal: "veganes Chili"!\nneu: Ü40 Stammtisc
+ h\nAlle interessierten Frauen ab 40 sind wieder recht herzlich eingeladen\,
+  hier bekannte und neue Gleichgesinnte zu finden und über das Leben und and
+ ere Widrigkeiten zu sinnieren...\nNatürlich kommen Frauen allen Alters ins 
+ Fraze\, aber hier seien auch ganz besonders auch die älteren angesprochen! 
+LAST-MODIFIED:20120212T233720Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kneipenspecial "Eintopf"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120115T140000Z
+DTEND:20120115T153000Z
+DTSTAMP:20120418T213912Z
+UID:h0nkqn99i9pcnmc355c2u463ic@google.com
+CLASS:PUBLIC
+CREATED:20120212T233626Z
+DESCRIPTION:Spielenachmittag bei Kaffee und Keksen\n\nMitspielerinnen gesuc
+ ht! Heute wollen wir die Spieleecke im FraZe durchstöbern und Kaffee und Ke
+ ksen nach Herzenslust unsere und eure Regelkenntnisse zu Themen wie Doppelk
+ opf\, Mensch-Ärgere-Dich-nicht\, Backgammon o.ä. auffrischen. Wer schon imm
+ er Mitspielerinnen gesucht hat\, um ein Spiel aus dem eigenen Schrank zu pr
+ obieren\, ist genauso eingeladen wie die erfahrene Backgammon-Spielerin! 
+LAST-MODIFIED:20120212T233636Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spielenachmittag
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120114T210000Z
+DTEND:20120114T223000Z
+DTSTAMP:20120418T213912Z
+UID:3rb6tgjlm96e3jn73fjn5cfsdg@google.com
+CREATED:20120212T233556Z
+DESCRIPTION:Untergrund Party\nIn Erinnerung an die ehemalige Womens Club Di
+ sco feiern wir mit euch untergrund.\nMit wechselnden DJanes und Getränkespe
+ cials.\n\nHeute an den Turntables: Prinz Anna\n80er- pop´n wave\, 60´s & 70
+ ´s\, [90er] \n\nStart: 22.00 Uhr\nOpen end!
+LAST-MODIFIED:20120212T233556Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Untergrund Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120110T190000Z
+DTEND:20120110T203000Z
+DTSTAMP:20120418T213912Z
+UID:mt6o78a0pacj8nqc15p0339r5k@google.com
+CLASS:PUBLIC
+CREATED:20120212T233439Z
+DESCRIPTION:Offen für alle Frauen\, die sich für's FraZe interessieren und 
+ mitreden möchten. Hier habt ihr u.a. die Möglichkeit\, das monatliche FraZe
+ -Programm aktiv mitzugestalten und eure eigenen Ideen einzubringen. Kommt e
+ infach vorbei!\nAchtung: wieder Dienstags! 
+LAST-MODIFIED:20120212T233516Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120111T190000Z
+DTEND:20120111T203000Z
+DTSTAMP:20120418T213912Z
+UID:lb7999elb0mkflcb3ndnche2p8@google.com
+CREATED:20120212T233503Z
+DESCRIPTION:Offenes Kulturgruppen-Treffen\nFür alle\, die das Kulturleben i
+ m FraZe mitgestalten möchten. Ausstellungen\, Lesungen oder Partys – hier p
+ lanen & verwirklichen wir neue Kulturprojekte. Ein Einstieg ist jederzeit m
+ öglich! Kommt vorbei! 
+LAST-MODIFIED:20120212T233503Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kulturgruppen-Treffen
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120103T180000Z
+DTEND:20120103T190000Z
+DTSTAMP:20120418T213912Z
+UID:b5oo1fj9hrnr0ric2bh0iidcl4@google.com
+CLASS:PUBLIC
+CREATED:20120212T233413Z
+DESCRIPTION:Meditation ist eine in vielen Religionen und Kulturen ausgeübte
+  spirituelle Praxis.\nDurch vielfältige Übungen soll sich der Geist beruhig
+ en und sammeln.\nEin Einstieg für interessierte Frauen ist jederzeit möglic
+ h!\nWer möchte\, kann sich eine Isomatte und dicke Socken mitbringen\, anso
+ nsten werden die normalen Stühle zum Sitzen genutzt.
+LAST-MODIFIED:20120212T233413Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Meditation
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20111222
+DTEND;VALUE=DATE:20120107
+DTSTAMP:20120418T213912Z
+UID:qe8mqb04crgomb4e8il5l5du6o@google.com
+CLASS:PUBLIC
+CREATED:20120212T233126Z
+DESCRIPTION:Achtung:\nDas Fraze Büro macht Pause in den Weihnachtsferien:\n
+ In der Zeit vom 22.12.11 bis zum 06.01.12 wird keine offene Bürozeit angebo
+ ten. \nDie Silvesterparty findet natürlich statt! 
+LAST-MODIFIED:20120212T233153Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ferien Fraze Büro
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120321T190000Z
+DTEND:20120321T223000Z
+DTSTAMP:20120418T213912Z
+UID:2m21ut0ab1h0bpml85tcq49rlo@google.com
+CREATED:20120212T232912Z
+DESCRIPTION:Kneipenspecial "veganes Chili"\nHeute gibt es wieder Leckereien
+  aus der FraZe-Küche. Diesmal: "veganes Chili"!\nneu: Ü40 Stammtisch\nAlle 
+ interessierten Frauen ab 40 sind wieder recht herzlich eingeladen\, hier be
+ kannte und neue Gleichgesinnte zu finden und über das Leben und andere Widr
+ igkeiten zu sinnieren...\nNatürlich kommen Frauen allen Alters ins Fraze\, 
+ aber hier seien auch ganz besonders auch die älteren angesprochen! 
+LAST-MODIFIED:20120212T232912Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ü40 Stammtisch
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120215T190000Z
+DTEND:20120215T223000Z
+DTSTAMP:20120418T213912Z
+UID:s1t5s11rbk96pkjl0a40j41634@google.com
+CLASS:PUBLIC
+CREATED:20120212T232759Z
+DESCRIPTION:Heute gibt es wieder Leckereien aus der FraZe-Küche. Diesmal: R
+ atatouille!\nneu: Ü40 Stammtisch\nAlle interessierten Frauen ab 40 sind wie
+ der recht herzlich eingeladen\, hier bekannte und neue Gleichgesinnte zu fi
+ nden und über das Leben und andere Widrigkeiten zu sinnieren...\nNatürlich 
+ kommen Frauen allen Alters ins Fraze\, aber hier seien auch ganz besonders 
+ auch die älteren angesprochen! 
+LAST-MODIFIED:20120212T232759Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Ü40 Stammtisch
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120318T140000Z
+DTEND:20120318T153000Z
+DTSTAMP:20120418T213912Z
+UID:6m2josk1k05cqh2r9p4q3o2t10@google.com
+CREATED:20120212T232515Z
+DESCRIPTION:Spielenachmittag bei Kaffee und Keksen\n\nMitspielerinnen gesuc
+ ht! Heute wollen wir die Spieleecke im FraZe durchstöbern und Kaffee und Ke
+ ksen nach Herzenslust unsere und eure Regelkenntnisse zu Themen wie Doppelk
+ opf\, Mensch-Ärgere-Dich-nicht\, Backgammon o.ä. auffrischen. Wer schon imm
+ er Mitspielerinnen gesucht hat\, um ein Spiel aus dem eigenen Schrank zu pr
+ obieren\, ist genauso eingeladen wie die erfahrene Backgammon-Spielerin! 
+LAST-MODIFIED:20120212T232515Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spielenachmittag
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120313T180000Z
+DTEND:20120313T190000Z
+DTSTAMP:20120418T213912Z
+UID:sqobsa3v68cfc8d59hc8i02edc@google.com
+CLASS:PUBLIC
+CREATED:20120212T230248Z
+DESCRIPTION:Meditation ist eine in vielen Religionen und Kulturen ausgeübte
+  spirituelle Praxis.\nDurch vielfältige Übungen soll sich der Geist beruhig
+ en und sammeln.\nEin Einstieg für interessierte Frauen ist jederzeit möglic
+ h!\nWer möchte\, kann sich eine Isomatte und dicke Socken mitbringen\, anso
+ nsten werden die normalen Stühle zum Sitzen genutzt.
+LAST-MODIFIED:20120212T232337Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:Meditation
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120226T140000Z
+DTEND:20120226T153000Z
+DTSTAMP:20120418T213912Z
+UID:7837odv574u9dbreqnnbek0aa8@google.com
+CLASS:PUBLIC
+CREATED:20120212T232129Z
+DESCRIPTION:Spielenachmittag bei Kaffee und Keksen\n\nMitspielerinnen gesuc
+ ht! Heute wollen wir die Spieleecke im FraZe durchstöbern und Kaffee und Ke
+ ksen nach Herzenslust unsere und eure Regelkenntnisse zu Themen wie Doppelk
+ opf\, Mensch-Ärgere-Dich-nicht\, Backgammon o.ä. auffrischen. Wer schon imm
+ er Mitspielerinnen gesucht hat\, um ein Spiel aus dem eigenen Schrank zu pr
+ obieren\, ist genauso eingeladen wie die erfahrene Backgammon-Spielerin! 
+LAST-MODIFIED:20120212T232129Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Spielenachmittag
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120217T190000Z
+DTEND:20120217T210000Z
+DTSTAMP:20120418T213912Z
+UID:1mb1n447uf983si3fvo0nlv0vk@google.com
+CLASS:PUBLIC
+CREATED:20120212T230735Z
+DESCRIPTION:Fraze-Kino: Wunschfilm"\n\nWelchen Film möchtet ihr sehen?     
+  \n\n"Quadrophenia - The Who Film (1979 GB)"\n\n<a href="http://de.wikipedi
+ a.org/wiki/Quadrophenia_%28Film%29" target="_blank">Filminfo 1</a>  \n<a hr
+ ef="http://www.moviepilot.de/movies/quadrophenia" target="_blank">Filminfo 
+ 2</a>  \n\noder "Die Geisha (2006 USA)" \n\n<a href="http://de.wikipedia.or
+ g/wiki/Die_Geisha_%28Film%29" target="_blank">Filminfo 1</a>  \n<a href="ht
+ tp://www.filmstarts.de/kritiken/38139-Die-Geisha.html" target="_blank">Film
+ info 2</a> \n\n
+LAST-MODIFIED:20120212T231842Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120214T190000Z
+DTEND:20120214T203000Z
+DTSTAMP:20120418T213912Z
+UID:rqlrcorh6sgrj6pi6tc353hhic@google.com
+CLASS:PUBLIC
+CREATED:20120212T230056Z
+DESCRIPTION:Offen für alle Frauen\, die sich für's FraZe interessieren und 
+ mitreden möchten. Hier habt ihr u.a. die Möglichkeit\, das monatliche FraZe
+ -Programm aktiv mitzugestalten und eure eigenen Ideen einzubringen. Kommt e
+ infach vorbei!\nAchtung: wieder Dienstags! 
+LAST-MODIFIED:20120212T230117Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120211T210000Z
+DTEND:20120211T223000Z
+DTSTAMP:20120418T213912Z
+UID:3s6ls6uhgodlpf4c2306sau984@google.com
+CLASS:PUBLIC
+CREATED:20120212T225843Z
+DESCRIPTION:In Erinnerung an die ehemalige Womens Club Disco feiern wir mit
+  euch untergrund.\nMit wechselnden DJanes und Getränkespecials.\n\nHeute an
+  den Turntables: DJ Caybee & DJ See It\nAlternative & Pop 
+LAST-MODIFIED:20120212T225916Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Untergrund Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090821T100000
+DTEND;TZID=Europe/Berlin:20090821T130000
+RRULE:FREQ=WEEKLY;BYDAY=FR;WKST=SU
+EXDATE;TZID=Europe/Berlin:20120427T100000
+EXDATE;TZID=Europe/Berlin:20120420T100000
+EXDATE;TZID=Europe/Berlin:20120413T100000
+EXDATE;TZID=Europe/Berlin:20120330T100000
+EXDATE;TZID=Europe/Berlin:20120323T100000
+EXDATE;TZID=Europe/Berlin:20120316T100000
+EXDATE;TZID=Europe/Berlin:20120309T100000
+EXDATE;TZID=Europe/Berlin:20120224T100000
+EXDATE;TZID=Europe/Berlin:20111223T100000
+EXDATE;TZID=Europe/Berlin:20120106T100000
+EXDATE;TZID=Europe/Berlin:20111230T100000
+EXDATE;TZID=Europe/Berlin:20131101T100000
+EXDATE;TZID=Europe/Berlin:20130329T100000
+EXDATE;TZID=Europe/Berlin:20120406T100000
+DTSTAMP:20120418T213912Z
+UID:p5b1pdigbkai103infa9ug7mjo@google.com
+CREATED:20090811T085456Z
+DESCRIPTION:Ihr habt Fragen? Ihr braucht eine Anlaufstelle?\nIhr wollt das 
+ Frauenkulturzentrum kennenlernen?\n\nIhr habt Ideen oder Anregungen?\n\nUns
+ er Büro ist Montags (17-20.00 Uhr)\, Mittwochs und Freitags (10-13.00 Uhr) 
+ für euch geöffnet. \nFreitags bieten wir speziell eine Sprechstunde für Mig
+ rantinnen an.
+LAST-MODIFIED:20120212T212022Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sprechstunde
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100120T200000
+DTEND;TZID=Europe/Berlin:20100120T213000
+RRULE:FREQ=MONTHLY;BYDAY=3WE;WKST=SU
+EXDATE;TZID=Europe/Berlin:20120815T200000
+DTSTAMP:20120418T213912Z
+UID:53cdp1bmj4167gdq751dm6j3hs@google.com
+CLASS:PUBLIC
+CREATED:20090811T090147Z
+DESCRIPTION:jeden 3.Mittwoch 20.00 -21.30 Uhr \nLARa Lesbenarchiv: offener 
+ Stammtisch\nAchtung!\nDas LARa-Lesbenarchiv hat vorerst keine Öffnungszeite
+ n mehr! Die Archiv-Frauen treffen sich zunächst jeden dritten Mittwoch im M
+ onat um 20.00 Uhr zu einer Plenumsitzung/einem offenen Stammtisch. Geliehen
+ e Bücher können dort oder bei der FraZe-Kneipe abgegeben werden.\nLARa-Lesb
+ enarchiv fon: 0176/78742362 \n\n
+LAST-MODIFIED:20120212T211945Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:2
+STATUS:CONFIRMED
+SUMMARY:LARa Archiv
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090812T200000
+DTEND;TZID=Europe/Berlin:20090812T233000
+RRULE:FREQ=WEEKLY;BYDAY=WE;WKST=SU
+EXDATE;TZID=Europe/Berlin:20120418T200000
+EXDATE;TZID=Europe/Berlin:20120516T200000
+EXDATE;TZID=Europe/Berlin:20120118T200000
+EXDATE;TZID=Europe/Berlin:20120104T200000
+EXDATE;TZID=Europe/Berlin:20111228T200000
+EXDATE;TZID=Europe/Berlin:20111221T200000
+EXDATE;TZID=Europe/Berlin:20120321T200000
+EXDATE;TZID=Europe/Berlin:20120215T200000
+EXDATE;TZID=Europe/Berlin:20130501T200000
+EXDATE;TZID=Europe/Berlin:20121226T200000
+EXDATE;TZID=Europe/Berlin:20121003T200000
+EXDATE;TZID=Europe/Berlin:20120815T200000
+DTSTAMP:20120418T213912Z
+UID:s1587o9cirn9eq7vr08l6p2a90@google.com
+CLASS:PUBLIC
+CREATED:20090811T090035Z
+DESCRIPTION:Getränke zu günstigen Preisen & die besten Tricks am Kickertisc
+ h! Gemütlich ein Wasser\, ein Bier oder eine Cola nach der Arbeit trinken? 
+ Dann komm ins Fraze\, dort gibt es Getränke zu günstigen Preisen und nette 
+ Frauen in einer angenehmen Atmosphäre. Hier passiert netzwerken und Austaus
+ ch und nicht in den Altherren-Zigarren-Clubs ! 
+LAST-MODIFIED:20120212T211844Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Offene Kneipe
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20120310T210000Z
+DTEND:20120310T223000Z
+DTSTAMP:20120418T213912Z
+UID:n0bc8q5rjtor09p8a0ninv46fg@google.com
+CLASS:PUBLIC
+CREATED:20120212T151054Z
+DESCRIPTION:Untergrund Party\nIn Erinnerung an die ehemalige Womens Club Di
+ sco feiern wir mit euch untergrund.\nMit wechselnden DJanes und Getränkespe
+ cials.\n\nHeute an den Turntables: Esther (Rock\, "Am Zwinger-Musik") \n\nS
+ tart: 22.00 Uhr\nOpen end!
+LAST-MODIFIED:20120212T151535Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Untergrund Party
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110111T180000Z
+DTEND:20110111T200000Z
+DTSTAMP:20120418T213912Z
+UID:4rrnbjhe2jkt0f4cku2pr3p7gk@google.com
+CLASS:PUBLIC
+CREATED:20101209T150317Z
+DESCRIPTION:Hausversammlung.\nDie Hausversammlung ist das Entscheidungsorga
+ n des Frauenkulturzentrums. Hier treffen sich alle Frauen\, die organisiere
+ n\, helfen und planen.\nWer das Frauenkulturzentrum mitgestalten will und I
+ nteresse daran hat\, mitzumachen...\nIhr seid herzlich eingeladen! Einfach 
+ vorbeikommen! 
+LAST-MODIFIED:20101231T035240Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20110201T180000Z
+DTEND:20110201T200000Z
+DTSTAMP:20120418T213912Z
+UID:oau5l20cielaae55dp8s23oehg@google.com
+CLASS:PUBLIC
+CREATED:20101209T150213Z
+DESCRIPTION:Hausversammlung.\nDie Hausversammlung ist das Entscheidungsorga
+ n des Frauenkulturzentrums. Hier treffen sich alle Frauen\, die organisiere
+ n\, helfen und planen.\nWer das Frauenkulturzentrum mitgestalten will und I
+ nteresse daran hat\, mitzumachen...\nIhr seid herzlich eingeladen! Einfach 
+ vorbeikommen! 
+LAST-MODIFIED:20101231T035239Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100719T200000
+DTEND;TZID=Europe/Berlin:20100719T213000
+RRULE:FREQ=MONTHLY;BYDAY=3MO;WKST=MO;UNTIL=20100920T180000Z
+DTSTAMP:20120418T213912Z
+UID:06djd01078pfbr6legofc0kchc@google.com
+CLASS:PUBLIC
+CREATED:20100719T091345Z
+DESCRIPTION:Achtung\, ab Juni wird der Yoga Termin von Donnerstags auf Mont
+ ags verlegt! \nBitte weitersagen!\n\nMontags (jeden 1.+ 3.Mo im Monat) \n20
+ .00-21.30 Uhr \nYoga-Unterricht\nJeden 1. und 3. Montag im Monat von 20.00 
+ bis 21.30 Uhr bieten wir jetzt kostenlosen Yoga-Unterricht an. Einen Einsti
+ eg in den Kurs ist jederzeit möglich. Bitte Isomatte\, dicke Socken und ein
+ e Decke mitbringen falls möglich.
+LAST-MODIFIED:20101101T005417Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Yoga
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100705T200000
+DTEND;TZID=Europe/Berlin:20100705T213000
+RRULE:FREQ=MONTHLY;BYDAY=1MO;WKST=MO;UNTIL=20101004T180000Z
+DTSTAMP:20120418T213912Z
+UID:04o6v8u68hu7no3fm5mhrpd1mo@google.com
+CLASS:PUBLIC
+CREATED:20100719T091243Z
+DESCRIPTION:Achtung\, ab Juni wird der Yoga Termin von Donnerstags auf Mont
+ ags verlegt! \nBitte weitersagen!\n\nMontags (jeden 1.+ 3.Mo im Monat) \n20
+ .00-21.30 Uhr \nYoga-Unterricht\nJeden 1. und 3. Montag im Monat von 20.00 
+ bis 21.30 Uhr bieten wir jetzt kostenlosen Yoga-Unterricht an. Einen Einsti
+ eg in den Kurs ist jederzeit möglich. Bitte Isomatte\, dicke Socken und ein
+ e Decke mitbringen falls möglich.
+LAST-MODIFIED:20101101T005416Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Yoga
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100112T190000
+DTEND;TZID=Europe/Berlin:20100112T210000
+RRULE:FREQ=MONTHLY;BYDAY=2TU;WKST=MO;UNTIL=20101109T180000Z
+DTSTAMP:20120418T213912Z
+UID:ov3runaebmt3uc34n1ge2dm0q8@google.com
+CLASS:PUBLIC
+CREATED:20100113T092757Z
+DESCRIPTION:Hausversammlung.\nDie Hausversammlung ist das Entscheidungsorga
+ n des Frauenkulturzentrums. Hier treffen sich alle Frauen\, die organisiere
+ n\, helfen und planen.\nWer das Frauenkulturzentrum mitgestalten will und I
+ nteresse daran hat\, mitzumachen...\nIhr seid herzlich eingeladen! Einfach 
+ vorbeikommen! 
+LAST-MODIFIED:20101101T005416Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20101207T180000Z
+DTEND:20101207T200000Z
+DTSTAMP:20120418T213912Z
+UID:j003r6mn4in2kt6181ba32mjbc@google.com
+CREATED:20101026T130427Z
+DESCRIPTION:Hausversammlung.\nDie Hausversammlung ist das Entscheidungsorga
+ n des Frauenkulturzentrums. Hier treffen sich alle Frauen\, die organisiere
+ n\, helfen und planen.\nWer das Frauenkulturzentrum mitgestalten will und I
+ nteresse daran hat\, mitzumachen...\nIhr seid herzlich eingeladen! Einfach 
+ vorbeikommen! 
+LAST-MODIFIED:20101101T005416Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20101110T190000Z
+DTEND:20101110T203000Z
+DTSTAMP:20120418T213912Z
+UID:8pb95g3r9rajlcl3lho7s56m1c@google.com
+CREATED:20101026T125832Z
+DESCRIPTION:Kulturgruppentreffen\nDas Fraze möchte sein Kulturprogramm weit
+ er ausbauen. Dazu suchen wir interessierte Frauen\, die sich hier engagiere
+ n wollen. Erste Ideen gibt es bereits. Heute soll ein loses Treffen stattfi
+ nden. Daraus soll eine regelmässige Gruppe werden. Kommt einfach im Fraze v
+ orbei und macht mit. Jede Frau kann sich nach eigenem Ermessen einbringen! 
+LAST-MODIFIED:20101101T005415Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Kulturgruppentreffen
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20101102T180000Z
+DTEND:20101102T200000Z
+DTSTAMP:20120418T213912Z
+UID:5ub28r6nq5sqh2jth9bakv56bc@google.com
+CLASS:PUBLIC
+CREATED:20101026T135351Z
+DESCRIPTION:Hausversammlung.\nDie Hausversammlung ist das Entscheidungsorga
+ n des Frauenkulturzentrums. Hier treffen sich alle Frauen\, die organisiere
+ n\, helfen und planen.\nWer das Frauenkulturzentrum mitgestalten will und I
+ nteresse daran hat\, mitzumachen...\nIhr seid herzlich eingeladen! Einfach 
+ vorbeikommen! 
+LAST-MODIFIED:20101101T005414Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20101005T170000Z
+DTEND:20101005T190000Z
+DTSTAMP:20120418T213912Z
+UID:hirurik3simubprh344945ko74@google.com
+CLASS:PUBLIC
+CREATED:20100909T140341Z
+DESCRIPTION:Hausversammlung.\nDie Hausversammlung ist das Entscheidungsorga
+ n des Frauenkulturzentrums. Hier treffen sich alle Frauen\, die organisiere
+ n\, helfen und planen.\nWer das Frauenkulturzentrum mitgestalten will und I
+ nteresse daran hat\, mitzumachen...\nIhr seid herzlich eingeladen! Einfach 
+ vorbeikommen! 
+LAST-MODIFIED:20100924T031330Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100830T180000Z
+DTEND:20100830T193000Z
+DTSTAMP:20120418T213912Z
+UID:6h4llhms3nhg061omhoo7gatpg@google.com
+CLASS:PUBLIC
+CREATED:20100820T094536Z
+DESCRIPTION:Achtung: hier ein Zusatztermin!\n------------------------------
+ ----------------\nMontags (jeden 1.+ 3.Mo im Monat) \n20.00-21.30 Uhr \nYog
+ a-Unterricht\nJeden 1. und 3. Montag im Monat von 20.00 bis 21.30 Uhr biete
+ n wir jetzt kostenlosen Yoga-Unterricht an. Einen Einstieg in den Kurs ist 
+ jederzeit möglich. Bitte Isomatte\, dicke Socken und eine Decke mitbringen 
+ falls möglich.
+LAST-MODIFIED:20100827T000505Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Yoga (Zusatztermin!)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20100719
+DTEND;VALUE=DATE:20100810
+DTSTAMP:20120418T213912Z
+UID:q207k0o6ihmmkj58ro3vi4bnbc@google.com
+CLASS:PUBLIC
+CREATED:20100719T090647Z
+DESCRIPTION:Achtung:\nDas FraZe-Büro macht vom 19. Juli bis 9. August Somme
+ rpause!\nAb dem 11. August sind wir wieder mit Bürozeiten für euch da!\nDie
+  regelmäßigen Angebote finden während der Sommerpause weiterhin statt. \n
+LAST-MODIFIED:20100827T000505Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Sommerpause FraZe Büro
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100907T170000Z
+DTEND:20100907T190000Z
+DTSTAMP:20120418T213912Z
+UID:impiur906hal2dplrsml6q7rrg@google.com
+CLASS:PUBLIC
+CREATED:20100719T092125Z
+DESCRIPTION:Hausversammlung.\nDie Hausversammlung ist das Entscheidungsorga
+ n des Frauenkulturzentrums. Hier treffen sich alle Frauen\, die organisiere
+ n\, helfen und planen.\nWer das Frauenkulturzentrum mitgestalten will und I
+ nteresse daran hat\, mitzumachen...\nIhr seid herzlich eingeladen! Einfach 
+ vorbeikommen! 
+LAST-MODIFIED:20100827T000505Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100607T200000
+DTEND;TZID=Europe/Berlin:20100607T213000
+RRULE:FREQ=MONTHLY;BYDAY=3TH;WKST=MO;UNTIL=20100607T180000Z
+DTSTAMP:20120418T213912Z
+UID:hi0gi8b5n2d97tlakv7knbgops@google.com
+CLASS:PUBLIC
+CREATED:20100506T104237Z
+DESCRIPTION:Achtung\, ab Juni wird wahrscheinlich der Yoga Termin von Donne
+ rstags auf Montags verlegt! Bitte weitersagen!\n\nMontags (jeden 1.+ 3.Mo i
+ m Monat) \n20.00-21.30 Uhr \nYoga-Unterricht\nJeden 1. und 3. Montag im Mon
+ at von 20.00 bis 21.30 Uhr bieten wir jetzt kostenlosen Yoga-Unterricht an.
+  Einen Einstieg in den Kurs ist jederzeit möglich. Bitte Isomatte\, dicke S
+ ocken und eine Decke mitbringen falls möglich.
+LAST-MODIFIED:20100604T090138Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Yoga (wird von Do auf Mo verlegt!)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100121T193000
+DTEND;TZID=Europe/Berlin:20100121T210000
+RRULE:FREQ=MONTHLY;BYDAY=3TH;WKST=MO;UNTIL=20100519T215959Z
+DTSTAMP:20120418T213912Z
+UID:209sshg381171r5i92a09s4tpg@google.com
+CLASS:PUBLIC
+CREATED:20100113T093312Z
+DESCRIPTION:Donnerstags (jeden 1.+ 3.Do im Monat) \n19.30-21.00 Uhr \nYoga-
+ Unterricht\nJeden 1. und 3. Donnerstag im Monat von 19.30 bis 21.00 Uhr bie
+ ten wir jetzt kostenlosen Yoga-Unterricht an. Einen Einstieg in den Kurs is
+ t jederzeit möglich. Bitte Isomatte\, dicke Socken und eine Decke mitbringe
+ n falls möglich.
+LAST-MODIFIED:20100604T090138Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Yoga
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090907T200000
+DTEND;TZID=Europe/Berlin:20090907T220000
+RRULE:FREQ=MONTHLY;BYDAY=1MO;WKST=SU;UNTIL=20100503T180000Z
+DTSTAMP:20120418T213912Z
+UID:rd7k7juagnm4h56ffv2k2koj50@google.com
+CLASS:PUBLIC
+CREATED:20090811T085853Z
+DESCRIPTION:Pink Pong mit pinken Bällen!\nHier gibt es alle 2 Wochen für sp
+ ielfreudige Frauen DIE Gelegenheit\, sich im Einzel\, Doppel oder Rundlauf 
+ auszutoben... und das mit pinken Bällen! Also kommt zahlreich egal\, wie al
+ t oder fortgeschritten ihr seid. 
+LAST-MODIFIED:20100604T090138Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pink Pong
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100107T193000
+DTEND;TZID=Europe/Berlin:20100107T210000
+RRULE:FREQ=MONTHLY;BYDAY=1TH;WKST=MO;UNTIL=20100401T173000Z
+DTSTAMP:20120418T213912Z
+UID:c1a7rlv8hc824h26geekba103k@google.com
+CREATED:20100113T093150Z
+DESCRIPTION:Donnerstags (jeden 1.+ 3.Do im Monat) \n19.30-21.00 Uhr \nYoga-
+ Unterricht\nJeden 1. und 3. Donnerstag im Monat von 19.30 bis 21.00 Uhr bie
+ ten wir jetzt kostenlosen Yoga-Unterricht an. Einen Einstieg in den Kurs is
+ t jederzeit möglich. Bitte Isomatte\, dicke Socken und eine Decke mitbringe
+ n falls möglich.
+LAST-MODIFIED:20100604T090137Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Yoga
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090817T200000
+DTEND;TZID=Europe/Berlin:20090817T220000
+RRULE:FREQ=MONTHLY;BYDAY=3MO;WKST=SU;UNTIL=20100517T180000Z
+DTSTAMP:20120418T213912Z
+UID:or5hol9mhlsh28qb4j4h4ndrps@google.com
+CLASS:PUBLIC
+CREATED:20090811T085752Z
+DESCRIPTION:Pink Pong mit pinken Bällen!\nHier gibt es alle 2 Wochen für sp
+ ielfreudige Frauen DIE Gelegenheit\, sich im Einzel\, Doppel oder Rundlauf 
+ auszutoben... und das mit pinken Bällen! Also kommt zahlreich egal\, wie al
+ t oder fortgeschritten ihr seid. 
+LAST-MODIFIED:20100604T090137Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Pink Pong
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20100621T200000
+DTEND;TZID=Europe/Berlin:20100621T213000
+RRULE:FREQ=MONTHLY;BYDAY=3TH;WKST=MO;UNTIL=20100621T180000Z
+DTSTAMP:20120418T213912Z
+UID:md8tmi9g32l55erbum0i2g8gf4@google.com
+CLASS:PUBLIC
+CREATED:20100113T093312Z
+DESCRIPTION:Achtung\, ab Juni wird wahrscheinlich der Yoga Termin von Donne
+ rstags auf Montags verlegt! \nBitte weitersagen!\n\nMontags (jeden 1.+ 3.Mo
+  im Monat) \n20.00-21.30 Uhr \nYoga-Unterricht\nJeden 1. und 3. Montag im M
+ onat von 20.00 bis 21.30 Uhr bieten wir jetzt kostenlosen Yoga-Unterricht a
+ n. Einen Einstieg in den Kurs ist jederzeit möglich. Bitte Isomatte\, dicke
+  Socken und eine Decke mitbringen falls möglich.
+LAST-MODIFIED:20100604T090136Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:3
+STATUS:CONFIRMED
+SUMMARY:Yoga (wird von Do auf Mo verlegt!)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100525T170000Z
+DTEND:20100525T190000Z
+DTSTAMP:20120418T213912Z
+UID:ubrtk8tljgfkjludqib6dbq410@google.com
+CLASS:PUBLIC
+CREATED:20100412T144226Z
+DESCRIPTION:Hier sprechen wir kurz Termine ab und vergeben die Thekenjobs. 
+ Jede interessierte Frau\, die schon mal Theke gemacht hat oder gerne machen
+  würde\, ist herzlichst eingeladen.
+LAST-MODIFIED:20100604T090135Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Thekengruppentreffen
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100706T170000Z
+DTEND:20100706T190000Z
+DTSTAMP:20120418T213912Z
+UID:lm5ruhvh6mo4hnfjb76v36tnis@google.com
+CLASS:PUBLIC
+CREATED:20100512T061544Z
+DESCRIPTION:Achtung: Wegen der Chorprobe findet die HV in der Gemeinschafts
+ küche der Bogefabrik statt!\n\nHausversammlung.\nDie Hausversammlung ist da
+ s Entscheidungsorgan des Frauenkulturzentrums. Hier treffen sich alle Fraue
+ n\, die organisieren\, helfen und planen.\nWer das Frauenkulturzentrum mitg
+ estalten will und Interesse daran hat\, mitzumachen...\nIhr seid herzlich e
+ ingeladen! Einfach vorbeikommen! 
+LAST-MODIFIED:20100604T090135Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100623T170000Z
+DTEND:20100623T180000Z
+DTSTAMP:20120418T213912Z
+UID:f859o0qhqm7vuagukkf4eaaoss@google.com
+CLASS:PUBLIC
+CREATED:20100512T090900Z
+DESCRIPTION:Hier sprechen wir kurz Termine ab und vergeben die Thekenjobs. 
+ Jede interessierte Frau\, die schon mal Theke gemacht hat oder gerne machen
+  würde\, ist herzlichst eingeladen.
+LAST-MODIFIED:20100604T090134Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Thekengruppentreffen
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100429T173000Z
+DTEND:20100429T190000Z
+DTSTAMP:20120418T213912Z
+UID:al1rjj7ruinl8er6fiamjg6s3o@google.com
+CREATED:20100318T115714Z
+DESCRIPTION:Donnerstags (jeden 1.+ 3.Do im Monat) \n19.30-21.00 Uhr \nYoga-
+ Unterricht\nJeden 1. und 3. Donnerstag im Monat von 19.30 bis 21.00 Uhr bie
+ ten wir jetzt kostenlosen Yoga-Unterricht an. Einen Einstieg in den Kurs is
+ t jederzeit möglich. Bitte Isomatte\, dicke Socken und eine Decke mitbringe
+ n falls möglich.\nHeute ist ein zusätzlicher Termin!
+LAST-MODIFIED:20100318T115714Z
+LOCATION:Frauenkulturzentrum\, Meller Str. 2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Yoga
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090820T193000
+DTEND;TZID=Europe/Berlin:20090820T210000
+RRULE:FREQ=MONTHLY;BYDAY=3TH;WKST=SU;UNTIL=20091217T183000Z
+DTSTAMP:20120418T213912Z
+UID:hhk87kqeeuprkk1cmt3v2glpm4@google.com
+CLASS:PUBLIC
+CREATED:20090811T090329Z
+DESCRIPTION:Jeden 1. und 3. Donnerstag im Monat von 19.30 bis 21.00 Uhr bie
+ ten wir jetzt kostenlosen Yoga-Unterricht an. Da die Teilnehmerinnenzahl au
+ f 10 Frauen beschränkt ist\, bitte bis zum 31.08. unter 0521/68667 oder fra
+ ze@fraze.de anmelden. 
+LAST-MODIFIED:20100317T101326Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Yoga-Unterricht
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090819T100000
+DTEND;TZID=Europe/Berlin:20090819T130000
+RRULE:FREQ=WEEKLY;BYDAY=WE;WKST=SU
+EXDATE;TZID=Europe/Berlin:20120530T100000
+EXDATE;TZID=Europe/Berlin:20120425T100000
+EXDATE;TZID=Europe/Berlin:20120418T100000
+EXDATE;TZID=Europe/Berlin:20120411T100000
+EXDATE;TZID=Europe/Berlin:20120404T100000
+EXDATE;TZID=Europe/Berlin:20120328T100000
+EXDATE;TZID=Europe/Berlin:20120321T100000
+EXDATE;TZID=Europe/Berlin:20120314T100000
+EXDATE;TZID=Europe/Berlin:20120307T100000
+EXDATE;TZID=Europe/Berlin:20120104T100000
+EXDATE;TZID=Europe/Berlin:20111228T100000
+EXDATE;TZID=Europe/Berlin:20130501T100000
+EXDATE;TZID=Europe/Berlin:20121226T100000
+EXDATE;TZID=Europe/Berlin:20121003T100000
+EXDATE;TZID=Europe/Berlin:20120815T100000
+DTSTAMP:20120418T213912Z
+UID:15rgunnki1b6se0lqgqu7n78d8@google.com
+CREATED:20090811T085409Z
+DESCRIPTION:Ihr habt Fragen? Ihr braucht eine Anlaufstelle? Ihr wollt das F
+ rauenkulturzentrum kennenlernen? Ihr habt Ideen oder Anregungen?\nUnser Bür
+ o ist Montags (17-20.00 Uhr)\, Mittwochs und Freitags (10-13.00 Uhr) für eu
+ ch geöffnet. Freitags bieten wir speziell eine Sprechstunde für Migrantinne
+ n an.
+LAST-MODIFIED:20100317T101326Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Bürozeit
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090903T193000
+DTEND;TZID=Europe/Berlin:20090903T210000
+RRULE:FREQ=MONTHLY;BYDAY=1TH;WKST=SU;UNTIL=20091203T183000Z
+DTSTAMP:20120418T213912Z
+UID:lq2r7ao5ibf4qha6g25a4ed8k8@google.com
+CLASS:PUBLIC
+CREATED:20090811T090530Z
+DESCRIPTION:Jeden 1. und 3. Donnerstag im Monat von 19.30 bis 21.00 Uhr bie
+ ten wir jetzt kostenlosen Yoga-Unterricht an. Da die Teilnehmerinnenzahl au
+ f 10 Frauen beschränkt ist\, bitte bis zum 31.08. unter 0521/68667 oder fra
+ ze@fraze.de anmelden. 
+LAST-MODIFIED:20100317T101325Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Yoga-Unterricht
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090812T200000
+DTEND;TZID=Europe/Berlin:20090812T213000
+RRULE:FREQ=WEEKLY;BYDAY=WE;WKST=SU;UNTIL=20091230T190000Z
+DTSTAMP:20120418T213912Z
+UID:hvfc8m3vakham84h5c7vnnnlb4@google.com
+CLASS:PUBLIC
+CREATED:20090811T090147Z
+DESCRIPTION:LARa Lesbenarchiv\nAchtung! Neue Öffnungszeiten!\nHier kann man
+  in Büchern und Filmen schmökern und diese auch ausleihen!\nTel.: 0521-3292
+ 133
+LAST-MODIFIED:20100317T101325Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:LARa Lesbenarchiv
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=Europe/Berlin:20090817T170000
+DTEND;TZID=Europe/Berlin:20090817T200000
+RRULE:FREQ=WEEKLY;BYDAY=MO;WKST=SU
+EXDATE;TZID=Europe/Berlin:20120430T170000
+EXDATE;TZID=Europe/Berlin:20120423T170000
+EXDATE;TZID=Europe/Berlin:20120416T170000
+EXDATE;TZID=Europe/Berlin:20120402T170000
+EXDATE;TZID=Europe/Berlin:20120326T170000
+EXDATE;TZID=Europe/Berlin:20120319T170000
+EXDATE;TZID=Europe/Berlin:20120312T170000
+EXDATE;TZID=Europe/Berlin:20120305T170000
+EXDATE;TZID=Europe/Berlin:20111226T170000
+EXDATE;TZID=Europe/Berlin:20130520T170000
+EXDATE;TZID=Europe/Berlin:20121224T170000
+EXDATE;TZID=Europe/Berlin:20121231T170000
+EXDATE;TZID=Europe/Berlin:20120528T170000
+EXDATE;TZID=Europe/Berlin:20120409T170000
+DTSTAMP:20120418T213912Z
+UID:o408mha59ab112h5ou6ugl449c@google.com
+CLASS:PUBLIC
+CREATED:20090811T085242Z
+DESCRIPTION:Ihr habt Fragen? Ihr braucht eine Anlaufstelle? Ihr wollt das F
+ rauenkulturzentrum kennenlernen? Ihr habt Ideen oder Anregungen?\nUnser Bür
+ o ist Montags (17-20.00 Uhr)\, Mittwochs und Freitags (10-13.00 Uhr) für eu
+ ch geöffnet. Freitags bieten wir speziell eine Sprechstunde für Migrantinne
+ n an.
+LAST-MODIFIED:20100317T101321Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Bürozeit
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100226T183000Z
+DTEND:20100226T210000Z
+DTSTAMP:20120418T213912Z
+UID:7ikac2ihv6m32nfs4gi87eqqho@google.com
+CLASS:PUBLIC
+CREATED:20100117T214128Z
+DESCRIPTION:26.02.10  Fr  \nEinlass: 19.30 Uhr Beginn: 20.00 Uhr \n\nFraze-
+ Kino "High Art"\n\nDer Film um lesbischen Liebe wurde am Sundance Film Fest
+ ival 1998 mit dem Drehbuchpreis ausgezeichnet. Syd (Radha Mitchell) arbeite
+ t beim renommierten Fotomagazin "Frame". Sie ist mit James (Gabriel Mann) l
+ iiert\, aber von Leidenschaft ist nicht mehr viel zu spüren. Eines Abends b
+ egegnet sie ihrer scheuen Nachbarin Lucy Berliner (Ally Sheedy)\, die hier 
+ mit ihrer deutschen Freundin Greta (Patricia Clarkson) lebt. Als Syd merkt\
+ , dass Lucy eine vormals berühmte Fotografin ist\, erzählt sie in der Redak
+ tion davon. Ihre Chefs übereden Lucy zu einer Titelstory. Lucy willigt ein.
+  Syd hat sich inzwischen in Lucy verliebt und gerät in einen Konflikt zwisc
+ hen ihren Gefühlen und ihrem beruflichen Ehrgeiz.\n(Kan/USA 1998\, R.: Lisa
+  Cholodenko\, D.: u.a. Radha Mitchell\, Ally Sheedy) \n\nhttp://www.cinema.
+ de/kino/filmarchiv/film/high-art\,1335675\,ApplicationMovie.html
+LAST-MODIFIED:20100317T101320Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino "High Art"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;VALUE=DATE:20100222
+DTEND;VALUE=DATE:20100227
+DTSTAMP:20120418T213912Z
+UID:74gq6u3n9q9jbbuuahso9jqvao@google.com
+CLASS:PUBLIC
+CREATED:20100220T195610Z
+DESCRIPTION:Diese Woche hat unser Büro geschlossen. Die Mittwochskneipe fäl
+ lt auch aus!
+LAST-MODIFIED:20100317T101318Z
+LOCATION:
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Bürozeiten und Mittwochskneipe fallen diese Woche aus!
+TRANSP:TRANSPARENT
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100312T183000Z
+DTEND:20100312T210000Z
+DTSTAMP:20120418T213912Z
+UID:huml1mklgsiqjpmjc0se2olou4@google.com
+CLASS:PUBLIC
+CREATED:20100213T133508Z
+DESCRIPTION:Fr. 12.0320.00 UhrFraze-Kino\n "Venus Boyz"\, Einlass 19.30 Uhr
+ \n\nDieser Dokumentationsfilm führt uns auf eine filmische Reise durch das 
+ Universum weiblicher Männlichkeit. Eine legendäre Drag King Nacht in New Yo
+ rk ist Ausgangspunkt einer Odyssee durch Welten jenseits der Geschlechtergr
+ enzen\, in welchen Frauen zu Männern werden - die einen für eine Nacht\, di
+ e andern für ihr ganzes Leben: was bewegt sie\, was verändert sich\, wovon 
+ träumen sie?\n\n(CH/USA/D 2001\, R.: Gabriel Baur\, D.: u.a. Diane Torr\, D
+ réd Gerestant)\n\nFilminfo:\nhttp://www.filmhai.de/kinofilm/articles\,id143
+ 8\,0\,venus_boyz.html
+LAST-MODIFIED:20100317T101316Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino "Venus Boyz"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20100122T183000Z
+DTEND:20100122T210000Z
+DTSTAMP:20120418T213912Z
+UID:ui6hgb53j30e5ir7djirmupo2k@google.com
+CLASS:PUBLIC
+CREATED:20100113T093444Z
+DESCRIPTION:22.01.10  Fr  Einlass:19.30 Uhr Beginn: 20.00 Uhr \nFraze-Kino 
+ "Slumdog Millionär"\n\nJamal Malik ist 18 Jahre alt und in den Slum der ind
+ ischen Megametropole Mumbai aufgewachsen. Doch alles könnte sich mit einem 
+ Schlag ändern\, denn er steht bei der Spielshow "Wer wird Millionär?" vor d
+ er alles entscheidenden Frage. Löst er richtig\, warten 20 Millionen Rupien
+  auf ihn\, wenn nicht\, verliert er alles. Er setzt alles auf eine Karte…Ei
+ n modernes Märchen voller Lebendigkeit\, Lebensenergie und Leidenschaft\, d
+ as Träume und Hoffnungen in atemberaubenden Bildern erscheinen lässt.\n\nUK
+  2008\, R.: Danny Boyle\, D.: u.a. Dev Patel\, Freida Pinto\, Irrfan Khan )
+  \n\nhttp://www.kino.de/kinofilm/slumdog-millionaer/111531.html
+LAST-MODIFIED:20100211T053806Z
+LOCATION:Frauenkulturzentrum\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino<br> "Slumdog Millionär"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090916T170000Z
+DTEND:20090916T183000Z
+DTSTAMP:20120418T213912Z
+UID:6j3c6q5crs9rulous7oh6gsb4g@google.com
+CLASS:PUBLIC
+CREATED:20090907T122252Z
+DESCRIPTION:Frauen\, die das Frauenkulturzentrum mit gestalten wollen\, tre
+ ffen sich\, um Organisatorisches zu besprechen
+LAST-MODIFIED:20090908T092637Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:1
+STATUS:CONFIRMED
+SUMMARY:Hausversammlung
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090925T180000Z
+DTEND:20090925T213000Z
+DTSTAMP:20120418T213912Z
+UID:sgj9jvueibqec6cino7e1dp9dc@google.com
+CLASS:PUBLIC
+CREATED:20090907T122517Z
+DESCRIPTION:Benefizparty für Wildwasser Bielefeld e.V.\nAm 25.09.2009\, ab 
+ 20 Uhr\, im Falkendom Bielefeld\n20:30 Lesbenchor "Just different" \ndanach
+  Frauenparty mit den DJs \nDJ See it\, The Ninette & randale_a\nEintritt 7\
+ ,50 EUR \, ermässigt: 5 EUR
+LAST-MODIFIED:20090907T122517Z
+LOCATION:Falkendom Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Benefizparty für Wildwasser Bielefeld e.V.
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090926T200000Z
+DTEND:20090926T213000Z
+DTSTAMP:20120418T213912Z
+UID:mhajelg26rjmoam5hvi6hrdh7g@google.com
+CLASS:PUBLIC
+CREATED:20090819T085932Z
+DESCRIPTION:Veranstaltungshinweise September \, \nUnderground Bielefeld Aug
+ ust-Bebel-Str. 16 / Heidi König\n\nSamstag   05.09. ab 22h What you see is 
+ What you get mit Dj see it\n \nSamstag   12.09. ab 22h Partynacht mit Dj An
+ ke\n \nSamstag   19.09. ab 22h Disco mit Dj Mandra\n \nSamstag   26.09. ab 
+ 22h Disco mit Dj Coraly\n\n
+LAST-MODIFIED:20090819T085932Z
+LOCATION:Underground\, August-Bebel-Str. 16\, Bielefeld 
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Disco mit Dj Coraly (Underground)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090919T200000Z
+DTEND:20090919T213000Z
+DTSTAMP:20120418T213912Z
+UID:uritg6n1l21e1meujgh7o7o6o8@google.com
+CLASS:PUBLIC
+CREATED:20090819T085911Z
+DESCRIPTION:Veranstaltungshinweise September \, \nUnderground Bielefeld Aug
+ ust-Bebel-Str. 16 / Heidi König\n\nSamstag   05.09. ab 22h What you see is 
+ What you get mit Dj see it\n \nSamstag   12.09. ab 22h Partynacht mit Dj An
+ ke\n \nSamstag   19.09. ab 22h Disco mit Dj Mandra\n \nSamstag   26.09. ab 
+ 22h Disco mit Dj Coraly\n\n
+LAST-MODIFIED:20090819T085911Z
+LOCATION:Underground\, August-Bebel-Str. 16\, Bielefeld 
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Disco mit Dj Mandra (Underground)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090912T200000Z
+DTEND:20090912T213000Z
+DTSTAMP:20120418T213912Z
+UID:cactph7ckjmar5cqtkvfqrof7k@google.com
+CLASS:PUBLIC
+CREATED:20090819T085853Z
+DESCRIPTION:Veranstaltungshinweise September \, \nUnderground Bielefeld Aug
+ ust-Bebel-Str. 16 / Heidi König\n\nSamstag   05.09. ab 22h What you see is 
+ What you get mit Dj see it\n \nSamstag   12.09. ab 22h Partynacht mit Dj An
+ ke\n \nSamstag   19.09. ab 22h Disco mit Dj Mandra\n \nSamstag   26.09. ab 
+ 22h Disco mit Dj Coraly\n\n
+LAST-MODIFIED:20090819T085853Z
+LOCATION:Underground\, August-Bebel-Str. 16\, Bielefeld 
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Partynacht mit Dj Anke (Underground)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090905T200000Z
+DTEND:20090905T213000Z
+DTSTAMP:20120418T213912Z
+UID:q4qivvtrve6lqhr9ag0o9eemo0@google.com
+CLASS:PUBLIC
+CREATED:20090819T085825Z
+DESCRIPTION:Veranstaltungshinweise September \, \nUnderground Bielefeld Aug
+ ust-Bebel-Str. 16 / Heidi König\n\nSamstag   05.09. ab 22h What you see is 
+ What you get mit Dj see it\n \nSamstag   12.09. ab 22h Partynacht mit Dj An
+ ke\n \nSamstag   19.09. ab 22h Disco mit Dj Mandra\n \nSamstag   26.09. ab 
+ 22h Disco mit Dj Coraly\n\n
+LAST-MODIFIED:20090819T085825Z
+LOCATION:Underground\, August-Bebel-Str. 16\, Bielefeld 
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:What you see is What you get mit Dj see it (Underground)
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090826T170000Z
+DTEND:20090826T210000Z
+DTSTAMP:20120418T213912Z
+UID:vdtvprahlij92mil8gdfg75pcs@google.com
+CLASS:PUBLIC
+CREATED:20090811T092300Z
+DESCRIPTION:26.08.09  Mi  19.00 Uhr  \nKneipen-Special "Grillabend"\nHeute 
+ wollen wir beim Grillen einen gemütlichen & gemeinschaftlichen Abend verbri
+ ngen.\nEs gibt Würstchen\, Salate und Brot. 
+LAST-MODIFIED:20090811T092300Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Kneipen-Special "Grillabend"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090922T090000Z
+DTEND:20090922T103000Z
+DTSTAMP:20120418T213912Z
+UID:qhb8prfmg15uosqh0hc0pkf5dg@google.com
+CLASS:PUBLIC
+CREATED:20090811T092149Z
+DESCRIPTION:22.08.09  Sa  11.00 Uhr  \nWing Zhun - Workshop\nWing Zhun bede
+ utet die Einheit aus Körper\, Geist und Seele zu leben (Ying & Yang). Die K
+ raft des Gegners wird genutzt\, um ihn kampfunfähig zu machen. Anhand von Ü
+ bungen lernen wir "Stop" zu sagen\, Grenzen zu setzen und körperliche Angri
+ ffe abzuwehren. Bitte bequeme Kleidung und Turnschuhe mitbringen. 
+LAST-MODIFIED:20090811T092149Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Wing Zhun - Workshop
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090815T120000Z
+DTEND:20090815T213000Z
+DTSTAMP:20120418T213912Z
+UID:k82mspbrdpkmavpamhgqp6t5nk@google.com
+CLASS:PUBLIC
+CREATED:20090811T092052Z
+DESCRIPTION:15.08.09  Sa      \nCSD Bielefeld 2009 "69 - mehr als eine Stel
+ lung"\nBeim Straßenfest auf dem Siggi bieten wir einen Infostand und einen 
+ Becks-Getränkestand an.\nDer CSD startet unter dem Motto "69 - mehr als ein
+ e Stellung - Lesben und Schwule kämpfen seit 40 Jahren gegen Entwürdigung" 
+ um 14.00 Uhr mit der Parade an der Altstädter Nicolaikirche. Das Straßenfes
+ t am Siggi beginnt um 15.00 Uhr. Es erwarten euch Infostände und eine Showb
+ ühne mit tollem Progamm rund um die Headlinerband "Klee". Abends sind Parti
+ es im Forum und Ostbahnhof mit Shuttle-Service!\nMehr unter www.csd-bielefe
+ ld.de. 
+LAST-MODIFIED:20090811T092053Z
+LOCATION:Bielefeld (Innenstadt\, Siegfriedsplatz\, Forum\, Ostbahnhof\, Und
+ erground)
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:CSD Bielefeld 2009 "69 - mehr als eine Stellung"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090821T183000Z
+DTEND:20090821T203000Z
+DTSTAMP:20120418T213912Z
+UID:emri120r925k5ehgo3io9vc1j0@google.com
+CLASS:PUBLIC
+CREATED:20090811T091917Z
+DESCRIPTION:21.08.09  Fr Einlass:20.30 Uhr Beginn: 21.00 Uhr \nFraze-Kino "
+ Grüne Tomaten"\nHeute zeigen wir euch einen der Klassiker über Frauenfreund
+ schaft.\n(USA\, 1991\, R.: Jon Avnet\, D.: Kathy Bates\, Mary Stuart-Master
+ son)\n\n
+LAST-MODIFIED:20090811T091917Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino: "Grüne Tomaten"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090818T170000Z
+DTEND:20090818T190000Z
+DTSTAMP:20120418T213912Z
+UID:t6k1gjnjb8d7on8en1llh3s3jo@google.com
+CLASS:PUBLIC
+CREATED:20090811T091823Z
+DESCRIPTION:Schreibwerkstatt\nHier hat jede Frau die Möglichkeit eigene Tex
+ te jeglicher Art zu verfassen und mit Gleichgesinnten zu besprechen. Seid k
+ reativ! Bereits vorhandene Texte können selbstverständlich gerne mitgebrach
+ t werden. 
+LAST-MODIFIED:20090811T091823Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Schreibwerkstatt
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090929T170000Z
+DTEND:20090929T190000Z
+DTSTAMP:20120418T213912Z
+UID:trec2me9dmb183g3ctv3n2dpc0@google.com
+CLASS:PUBLIC
+CREATED:20090811T091441Z
+DESCRIPTION:Schreibwerkstatt\nHier hat jede Frau die Möglichkeit eigene Tex
+ te jeglicher Art zu verfassen und mit Gleichgesinnten zu besprechen. Seid k
+ reativ! Bereits vorhandene Texte können selbstverständlich gerne mitgebrach
+ t werden. 
+LAST-MODIFIED:20090811T091441Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Schreibwerkstatt
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090919T183000Z
+DTEND:20090919T203000Z
+DTSTAMP:20120418T213912Z
+UID:5e6hkdp5aiglsbtsntqrhtr6pk@google.com
+CLASS:PUBLIC
+CREATED:20090811T091307Z
+DESCRIPTION:18.09.09  Fr Einlass:20.30 Uhr Beginn: 21.00 Uhr \nFraze-Kino: 
+ "Itty Bitty Titty Committee"\nDas Mauerblümchen Anna arbeitet in einer Schö
+ nheitsklinik und begegnet eines Nachts Sadie\, die das Gebäude mit feminist
+ ischen Parolen besprüht. Sadie ist die charismatische Anführerin der radika
+ len Gruppe "Clits in Action"\, kurz C.I.A.\, die mit Guerilla-Aktionen femi
+ nistische Werte vermitteln will - für Anna eine völlig neue\, faszinierende
+  Welt. Sie verschreibt sich der Revolution und verliebt sich in Sadie. Doch
+  irgendwann gehen Liebe und Politik derartig durcheinander\, dass Anna sich
+  entscheiden muss: Aufgeben oder Weiterkämpfen?\n(USA 2007\, R.: Jamie Babb
+ it\, D.: Melonie Diaz\, Nicole Vicius)\n
+LAST-MODIFIED:20090811T091307Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Fraze-Kino: "Itty Bitty Titty Committee"
+TRANSP:OPAQUE
+END:VEVENT
+BEGIN:VEVENT
+DTSTART:20090915T170000Z
+DTEND:20090915T190000Z
+DTSTAMP:20120418T213912Z
+UID:qa9ees26ract4sajv80pi4lv6o@google.com
+CLASS:PUBLIC
+CREATED:20090811T091003Z
+DESCRIPTION:15.09.09  Di  19.00 Uhr  \nGeo-Caching\n(Treffpunkt im Frauenku
+ lturzentrum)\nWer Spaß am Unterwegssein\, am Draußensein und Spaß an der Su
+ che hat\, ist bei dieser Form der modernen Schnitzeljagd genau richtig! Unt
+ er Anleitung der erfahrenen Geocacherin Dagmar werden wir uns zu Fuß auf de
+ m Weg nach dem "Schatz" machen. Bitte Taschenlampe und bequemes Schuhwerk m
+ itbringen. 
+LAST-MODIFIED:20090811T091003Z
+LOCATION:Frauenkulturzentrum e.V.\, Meller Str.2\, 33613 Bielefeld
+SEQUENCE:0
+STATUS:CONFIRMED
+SUMMARY:Geo-Caching
+TRANSP:OPAQUE
+END:VEVENT
+END:VCALENDAR

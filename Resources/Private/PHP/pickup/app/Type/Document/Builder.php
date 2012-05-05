@@ -20,7 +20,7 @@ class Builder {
             return null;
         }
         unset($data['content']);
-        
+
         return self::build(
             Metadata\Builder::build($data,$options),
             $content
@@ -41,7 +41,7 @@ class Builder {
                 return new Feed($metaData, $content);
                 break;
 
-            
+
             case 'application/json':
                 return new Json($metaData, $content);
                 break;
@@ -51,13 +51,17 @@ class Builder {
             case 'application/xml':
                 return new Xml($metaData, $content);
                 break;
-            
-            
+
+			case 'text/calendar':
+                return new Ical($metaData, $content);
+                break;
+
+
             case 'text/html':
             case 'application/xhtml+xml':
             default:
                 return new Html($metaData, $content);
-                break;            
+                break;
         }
     }
 }

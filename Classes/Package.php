@@ -40,14 +40,15 @@ class Package extends BasePackage {
     public function boot(\TYPO3\FLOW3\Core\Bootstrap $bootstrap) {
         require_once $this->packagePath.'Resources/Private/PHP/pickup/app/init.php';
 		require_once $this->packagePath.'Resources/Private/PHP/ToDate/bootstrap.php';
-		
+		require_once $this->packagePath.'Resources/Private/PHP/SG-iCalendar/SG_iCal.php';
+
 		$dispatcher = $bootstrap->getSignalSlotDispatcher();
-		
+
 		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'importStarted', 'Org\Gucken\Events\Service\ImportLogService', 'importStarted');
 		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'factoidImported', 'Org\Gucken\Events\Service\ImportLogService', 'factoidImported');
 		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'exceptionThrown', 'Org\Gucken\Events\Service\ImportLogService', 'exceptionThrown');
 		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'importFinished', 'Org\Gucken\Events\Service\ImportLogService', 'importFinished');
-		
+
     }
 
 }

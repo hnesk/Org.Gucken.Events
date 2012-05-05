@@ -3,7 +3,7 @@
 namespace Type;
 
 /**
- * A Date Class 
+ * A Date Class
  *
  * @author jk
  */
@@ -48,9 +48,10 @@ class Date extends \Type\Base {
             $this->date->setTime($dateParts['hour'], $dateParts['minute'], $dateParts['second']);
             $this->date->setTimezone(new \DateTimeZone($dateParts['timezone']));
         } else if (\is_numeric($date)) {
-            $this->date = new\DateTime('@' . $date);
+            $this->date = new \DateTime('@' . $date);
+			$this->date->setTimezone(new \DateTimeZone('Europe/Berlin'));
         } else if (\is_array($date)) {
-            $this->date = new\DateTime();            
+            $this->date = new \DateTime();
             $this->date->setDate($date[0] , $date[1], $date[2]);
             $this->date->setTime(isset($date[3]) ? $date[3] : 0 , isset($date[4]) ? $date[4] : 0, isset($date[5]) ? $date[5] : 0);
         } else if (\is_string($date)) {
@@ -89,7 +90,7 @@ class Date extends \Type\Base {
             $parser = new Date\Parser($format, $defaults);
             if ($parser->match($time)) {
                 $timedDate = $parser->getDate();
-            }            
+            }
         } else if (\is_object($time)) {
             if ($time instanceof Date) {
                 $timedDate = $time->getNativeValue();
