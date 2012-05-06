@@ -24,7 +24,7 @@ namespace Org\Gucken\Events\Controller;
 use TYPO3\FLOW3\Annotations as FLOW3;
 
 /**
- * Login controller for the Events package 
+ * Login controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
@@ -35,30 +35,30 @@ class AccountController extends AbstractAdminController {
 	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
-	
-	
+
+
 	/**
 	 * @var \TYPO3\FLOW3\Security\Context
 	 */
-	protected $securityContext;	
-	
+	protected $securityContext;
+
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface $authenticationManager 
+	 * @param \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface $authenticationManager
 	 */
 	public function injectAuthenticationManager(\TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface $authenticationManager) {
 		$this->authenticationManager = $authenticationManager;
 	}
-	
+
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Security\Context $securityContext 
+	 * @param \TYPO3\FLOW3\Security\Context $securityContext
 	 */
 	public function injectSecurityContext(\TYPO3\FLOW3\Security\Context $securityContext) {
 		$this->securityContext = $securityContext;
 	}
 
-		
+
 	/**
 	 * Index action show login form
 	 *
@@ -66,7 +66,7 @@ class AccountController extends AbstractAdminController {
 	 */
 	public function indexAction() {
 	}
-	
+
 	/**
 	 * Calls the authentication manager to authenticate all active tokens
 	 * and redirects to the original intercepted request on success if there
@@ -85,15 +85,17 @@ class AccountController extends AbstractAdminController {
 			$authenticated = TRUE;
 		} catch (\TYPO3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
 		}
-		
 
 		if ($authenticated) {
 			$storedRequest = $this->securityContext->getInterceptedRequest();
 			if ($storedRequest !== NULL) {
-				$packageKey = $storedRequest->getControllerPackageKey();
-				$subpackageKey = $storedRequest->getControllerSubpackageKey();
-				if ($subpackageKey !== NULL) $packageKey .= '\\' . $subpackageKey;
-				$this->redirect($storedRequest->getControllerActionName(), $storedRequest->getControllerName(), $packageKey, $storedRequest->getArguments());
+				$mainRequest = $storedRequest->getMainRequest();
+				$packageKey = $mainRequest->getControllerPackageKey();
+				$subpackageKey = $mainRequest->getControllerSubpackageKey();
+				if ($subpackageKey !== NULL) {
+					$packageKey .= '\\' . $subpackageKey;
+				}
+				$this->redirect($mainRequest->getControllerActionName(), $mainRequest->getControllerName(), $packageKey, $mainRequest->getArguments());
 			} else {
 				$this->redirect('index','admin');
 			}
@@ -102,9 +104,11 @@ class AccountController extends AbstractAdminController {
 			return call_user_func(array($this, $this->errorMethodName));
 		}
 	}
+
+
 	public function getErrorFlashMessage() {
 		return new \TYPO3\FLOW3\Error\Error('Falscher Benutzername und/oder Passwort');
-		
+
 	}
 
 
