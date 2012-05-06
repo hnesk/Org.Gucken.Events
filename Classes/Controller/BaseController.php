@@ -279,7 +279,7 @@ class BaseController extends \TYPO3\FLOW3\Mvc\Controller\ActionController {
 	 * @return boolean
 	 */
 	public function isHtmlRequest() {
-		return in_array('html',$this->environment->getAcceptedFormats());
+		return strpos($this->request->getHttpRequest()->getHeaders()->get('Accept'), 'text/html') !== false;
 	}
 
 	/**
