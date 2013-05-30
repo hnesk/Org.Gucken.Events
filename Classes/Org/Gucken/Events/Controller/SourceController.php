@@ -77,7 +77,7 @@ class SourceController extends AbstractAdminController {
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\EventSource $source
-     * @Flow\IgnoreValidation({"source"})
+     * @Flow\IgnoreValidation("source")
      * @return void
      */
     public function addAction(Model\EventSource $source = null) {

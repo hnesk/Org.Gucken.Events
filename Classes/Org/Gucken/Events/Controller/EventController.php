@@ -103,7 +103,7 @@ class EventController extends AbstractAdminController {
 	/**
 	 *
 	 * @param Org\Gucken\Events\Domain\Model\Event $event
-	 * @Flow\IgnoreValidation({"event"})
+	 * @Flow\IgnoreValidation("event")
 	 * @return void
 	 */
 	public function addAction(Event $event = null) {
@@ -117,7 +117,7 @@ class EventController extends AbstractAdminController {
 	/**
 	 *
 	 * @param Org\Gucken\Events\Domain\Model\Event $event
-	 * @Flow\IgnoreValidation({"event"})
+	 * @Flow\IgnoreValidation("event")
 	 * @return void
 	 */
 	public function editAction(Event $event = null) {

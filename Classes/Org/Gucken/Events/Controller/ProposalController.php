@@ -62,7 +62,7 @@ class ProposalController extends BaseController {
 	/**
 	 * @param \Org\Gucken\Events\Domain\Model\EventProposal $proposal
 	 * @param boolean $chooseLocation
-	 * @Flow\IgnoreValidation({"proposal"})
+	 * @Flow\IgnoreValidation("proposal")
 	 */
 	public function proposeAction(\Org\Gucken\Events\Domain\Model\EventProposal $proposal = null) {
 		if (is_null($proposal)) {
