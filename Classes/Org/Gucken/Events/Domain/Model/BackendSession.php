@@ -22,13 +22,13 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * The backend session
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("session")
+ * @Flow\Scope("session")
  *
  */
 class BackendSession {

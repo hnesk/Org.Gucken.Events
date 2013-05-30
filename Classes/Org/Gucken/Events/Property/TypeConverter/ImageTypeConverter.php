@@ -13,14 +13,14 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * An type converter for Image objects; which are uploaded using plupload
  *
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class ImageTypeConverter extends \TYPO3\FLOW3\Property\TypeConverter\AbstractTypeConverter {
+class ImageTypeConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter {
 
 	/**
 	 * @var array<string>
@@ -38,8 +38,8 @@ class ImageTypeConverter extends \TYPO3\FLOW3\Property\TypeConverter\AbstractTyp
 	protected $priority = 2;
 
 	/**
-	 * @FLOW3\Inject
-	 * @var \TYPO3\FLOW3\Resource\ResourceManager
+	 * @Flow\Inject
+	 * @var \TYPO3\Flow\Resource\ResourceManager
 	 */
 	protected $resourceManager;
 
@@ -65,13 +65,13 @@ class ImageTypeConverter extends \TYPO3\FLOW3\Property\TypeConverter\AbstractTyp
 	 * @param array $source The upload info (expected keys: error, name, tmp_name)
 	 * @param string $targetType
 	 * @param array $convertedChildProperties
-	 * @param \TYPO3\FLOW3\Property\PropertyMappingConfigurationInterface $configuration
-	 * @return \TYPO3\Media\Domain\Model\Image An object or an instance of TYPO3\FLOW3\Error\Error if the input format is not supported or could not be converted for other reasons
+	 * @param \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration
+	 * @return \TYPO3\Media\Domain\Model\Image An object or an instance of TYPO3\Flow\Error\Error if the input format is not supported or could not be converted for other reasons
 	 */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\FLOW3\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
+	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
 		$resource = $this->resourceManager->importUploadedResource($_FILES['file']);
 		if ($resource === FALSE) {
-			throw new \TYPO3\FLOW3\Property\Exception\TypeConverterException('Resource could not be converted.', 1316428994);
+			throw new \TYPO3\Flow\Property\Exception\TypeConverterException('Resource could not be converted.', 1316428994);
 		}
 		$image = new \TYPO3\Media\Domain\Model\Image($resource);
 		$image->setTitle(''); // TODO: this should maybe be settable

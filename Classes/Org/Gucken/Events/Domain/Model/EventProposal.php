@@ -24,20 +24,20 @@ namespace Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A user entered event proposal
  *
- * @FLOW3\Scope("prototype")
- * @FLOW3\Entity
+ * @Flow\Scope("prototype")
+ * @Flow\Entity
  */
 class EventProposal extends EventFactoid {
 
 	/**
 	 *
 	 * @var string
-	 * @FLOW3\Validate(type="NotEmpty")
+	 * @Flow\Validate(type="NotEmpty")
 	 */
 	protected $locationText;
 
@@ -45,7 +45,7 @@ class EventProposal extends EventFactoid {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $sourceRepository;
 

@@ -24,36 +24,36 @@ namespace Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * An Event
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("prototype")
- * @FLOW3\Entity
+ * @Flow\Scope("prototype")
+ * @Flow\Entity
  */
 class Event {
 
 	/**
 	 * The title
 	 * @var string
-	 * @FLOW3\Validate(type="NotEmpty")
+	 * @Flow\Validate(type="NotEmpty")
 	 */
 	protected $title;
 
 	/**
 	 * The start date and time
 	 * @var \DateTime
-	 * @FLOW3\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
-	 * @FLOW3\Validate(type="NotEmpty")
+	 * @Flow\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
+	 * @Flow\Validate(type="NotEmpty")
 	 */
 	protected $startDateTime;
 
 	/**
 	 * The end date and time
 	 * @var \DateTime
-	 * @FLOW3\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
+	 * @Flow\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
 	 */
 	protected $endDateTime;
 
@@ -62,7 +62,7 @@ class Event {
 	 * The location
 	 * @var \Org\Gucken\Events\Domain\Model\Location
 	 * @ORM\ManyToOne
-	 * @FLOW3\Validate(type="NotEmpty")
+	 * @Flow\Validate(type="NotEmpty")
 	 */
 	protected $location;
 
@@ -77,7 +77,7 @@ class Event {
 	 * The type
 	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
 	 * @ORM\ManyToMany
-	 * @FLOW3\Validate(type="NotEmpty")
+	 * @Flow\Validate(type="NotEmpty")
 	 */
 	protected $types;
 
@@ -124,7 +124,7 @@ class Event {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Model\Day\Factory
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $dayFactory;
 

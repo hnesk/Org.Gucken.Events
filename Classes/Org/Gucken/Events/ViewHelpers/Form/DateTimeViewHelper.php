@@ -1,7 +1,7 @@
 <?php
 namespace Org\Gucken\Events\ViewHelpers\Form;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 
 class DateTimeViewHelper extends \TYPO3\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper {
@@ -13,8 +13,8 @@ class DateTimeViewHelper extends \TYPO3\Fluid\ViewHelpers\Form\AbstractFormField
 
 	/**
 	 *
-	 * @var \TYPO3\FLOW3\Property\PropertyMapper
-	 * @FLOW3\Inject
+	 * @var \TYPO3\Flow\Property\PropertyMapper
+	 * @Flow\Inject
 	 */
 	protected $propertyMapper;
 
@@ -22,7 +22,7 @@ class DateTimeViewHelper extends \TYPO3\Fluid\ViewHelpers\Form\AbstractFormField
 	/**
 	 *
 	 * @var \TYPO3\Fluid\Core\ViewHelper\TagBuilder
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $tagDateHidden;
 
@@ -30,14 +30,14 @@ class DateTimeViewHelper extends \TYPO3\Fluid\ViewHelpers\Form\AbstractFormField
 	/**
 	 *
 	 * @var \TYPO3\Fluid\Core\ViewHelper\TagBuilder
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $tagTime;
 
 	/**
 	 *
 	 * @var \TYPO3\Fluid\Core\ViewHelper\TagBuilder
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $tagTimeHidden;
 

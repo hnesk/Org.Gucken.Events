@@ -22,16 +22,16 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Converter which transform string to DateConditions.
  *
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class DateConditionConverter extends \TYPO3\FLOW3\Property\TypeConverter\AbstractTypeConverter {
+class DateConditionConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter {
 
 	/**
 	 * @var array<string>
@@ -50,7 +50,7 @@ class DateConditionConverter extends \TYPO3\FLOW3\Property\TypeConverter\Abstrac
 	 * @param string $targetType must be "\ToDate\Condition\AbstractDateCondition"
 	 * @return \ToDate\Condition\DateConditionInterface
 	 */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\FLOW3\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
+	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
 		$parser = new \ToDate\Parser\FormalDateExpressionParser($source);
 		$condition = $parser->parse();
 		return $condition ? $condition : new \ToDate\Condition\ErrorCondition("", $source);

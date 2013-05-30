@@ -25,7 +25,7 @@ use \Org\Gucken\Events\Domain\Model\Event;
 use Org\Gucken\Events\Domain\Model\Location;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Proposal controller to submit Events
@@ -36,21 +36,21 @@ class ProposalController extends BaseController {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $locationRepository;
 
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $typeRepository;
 
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $factoidIdentityRepository;
 
@@ -62,7 +62,7 @@ class ProposalController extends BaseController {
 	/**
 	 * @param \Org\Gucken\Events\Domain\Model\EventProposal $proposal
 	 * @param boolean $chooseLocation
-	 * @FLOW3\IgnoreValidation({"proposal"})
+	 * @Flow\IgnoreValidation({"proposal"})
 	 */
 	public function proposeAction(\Org\Gucken\Events\Domain\Model\EventProposal $proposal = null) {
 		if (is_null($proposal)) {
@@ -84,10 +84,10 @@ class ProposalController extends BaseController {
 	 * @param \Org\Gucken\Events\Domain\Model\EventProposal $proposal
 	 * @param string $locationText
 	 *
-	 * @FLOW3\Validate(argumentName="proposal.startDateTime",type="Org\Gucken\Events\Domain\Validator\FutureValidator")
-	 * @FLOW3\Validate(argumentName="proposal.startDateTime",type="NotEmpty")
-	 * @FLOW3\Validate(argumentName="proposal.title",type="NotEmpty")
-	 * @FLOW3\Validate(argumentName="proposal.type",type="NotEmpty")
+	 * @Flow\Validate(argumentName="proposal.startDateTime",type="Org\Gucken\Events\Domain\Validator\FutureValidator")
+	 * @Flow\Validate(argumentName="proposal.startDateTime",type="NotEmpty")
+	 * @Flow\Validate(argumentName="proposal.title",type="NotEmpty")
+	 * @Flow\Validate(argumentName="proposal.type",type="NotEmpty")
 	 */
 	public function validateAction(\Org\Gucken\Events\Domain\Model\EventProposal $proposal) {
 		$location = $this->locationRepository->findOneByExactAdress($proposal->getLocationText());

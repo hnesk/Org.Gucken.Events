@@ -25,7 +25,7 @@ use Org\Gucken\Events\Domain\Model\Event;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
 use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Lastfm\Type\Venue as Venue;
 
 /**
@@ -39,14 +39,14 @@ class FactoidConvertController extends AbstractAdminController {
 	/**
      *
      * @var \Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $identityRepository;
 
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\EventRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $eventRepository;
 
@@ -54,14 +54,14 @@ class FactoidConvertController extends AbstractAdminController {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Service\ConvertEventFactoidService
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $convertService;
 
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Model\BackendSession
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $backendSession;
 

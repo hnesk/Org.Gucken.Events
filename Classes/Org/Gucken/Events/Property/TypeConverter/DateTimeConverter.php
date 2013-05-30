@@ -22,7 +22,7 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Converter which transforms from different input formats into DateTime objects.
@@ -31,9 +31,9 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class DateTimeConverter extends \TYPO3\FLOW3\Property\TypeConverter\DateTimeConverter {
+class DateTimeConverter extends \TYPO3\Flow\Property\TypeConverter\DateTimeConverter {
 
 
 	/**
@@ -65,7 +65,7 @@ class DateTimeConverter extends \TYPO3\FLOW3\Property\TypeConverter\DateTimeConv
 
 		$time = \DateTime::createFromFormat($timeFormat, $timeAsString);
 		if (!$time) {
-			throw new \TYPO3\FLOW3\Property\Exception\TypeConverterException('Could not convert "'.$timeAsString.'" to a time specification in format "'.$timeFormat.'"', 1309383873);
+			throw new \TYPO3\Flow\Property\Exception\TypeConverterException('Could not convert "'.$timeAsString.'" to a time specification in format "'.$timeFormat.'"', 1309383873);
 		}
 		$date->setTime($time->format('H'), $time->format('i'), $time->format('s'));
 	}

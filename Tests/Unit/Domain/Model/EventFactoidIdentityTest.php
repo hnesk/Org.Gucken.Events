@@ -5,7 +5,7 @@ use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
 
 
-class EventFactoidIdentityTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
+class EventFactoidIdentityTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	
 	/**
 	 * @test 

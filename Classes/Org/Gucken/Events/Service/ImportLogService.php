@@ -5,15 +5,15 @@ namespace Org\Gucken\Events\Service;
 
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Repository;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
 class ImportLogService {
 
 	/**
-	 * @var \TYPO3\FLOW3\Log\SystemLoggerInterface
+	 * @var \TYPO3\Flow\Log\SystemLoggerInterface
 	 */
 	protected $systemLogger;
 	
@@ -26,9 +26,9 @@ class ImportLogService {
 	protected $logBySource = array();
 
 	/**
-	 * @param \TYPO3\FLOW3\Log\SystemLoggerInterface
+	 * @param \TYPO3\Flow\Log\SystemLoggerInterface
 	 */
-	public function injectSystemLogger(\TYPO3\FLOW3\Log\SystemLoggerInterface $systemLogger) {
+	public function injectSystemLogger(\TYPO3\Flow\Log\SystemLoggerInterface $systemLogger) {
 		$this->systemLogger = $systemLogger;
 	}
 	

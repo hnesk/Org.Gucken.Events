@@ -23,27 +23,27 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * An identifier for a location on an external website or service
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
 class ExternalLocationIdentifierFactory {
 
 	/**
 	 *
-	 * @var \TYPO3\FLOW3\Object\ObjectManagerInterface
-	 * @FLOW3\Inject 
+	 * @var \TYPO3\Flow\Object\ObjectManagerInterface
+	 * @Flow\Inject 
 	 */
 	protected $objectManager;
 	
 	/**
 	 *
-	 * @var \TYPO3\FLOW3\Reflection\ReflectionService
-	 * @FLOW3\Inject 
+	 * @var \TYPO3\Flow\Reflection\ReflectionService
+	 * @Flow\Inject 
 	 */
 	protected $reflectionService;
 	

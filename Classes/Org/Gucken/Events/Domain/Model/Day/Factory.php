@@ -3,13 +3,13 @@ namespace Org\Gucken\Events\Domain\Model\Day;
 use Org\Gucken\Events\Domain\Model\Day;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A Factory for Days, that ensures unique objects
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
 class Factory {
 

@@ -2,7 +2,7 @@
 
 namespace Org\Gucken\Events\Domain\Repository;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Org\Gucken\Events\Domain\Model\EventSearchRequest;
 
 
@@ -11,19 +11,19 @@ use Org\Gucken\Events\Domain\Model\EventSearchRequest;
  * @package Org.Gucken.Events
  * @subpackage Domain
  *
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository {
+class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository {
 
     protected $defaultOrderings = array(
-        'startDateTime' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING,
-		'source' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING,
+        'startDateTime' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING,
+		'source' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING,
     );
 
 	/**
 	 * @param \DateTime $startDateTime
 	 * @param \DateTime $endDateTime
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findUnassignedBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null) {
 		return $this->_findBetween($startDateTime, $endDateTime, true);
@@ -31,7 +31,7 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 
 	/**
 	 * @param \DateTime $day
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findUnassignedOn(\DateTime $day = null) {
 		$day = $day ? clone $day : new \DateTime();
@@ -46,7 +46,7 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 	/**
 	 * @param \DateTime $startDateTime
 	 * @param \DateTime $endDateTime
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null) {
 		return $this->_findBetween($startDateTime, $endDateTime);
@@ -55,7 +55,7 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 	/**
 	 *
 	 * @param \DateTime $startDateTime
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findAfter(\DateTime $startDateTime = null) {
 		return $this->_findBetween($startDateTime);
@@ -65,7 +65,7 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 	 * @param \DateTime $startDateTime
 	 * @param \DateTime $endDateTime
 	 * @param boolean $unassignedOnly
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	protected function _findBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null, $unassignedOnly = false) {
 		$startDateTime = $startDateTime ?: new \DateTime();
@@ -89,7 +89,7 @@ class EventFactoidIdentityRepository extends \TYPO3\FLOW3\Persistence\Repository
 	/**
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $searchRequest
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findBySearchRequest(EventSearchRequest $searchRequest) {
 		$query = $this->createQuery();

@@ -22,7 +22,7 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Converter which transforms from different input formats into DateTime objects.
@@ -31,9 +31,9 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @api
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class TypeUrlConverter extends \TYPO3\FLOW3\Property\TypeConverter\AbstractTypeConverter {
+class TypeUrlConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter {
 
 	/**
 	 * @var array<string>
@@ -52,7 +52,7 @@ class TypeUrlConverter extends \TYPO3\FLOW3\Property\TypeConverter\AbstractTypeC
 	 * @param string $targetType must be "\Type\Url"
 	 * @return \Type\Url
 	 */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\FLOW3\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
+	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
                return new \Type\Url($source);
 	}
 }

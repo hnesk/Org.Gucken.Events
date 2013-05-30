@@ -23,8 +23,8 @@ namespace Org\Gucken\Events\Command;
  *                                                                        */
 
 use Org\Gucken\Events\Domain\Model\Location as Location;
-use TYPO3\FLOW3\Annotations as FLOW3;
-use TYPO3\FLOW3\Cli\CommandController as CommandController;
+use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Cli\CommandController as CommandController;
 
 /**
  * Command controller for the Importer
@@ -35,7 +35,7 @@ class LocationCommandController extends CommandController {
 
 
     /**
-     * @FLOW3\Inject
+     * @Flow\Inject
      * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
      */
     protected $locationRepository;

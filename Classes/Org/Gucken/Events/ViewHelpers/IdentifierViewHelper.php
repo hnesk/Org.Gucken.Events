@@ -1,7 +1,7 @@
 <?php
 namespace Org\Gucken\Events\ViewHelpers;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  */
@@ -9,17 +9,17 @@ class IdentifierViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelp
 	
 	/**
 	 *
-	 * @var \TYPO3\FLOW3\Persistence\PersistenceManagerInterface 
+	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface 
 	 */
 	protected $persistenceManager;
 	
 	/**
 	 * Injects the FLOW3 Persistence Manager
 	 *
-	 * @param \TYPO3\FLOW3\Persistence\PersistenceManagerInterface $persistenceManager
+	 * @param \TYPO3\Flow\Persistence\PersistenceManagerInterface $persistenceManager
 	 * @return void
 	 */
-	public function injectPersistenceManager(\TYPO3\FLOW3\Persistence\PersistenceManagerInterface $persistenceManager) {
+	public function injectPersistenceManager(\TYPO3\Flow\Persistence\PersistenceManagerInterface $persistenceManager) {
 		$this->persistenceManager = $persistenceManager;
 	}
 	/**

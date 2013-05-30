@@ -2,7 +2,7 @@
 
 namespace Org\Gucken\Events\Domain\Repository;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A repository for HTTP Documents or a: Cache
@@ -11,12 +11,12 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @subpackage Domain
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * 
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class DocumentRepository extends \TYPO3\FLOW3\Persistence\Repository {
+class DocumentRepository extends \TYPO3\Flow\Persistence\Repository {
 
 	protected $defaultOrderings = array(
-		'localTime' =>  \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING
+		'localTime' =>  \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING
 	);
 	
 	/**

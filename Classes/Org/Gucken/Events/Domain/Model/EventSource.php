@@ -3,7 +3,7 @@
 namespace Org\Gucken\Events\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * This script belongs to the FLOW3 package "Events".                     *
@@ -29,8 +29,8 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * An event source
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("prototype")
- * @FLOW3\Entity
+ * @Flow\Scope("prototype")
+ * @Flow\Entity
  */
 class EventSource {
 
@@ -74,63 +74,63 @@ class EventSource {
 
 
 	/**
-     * @FLOW3\Inject
-     * @var \TYPO3\FLOW3\Property\PropertyMapper
+     * @Flow\Inject
+     * @var \TYPO3\Flow\Property\PropertyMapper
      */
     protected $propertyMapper;
 
     /**
-     * @FLOW3\Inject
+     * @Flow\Inject
      * @var Org\Gucken\Rad\Service\ReflectionService
      */
     protected $repositoryReflectionService;
 
     /**
-     * @FLOW3\Inject
+     * @Flow\Inject
      * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
      */
     protected $importLogEntryRepository;
 
     /**
-     * @var \TYPO3\FLOW3\Reflection\ReflectionService
+     * @var \TYPO3\Flow\Reflection\ReflectionService
      */
     protected $reflectionService;
 
     /**
-     * @var \TYPO3\FLOW3\Object\ObjectManager
+     * @var \TYPO3\Flow\Object\ObjectManager
      */
     protected $objectManager;
 
 
 
 	/**
-	 * @param \TYPO3\FLOW3\Reflection\ReflectionService $reflectionService
+	 * @param \TYPO3\Flow\Reflection\ReflectionService $reflectionService
 	 */
-	public function injectReflectionService(\TYPO3\FLOW3\Reflection\ReflectionService $reflectionService) {
+	public function injectReflectionService(\TYPO3\Flow\Reflection\ReflectionService $reflectionService) {
 		$this->reflectionService = $reflectionService;
 	}
 
 	/**
-	 * @param \TYPO3\FLOW3\Object\ObjectManagerInterface $objectManager
+	 * @param \TYPO3\Flow\Object\ObjectManagerInterface $objectManager
 	 */
-	public function injectObjectManager(\TYPO3\FLOW3\Object\ObjectManagerInterface $objectManager) {
+	public function injectObjectManager(\TYPO3\Flow\Object\ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
 
 
 
 	/**
-	 * @var \TYPO3\FLOW3\Validation\ValidatorResolver
+	 * @var \TYPO3\Flow\Validation\ValidatorResolver
 	 */
 	protected $validatorResolver;
 
 	/**
 	 * Injects the validator resolver
 	 *
-	 * @param \TYPO3\FLOW3\Validation\ValidatorResolver $validatorResolver
+	 * @param \TYPO3\Flow\Validation\ValidatorResolver $validatorResolver
 	 * @return void
 	 */
-	public function injectValidatorResolver(\TYPO3\FLOW3\Validation\ValidatorResolver $validatorResolver) {
+	public function injectValidatorResolver(\TYPO3\Flow\Validation\ValidatorResolver $validatorResolver) {
 		$this->validatorResolver = $validatorResolver;
 	}
     /**
@@ -240,11 +240,11 @@ class EventSource {
      */
     public function setImplementationClass($implementationClass) {
         if (!\class_exists($implementationClass)) {
-            throw new \TYPO3\FLOW3\Aop\Exception\InvalidArgumentException('Argument needs to be a class name, "' . $implementationClass . '" given', 1314480311);
+            throw new \TYPO3\Flow\Aop\Exception\InvalidArgumentException('Argument needs to be a class name, "' . $implementationClass . '" given', 1314480311);
         }
 		$implementation = $this->objectManager->get($implementationClass);
 		if (!$implementation instanceof \Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface) {
-            throw new \TYPO3\FLOW3\Aop\Exception\InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, ' . $implementationClass . ' given', 1314480281);
+            throw new \TYPO3\Flow\Aop\Exception\InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, ' . $implementationClass . ' given', 1314480281);
         }
         $this->implementationClass = $implementationClass;
     }
@@ -302,7 +302,7 @@ class EventSource {
 					$repository = $this->repositoryReflectionService->getRepositoryFor($type);
 					if ($repository && $repository->findByIdentifier($rawValue)) {
 						$value = $this->propertyMapper->convert($rawValue, $type);
-					} else if (\TYPO3\FLOW3\Utility\TypeHandling::isLiteral($type)) {
+					} else if (\TYPO3\Flow\Utility\TypeHandling::isLiteral($type)) {
 						$value = $rawValue;
 					} else {
 						$value = $this->propertyMapper->convert($rawValue, $type);
@@ -311,7 +311,7 @@ class EventSource {
 					$value = '';
 				}
 			} else {
-                if (\TYPO3\FLOW3\Utility\TypeHandling::isLiteral($type)) {
+                if (\TYPO3\Flow\Utility\TypeHandling::isLiteral($type)) {
                     $value = '';
                 } else {
                     $value = $this->objectManager->get($type);
@@ -363,7 +363,7 @@ class EventSource {
         // configure object
         foreach ($this->getParameterProperties() as $key => $property) {
 			try {
-				\TYPO3\FLOW3\Reflection\ObjectAccess::setProperty($implementation, $key, $property);
+				\TYPO3\Flow\Reflection\ObjectAccess::setProperty($implementation, $key, $property);
 			} catch (\Exception $e) {}
         }
         return $implementation;
@@ -371,7 +371,7 @@ class EventSource {
 
 	/**
 	 *
-	 * @return \TYPO3\FLOW3\Error\Result
+	 * @return \TYPO3\Flow\Error\Result
 	 */
 	public function validate() {
 		$implementation = $this->getImplementation();

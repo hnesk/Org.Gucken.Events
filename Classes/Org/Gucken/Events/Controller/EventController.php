@@ -25,7 +25,7 @@ use Org\Gucken\Events\Domain\Model\Event;
 use Org\Gucken\Events\Domain\Model\EventSearchRequest;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Standard controller for the Events package
@@ -36,21 +36,21 @@ class EventController extends AbstractAdminController {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\EventRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $eventRepository;
 
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $locationRepository;
 
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Model\BackendSession
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $backendSession;
 
@@ -59,7 +59,7 @@ class EventController extends AbstractAdminController {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $typeRepository;
 
@@ -103,7 +103,7 @@ class EventController extends AbstractAdminController {
 	/**
 	 *
 	 * @param Org\Gucken\Events\Domain\Model\Event $event
-	 * @FLOW3\IgnoreValidation({"event"})
+	 * @Flow\IgnoreValidation({"event"})
 	 * @return void
 	 */
 	public function addAction(Event $event = null) {
@@ -117,7 +117,7 @@ class EventController extends AbstractAdminController {
 	/**
 	 *
 	 * @param Org\Gucken\Events\Domain\Model\Event $event
-	 * @FLOW3\IgnoreValidation({"event"})
+	 * @Flow\IgnoreValidation({"event"})
 	 * @return void
 	 */
 	public function editAction(Event $event = null) {

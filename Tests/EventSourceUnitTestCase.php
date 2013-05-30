@@ -3,7 +3,7 @@ namespace Org\Gucken\Events\Tests;
 
 require_once __DIR__.'/../Resources/Private/PHP/pickup/app/init.php';
 
-class EventSourceUnitTestCase extends \TYPO3\FLOW3\Tests\UnitTestCase {	
+class EventSourceUnitTestCase extends \TYPO3\Flow\Tests\UnitTestCase {	
 	
 	/**
 	 * @var string

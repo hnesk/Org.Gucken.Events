@@ -27,8 +27,8 @@ use Org\Gucken\Events\Domain\Model\Location as Location;
 use Org\Gucken\Events\Domain\Model\PostalAddress as PostalAddress;
 use Org\Gucken\Events\Domain\Model\GeoCoordinates as GeoCoordinates;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
-use TYPO3\FLOW3\Cli\CommandController as CommandController;
+use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Cli\CommandController as CommandController;
 
 /**
  * Command controller for the Importer
@@ -39,13 +39,13 @@ class InitialImportCommandController extends CommandController {
 
 	/**
 	 * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $locationRepository;
 
 	/**
 	 * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $typeRepository;
 

@@ -5,7 +5,7 @@ namespace Org\Gucken\Events\Service;
 
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Repository;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 
 class ImportEventFactoidsService {
@@ -13,21 +13,21 @@ class ImportEventFactoidsService {
     /**
      *
      * @var Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $eventFactoidIdentityRepository;	
 
     /**
      *
      * @var Org\Gucken\Events\Domain\Repository\EventSourceRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $eventSourceRepository;
 	
     /**
      *
      * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $importLogRepository;
 	
@@ -76,7 +76,7 @@ class ImportEventFactoidsService {
 	
 	/**
 	 * @param Model\EventSource $source
-	 * @FLOW3\Signal
+	 * @Flow\Signal
 	 */
 	protected function emitImportStarted(Model\EventSource $source) {}	
 	
@@ -86,21 +86,21 @@ class ImportEventFactoidsService {
 	 * @param Model\EventFactoidIdentity $identity
 	 * @param Model\EventFactoid $factoid
 	 * @param boolean $isNewFactoid
-	 * @FLOW3\Signal
+	 * @Flow\Signal
 	 */
 	protected function emitFactoidImported(Model\EventSource $source, Model\EventFactoidIdentity $identity, Model\EventFactoid $factoid, $isNewFactoid) {}		
 
 	/**
 	 * @param Model\EventSource $source
 	 * @param \Exception $e
-	 * @FLOW3\Signal
+	 * @Flow\Signal
 	 */
 	protected function emitExceptionThrown(Model\EventSource $source, $e) {}	
 	
 	
 	/**
 	 * @param Model\EventSource $source
-	 * @FLOW3\Signal
+	 * @Flow\Signal
 	 */
 	protected function emitImportFinished(Model\EventSource $source) {}	
 	

@@ -24,8 +24,8 @@ namespace Org\Gucken\Events\Command;
 
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
-use TYPO3\FLOW3\Cli\CommandController as CommandController;
+use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Cli\CommandController as CommandController;
 
 /**
  * Command controller for User Management
@@ -35,27 +35,27 @@ use TYPO3\FLOW3\Cli\CommandController as CommandController;
 class AccountCommandController extends CommandController {
 
 	/**
-	 * @var \TYPO3\FLOW3\Security\AccountRepository
-	 * @FLOW3\Inject
+	 * @var \TYPO3\Flow\Security\AccountRepository
+	 * @Flow\Inject
 	 */
 	protected $accountRepository;
 
 
 	/**
-	 * @var \TYPO3\FLOW3\Security\AccountFactory
-	 * @FLOW3\Inject
+	 * @var \TYPO3\Flow\Security\AccountFactory
+	 * @Flow\Inject
 	 */
 	protected $accountFactory;
 
 	/**
-	 * @var \TYPO3\FLOW3\Security\Cryptography\HashService
-	 * @FLOW3\Inject
+	 * @var \TYPO3\Flow\Security\Cryptography\HashService
+	 * @Flow\Inject
 	 */
 	protected $hashService;
 
 	/**
-	 * @FLOW3\Inject
-	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
+	 * @Flow\Inject
+	 * @var \TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
@@ -158,7 +158,7 @@ class AccountCommandController extends CommandController {
 		}
 
 		foreach ($roles as $role) {
-			$existingAccount->addRole(new \TYPO3\FLOW3\Security\Policy\Role($role));
+			$existingAccount->addRole(new \TYPO3\Flow\Security\Policy\Role($role));
 		}
 		$this->accountRepository->update($existingAccount);
 
@@ -187,7 +187,7 @@ class AccountCommandController extends CommandController {
 		}
 
 		foreach ($roles as $role) {
-			$existingAccount->removeRole(new \TYPO3\FLOW3\Security\Policy\Role($role));
+			$existingAccount->removeRole(new \TYPO3\Flow\Security\Policy\Role($role));
 		}
 		$this->accountRepository->update($existingAccount);
 
@@ -212,7 +212,7 @@ class AccountCommandController extends CommandController {
 
 		$message = '"'.$existingAccount->getAccountIdentifier().'" has the following roles';
 		foreach ($existingAccount->getRoles() as $role) {
-			/* @var $role \TYPO3\FLOW3\Security\Policy\Role */
+			/* @var $role \TYPO3\Flow\Security\Policy\Role */
 			$message .= "\t * ".$role.PHP_EOL;
 		}
 
@@ -237,7 +237,7 @@ class AccountCommandController extends CommandController {
 			'Roles'.PHP_EOL;
 
 		foreach ($accounts as $account) {
-			/* @var $account \TYPO3\FLOW3\Security\Account */
+			/* @var $account \TYPO3\Flow\Security\Account */
 			if (is_null($filterRole) || $this->hasRole($account, $filterRole)) {
 				$message .= $this->formatAccount($account) . PHP_EOL;
 			}
@@ -247,11 +247,11 @@ class AccountCommandController extends CommandController {
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Security\Account $account
+	 * @param \TYPO3\Flow\Security\Account $account
 	 * @param string $filterRole
 	 * @return boolean
 	 */
-	protected function hasRole(\TYPO3\FLOW3\Security\Account $account, $filterRole) {
+	protected function hasRole(\TYPO3\Flow\Security\Account $account, $filterRole) {
 		foreach ($account->getRoles() as $role) {
 			if ($filterRole == $role) {
 				return true;
@@ -262,10 +262,10 @@ class AccountCommandController extends CommandController {
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Security\Account $account
+	 * @param \TYPO3\Flow\Security\Account $account
 	 * @return string
 	 */
-	protected function formatAccount(\TYPO3\FLOW3\Security\Account $account) {
+	protected function formatAccount(\TYPO3\Flow\Security\Account $account) {
 		$message =
 			\str_pad($account->getAccountIdentifier(), 20) . "\t" .
 			str_pad($account->getCreationDate()->format('Y-m-d H:i:s'), 20). "\t" .

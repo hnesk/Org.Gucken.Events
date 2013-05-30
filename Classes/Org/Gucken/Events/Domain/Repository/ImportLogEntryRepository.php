@@ -1,7 +1,7 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A repository for import log entries
@@ -9,18 +9,18 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @package Org.Gucken.Events
  * @subpackage Domain
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {
+class ImportLogEntryRepository extends \TYPO3\Flow\Persistence\Repository {
 
 	protected $defaultOrderings = array(
-		'startTime' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING
+		'startTime' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING
 	);
 
 	/**
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface 
 	 */
 	public function findLastBySource(\Org\Gucken\Events\Domain\Model\EventSource $source) {		
 		$query = $this->createQuery();
@@ -33,7 +33,7 @@ class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
 	 * @param \DateTime $start
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface 
 	 */
 	public function findBySourceAndDate(\Org\Gucken\Events\Domain\Model\EventSource $source, \DateTime $start) {
 		$query = $this->createQuery();
@@ -50,7 +50,7 @@ class ImportLogEntryRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
 	 * @param \DateTime $start
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface 
 	 */
 	public function findWithErrorsBySourceAndDate(\Org\Gucken\Events\Domain\Model\EventSource $source, \DateTime $start) {
 		$query = $this->createQuery();

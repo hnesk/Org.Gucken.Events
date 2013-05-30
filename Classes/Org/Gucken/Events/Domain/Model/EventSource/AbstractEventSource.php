@@ -8,7 +8,7 @@ use Type\Url,
 	Type\Feed;
 
 use Org\Gucken\Events\Annotations as Events,
-	TYPO3\FLOW3\Annotations as FLOW3;
+	TYPO3\Flow\Annotations as Flow;
 
 /**
  */
@@ -22,14 +22,14 @@ class AbstractEventSource  {
 
 
     /**
-     * @FLOW3\Inject
+     * @Flow\Inject
      * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
      */
     protected $locationRepository;
 
 
     /**
-     * @FLOW3\Inject
+     * @Flow\Inject
      * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
      */
     protected $typeRepository;

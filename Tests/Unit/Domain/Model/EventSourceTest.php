@@ -2,7 +2,7 @@
 namespace Org\Gucken\Events\Tests\Unit\Domain\Model;
 
 
-class EventSourceTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
+class EventSourceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	
 	/**
 	 * @test 

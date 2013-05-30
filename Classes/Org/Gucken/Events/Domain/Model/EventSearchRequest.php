@@ -22,7 +22,7 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Org\Gucken\Events\Domain\Model\Location;
 use Org\Gucken\Events\Domain\Model\Type;
 use Org\Gucken\Events\Domain\Model\AbstractSearchRequest;
@@ -30,7 +30,7 @@ use Org\Gucken\Events\Domain\Model\AbstractSearchRequest;
  * An Event search request
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  *
  */
 class EventSearchRequest extends AbstractSearchRequest {
@@ -70,7 +70,7 @@ class EventSearchRequest extends AbstractSearchRequest {
 	/**
 	 *
 	 * @var string
-	 * @FLOW3\Validate(type="\Org\Gucken\Events\Domain\Validator\PropertyNameValidator", options = {"class" = "\Org\Gucken\Events\Domain\Model\Event"})
+	 * @Flow\Validate(type="\Org\Gucken\Events\Domain\Validator\PropertyNameValidator", options = {"class" = "\Org\Gucken\Events\Domain\Model\Event"})
 	 */
 	protected $orderColumn;
 
@@ -79,7 +79,7 @@ class EventSearchRequest extends AbstractSearchRequest {
 	 * @param \DateTime $startDate
 	 * @param \DateTime $endDate
 	 */
-	public function __construct($startDate = null, $endDate = null, $title = null, $type = null, $location = null, $orderColumn = 'startDateTime', $orderDirection = \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING) {
+	public function __construct($startDate = null, $endDate = null, $title = null, $type = null, $location = null, $orderColumn = 'startDateTime', $orderDirection = \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING) {
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
 		$this->setTitle($title);
@@ -100,7 +100,7 @@ class EventSearchRequest extends AbstractSearchRequest {
 	/**
 	 *
 	 * @param string $title
-	 * @FLOW3\Session(autoStart=true)
+	 * @Flow\Session(autoStart=true)
 	 */
 	public function setTitle($title) {
 		$this->title= $title;
@@ -135,7 +135,7 @@ class EventSearchRequest extends AbstractSearchRequest {
 	/**
 	 *
 	 * @param \DateTime $endDate
-	 * @FLOW3\Session(autoStart=true)
+	 * @Flow\Session(autoStart=true)
 	 */
 	public function setEndDate(\DateTime $endDate = null) {
 		if (!$endDate) {
@@ -185,10 +185,10 @@ class EventSearchRequest extends AbstractSearchRequest {
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Persistence\QueryInterface $query
-	 * @return \TYPO3\FLOW3\Persistence\QueryInterface
+	 * @param \TYPO3\Flow\Persistence\QueryInterface $query
+	 * @return \TYPO3\Flow\Persistence\QueryInterface
 	 */
-	public function buildFilters(\TYPO3\FLOW3\Persistence\QueryInterface $query) {
+	public function buildFilters(\TYPO3\Flow\Persistence\QueryInterface $query) {
 		$conditions = array();
 
 		if ($this->getStartDate()) {

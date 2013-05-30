@@ -2,25 +2,25 @@
 namespace Org\Gucken\Events\Domain\Validator;
 
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A Validator for property names of a class
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  */
-class PropertyNameValidator extends \TYPO3\FLOW3\Validation\Validator\AbstractValidator {
+class PropertyNameValidator extends \TYPO3\Flow\Validation\Validator\AbstractValidator {
 
 	/**
 	 *
-	 * @var \TYPO3\FLOW3\Reflection\ReflectionService
+	 * @var \TYPO3\Flow\Reflection\ReflectionService
 	 */
 	protected $reflectionService;
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Reflection\ReflectionService $reflectionService
+	 * @param \TYPO3\Flow\Reflection\ReflectionService $reflectionService
 	 */
-	public function injectReflectionService(\TYPO3\FLOW3\Reflection\ReflectionService $reflectionService) {
+	public function injectReflectionService(\TYPO3\Flow\Reflection\ReflectionService $reflectionService) {
 		$this->reflectionService = $reflectionService;
 	}
 
@@ -34,7 +34,7 @@ class PropertyNameValidator extends \TYPO3\FLOW3\Validation\Validator\AbstractVa
 	 */
 	protected function isValid($value) {
 		if (!isset($this->options['class'])) {
-			throw new \TYPO3\FLOW3\Validation\Exception\InvalidValidationOptionsException('"class" in PropertyNameValidator was empty.', 1333376577);
+			throw new \TYPO3\Flow\Validation\Exception\InvalidValidationOptionsException('"class" in PropertyNameValidator was empty.', 1333376577);
 		}
 
 		$className = $this->options['class'];

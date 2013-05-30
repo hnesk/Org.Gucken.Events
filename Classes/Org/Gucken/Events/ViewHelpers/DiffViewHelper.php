@@ -1,7 +1,7 @@
 <?php
 namespace Org\Gucken\Events\ViewHelpers;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Org\Gucken\Events\Utility;
 
 /**
@@ -9,15 +9,15 @@ use Org\Gucken\Events\Utility;
 class DiffViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
 	
 	/**
-	 * @var \TYPO3\FLOW3\Reflection\ReflectionService
+	 * @var \TYPO3\Flow\Reflection\ReflectionService
 	 */
 	protected $localReflectionService;
 	
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Reflection\ReflectionService $reflectionService 
+	 * @param \TYPO3\Flow\Reflection\ReflectionService $reflectionService 
 	 */
-	public function injectLocalReflectionService(\TYPO3\FLOW3\Reflection\ReflectionService $reflectionService) {
+	public function injectLocalReflectionService(\TYPO3\Flow\Reflection\ReflectionService $reflectionService) {
 		$this->localReflectionService = $reflectionService;
 	}
 	
@@ -54,7 +54,7 @@ class DiffViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
 	}
 
 	protected function propertyAsString($object,$property) {
-		$value = \TYPO3\FLOW3\Reflection\ObjectAccess::getPropertyInternal($object, $property, false, $exists);
+		$value = \TYPO3\Flow\Reflection\ObjectAccess::getPropertyInternal($object, $property, false, $exists);
 		if (is_object($value)) {
 			if ($value instanceof \DateTime) {
 				return $value->format('d.M.Y H:i');

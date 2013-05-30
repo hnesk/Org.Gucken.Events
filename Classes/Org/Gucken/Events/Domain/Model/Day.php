@@ -21,7 +21,7 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A Wrapper for \DateTime which only saves the date
@@ -30,7 +30,7 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * or do I missunderstand the purpose of valueobject?
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  */
 class Day {
 	/**

@@ -22,7 +22,7 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Org\Gucken\Events\Domain\Model\Location;
 use Org\Gucken\Events\Domain\Model\Type;
 
@@ -30,7 +30,7 @@ use Org\Gucken\Events\Domain\Model\Type;
  * An Event search request
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  *
  */
 class LocationSearchRequest extends AbstractSearchRequest {
@@ -60,7 +60,7 @@ class LocationSearchRequest extends AbstractSearchRequest {
 	 * @param string $orderColumn
 	 * @param string $orderDirection
 	 */
-	public function __construct($name = null, $reviewed = null, $city = null,$orderColumn = 'name', $orderDirection = \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_DESCENDING) {
+	public function __construct($name = null, $reviewed = null, $city = null,$orderColumn = 'name', $orderDirection = \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING) {
 		$this->setName($name);
 		$this->setReviewed($reviewed);
 		$this->setCity($city);
@@ -119,10 +119,10 @@ class LocationSearchRequest extends AbstractSearchRequest {
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Persistence\QueryInterface $query
+	 * @param \TYPO3\Flow\Persistence\QueryInterface $query
 	 * @return array
 	 */
-	public function buildFilters(\TYPO3\FLOW3\Persistence\QueryInterface $query) {
+	public function buildFilters(\TYPO3\Flow\Persistence\QueryInterface $query) {
 		$conditions = array();
 
 		if ($this->getName()) {

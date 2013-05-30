@@ -2,10 +2,10 @@
 
 namespace Org\Gucken\Events\Utility;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
- * @FLOW3\Scope("singleton") 
+ * @Flow\Scope("singleton") 
  */
 class Algorithms {
 	/*

@@ -1,7 +1,7 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Org\Gucken\Events\Domain\Model\EventSearchRequest;
 
 /**
@@ -11,15 +11,15 @@ use Org\Gucken\Events\Domain\Model\EventSearchRequest;
  * @subpackage Domain
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
+class EventRepository extends \TYPO3\Flow\Persistence\Doctrine\Repository {
 
 
 	protected $midnightHour = 0;
 
     protected $defaultOrderings = array(
-        'startDateTime' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING,
+        'startDateTime' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING,
     );
 
 	public function injectSettings($settings) {
@@ -28,7 +28,7 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 
 	/**
 	 * @param \DateTime $day
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findOn(\DateTime $day = null) {
 		$day = $day ? clone $day : new \DateTime();
@@ -42,7 +42,7 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	/**
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $searchRequest
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findBySearchRequest(EventSearchRequest $searchRequest) {
 		$query = $this->createQuery();
@@ -54,7 +54,7 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	 *
 	 * @param \DateTime $startDateTime
 	 * @param \DateTime $endDateTime
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findBetween(\DateTime $startDateTime = null, $endDateTime = null) {
 		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
@@ -76,7 +76,7 @@ class EventRepository extends \TYPO3\FLOW3\Persistence\Doctrine\Repository {
 	/**
 	 *
 	 * @param \DateTime $date
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findAfter(\DateTime $startDateTime = null) {
 		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();

@@ -6,7 +6,7 @@ use Org\Gucken\Events\Domain\Model\EventFactoid;
 use Org\Gucken\Events\Service\ConvertEventFactoidService;
 
 
-class ConvertEventFactoidServiceTest extends \TYPO3\FLOW3\Tests\UnitTestCase {
+class ConvertEventFactoidServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	
 	/**
 	 *

@@ -21,7 +21,7 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Login controller for the Events package
@@ -32,29 +32,29 @@ class AccountController extends AbstractAdminController {
 
 	/**
 	 * The authentication manager
-	 * @var \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface
+	 * @var \TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface
 	 */
 	protected $authenticationManager;
 
 
 	/**
-	 * @var \TYPO3\FLOW3\Security\Context
+	 * @var \TYPO3\Flow\Security\Context
 	 */
 	protected $securityContext;
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface $authenticationManager
+	 * @param \TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface $authenticationManager
 	 */
-	public function injectAuthenticationManager(\TYPO3\FLOW3\Security\Authentication\AuthenticationManagerInterface $authenticationManager) {
+	public function injectAuthenticationManager(\TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface $authenticationManager) {
 		$this->authenticationManager = $authenticationManager;
 	}
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Security\Context $securityContext
+	 * @param \TYPO3\Flow\Security\Context $securityContext
 	 */
-	public function injectSecurityContext(\TYPO3\FLOW3\Security\Context $securityContext) {
+	public function injectSecurityContext(\TYPO3\Flow\Security\Context $securityContext) {
 		$this->securityContext = $securityContext;
 	}
 
@@ -83,7 +83,7 @@ class AccountController extends AbstractAdminController {
 		try {
 			$this->authenticationManager->authenticate();
 			$authenticated = TRUE;
-		} catch (\TYPO3\FLOW3\Security\Exception\AuthenticationRequiredException $exception) {
+		} catch (\TYPO3\Flow\Security\Exception\AuthenticationRequiredException $exception) {
 		}
 
 		if ($authenticated) {
@@ -107,7 +107,7 @@ class AccountController extends AbstractAdminController {
 
 
 	public function getErrorFlashMessage() {
-		return new \TYPO3\FLOW3\Error\Error('Falscher Benutzername und/oder Passwort');
+		return new \TYPO3\Flow\Error\Error('Falscher Benutzername und/oder Passwort');
 
 	}
 

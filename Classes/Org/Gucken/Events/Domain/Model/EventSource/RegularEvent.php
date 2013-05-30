@@ -5,10 +5,10 @@ namespace Org\Gucken\Events\Domain\Model\EventSource;
 use Type\Url;
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Annotations as Events;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  */
 class RegularEvent implements EventSourceInterface {
 
@@ -22,8 +22,8 @@ class RegularEvent implements EventSourceInterface {
 
 	/**
 	 * @Events\Configurable
-	 * @FLOW3\Validate(type="\Org\Gucken\Events\Domain\Validator\DateConditionValidator")
-	 * @FLOW3\Validate(type="NotEmpty")
+	 * @Flow\Validate(type="\Org\Gucken\Events\Domain\Validator\DateConditionValidator")
+	 * @Flow\Validate(type="NotEmpty")
 	 * @var \ToDate\Condition\AbstractDateCondition
 	 */
 	protected $dateCondition;

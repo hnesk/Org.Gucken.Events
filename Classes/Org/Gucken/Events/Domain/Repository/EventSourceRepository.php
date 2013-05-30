@@ -1,8 +1,8 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
-use TYPO3\FLOW3\Persistence\QueryInterface;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Persistence\QueryInterface;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A repository for Events
@@ -11,16 +11,16 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @subpackage Domain
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * 
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class EventSourceRepository extends \TYPO3\FLOW3\Persistence\Repository {
+class EventSourceRepository extends \TYPO3\Flow\Persistence\Repository {
 	protected $defaultOrderings = array(
 		'name' => QueryInterface::ORDER_ASCENDING
 	);
 	
 	/**
 	 *
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface 
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface 
 	 */
 	public function findAllActive() {
 		$query = $this->createQuery();

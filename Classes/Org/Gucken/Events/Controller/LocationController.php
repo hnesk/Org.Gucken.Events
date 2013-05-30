@@ -26,7 +26,7 @@ use Org\Gucken\Events\Domain\Model\Location;
 use Org\Gucken\Events\Domain\Model\EventSource;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
 use Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Lastfm\Type\Venue as Venue;
 
 /**
@@ -39,21 +39,21 @@ class LocationController extends AbstractAdminController {
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $locationRepository;
 
     /**
      *
      * @var \Org\Gucken\Events\Domain\Model\ExternalLocationIdentifierFactory
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
 	protected $identifierFactory;
 
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Model\BackendSession
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $backendSession;
 
@@ -92,7 +92,7 @@ class LocationController extends AbstractAdminController {
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Location $location
-     * @FLOW3\IgnoreValidation("location")
+     * @Flow\IgnoreValidation("location")
      * @return void
      */
     public function addAction(Location $location = null) {
@@ -127,7 +127,7 @@ class LocationController extends AbstractAdminController {
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Location $location
-	 * @FLOW3\IgnoreValidation("location")
+	 * @Flow\IgnoreValidation("location")
      * @return void
      */
     public function editAction(\Org\Gucken\Events\Domain\Model\Location $location) {

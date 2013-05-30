@@ -23,14 +23,14 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * An tag for a location 
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("prototype")
- * @FLOW3\ValueObject
+ * @Flow\Scope("prototype")
+ * @Flow\ValueObject
  */
 class LocationKeyword {
 
@@ -38,7 +38,7 @@ class LocationKeyword {
      * The keyword 
      * 
      * @var string
-     * @FLOW3\Validate(type="StringLength", options={ "minimum"=1, "maximum"=255 })     * 
+     * @Flow\Validate(type="StringLength", options={ "minimum"=1, "maximum"=255 })     * 
      */
     protected $keyword;
     
@@ -51,7 +51,7 @@ class LocationKeyword {
 	
 	/**
 	 * This is only to allow non unqiue values, because flow3s valueobject hashgeneration doesn't work yet
-	 * TYPO3\FLOW3\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
+	 * TYPO3\Flow\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
 	 * @var string
 	 */
 	protected $locationId;

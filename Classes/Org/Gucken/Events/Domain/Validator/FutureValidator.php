@@ -5,7 +5,7 @@ namespace Org\Gucken\Events\Domain\Validator;
  * A Validator for Date expressions
  *
  */
-class FutureValidator extends \TYPO3\FLOW3\Validation\Validator\AbstractValidator {
+class FutureValidator extends \TYPO3\Flow\Validation\Validator\AbstractValidator {
 
 	/**
 	 * Checks if the given value is a date expression.

@@ -24,7 +24,7 @@ namespace Org\Gucken\Events\Controller;
 use Org\Gucken\Events\Service\ImportEventFactoidsService;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Standard controller for the Events package

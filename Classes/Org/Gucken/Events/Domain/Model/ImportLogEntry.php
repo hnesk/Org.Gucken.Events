@@ -6,13 +6,13 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        *
  *                                                                        */
 use Doctrine\ORM\Mapping as ORM,
-	TYPO3\FLOW3\Annotations as FLOW3;
+	TYPO3\Flow\Annotations as Flow;
 
 /**
  * A Import history
  *
- * @FLOW3\Scope("prototype")
- * @FLOW3\Entity
+ * @Flow\Scope("prototype")
+ * @Flow\Entity
  */
 class ImportLogEntry {
 

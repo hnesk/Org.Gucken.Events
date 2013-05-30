@@ -7,14 +7,14 @@ use Org\Gucken\Events\Domain\Model;
 
 
 use Org\Gucken\Events\Annotations as Events;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  */
 class Facebook implements EventSourceInterface {
 	/**
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
 	 */
 	protected $locationRepository;

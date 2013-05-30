@@ -24,7 +24,7 @@ namespace Org\Gucken\Events\Controller;
 
 use Org\Gucken\Events\Domain\Model\Type;
 use Org\Gucken\Events\Domain\Model\TypeKeyword;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Standard controller for the Events package
@@ -36,7 +36,7 @@ class TypeController extends AbstractAdminController {
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $typeRepository;
 
@@ -54,7 +54,7 @@ class TypeController extends AbstractAdminController {
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\Type $type
-     * @FLOW3\IgnoreValidation("type")
+     * @Flow\IgnoreValidation("type")
      * @return void
      */
     public function addAction(Type $type = null) {

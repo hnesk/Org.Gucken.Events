@@ -5,11 +5,11 @@ namespace Org\Gucken\Events\Domain\Model\EventSource;
 use Type\Url;
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Annotations as Events;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Null Implementation that does nothing
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  */
 class ManualEntry implements EventSourceInterface {
 	/**

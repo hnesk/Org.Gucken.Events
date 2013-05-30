@@ -2,7 +2,7 @@
 
 namespace Org\Gucken\Events\Domain\Repository;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A repository for Locations
@@ -11,12 +11,12 @@ use TYPO3\FLOW3\Annotations as FLOW3;
  * @subpackage Domain
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
- * @FLOW3\Scope("singleton")
+ * @Flow\Scope("singleton")
  */
-class LocationRepository extends \TYPO3\FLOW3\Persistence\Repository {
+class LocationRepository extends \TYPO3\Flow\Persistence\Repository {
 
     protected $defaultOrderings = array(
-        'name' => \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING
+        'name' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING
     );
 
 
@@ -54,7 +54,7 @@ class LocationRepository extends \TYPO3\FLOW3\Persistence\Repository {
 	/**
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest
-	 * @return \TYPO3\FLOW3\Persistence\QueryResultInterface
+	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
 	 */
 	public function findBySearchRequest(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest) {
 		$query = $this->createQuery();

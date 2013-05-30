@@ -4,7 +4,7 @@ namespace Org\Gucken\Events\Service;
 
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Repository;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * 
@@ -14,14 +14,14 @@ class DocumentRepositoryService implements \Type\Document\RepositoryInterface {
 	/**
 	 *
 	 * @var \Org\Gucken\Events\Domain\Repository\DocumentRepository
-	 * @FLOW3\Inject
+	 * @Flow\Inject
 	 */
 	protected $documentRepository;
 	
 	/**
 	 *
-	 * @var \TYPO3\FLOW3\Persistence\PersistenceManagerInterface
-	 * @FLOW3\Inject
+	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface
+	 * @Flow\Inject
 	 */
 	protected $persistenceManager;
 	

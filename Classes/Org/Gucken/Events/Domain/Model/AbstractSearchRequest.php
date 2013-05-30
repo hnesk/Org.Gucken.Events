@@ -22,13 +22,13 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * An abstract search request
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @FLOW3\Scope("prototype")
+ * @Flow\Scope("prototype")
  *
  */
 abstract class AbstractSearchRequest {
@@ -42,16 +42,16 @@ abstract class AbstractSearchRequest {
 	/**
 	 *
 	 * @var string
-	 * @FLOW3\Validate(type="RegularExpression", options={ "regularExpression"="#ASC|DESC#"})
+	 * @Flow\Validate(type="RegularExpression", options={ "regularExpression"="#ASC|DESC#"})
 	 */
 	protected $orderDirection;
 
 	/**
 	 *
-	 * @param \TYPO3\FLOW3\Persistence\QueryInterface $query
-	 * @return \TYPO3\FLOW3\Persistence\QueryInterface
+	 * @param \TYPO3\Flow\Persistence\QueryInterface $query
+	 * @return \TYPO3\Flow\Persistence\QueryInterface
 	 */
-	public function apply(\TYPO3\FLOW3\Persistence\QueryInterface $query) {
+	public function apply(\TYPO3\Flow\Persistence\QueryInterface $query) {
 
 
 		if ($this->getOrderColumn()) {
@@ -68,10 +68,10 @@ abstract class AbstractSearchRequest {
 	}
 
 	/**
-	 *  @param \TYPO3\FLOW3\Persistence\QueryInterface $query
+	 *  @param \TYPO3\Flow\Persistence\QueryInterface $query
 	 *  @return array
 	 */
-	abstract protected function buildFilters(\TYPO3\FLOW3\Persistence\QueryInterface $query);
+	abstract protected function buildFilters(\TYPO3\Flow\Persistence\QueryInterface $query);
 
 	/**
 	 *
@@ -105,7 +105,7 @@ abstract class AbstractSearchRequest {
 	 * @return string
 	 */
 	public function getOrderDirection() {
-		return $this->orderDirection ?: \TYPO3\FLOW3\Persistence\QueryInterface::ORDER_ASCENDING;
+		return $this->orderDirection ?: \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING;
 	}
 
 	/**

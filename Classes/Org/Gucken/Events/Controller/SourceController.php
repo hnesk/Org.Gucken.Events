@@ -25,7 +25,7 @@ namespace Org\Gucken\Events\Controller;
 use Org\Gucken\Events\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * Standard controller for the Events package 
@@ -36,22 +36,22 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @var \TYPO3\FLOW3\Reflection\ReflectionService
-     * @FLOW3\Inject
+     * @var \TYPO3\Flow\Reflection\ReflectionService
+     * @Flow\Inject
      */
     protected $reflectionService;
 
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $sourceRepository;
         
     /**
      *
      * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
-     * @FLOW3\Inject
+     * @Flow\Inject
      */
     protected $typeRepository;
 
@@ -77,7 +77,7 @@ class SourceController extends AbstractAdminController {
     /**
      *
      * @param Org\Gucken\Events\Domain\Model\EventSource $source
-     * @FLOW3\IgnoreValidation({"source"})
+     * @Flow\IgnoreValidation({"source"})
      * @return void
      */
     public function addAction(Model\EventSource $source = null) {
@@ -93,7 +93,7 @@ class SourceController extends AbstractAdminController {
      */
     public function saveAction(Model\EventSource $source) {
 		$errors = $source->validate();
-		/* @var $errors \TYPO3\FLOW3\Error\Result */
+		/* @var $errors \TYPO3\Flow\Error\Result */
 		if ($errors->hasErrors()) {
 			foreach ($errors->getFlattenedErrors() as $errorArray) {
 				foreach ($errorArray as $error) {
@@ -125,7 +125,7 @@ class SourceController extends AbstractAdminController {
      */
     public function updateAction(Model\EventSource $source) {
 		$errors = $source->validate();
-		/* @var $errors \TYPO3\FLOW3\Error\Result */
+		/* @var $errors \TYPO3\Flow\Error\Result */
 		if ($errors->hasErrors()) {
 			foreach ($errors->getFlattenedErrors() as $errorArray) {
 				foreach ($errorArray as $error) {

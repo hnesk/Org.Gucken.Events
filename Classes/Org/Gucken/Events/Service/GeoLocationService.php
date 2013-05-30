@@ -2,7 +2,7 @@
 
 namespace Org\Gucken\Events\Service;
 
-use TYPO3\FLOW3\Annotations as FLOW3;
+use TYPO3\Flow\Annotations as Flow;
 use Org\Gucken\Events\Domain\Model\PostalAddress;
 use Org\Gucken\Events\Domain\Model\GeoCoordinates;
 
