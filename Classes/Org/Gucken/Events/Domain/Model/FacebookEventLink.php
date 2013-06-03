@@ -2,7 +2,7 @@
 namespace Org\Gucken\Events\Domain\Model;
 
 /*                                                                        *
- * This script belongs to the FLOW3 package "Events".                     *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -27,7 +27,7 @@ use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
- * A last.fm link
+ * A facebook link
  *
  * @Flow\Scope("prototype")
  * @Flow\Entity

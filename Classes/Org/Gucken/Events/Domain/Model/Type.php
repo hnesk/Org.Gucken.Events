@@ -3,7 +3,7 @@
 namespace Org\Gucken\Events\Domain\Model;
 
 /* *
- * This script belongs to the FLOW3 package "Events".                     *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -67,14 +67,6 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 		$this->pluralTitle = $pluralTitle;
 		$this->description = $description;
 		$this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getInternalId() {
-		return $this->FLOW3_Persistence_Identifier;
 	}
 
 	/**

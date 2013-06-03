@@ -67,7 +67,7 @@ class AbstractEventSource  {
 
 	/**
 	 *
-	 * @param Model\EventFactoidIdentity $factoidIdentity
+	 * @param EventFactoidIdentity $factoidIdentity
 	 * @param \Org\Gucken\Events\Domain\Model\EventLink if set link will be updated else created
 	 * @return \Org\Gucken\Events\Domain\Model\WebEventLink
 	 */

@@ -2,7 +2,7 @@
 namespace Org\Gucken\Events\Property\TypeConverter;
 
 /*                                                                        *
- * This script belongs to the FLOW3 framework.                            *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License as published by the *

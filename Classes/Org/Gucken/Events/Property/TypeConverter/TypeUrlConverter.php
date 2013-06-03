@@ -2,7 +2,7 @@
 namespace Org\Gucken\Events\Property\TypeConverter;
 
 /*                                                                        *
- * This script belongs to the FLOW3 framework.                            *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License as published by the *
@@ -45,13 +45,15 @@ class TypeUrlConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeCo
 	 */
 	protected $targetType = '\Type\Url';
 
-	/**
-	 * Converts $source to a \Type\Url
-	 *
-	 * @param string $source the string to be converted to a \Type\Url object
-	 * @param string $targetType must be "\Type\Url"
-	 * @return \Type\Url
-	 */
+    /**
+     * Converts $source to a \Type\Url
+     *
+     * @param string $source the string to be converted to a \Type\Url object
+     * @param string $targetType must be "\Type\Url"
+     * @param array $convertedChildProperties
+     * @param \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration
+     * @return \Type\Url
+     */
 	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
                return new \Type\Url($source);
 	}

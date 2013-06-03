@@ -3,8 +3,7 @@
 namespace Org\Gucken\Events\Domain\Model;
 
 /* *
- * This script belongs to the FLOW3 package "Org.Gucken.Events".          *
- *                                                                        *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;

@@ -4,7 +4,7 @@
 # Settings for the Events package                                        #
 
 TYPO3:
-  FLOW3:
+  Flow:
     security:
       authentication:
         providers:

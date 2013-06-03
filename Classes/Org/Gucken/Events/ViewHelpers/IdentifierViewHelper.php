@@ -14,7 +14,7 @@ class IdentifierViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelp
 	protected $persistenceManager;
 	
 	/**
-	 * Injects the FLOW3 Persistence Manager
+	 * Injects the Flow Persistence Manager
 	 *
 	 * @param \TYPO3\Flow\Persistence\PersistenceManagerInterface $persistenceManager
 	 * @return void

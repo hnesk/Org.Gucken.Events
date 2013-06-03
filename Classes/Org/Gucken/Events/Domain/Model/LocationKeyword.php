@@ -3,7 +3,7 @@
 namespace Org\Gucken\Events\Domain\Model;
 
 /* *
- * This script belongs to the FLOW3 package "Events".                     *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -50,7 +50,7 @@ class LocationKeyword {
     protected $location;
 	
 	/**
-	 * This is only to allow non unqiue values, because flow3s valueobject hashgeneration doesn't work yet
+	 * This is only to allow non unqiue values, because flows valueobject hashgeneration doesn't work yet
 	 * TYPO3\Flow\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
 	 * @var string
 	 */

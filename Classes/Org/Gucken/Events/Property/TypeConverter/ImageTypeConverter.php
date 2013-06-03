@@ -3,7 +3,7 @@ namespace Org\Gucken\Events\Property\TypeConverter;
 
 
 /*                                                                        *
- * This script orginally belongs to the FLOW3 package "TYPO3.TYPO3".      *
+ * This script orginally belongs to the Flow package  "TYPO3.Neos"        *
  * and has be adapted for Org.Gucken.Events.                              *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *

@@ -3,7 +3,7 @@
 namespace Org\Gucken\Events\Controller;
 
 /* *
- * This script belongs to the FLOW3 package "Events".                     *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU Lesser General Public License as published by the *
@@ -58,11 +58,6 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 */
 	protected $systemLogger;
 
-	/**
-	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Utility\Environment
-	 */
-	protected $environment;
 
 	/**
 	 *

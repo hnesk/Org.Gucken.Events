@@ -3,7 +3,7 @@
 namespace Org\Gucken\Events\Domain\Model;
 
 /* *
- * This script belongs to the FLOW3 package "Events".                     *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -44,13 +44,13 @@ class TypeKeyword {
     
     /**
      *
-     * @var Org\Gucken\Events\Domain\Model\Type
+     * @var \Org\Gucken\Events\Domain\Model\Type
      * @ORM\ManyToOne(inversedBy="keywords")
      */
     protected $type;
 	
 	/**
-	 * This is only to allow non unqiue values, because flow3s valueobject hashgeneration doesn't work yet
+	 * This is only to allow non unqiue values, because Flows valueobject hashgeneration doesn't work yet
 	 * TYPO3\Flow\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
 	 * @var string
 	 */
@@ -59,7 +59,7 @@ class TypeKeyword {
     /**
      *
      * @param string $keyword
-     * @param Org\Gucken\Events\Domain\Model\Type $type
+     * @param \Org\Gucken\Events\Domain\Model\Type $type
 	 * @param string $typeId
      */
     public function __construct($keyword, \Org\Gucken\Events\Domain\Model\Type $type, $typeId) {

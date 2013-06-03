@@ -10,6 +10,10 @@ use TYPO3\Flow\Annotations as Flow;
  */
 class PropertyNameValidator extends \TYPO3\Flow\Validation\Validator\AbstractValidator {
 
+    protected $supportedOptions = array(
+        'class' => array(NULL, 'Validate the property to be a member of this class', 'string', TRUE)
+    );
+
 	/**
 	 *
 	 * @var \TYPO3\Flow\Reflection\ReflectionService

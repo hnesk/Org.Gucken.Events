@@ -3,7 +3,7 @@
 namespace Org\Gucken\Events\Command;
 
 /* *
- * This script belongs to the FLOW3 package "Kickstart".                  *
+ * This script belongs to the Flow package "Org.Gucken.Events".           *
  *                                                                        *
  * It is free software; you can redistribute it and/or modify it under    *
  * the terms of the GNU General Public License as published by the Free   *
@@ -65,7 +65,7 @@ class AccountCommandController extends CommandController {
          *
          * The exceeding arguments are the assigned roles for this account
 	 *
-	 * Example: flow3 account:add --identifier hnesk --pasword "5u|Der!" [User Administrator]
+	 * Example: ./flow account:add --identifier hnesk --pasword "5u|Der!" [User Administrator]
 	 *
 	 * @param string $identifier The username
 	 * @param string $password Plain text password
@@ -78,7 +78,7 @@ class AccountCommandController extends CommandController {
 			return 'An account with identifier "' . $identifier . '" already exists' . PHP_EOL;
 		}
 
-		$this->authenticationManager->logout();
+		//$this->authenticationManager->logout();
 
 		$roles = $this->request->getExceedingArguments();
 		$account = $this->accountFactory->createAccountWithPassword(
@@ -97,7 +97,7 @@ class AccountCommandController extends CommandController {
 	/**
 	 * Delete an user
 	 *
-	 * <code>./flow3_dev event:user:delete --identifier hnesk</code>
+	 * <code>./flow event:user:delete --identifier hnesk</code>
 	 *
 	 * @param string $identifier
 	 * @param string $authenticationProviderName
@@ -119,7 +119,7 @@ class AccountCommandController extends CommandController {
 	/**
 	 * Change the password for a user
 	 *
-	 * <code>./flow3_dev event:user:changepassword --identifier hnesk --pasword "5u|Der!"</code>
+	 * <code>./flow event:user:changepassword --identifier hnesk --pasword "5u|Der!"</code>
 	 *
 	 * @param string $identifier
 	 * @param string $password
@@ -141,7 +141,7 @@ class AccountCommandController extends CommandController {
 	/**
 	 * Grant roles to an existing user
 	 *
-	 * <code>./flow3_dev event:user:grant --identifier hnesk User Administrator</code>
+	 * <code>./flow event:user:grant --identifier hnesk User Administrator</code>
 	 *
 	 * @param string $identifier
 	 * @param string $authenticationProviderName
@@ -169,7 +169,7 @@ class AccountCommandController extends CommandController {
 	/**
 	 * Revoke roles from an existing user
 	 *
-	 * <code>./flow3_dev event:user:revoke --identifier hnesk Administrator</code>
+	 * <code>./flow event:user:revoke --identifier hnesk Administrator</code>
 	 *
 	 * @param string $identifier
 	 * @param string $authenticationProviderName
@@ -198,7 +198,7 @@ class AccountCommandController extends CommandController {
 	/**
 	 * List roles of an user
 	 *
-	 * <code>./flow3_dev event:user:listroles --identifier hnesk</code>
+	 * <code>./flow event:user:listroles --identifier hnesk</code>
 	 *
 	 * @param string $identifier
 	 * @param string $authenticationProviderName
@@ -223,7 +223,7 @@ class AccountCommandController extends CommandController {
 	/**
 	 * List roles of an user
 	 *
-	 * <code>./flow3_dev event:user:list --filterRole Administraor</code>
+	 * <code>./flow event:user:list --filterRole Administraor</code>
 	 *
 	 * @param string $filterRole
 	 * @return string
