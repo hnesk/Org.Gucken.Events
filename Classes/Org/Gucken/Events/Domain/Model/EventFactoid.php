@@ -7,6 +7,7 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
+use Type\Xml;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -35,6 +36,7 @@ class EventFactoid {
     /**
      * The end date time
      * @var \DateTime
+     * @ORM\Column(nullable=true)
      */
     protected $endDateTime;
 
@@ -55,19 +57,21 @@ class EventFactoid {
     /**
      * The url
      * @var string
+     * @ORM\Column(nullable=true)
      */
     protected $url;
 
     /**
      * The short description
      * @var string
+     * @ORM\Column(nullable=true)
      */
     protected $shortDescription;
 
     /**
      * The description
      * @var string
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text",nullable=true)
      */
     protected $description;
 
@@ -87,7 +91,7 @@ class EventFactoid {
 
 	/**
 	 *
-	 * @var Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+	 * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
      * @ORM\ManyToOne(inversedBy="factoids")
 	 */
 	protected $identity;
@@ -101,7 +105,7 @@ class EventFactoid {
 
 	/**
 	 *
-	 * @var Org\Gucken\Events\Domain\Model\EventSource
+	 * @var \Org\Gucken\Events\Domain\Model\EventSource
      * @Flow\Transient
 	 */
 	protected $source;
@@ -120,7 +124,7 @@ class EventFactoid {
 			$this->setShortDescription((string) $record->getNative('short'));
 			$description = $record->get('description');
 			if (trim((string) $description)) {
-				if ($description instanceof Type\Xml) {
+				if ($description instanceof Xml) {
 					$description = $description->markdown()->normalizeSpaceKeepBreaks();
 				}
 			}

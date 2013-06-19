@@ -65,18 +65,21 @@ class Document  {
     /**
      * The last modified Date 
      * @var \DateTime
+     * @ORM\Column(nullable=true)
      */		
 	protected $lastModified;
 
     /**
      * The expire date
      * @var \DateTime
+     * @ORM\Column(nullable=true)
      */		
 	protected $expires;
 	
 	/**
      * The etag
      * @var string
+     * @ORM\Column(nullable=true)
      */
     protected $etag;	
 	
@@ -335,7 +338,7 @@ class Document  {
      * @return string
      */
     public function __toString() {
-        return $this->url . ' on ' . $this->date->format('Y-m-d H-i');
+        return $this->requestedUrl . ' on ' . $this->date->format('Y-m-d H-i');
     }
 
 }

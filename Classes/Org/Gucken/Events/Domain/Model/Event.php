@@ -20,11 +20,13 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        *
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
-
-use Org\Gucken\Events\Domain\Model;
-
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
+use TYPO3\Media\Domain\Model\Image;
 
 /**
  * An Event
@@ -54,6 +56,7 @@ class Event {
 	 * The end date and time
 	 * @var \DateTime
 	 * @Flow\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
+     * @ORM\Column(nullable=true)
 	 */
 	protected $endDateTime;
 
@@ -70,6 +73,7 @@ class Event {
 	 * Event specific location details
 	 *
 	 * @var string
+     * @ORM\Column(nullable=true)
 	 */
 	protected $locationDetail;
 
@@ -92,7 +96,7 @@ class Event {
 	/**
 	 * Markdown version of the description
 	 *
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text",nullable=true)
 	 * @var string
 	 */
 	protected $description;
@@ -100,7 +104,7 @@ class Event {
 	/**
 	 * Markdown version of the description
 	 *
-	 * @ORM\Column(type="text")
+	 * @ORM\Column(type="text", nullable=true)
 	 * @var string
 	 */
 	protected $shortDescription;
@@ -116,7 +120,7 @@ class Event {
 	 *
 	 * @var \TYPO3\Media\Domain\Model\Image
 	 * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
-	 *
+     * @ORM\JoinColumn(name="image", referencedColumnName="persistence_object_identifier", nullable=true)
 	 */
 	protected $image;
 
@@ -129,9 +133,9 @@ class Event {
 	protected $dayFactory;
 
 	public function __construct() {
-		$this->types = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->factoidIdentitys = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->links = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->types = new ArrayCollection();
+		$this->factoidIdentitys = new ArrayCollection();
+		$this->links = new ArrayCollection();
 	}
 
 	/**
@@ -193,7 +197,7 @@ class Event {
 
 
 	/**
-	 * @return Org\Gucken\Events\Domain\Model\Day
+	 * @return \Org\Gucken\Events\Domain\Model\Day
 	 */
 	public function getDay() {
 		return $this->dayFactory->build($this->startDateTime);
@@ -215,7 +219,7 @@ class Event {
 	 * @param \Org\Gucken\Events\Domain\Model\Location $location The Event's location
 	 * @return void
 	 */
-	public function setLocation(\Org\Gucken\Events\Domain\Model\Location $location) {
+	public function setLocation(Location $location) {
 		$this->location = $location;
 	}
 
@@ -259,7 +263,7 @@ class Event {
      * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Types> $types
      * @return void
      */
-    public function setTypes(\Doctrine\Common\Collections\Collection $types) {
+    public function setTypes(Collection $types) {
         $this->types = $types;
     }
 
@@ -269,7 +273,7 @@ class Event {
      * @param \Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function addType(\Org\Gucken\Events\Domain\Model\Type $type = null) {
+    public function addType(Type $type = null) {
 		if ($type) {
 			$this->types->add($type);
 		}
@@ -281,7 +285,7 @@ class Event {
      * @param \Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function addTypeIfNotExists(\Org\Gucken\Events\Domain\Model\Type $type = null) {
+    public function addTypeIfNotExists(Type $type = null) {
 		if ($type) {
 			if (!$this->types->contains($type)) {
 				$this->types->add($type);
@@ -296,7 +300,7 @@ class Event {
      * @param \Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function removeType(\Org\Gucken\Events\Domain\Model\Type $type) {
+    public function removeType(Type $type) {
         $this->types->removeElement($type);
     }
 
@@ -312,7 +316,7 @@ class Event {
     /**
      * Getter for type
      *
-     * @return \Org\Gucken\Events\Domain\Model\Type
+     * @return Type
      */
     public function getType() {
         return $this->types->first();
@@ -325,7 +329,7 @@ class Event {
      * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink> $links
      * @return void
      */
-    public function setLinks(\Doctrine\Common\Collections\Collection $links) {
+    public function setLinks(Collection $links) {
         $this->links = $links;
     }
 
@@ -333,7 +337,7 @@ class Event {
 	 * add a link
 	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link
 	 */
-    public function addLink(\Org\Gucken\Events\Domain\Model\EventLink $link = null) {
+    public function addLink(EventLink $link = null) {
 		if ($link) {
 			$link->setEvent($this);
 			$this->links->add($link);
@@ -346,14 +350,14 @@ class Event {
      * @param \Org\Gucken\Events\Domain\Model\EventLink $link
      * @return void
      */
-    public function removeLink(\Org\Gucken\Events\Domain\Model\EventLink $link) {
+    public function removeLink(EventLink $link) {
         $this->links->removeElement($link);
     }
 
     /**
      * Getter for links
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink>
+     * @return Collection<\Org\Gucken\Events\Domain\Model\EventLink>
      */
     public function getLinks() {
         return clone $this->links;
@@ -388,7 +392,7 @@ class Event {
 	 *
 	 * @param \TYPO3\Media\Domain\Model\Image $image
 	 */
-	public function setImage(\TYPO3\Media\Domain\Model\Image $image) {
+	public function setImage(Image $image) {
 		$this->image = $image;
 	}
 

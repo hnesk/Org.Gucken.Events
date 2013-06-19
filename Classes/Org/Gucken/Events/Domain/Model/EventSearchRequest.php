@@ -144,7 +144,7 @@ class EventSearchRequest extends AbstractSearchRequest {
 			} else {
 				$endDate = new \DateTime();
 			}
-			$endDate->modify('+14 days');
+			$endDate->modify('+1014 days');
 		}
 		$this->endDate = $endDate;
 

@@ -12,7 +12,10 @@ TYPO3:
             provider: PersistedUsernamePasswordProvider
             entryPoint: 'WebRedirect'
             entryPointOptions:
-              uri: 'account/login'
+              routeValues:
+                '@package': 'Org.Gucken.Events'
+                '@controller': 'Account'
+                '@action': 'index'
 
 Org:
   Gucken:

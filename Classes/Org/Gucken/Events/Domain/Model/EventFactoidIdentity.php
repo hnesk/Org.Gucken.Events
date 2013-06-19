@@ -50,7 +50,8 @@ class EventFactoidIdentity {
 	/**
 	 *
 	 * @var boolean
-	 */
+     * @ORM\Column(nullable=true)
+     */
 	protected $shouldSkip;
 	
 	
@@ -189,6 +190,7 @@ class EventFactoidIdentity {
 	 */
 	public function addFactoidIfNotExists(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid) {
 		foreach ($this->factoids as $aFactoid) {
+            /* @var $aFactoid EventFactoid */
 			if ($aFactoid->equals($factoid)) {
 				return $aFactoid;
 			}

@@ -22,102 +22,67 @@ namespace Org\Gucken\Events\Controller;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Security\Authentication\Controller\AbstractAuthenticationController;
 
 /**
  * Login controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class AccountController extends AbstractAdminController {
-
-	/**
-	 * The authentication manager
-	 * @var \TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface
-	 */
-	protected $authenticationManager;
+class AccountController extends AbstractAuthenticationController {
 
 
 	/**
-	 * @var \TYPO3\Flow\Security\Context
-	 */
-	protected $securityContext;
-
-	/**
-	 *
-	 * @param \TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface $authenticationManager
-	 */
-	public function injectAuthenticationManager(\TYPO3\Flow\Security\Authentication\AuthenticationManagerInterface $authenticationManager) {
-		$this->authenticationManager = $authenticationManager;
-	}
-
-	/**
-	 *
-	 * @param \TYPO3\Flow\Security\Context $securityContext
-	 */
-	public function injectSecurityContext(\TYPO3\Flow\Security\Context $securityContext) {
-		$this->securityContext = $securityContext;
-	}
-
-
-	/**
-	 * Index action show login form
+	 * Index action shows login form
 	 *
 	 * @return void
 	 */
 	public function indexAction() {
 	}
 
-	/**
-	 * Calls the authentication manager to authenticate all active tokens
-	 * and redirects to the original intercepted request on success if there
-	 * is one stored in the security context. If no intercepted request is
-	 * found, the function simply returns.
-	 *
-	 * If authentication fails, the result of calling the defined
-	 * $errorMethodName is returned.
-	 *
-	 * @return string
-	 */
-	public function authenticateAction() {
-		$authenticated = FALSE;
-		try {
-			$this->authenticationManager->authenticate();
-			$authenticated = TRUE;
-		} catch (\TYPO3\Flow\Security\Exception\AuthenticationRequiredException $exception) {
-		}
+    /**
+     *
+     */
+    public function logoutAction() {
+        parent::logoutAction();
+        $this->flashMessageContainer->addMessage(new \TYPO3\Flow\Error\Notice('Du hast Dich abgemeldet.'));
+        $this->redirect('index', 'standard');
+    }
 
-		if ($authenticated) {
-			$storedRequest = $this->securityContext->getInterceptedRequest();
-			if ($storedRequest !== NULL) {
-				$mainRequest = $storedRequest->getMainRequest();
-				$packageKey = $mainRequest->getControllerPackageKey();
-				$subpackageKey = $mainRequest->getControllerSubpackageKey();
-				if ($subpackageKey !== NULL) {
-					$packageKey .= '\\' . $subpackageKey;
-				}
-				$this->redirect($mainRequest->getControllerActionName(), $mainRequest->getControllerName(), $packageKey, $mainRequest->getArguments());
-			} else {
-				$this->redirect('index','admin');
-			}
-		} else {
-			#$this->getControllerContext()->getRequest();
-			return call_user_func(array($this, $this->errorMethodName));
-		}
-	}
+    /**
+     * Overriden to allow template switching
+     *
+     * @param \TYPO3\Flow\Mvc\View\ViewInterface $view
+     */
+    public function initializeView(\TYPO3\Flow\Mvc\View\ViewInterface $view) {
+        /* @var $view \TYPO3\Fluid\View\TemplateView */
+        $currentView = $this->settings['currentView'];
+        $view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
+        $view->setTemplateRootPath($this->settings['views'][$currentView]['templateRootPath']);
+        $view->setPartialRootPath($this->settings['views'][$currentView]['partialRootPath']);
+        $view->assign('skinPackage', $this->settings['views'][$currentView]['skinPackage']);
+    }
 
 
-	public function getErrorFlashMessage() {
-		return new \TYPO3\Flow\Error\Error('Falscher Benutzername und/oder Passwort');
+    protected function onAuthenticationFailure(\TYPO3\Flow\Security\Exception\AuthenticationRequiredException $exception = NULL)
+    {
+        $this->flashMessageContainer->addMessage(new \TYPO3\Flow\Error\Error('Falscher Benutzername und/oder Passwort!', ($exception === NULL ? 1347016771 : $exception->getCode())));
+    }
 
-	}
+    /**
+     * Is called if authentication was successful.
+     *
+     * @param \TYPO3\Flow\Mvc\ActionRequest $originalRequest The request that was intercepted by the security framework, NULL if there was none
+     * @return void
+     */
+    protected function onAuthenticationSuccess(\TYPO3\Flow\Mvc\ActionRequest $originalRequest = NULL)
+    {
+        if ($originalRequest !== NULL) {
+            $this->redirectToRequest($originalRequest);
+        }
+        $this->redirect('index', 'admin');
+    }
 
 
-
-
-	public function logoutAction() {
-		$this->authenticationManager->logout();
-		$this->addNotice('Du hast Dich abgemeldet.');
-		$this->redirect('index', 'standard');
-	}
 }
 ?>
