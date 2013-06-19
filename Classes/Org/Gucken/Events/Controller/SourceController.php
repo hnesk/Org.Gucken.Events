@@ -68,7 +68,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
      */
     public function viewAction(Model\EventSource $source) {
         $this->view->assign('source', $source);         
@@ -76,7 +76,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
      * @Flow\IgnoreValidation("source")
      * @return void
      */
@@ -89,7 +89,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
      */
     public function saveAction(Model\EventSource $source) {
 		$errors = $source->validate();
@@ -110,7 +110,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
      * @return void
      */
     public function editAction(Model\EventSource $source) {
@@ -121,7 +121,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
      */
     public function updateAction(Model\EventSource $source) {
 		$errors = $source->validate();
@@ -138,12 +138,11 @@ class SourceController extends AbstractAdminController {
 			$this->redirect('index');
 		}         
     }
-    
-	/**
-	 *
-	 * @param Org\Gucken\Events\Domain\Model\EventSource $source
-	 */
-	public function deleteAction(Model\EventSource $source) {
+
+    /**
+     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+     */
+    public function deleteAction(Model\EventSource $source) {
         $this->sourceRepository->remove($source);
 		$this->addNotice($source . ' wurde gelöscht');
         $this->redirect('index');
@@ -182,9 +181,6 @@ class SourceController extends AbstractAdminController {
         }
         return $implementations;
     }
-
-	
-	
 
 }
 

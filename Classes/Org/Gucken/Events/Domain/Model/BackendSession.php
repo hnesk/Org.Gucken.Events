@@ -61,7 +61,8 @@ class BackendSession {
 	/**
 	 *
 	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $eventSearchRequest
-	 */
+     * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+     */
 	public function setEventSearchRequest(\Org\Gucken\Events\Domain\Model\EventSearchRequest $eventSearchRequest = null) {
 		$this->eventSearchRequest = $eventSearchRequest ?: new \Org\Gucken\Events\Domain\Model\EventSearchRequest();
 		return $this->eventSearchRequest;

@@ -43,18 +43,20 @@ class DateTimeConverter extends \TYPO3\Flow\Property\TypeConverter\DateTimeConve
 
 	const CONFIGURATION_TIME_FORMAT = 'timeFormat';
 
-	/**
-	 * Overrides hour, minute & second of the given date with the values in the $source array
-	 *
-	 * Overriden implementation to also allow parameter time and timeFormat
-	 *
-	 * @param \DateTime $date
-	 * @param array $source
-	 * @return void
-	 */
+    /**
+     * Overrides hour, minute & second of the given date with the values in the $source array
+     *
+     * Overriden implementation to also allow parameter time and timeFormat
+     *
+     * @param \DateTime $date
+     * @param array $source
+     * @throws \TYPO3\Flow\Property\Exception\TypeConverterException
+     * @return void
+     */
 	protected function overrideTimeIfSpecified(\DateTime $date, array $source) {
 		if (!isset($source['time']) || !is_string($source['time']) || strlen(trim($source['time']))===0) {
-			return parent::overrideTimeIfSpecified($date, $source);
+			parent::overrideTimeIfSpecified($date, $source);
+            return;
 		}
 
 		$timeFormat = self::CONFIGURATION_TIME_FORMAT;

@@ -53,8 +53,8 @@ class StandardController extends BaseController {
 
 	/**
 	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event
-	 * @return void
+	 * @param \Org\Gucken\Events\Domain\Model\Event $event
+	 * @return string
 	 */
 	public function showAction(Event $event) {
 		$this->view->assign('event', $event);

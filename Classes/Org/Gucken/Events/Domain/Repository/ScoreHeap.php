@@ -1,5 +1,6 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
+use Org\Gucken\Events\Domain\Model\ScorableInterface;
 
 /**
  * A heap to compare scorable objects
@@ -19,12 +20,12 @@ class ScoreHeap extends \SplHeap {
 		$this->keywordLookup = array_flip($keywords);
 	}
 
-	/**
-	 * @param Location $value1
-	 * @param Location $value2
-	 * @return int
-	 */
-	protected function compare(\Org\Gucken\Events\Domain\Model\ScorableInterface $value1, \Org\Gucken\Events\Domain\Model\ScorableInterface $value2) {
+    /**
+     * @param ScorableInterface $value1
+     * @param ScorableInterface $value2
+     * @return int
+     */
+	protected function compare(ScorableInterface $value1, ScorableInterface $value2) {
 		return $value1->score($this->keywordLookup) - $value2->score($this->keywordLookup);
 	}
 
