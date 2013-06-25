@@ -54,6 +54,7 @@ abstract class ExternalLocationIdentifier {
 	/**
 	 *
 	 * @var string
+     * @ORM\Column(nullable=true)
 	 */
 	protected $label;
 
