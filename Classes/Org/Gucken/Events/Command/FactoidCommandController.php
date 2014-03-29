@@ -81,8 +81,9 @@ class FactoidCommandController extends CommandController {
      * @param string $filter optionally filter by title
      */
     public function showCommand($name, $filter = '') {
-           $source = $this->sourceRepository->findOneByName($name);
+           $source = $this->sourceRepository->findOneByCode($name);
            /* @var $source \Org\Gucken\Events\Domain\Model\EventSource */
+            var_dump($source);
 
            foreach ($source->getImplementation()->getEvents() as $factoid) {
                if ($filter && strpos($factoid->getTitle(),$filter) === false) {
