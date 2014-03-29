@@ -111,7 +111,7 @@ class TypeController extends AbstractAdminController {
      */
     public function deleteAction(Type $type) {
         $this->typeRepository->remove($type);
-		$this->addNotice($type . ' wurde gelöscht');
+        $this->addFlashMessage($type . ' wurde gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
         $this->redirect('index');
     }
 

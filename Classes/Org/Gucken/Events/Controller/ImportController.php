@@ -25,6 +25,7 @@ use Org\Gucken\Events\Service\ImportEventFactoidsService;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Error\Message;
 
 /**
  * Standard controller for the Events package 
@@ -54,8 +55,8 @@ class ImportController extends AbstractAdminController {
 	 */
 	public function allAction() {
 		$count = $this->importFactoidsService->import();
-                $this->addNotice($count.' Factoids imported');
-                $this->redirect('index');
+        $this->addFlashMessage($count.' Factoids imported', 'Obacht!', Message::SEVERITY_NOTICE);
+        $this->redirect('index');
 	}
         
 	/**
@@ -64,8 +65,8 @@ class ImportController extends AbstractAdminController {
 	 */
 	public function sourceAction(\Org\Gucken\Events\Domain\Model\EventSource $source) {
 		$count = $this->importFactoidsService->importSource($source);
-                $this->addNotice($count.' Factoids for source '.$source->getName().' imported');
-                $this->redirect('index');
+        $this->addFlashMessage($count.' Factoids for source '.$source->getName().' imported', 'Obacht!', Message::SEVERITY_NOTICE);
+        $this->redirect('index');
 	}
         
 	

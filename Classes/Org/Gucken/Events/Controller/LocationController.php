@@ -163,7 +163,7 @@ class LocationController extends AbstractAdminController {
      */
     public function deleteAction(Location $location) {
         $this->locationRepository->remove($location);
-		$this->addNotice($location . ' wurde gelöscht');
+        $this->addFlashMessage($location . ' wurde gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
         $this->redirect('index');
     }
 

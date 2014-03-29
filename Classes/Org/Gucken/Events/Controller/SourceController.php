@@ -26,6 +26,7 @@ use Org\Gucken\Events\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Error\Message;
 
 /**
  * Standard controller for the Events package 
@@ -71,6 +72,14 @@ class SourceController extends AbstractAdminController {
      * @param \Org\Gucken\Events\Domain\Model\EventSource $source
      */
     public function viewAction(Model\EventSource $source) {
+        $eventFactoids = array();
+        try {
+            $eventFactoids = $source->getEventFactoids();
+        } catch (\Exception $e) {
+            $this->addFlashMessage($e->getMessage(), $e->getCode(), Message::SEVERITY_ERROR);
+        }
+
+        $this->view->assign('eventFactoids', $eventFactoids);
         $this->view->assign('source', $source);         
     }
 
@@ -144,7 +153,7 @@ class SourceController extends AbstractAdminController {
      */
     public function deleteAction(Model\EventSource $source) {
         $this->sourceRepository->remove($source);
-		$this->addNotice($source . ' wurde gelöscht');
+        $this->addFlashMessage($source . ' wurde gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
         $this->redirect('index');
     }	
 

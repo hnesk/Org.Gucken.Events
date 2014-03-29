@@ -141,7 +141,7 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
 	public function deleteAction(EventFactoidIdentity $identity) {
 		$this->identityRepository->remove($identity);
-		$this->addNotice('Faktoid-ID "'.$identity.'" gelöscht');
+        $this->addFlashMessage('Faktoid-ID "'.$identity.'" gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
 		$this->redirect('index');
 	}
 
@@ -151,10 +151,8 @@ class FactoidConvertController extends AbstractAdminController {
 	public function skipAction(EventFactoidIdentity $identity) {
 		$identity->setShouldSkip(true);
 		$this->identityRepository->update($identity);
-		$this->addNotice('Faktoid-ID "'.$identity.'" wird ignoriert');
-
+        $this->addFlashMessage('Faktoid-ID "'.$identity.'" wird ignoriert', 'Obacht!', Message::SEVERITY_NOTICE);
 		$this->view->assign('identity',$identity);
-
 		$this->redirectIfHtml('index');
 	}
 
@@ -173,12 +171,12 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
 	public function deleteFactoidAction(EventFactoidIdentity $identity, EventFactoid $factoid) {
 		$identity->removeFactoid($factoid);
-		$this->addNotice('Faktoid '.$factoid.' gelöscht');
+        $this->addFlashMessage('Faktoid "'.$factoid.'" gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
 		if ($identity->hasFactoids()) {
 			$this->identityRepository->update($identity);
 		} else {
 			$this->identityRepository->remove($identity);
-			$this->addNotice('Zugehörige Faktoid-ID auch');
+            $this->addFlashMessage('Zugehörige Faktoid-ID auch', 'Obacht!', Message::SEVERITY_NOTICE);
 		}
 
 		$this->view->assign('factoid', $factoid);
@@ -193,8 +191,7 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
     public function convertAction(EventFactoidIdentity $identity) {
 		$event = $this->convertService->convert($identity);
-		$this->addNotice('Veranstaltung "'.$event.'" erstellt.');
-
+        $this->addFlashMessage('Veranstaltung "'.$event.'" erstellt', 'Obacht!', Message::SEVERITY_NOTICE);
 		$currentDate = $identity->getStartDateTime();
 		$this->view->assign('events',$this->eventRepository->findOn($currentDate));
 		$this->view->assign('identities',$this->identityRepository->findUnassignedOn($currentDate));
@@ -209,7 +206,7 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
     public function mergeAction(Event $event, EventFactoidIdentity $identity) {
 		$event = $this->convertService->merge($event, $identity);
-		$this->addNotice('Faktoid-ID "'.$identity.'" mit Event "'.$event.'" zusammengefasst');
+        $this->addFlashMessage('Faktoid-ID "'.$identity.'" mit Event "'.$event.'" zusammengefasst', 'Obacht!', Message::SEVERITY_NOTICE);
 		$this->view->assign('event',$event);
 		$this->view->assign('identity',$identity);
 
@@ -223,8 +220,7 @@ class FactoidConvertController extends AbstractAdminController {
 	 */
     public function unlinkAction(\Org\Gucken\Events\Domain\Model\EventLink $link) {
 		$unlinkedIdentity = $this->convertService->unlink($link);
-		$this->addNotice('Faktoid-ID "'.$unlinkedIdentity.'" von Event gelöst');
-
+        $this->addFlashMessage('Faktoid-ID "'.$unlinkedIdentity.'" von Event gelöst', 'Obacht!', Message::SEVERITY_NOTICE);
 		$currentDate = $link->getEvent()->getStartDateTime();
 		$this->view->assign('events',$this->eventRepository->findOn($currentDate));
 		$this->view->assign('identities',$this->identityRepository->findUnassignedOn($currentDate));

@@ -24,6 +24,12 @@ namespace Org\Gucken\Events\Controller;
 
 use Org\Gucken\Events\Domain\Model;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Error\Message;
+use TYPO3\Flow\Mvc\Controller\ActionController;
+use TYPO3\Flow\Mvc\Controller\MvcPropertyMappingConfiguration;
+use TYPO3\Flow\Mvc\View\ViewInterface;
+use TYPO3\Flow\Persistence\QueryResultInterface;
+use TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter;
 
 
 /**
@@ -31,7 +37,7 @@ use TYPO3\Flow\Annotations as Flow;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
+class BaseController extends ActionController {
 	const CREATION = 1;
 	const MODIFICATION = 2;
 	const OVERRIDE = 4;
@@ -86,11 +92,18 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
     }
 
 
+    /**
+     * @param string $actionName
+     * @param string|null $controllerName
+     * @param string|null $packageKey
+     * @param array $arguments
+     * @param int $delay
+     * @param int $statusCode
+     * @param null $format
+     */
     protected function redirect($actionName, $controllerName = NULL, $packageKey = NULL, array $arguments = NULL, $delay = 0, $statusCode = 303, $format = NULL) {
-        $redirectArgumentArray = $this->arguments[$this->redirectArgumentArrayName];
-        /* @var $redirectArgumentArray \TYPO3\Flow\Mvc\Controller\Argument */
-        $redirectArgument = $this->arguments[$this->redirectArgumentName];
-        /* @var $redirectArgument \TYPO3\Flow\Mvc\Controller\Argument */
+        $redirectArgumentArray = $this->arguments->getArgument($this->redirectArgumentArrayName);
+        $redirectArgument = $this->arguments->getArgument($this->redirectArgumentName);
 
         $redirectUri = null;
         if (count($redirectArgumentArray->getValue()) > 0) {
@@ -108,13 +121,14 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
         }
     }
 
-	/**
-	 * Shortcut for easier setting of property mapping configuration for nested objects
-	 *
-	 * @param string $argument
-	 * @param string $propertyPath
-	 * @param int $propertyFlags allow creation and/or modification, bitfield of self::CREATION / self::MODIFICATION
-	 */
+    /**
+     * Shortcut for easier setting of property mapping configuration for nested objects
+     *
+     * @param string $argument
+     * @param string $propertyPath
+     * @param $callback
+     * @throws \InvalidArgumentException
+     */
 	protected function preprocessProperty($argument,$propertyPath, $callback) {
 		$data = $this->request->getArgument($argument);
 		if (!is_callable($callback)) {
@@ -129,7 +143,13 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 		$this->request->setArgument($argument,$data);
 	}
 
-	private function _preprocessProperty($data, $propertyPathParts, $callback) {
+    /**
+     * @param $data
+     * @param $propertyPathParts
+     * @param $callback
+     * @return mixed
+     */
+    private function _preprocessProperty($data, $propertyPathParts, $callback) {
 		$currentProperty = array_shift($propertyPathParts);
 
 		// * = recursive call for all keys
@@ -165,7 +185,7 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	protected function allowForProperty($argument,$propertyPath, $propertyFlags = self::EVERYTHING) {
 		$data = $this->request->getArgument($argument);
         $propertyMappingConfiguration = $this->arguments[$argument]->getPropertyMappingConfiguration();
-		/* @var $propertyMapping \TYPO3\Flow\Mvc\Controller\MvcPropertyMappingConfiguration */
+		/* @var $propertyMapping MvcPropertyMappingConfiguration */
 
 		$propertyPathParts = explode('.', $propertyPath);
 		$this->applyAllowForProperty($propertyMappingConfiguration, $data, $propertyPathParts, $propertyFlags);
@@ -173,12 +193,12 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 
 	/**
 	 *
-	 * @param \TYPO3\Flow\Mvc\Controller\MvcPropertyMappingConfiguration $propertyMappingConfiguration
+	 * @param MvcPropertyMappingConfiguration $propertyMappingConfiguration
 	 * @param array $data
 	 * @param array $subPropertyPathParts
 	 * @param int $propertyFlags allow creation and/or modification, bitfield of self::CREATION / self::MODIFICATION
 	 */
-	private function applyAllowForProperty($propertyMappingConfiguration, $data, $subPropertyPathParts, $propertyFlags) {
+	private function applyAllowForProperty(MvcPropertyMappingConfiguration $propertyMappingConfiguration, $data, $subPropertyPathParts, $propertyFlags) {
 		if (empty($data)) {
 			return;
 		}
@@ -198,58 +218,16 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 			$this->applyAllowForProperty($subPropertyMappingConfiguration, $subData, $subPropertyPathParts, $propertyFlags);
 		} else {
 			if ($propertyFlags && self::CREATION) {
-				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter', \TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, TRUE);
+				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter', PersistentObjectConverter::CONFIGURATION_CREATION_ALLOWED, TRUE);
 			}
 			if ($propertyFlags && self::MODIFICATION) {
-				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter', \TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED, TRUE);
+				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter', PersistentObjectConverter::CONFIGURATION_MODIFICATION_ALLOWED, TRUE);
 			}
 			if ($propertyFlags && self::OVERRIDE) {
-				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter', \TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter::CONFIGURATION_OVERRIDE_TARGET_TYPE_ALLOWED, TRUE);
+				$propertyMappingConfiguration->setTypeConverterOption('TYPO3\Flow\Property\TypeConverter\PersistentObjectConverter', PersistentObjectConverter::CONFIGURATION_OVERRIDE_TARGET_TYPE_ALLOWED, TRUE);
 			}
 
 		}
-	}
-
-
-    /**
-     *
-     * @param string $message
-     */
-    public function addNotice($message) {
-        $this->flashMessageContainer->addMessage(new \TYPO3\Flow\Error\Notice($message));
-    }
-
-	/**
-	 * Overridden to allow template switching
-	 *
-	 * $this->initializeView($view) has to be called before $view->canRender()
-	 *
-	 * @return \TYPO3\Flow\Mvc\View\ViewInterface the resolved view
-	 * @api
-	 */
-	protected function resolveView() {
-		$viewObjectName = $this->resolveViewObjectName();
-		if ($viewObjectName !== FALSE) {
-			$view = $this->objectManager->get($viewObjectName);
-			$this->initializeView($view);
-			if ($view->canRender($this->controllerContext) === FALSE) {
-				unset($view);
-			}
-		}
-		if (!isset($view) && $this->defaultViewObjectName != '') {
-			$view = $this->objectManager->get($this->defaultViewObjectName);
-			$this->initializeView($view);
-			if ($view->canRender($this->controllerContext) === FALSE) {
-				unset($view);
-			}
-		}
-		if (!isset($view)) {
-			$view = $this->objectManager->get('TYPO3\Flow\Mvc\View\NotFoundView');
-			$view->assign('errorMessage', 'No template was found. View could not be resolved for action "' . $this->request->getControllerActionName() . '"');
-		}
-		$view->setControllerContext($this->controllerContext);
-
-		return $view;
 	}
 
 
@@ -257,9 +235,9 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	/**
 	 * Overriden to allow template switching
 	 *
-	 * @param \TYPO3\Flow\Mvc\View\ViewInterface $view
+	 * @param ViewInterface $view
 	 */
-	public function initializeView(\TYPO3\Flow\Mvc\View\ViewInterface $view) {
+	public function initializeView(ViewInterface $view) {
 		/* @var $view \TYPO3\Fluid\View\TemplateView */
 		$currentView = $this->settings['currentView'];
 		$view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
@@ -284,7 +262,7 @@ class BaseController extends \TYPO3\Flow\Mvc\Controller\ActionController {
 	 * @return array
 	 */
 	public function addDummyEntry($collection, $label = '---') {
-		if ($collection instanceof \TYPO3\Flow\Persistence\QueryResultInterface) {
+		if ($collection instanceof QueryResultInterface) {
 			$collection = $collection->toArray();
 		}
 		return array('' => $label) + $collection;

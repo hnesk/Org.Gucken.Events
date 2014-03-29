@@ -26,6 +26,7 @@ use Org\Gucken\Events\Domain\Model\EventSearchRequest;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Error\Message;
 
 /**
  * Standard controller for the Events package
@@ -102,7 +103,7 @@ class EventController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 * @param \Org\Gucken\Events\Domain\Model\Event $event
 	 * @Flow\IgnoreValidation("event")
 	 * @return void
 	 */
@@ -116,7 +117,7 @@ class EventController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 * @param \Org\Gucken\Events\Domain\Model\Event $event
 	 * @Flow\IgnoreValidation("event")
 	 * @return void
 	 */
@@ -140,7 +141,7 @@ class EventController extends AbstractAdminController {
 	 */
 	public function createAction(Event $event) {
 		$this->eventRepository->add($event);
-		$this->addNotice('Veranstaltung "'.$event.'" erstellt');
+        $this->addFlashMessage('Veranstaltung "'.$event.'" erstellt', 'Obacht!', Message::SEVERITY_NOTICE);
 		$this->redirect('index');
 	}
 
@@ -157,7 +158,7 @@ class EventController extends AbstractAdminController {
 	 */
 	public function updateAction(Event $event) {
 		$this->eventRepository->update($event);
-		$this->addNotice('Veranstaltung "'.$event.'" aktualisiert');
+        $this->addFlashMessage('Veranstaltung "'.$event.'" aktualisiert', 'Obacht!', Message::SEVERITY_NOTICE);
 		$this->redirect('index');
 	}
 
@@ -168,7 +169,7 @@ class EventController extends AbstractAdminController {
 	 */
 	public function deleteAction(Event $event) {
 		$this->eventRepository->remove($event);
-		$this->addNotice('Veranstaltung "'.$event.'" gelöscht');
+        $this->addFlashMessage('Veranstaltung "'.$event.'" gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
 		$this->redirect('index');
 	}
 }
