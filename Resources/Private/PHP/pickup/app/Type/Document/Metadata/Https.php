@@ -1,6 +1,5 @@
 <?php
 namespace Type\Document\Metadata;
-use Type\Document\Metadata\Http;
 /**
  * Description of Https
  *

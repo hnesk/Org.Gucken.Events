@@ -4,12 +4,16 @@ namespace Org\Gucken\Events\Service;
 
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Repository;
+use Type\Date;
+use Type\Document\RepositoryInterface;
+use Type\Document;
+use Type\Url;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
  * 
  */
-class DocumentRepositoryService implements \Type\Document\RepositoryInterface {
+class DocumentRepositoryService implements RepositoryInterface {
 
 	/**
 	 *
@@ -27,10 +31,10 @@ class DocumentRepositoryService implements \Type\Document\RepositoryInterface {
 	
    /**
      *
-     * @param \Type\Document $document
+     * @param Document $document
      * @return mixed
      */
-    public function store(\Type\Document $document) {
+    public function store(Document $document) {
 		$documentModel = new Model\Document();
 		$documentModel->setFromDocument($document);
 		$this->documentRepository->add($documentModel);
@@ -40,25 +44,24 @@ class DocumentRepositoryService implements \Type\Document\RepositoryInterface {
     /**
      *
      * @param mixed $id
-     * @return \Type\Document 
+     * @return Document
      */	
     public function retrieveById($id) {
 		return $this->documentRepository->findByIdentifier($id);
 	}
-	
+
     /**
      *
-     * @param Url $url
+     * @param Url|string $url
      * @param int $maxAge
-     * @return \Type\Document
+     * @param array $options
+     * @return Document
      */
     public function retrieveLatestByUrl($url, $maxAge=null,$options=array()) {
-        if (!is_null($maxAge)) {
-            $newerThanDate =  \Type\Date::ago($maxAge)->getNativeValue();
-        }
+        $newerThanDate = is_null($maxAge) ? null :Date::ago($maxAge)->getNativeValue();
 		$document = $this->documentRepository->findLatestByUrl((string) $url, $newerThanDate);
 		if ($document) {		
-			return \Type\Document\Builder::buildFromArray($document->asArray(),$options);
+			return Document\Builder::buildFromArray($document->asArray(),$options);
 		} else {
 			return null;
 		}

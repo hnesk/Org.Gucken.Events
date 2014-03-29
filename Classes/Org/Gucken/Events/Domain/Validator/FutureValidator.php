@@ -1,11 +1,12 @@
 <?php
 namespace Org\Gucken\Events\Domain\Validator;
+use TYPO3\Flow\Validation\Validator\AbstractValidator;
 
 /**
  * A Validator for Date expressions
  *
  */
-class FutureValidator extends \TYPO3\Flow\Validation\Validator\AbstractValidator {
+class FutureValidator extends AbstractValidator {
 
 	/**
 	 * Checks if the given value is a date expression.

@@ -60,7 +60,7 @@ class DayOfWeekOfMonthCondition extends AbstractDayOfWeekCondition implements Da
 				$anchorDateString =  $date->format('Y-m-01');
 			} else {
 				// starting from the end of the next month
-				$anchorDateString = $date->format('Y').'-'.(1+$date->format('m')).'-01';
+				$anchorDateString = $date->format('Y').'-'.(1+intval($date->format('m'))).'-01';
 			}
 			$testDate = new \DateTime($anchorDateString);
 			$testDate->modify($weekOfMonth . ' '. self::$PUKOOL[$this->dayOfWeek]);

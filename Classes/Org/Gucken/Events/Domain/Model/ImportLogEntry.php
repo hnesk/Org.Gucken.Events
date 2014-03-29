@@ -211,7 +211,7 @@ class ImportLogEntry {
 
 	/**
 	 *
-	 * @param type $message 
+	 * @param string $message
 	 */
 	public function addMessage($message) {
 		$this->messages[] = $message;

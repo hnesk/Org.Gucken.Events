@@ -23,6 +23,7 @@ namespace Org\Gucken\Events\Command;
  *                                                                        */
 
 use Org\Gucken\Events\Domain\Model\Location as Location;
+use Org\Gucken\Events\Domain\Repository\LocationRepository;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Cli\CommandController as CommandController;
 
@@ -36,7 +37,7 @@ class LocationCommandController extends CommandController {
 
     /**
      * @Flow\Inject
-     * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
+     * @var LocationRepository
      */
     protected $locationRepository;
 
@@ -51,9 +52,8 @@ class LocationCommandController extends CommandController {
     }
 
     /**
-     * Search locations by keywords
-	 *
-     * @param string $searchString
+     * List locations
+     *
      */
     public function listCommand() {
         $locations = $this->locationRepository->findAll();
@@ -63,7 +63,7 @@ class LocationCommandController extends CommandController {
     }
 
 
-	protected function outputLocation($location) {
+	protected function outputLocation(Location $location) {
 		if ($location) {
 			$this->outputLine(sprintf(
 					'%-30s: %-50s',

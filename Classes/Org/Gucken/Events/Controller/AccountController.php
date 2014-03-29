@@ -22,7 +22,12 @@ namespace Org\Gucken\Events\Controller;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Error\Error;
+use TYPO3\Flow\Error\Notice;
+use TYPO3\Flow\Mvc\ActionRequest;
+use TYPO3\Flow\Mvc\View\ViewInterface;
 use TYPO3\Flow\Security\Authentication\Controller\AbstractAuthenticationController;
+use TYPO3\Flow\Security\Exception\AuthenticationRequiredException;
 
 /**
  * Login controller for the Events package
@@ -45,16 +50,16 @@ class AccountController extends AbstractAuthenticationController {
      */
     public function logoutAction() {
         parent::logoutAction();
-        $this->flashMessageContainer->addMessage(new \TYPO3\Flow\Error\Notice('Du hast Dich abgemeldet.'));
+        $this->flashMessageContainer->addMessage(new Notice('Du hast Dich abgemeldet.'));
         $this->redirect('index', 'standard');
     }
 
     /**
      * Overriden to allow template switching
      *
-     * @param \TYPO3\Flow\Mvc\View\ViewInterface $view
+     * @param ViewInterface $view
      */
-    public function initializeView(\TYPO3\Flow\Mvc\View\ViewInterface $view) {
+    public function initializeView(ViewInterface $view) {
         /* @var $view \TYPO3\Fluid\View\TemplateView */
         $currentView = $this->settings['currentView'];
         $view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
@@ -64,18 +69,18 @@ class AccountController extends AbstractAuthenticationController {
     }
 
 
-    protected function onAuthenticationFailure(\TYPO3\Flow\Security\Exception\AuthenticationRequiredException $exception = NULL)
+    protected function onAuthenticationFailure(AuthenticationRequiredException $exception = NULL)
     {
-        $this->flashMessageContainer->addMessage(new \TYPO3\Flow\Error\Error('Falscher Benutzername und/oder Passwort!', ($exception === NULL ? 1347016771 : $exception->getCode())));
+        $this->flashMessageContainer->addMessage(new Error('Falscher Benutzername und/oder Passwort!', ($exception === NULL ? 1347016771 : $exception->getCode())));
     }
 
     /**
      * Is called if authentication was successful.
      *
-     * @param \TYPO3\Flow\Mvc\ActionRequest $originalRequest The request that was intercepted by the security framework, NULL if there was none
+     * @param ActionRequest $originalRequest The request that was intercepted by the security framework, NULL if there was none
      * @return void
      */
-    protected function onAuthenticationSuccess(\TYPO3\Flow\Mvc\ActionRequest $originalRequest = NULL)
+    protected function onAuthenticationSuccess(ActionRequest $originalRequest = NULL)
     {
         if ($originalRequest !== NULL) {
             $this->redirectToRequest($originalRequest);

@@ -23,6 +23,7 @@ namespace Org\Gucken\Events\Property\TypeConverter;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Property\Exception\TypeConverterException;
 
 /**
  * Converter which transforms from different input formats into DateTime objects.
@@ -50,7 +51,7 @@ class DateTimeConverter extends \TYPO3\Flow\Property\TypeConverter\DateTimeConve
      *
      * @param \DateTime $date
      * @param array $source
-     * @throws \TYPO3\Flow\Property\Exception\TypeConverterException
+     * @throws TypeConverterException
      * @return void
      */
 	protected function overrideTimeIfSpecified(\DateTime $date, array $source) {
@@ -67,7 +68,7 @@ class DateTimeConverter extends \TYPO3\Flow\Property\TypeConverter\DateTimeConve
 
 		$time = \DateTime::createFromFormat($timeFormat, $timeAsString);
 		if (!$time) {
-			throw new \TYPO3\Flow\Property\Exception\TypeConverterException('Could not convert "'.$timeAsString.'" to a time specification in format "'.$timeFormat.'"', 1309383873);
+			throw new TypeConverterException('Could not convert "'.$timeAsString.'" to a time specification in format "'.$timeFormat.'"', 1309383873);
 		}
 		$date->setTime($time->format('H'), $time->format('i'), $time->format('s'));
 	}

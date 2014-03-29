@@ -2,10 +2,11 @@
 namespace Org\Gucken\Events\ViewHelpers;
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  */
-class ObjectHashViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
+class ObjectHashViewHelper extends AbstractViewHelper {
 	/**
 	 * Returns an uniqe hash for an object
 	 *

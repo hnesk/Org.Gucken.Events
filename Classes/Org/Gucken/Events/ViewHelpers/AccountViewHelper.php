@@ -2,10 +2,11 @@
 namespace Org\Gucken\Events\ViewHelpers;
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  */
-class AccountViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
+class AccountViewHelper extends AbstractViewHelper {
 	/**
 	 * @var \TYPO3\Flow\Security\Context
 	 * @Flow\Inject

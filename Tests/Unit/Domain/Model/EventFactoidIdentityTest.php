@@ -3,9 +3,10 @@ namespace Org\Gucken\Events\Tests\Unit\Domain\Model;
 
 use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
+use TYPO3\Flow\Tests\UnitTestCase;
 
 
-class EventFactoidIdentityTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class EventFactoidIdentityTest extends UnitTestCase {
 	
 	/**
 	 * @test 

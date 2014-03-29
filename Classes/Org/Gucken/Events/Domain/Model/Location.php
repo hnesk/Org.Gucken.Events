@@ -22,7 +22,10 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Org\Gucken\Events\Domain\Model\ScorableInterface;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -32,7 +35,7 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
+class Location implements ScorableInterface {
 
     /**
      * The name
@@ -62,26 +65,26 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 
     /**
      * The address
-     * @var \Org\Gucken\Events\Domain\Model\PostalAddress
+     * @var PostalAddress
      * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
      */
     protected $address;
 
     /**
      * The geo
-     * @var \Org\Gucken\Events\Domain\Model\GeoCoordinates
+     * @var GeoCoordinates
      * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
      */
     protected $geo;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier>
+     * @var ArrayCollection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier>
      * @ORM\OneToMany(mappedBy="location", cascade={"all"}, orphanRemoval=true)
      */
     protected $externalIdentifiers;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection<\Org\Gucken\Events\Domain\Model\LocationKeyword>
+     * @var ArrayCollection<\Org\Gucken\Events\Domain\Model\LocationKeyword>
      * @ORM\OneToMany(mappedBy="location", cascade={"all"}, orphanRemoval=true)
      */
     protected $keywords;
@@ -112,8 +115,8 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 	protected $code;
 
     public function __construct() {
-        $this->externalIdentifiers = new \Doctrine\Common\Collections\ArrayCollection();
-		$this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->externalIdentifiers = new ArrayCollection();
+		$this->keywords = new ArrayCollection();
     }
 
     /**
@@ -176,7 +179,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Get the Location's address
      *
-     * @return \Org\Gucken\Events\Domain\Model\PostalAddress The Location's address
+     * @return PostalAddress The Location's address
      */
     public function getAddress() {
         return $this->address;
@@ -185,17 +188,17 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Sets this Location's address
      *
-     * @param \Org\Gucken\Events\Domain\Model\PostalAddress $address The Location's address
+     * @param PostalAddress $address The Location's address
      * @return void
      */
-    public function setAddress($address) {
+    public function setAddress(PostalAddress $address = null) {
         $this->address = $address;
     }
 
     /**
      * Get the Location's geo
      *
-     * @return \Org\Gucken\Events\Domain\Model\GeoCoordinates The Location's geo
+     * @return GeoCoordinates The Location's geo
      */
     public function getGeo() {
         return $this->geo;
@@ -204,10 +207,10 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Sets this Location's geo
      *
-     * @param \Org\Gucken\Events\Domain\Model\GeoCoordinates $geo The Location's geo
+     * @param GeoCoordinates $geo The Location's geo
      * @return void
      */
-    public function setGeo($geo) {
+    public function setGeo(GeoCoordinates $geo = null) {
         $this->geo = $geo;
     }
 
@@ -271,20 +274,20 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Setter for extenal identifiers
      *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier> $externalIdentifiers
+     * @param Collection $externalIdentifiers
      * @return void
      */
-    public function setExternalIdentifiers(\Doctrine\Common\Collections\Collection $externalIdentifiers) {
+    public function setExternalIdentifiers(Collection $externalIdentifiers) {
         $this->externalIdentifiers = $externalIdentifiers;
     }
 
     /**
      * Adds a location identifier
      *
-     * @param \Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier $externalIdentifier
+     * @param ExternalLocationIdentifier $externalIdentifier
      * @return void
      */
-    public function addExternalIdentifier(\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier $externalIdentifier) {
+    public function addExternalIdentifier(ExternalLocationIdentifier $externalIdentifier) {
         $externalIdentifier->setLocation($this);
         $this->externalIdentifiers->add($externalIdentifier);
     }
@@ -292,10 +295,10 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Adds a location identifier
      *
-     * @param \Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier $externalIdentifier
+     * @param ExternalLocationIdentifier $externalIdentifier
      * @return void
      */
-    public function removeExternalIdentifier(\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier $externalIdentifier) {
+    public function removeExternalIdentifier(ExternalLocationIdentifier $externalIdentifier) {
         $this->externalIdentifiers->removeElement($externalIdentifier);
         ;
     }
@@ -303,7 +306,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Getter for location indentifiers
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier>
+     * @return Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier>
      */
     public function getExternalIdentifiers() {
         return clone $this->externalIdentifiers;
@@ -321,20 +324,20 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Setter for keywords
      *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\LocationKeyword> $keywords
+     * @param Collection $keywords
      * @return void
      */
-    public function setKeywords(\Doctrine\Common\Collections\Collection $keywords) {
+    public function setKeywords(Collection $keywords) {
         $this->keywords = $keywords;
     }
 
     /**
      * Adds a keyword
      *
-     * @param \Org\Gucken\Events\Domain\Model\LocationKeyword $keyword
+     * @param LocationKeyword $keyword
      * @return void
      */
-    public function addKeyword(\Org\Gucken\Events\Domain\Model\LocationKeyword $keyword) {
+    public function addKeyword(LocationKeyword $keyword) {
         #$keyword->setLocation($this);
         $this->keywords->add($keyword);
     }
@@ -353,17 +356,17 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * removes a keyword
      *
-     * @param \Org\Gucken\Events\Domain\Model\LocationKeyword $keyword
+     * @param LocationKeyword $keyword
      * @return void
      */
-    public function removeKeyword(\Org\Gucken\Events\Domain\Model\LocationKeyword $keyword) {
+    public function removeKeyword(LocationKeyword $keyword) {
         $this->keywords->removeElement($keyword);
     }
 
     /**
      * Getter for location keywords
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\LocationKeyword>
+     * @return Collection<LocationKeyword>
      */
     public function getKeywords() {
         return clone $this->keywords;
@@ -395,6 +398,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     public function getKeywordArray() {
 		$keywords = array();
 		foreach ($this->keywords as $keyword) {
+            /** @var $keyword LocationKeyword */
 			$keywords[] = mb_strtolower($keyword->getKeyword(), 'utf-8');
 		}
 		return $keywords;
@@ -402,7 +406,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 
 	/**
 	 *
-	 * @param array $keywords
+	 * @param array $keywordLookup
 	 * @return float
 	 */
 	public function score(array $keywordLookup) {
@@ -421,6 +425,7 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 	 */
 	public function removeEmptyKeywords() {
         foreach ($this->keywords as $key =>$locationKeyword) {
+            /** @var $locationKeyword LocationKeyword */
             if (trim($locationKeyword->getKeyword()) === '') {
                 $this->keywords->remove($key);
             }
@@ -428,10 +433,11 @@ class Location implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 	}
 
 	/**
-	 * Helper function to remove empty keywords
+	 * Helper function to remove empty Location ids
 	 */
 	public function removeEmptyExternalIdentifier() {
         foreach ($this->externalIdentifiers as $key =>$externalIdentifier) {
+            /** @var $externalIdentifier ExternalLocationIdentifier */
             if (trim($externalIdentifier->getSchemeLabel()) === '') {
                 $this->externalIdentifiers->remove($key);
             }

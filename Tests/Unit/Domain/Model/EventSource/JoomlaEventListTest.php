@@ -1,13 +1,16 @@
 <?php
 namespace Org\Gucken\Bielefeld\Tests\Unit\Domain\Model;
 
+use Org\Gucken\Events\Domain\Model\EventSource\JoomlaEventList;
+use Org\Gucken\Events\Tests\EventSourceUnitTestCase;
+
 require_once FLOW_PATH_PACKAGES.'/Application/Org.Gucken.Events/Tests/EventSourceUnitTestCase.php';
 
-class JoomlaEventListTest extends \Org\Gucken\Events\Tests\EventSourceUnitTestCase {
+class JoomlaEventListTest extends EventSourceUnitTestCase {
 		
 	public function setUp() {
 		$this->baseUrl = 'file://'.realpath(__DIR__ . '/../../../Fixtures/JoomlaEventList');
-		$this->source = new \Org\Gucken\Events\Domain\Model\EventSource\JoomlaEventList();
+		$this->source = new JoomlaEventList();
 	}
 	
 	public function tearDown() {
@@ -19,8 +22,10 @@ class JoomlaEventListTest extends \Org\Gucken\Events\Tests\EventSourceUnitTestCa
 	 * @test 
 	 */
 	public function linksGetParsed() {
-		$this->source->setUrl($this->baseUrl.'/Ringlokschuppen-Disco.html');				
-		print_r($this->source->getUrls());
+		$this->source->setUrl($this->baseUrl.'/Ringlokschuppen-Disco.html');
+        $urls = $this->source->getUrls();
+		#print_r($urls);
+        $this->assertGreaterThan(0, count($urls));
 	}	
 	
 	
@@ -30,7 +35,7 @@ class JoomlaEventListTest extends \Org\Gucken\Events\Tests\EventSourceUnitTestCa
 	 * @dataProvider getConcertData
 	 */
 	public function concertsHaveCorrectData($file, $nr, $data) {
-		return $this->assertEventDataIsCorrect($file, $nr, $data);
+		$this->assertEventDataIsCorrect($file, $nr, $data);
 	}	
 
 	/**
@@ -38,7 +43,7 @@ class JoomlaEventListTest extends \Org\Gucken\Events\Tests\EventSourceUnitTestCa
 	 * @dataProvider getPartyData
 	 */
 	public function partysHaveCorrectData($file, $nr, $data) {
-		return $this->assertEventDataIsCorrect($file, $nr, $data);
+		$this->assertEventDataIsCorrect($file, $nr, $data);
 	}
 	
 	

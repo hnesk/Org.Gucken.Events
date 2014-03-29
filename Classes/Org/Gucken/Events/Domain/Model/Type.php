@@ -22,6 +22,8 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
@@ -32,7 +34,7 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
+class Type implements ScorableInterface {
 
 	/**
 	 * @var string
@@ -50,7 +52,7 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 	protected $description;
 	
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection<\Org\Gucken\Events\Domain\Model\TypeKeyword>
+     * @var ArrayCollection<\Org\Gucken\Events\Domain\Model\TypeKeyword>
      * @ORM\OneToMany(mappedBy="type", cascade={"all"}, orphanRemoval=true)
      */
     protected $keywords;
@@ -66,7 +68,7 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 		$this->title = $title;
 		$this->pluralTitle = $pluralTitle;
 		$this->description = $description;
-		$this->keywords = new \Doctrine\Common\Collections\ArrayCollection();
+		$this->keywords = new ArrayCollection();
 	}
 
 	/**
@@ -116,15 +118,15 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 	public function __toString() {
 		return $this->title;
 	}
-	
+
 
     /**
      * Setter for keywords
      *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\TypeKeyword> $keywords
+     * @param Collection $keywords
      * @return void
      */
-    public function setKeywords(\Doctrine\Common\Collections\Collection $keywords) {
+    public function setKeywords(Collection $keywords) {
         $this->keywords = $keywords;
     }
 	
@@ -132,27 +134,27 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     /**
      * Adds a keyword
      *
-     * @param \Org\Gucken\Events\Domain\Model\TypeKeyword $keyword
+     * @param TypeKeyword $keyword
      * @return void
      */
-    public function addKeyword(\Org\Gucken\Events\Domain\Model\TypeKeyword $keyword) {
+    public function addKeyword(TypeKeyword $keyword) {
         $this->keywords->add($keyword);
     }
 
     /**
      * removes a keyword
      *
-     * @param \Org\Gucken\Events\Domain\Model\TypeKeyword $keyword
+     * @param TypeKeyword $keyword
      * @return void
      */
-    public function removeKeyword(\Org\Gucken\Events\Domain\Model\TypeKeyword $keyword) {
+    public function removeKeyword(TypeKeyword $keyword) {
         $this->keywords->removeElement($keyword);
     }
 
     /**
      * Getter for type keywords
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\TypeKeyword> 
+     * @return Collection
      */
     public function getKeywords() {
         return clone $this->keywords;
@@ -166,16 +168,17 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
     public function getKeywordArray() {
 		$keywords = array();
 		foreach ($this->keywords as $keyword) {
+            /** @var $keyword TypeKeyword */
 			$keywords[] = mb_strtolower($keyword->getKeyword(), 'utf-8');
 		}
 		return $keywords;
     }
-	
-	/**
-	 *
-	 * @param array $keywords 
-	 * @return float
-	 */
+
+    /**
+     *
+     * @param array $keywordLookup
+     * @return float
+     */
 	public function score(array $keywordLookup) {
 		$score = 0;
 		foreach ($this->getKeywordArray() as $keyword) {
@@ -191,6 +194,7 @@ class Type implements \Org\Gucken\Events\Domain\Model\ScorableInterface {
 	 */
 	public function removeEmptyKeywords() {
         foreach ($this->keywords as $key =>$typeKeyword) {
+            /** @var $typeKeyword TypeKeyword */
             if (trim($typeKeyword->getKeyword()) === '') {
                 $this->keywords->remove($key);
             }

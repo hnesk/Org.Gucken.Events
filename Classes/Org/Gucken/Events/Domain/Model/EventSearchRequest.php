@@ -23,9 +23,7 @@ namespace Org\Gucken\Events\Domain\Model;
 
 
 use TYPO3\Flow\Annotations as Flow;
-use Org\Gucken\Events\Domain\Model\Location;
-use Org\Gucken\Events\Domain\Model\Type;
-use Org\Gucken\Events\Domain\Model\AbstractSearchRequest;
+
 /**
  * An Event search request
  *
@@ -57,13 +55,13 @@ class EventSearchRequest extends AbstractSearchRequest {
 
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\Type
+	 * @var Type
 	 */
 	protected $type;
 
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\Location
+	 * @var Location
 	 */
 	protected $location;
 
@@ -74,12 +72,17 @@ class EventSearchRequest extends AbstractSearchRequest {
 	 */
 	protected $orderColumn;
 
-	/**
-	 *
-	 * @param \DateTime $startDate
-	 * @param \DateTime $endDate
-	 */
-	public function __construct($startDate = null, $endDate = null, $title = null, $type = null, $location = null, $orderColumn = 'startDateTime', $orderDirection = \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING) {
+    /**
+     *
+     * @param \DateTime $startDate
+     * @param \DateTime $endDate
+     * @param string|null $title
+     * @param Type|null $type
+     * @param Location|null $location
+     * @param string $orderColumn
+     * @param string $orderDirection
+     */
+	public function __construct($startDate = null, $endDate = null, $title = null, Type $type = null, Location $location = null, $orderColumn = 'startDateTime', $orderDirection = \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING) {
 		$this->setStartDate($startDate);
 		$this->setEndDate($endDate);
 		$this->setTitle($title);
@@ -160,9 +163,9 @@ class EventSearchRequest extends AbstractSearchRequest {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Type $type
+	 * @param Type $type
 	 */
-	public function setType(\Org\Gucken\Events\Domain\Model\Type $type = null) {
+	public function setType(Type $type = null) {
 		$this->type = $type;
 	}
 
@@ -176,9 +179,9 @@ class EventSearchRequest extends AbstractSearchRequest {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Location $location
+	 * @param Location $location
 	 */
-	public function setLocation(\Org\Gucken\Events\Domain\Model\Location $location = null) {
+	public function setLocation(Location $location = null) {
 		$this->location = $location;
 	}
 
@@ -213,11 +216,11 @@ class EventSearchRequest extends AbstractSearchRequest {
 		return $conditions;
 	}
 
-	/**
-	 *
-	 * @param EventSearchRequest $searchRequest
-	 * @return EventSearchRequest
-	 */
+    /**
+     *
+     * @param AbstractSearchRequest $searchRequest
+     * @return AbstractSearchRequest
+     */
 	public function updateSearchRequest(AbstractSearchRequest $searchRequest = null) {
 		if ($searchRequest->getStartDate()) {
 			$this->setStartDate($searchRequest->getStartDate());

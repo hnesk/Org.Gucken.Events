@@ -2,24 +2,26 @@
 namespace Org\Gucken\Events\ViewHelpers;
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Persistence\PersistenceManagerInterface;
+use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  */
-class IdentifierViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
+class IdentifierViewHelper extends AbstractViewHelper {
 	
 	/**
 	 *
-	 * @var \TYPO3\Flow\Persistence\PersistenceManagerInterface 
+	 * @var PersistenceManagerInterface
 	 */
 	protected $persistenceManager;
 	
 	/**
 	 * Injects the Flow Persistence Manager
 	 *
-	 * @param \TYPO3\Flow\Persistence\PersistenceManagerInterface $persistenceManager
+	 * @param PersistenceManagerInterface $persistenceManager
 	 * @return void
 	 */
-	public function injectPersistenceManager(\TYPO3\Flow\Persistence\PersistenceManagerInterface $persistenceManager) {
+	public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager) {
 		$this->persistenceManager = $persistenceManager;
 	}
 	/**

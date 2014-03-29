@@ -21,6 +21,7 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Org\Gucken\Events\Domain\Model\EventSource;
 use Org\Gucken\Events\Service\ImportEventFactoidsService;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -36,7 +37,7 @@ class ImportController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Service\ImportEventFactoidsService
+	 * @var ImportEventFactoidsService
 	 * @Flow\Inject
 	 */
 	protected $importFactoidsService;
@@ -58,12 +59,13 @@ class ImportController extends AbstractAdminController {
         $this->addFlashMessage($count.' Factoids imported', 'Obacht!', Message::SEVERITY_NOTICE);
         $this->redirect('index');
 	}
-        
-	/**
-	 *
-	 * @return void
-	 */
-	public function sourceAction(\Org\Gucken\Events\Domain\Model\EventSource $source) {
+
+    /**
+     *
+     * @param EventSource $source
+     * @return void
+     */
+	public function sourceAction(EventSource $source) {
 		$count = $this->importFactoidsService->importSource($source);
         $this->addFlashMessage($count.' Factoids for source '.$source->getName().' imported', 'Obacht!', Message::SEVERITY_NOTICE);
         $this->redirect('index');

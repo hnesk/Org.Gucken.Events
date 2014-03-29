@@ -200,7 +200,7 @@ class XPath extends \Type\Base implements \IteratorAggregate {
     protected function setXpath($xpath, $recursiveNamespaces = false) {
         $this->xpath = $xpath;
         set_error_handler(array($this, '_handleError'));
-        $result = $this->_getDomXpath($recursiveNamespaces)->evaluate('/wrtlfsdfls-does-not-exits'.$xpath, $this->element->getDomDocument());
+        $this->_getDomXpath($recursiveNamespaces)->evaluate('/wrtlfsdfls-does-not-exits'.$xpath, $this->element->getDomDocument());
         restore_error_handler();
     }
 

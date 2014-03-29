@@ -6,6 +6,7 @@ namespace Org\Gucken\Events\Service;
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Repository;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Log\SystemLoggerInterface;
 
 /**
  * @Flow\Scope("singleton")
@@ -13,7 +14,7 @@ use TYPO3\Flow\Annotations as Flow;
 class ImportLogService {
 
 	/**
-	 * @var \TYPO3\Flow\Log\SystemLoggerInterface
+	 * @var SystemLoggerInterface
 	 */
 	protected $systemLogger;
 	
@@ -28,7 +29,7 @@ class ImportLogService {
 	/**
 	 * @param \TYPO3\Flow\Log\SystemLoggerInterface
 	 */
-	public function injectSystemLogger(\TYPO3\Flow\Log\SystemLoggerInterface $systemLogger) {
+	public function injectSystemLogger(SystemLoggerInterface $systemLogger) {
 		$this->systemLogger = $systemLogger;
 	}
 	
@@ -55,7 +56,7 @@ class ImportLogService {
 	 * @param boolean $isNewFactoid 
 	 */
 	public function factoidImported(Model\EventSource $source, Model\EventFactoidIdentity $identity, Model\EventFactoid $factoid, $isNewFactoid) {
-		$importLog = $this->logBySource[spl_object_hash($source)];
+        $importLog = $this->getLogEntryBySource($source);
 		if ($isNewFactoid) {
 			$importLog->incrementImportCount();
 		} else {
@@ -71,7 +72,7 @@ class ImportLogService {
 	 */
 	public function exceptionThrown(Model\EventSource $source, $e) {
 		$this->systemLogger->log($e->getCode().' '.$e->getMessage(). ' in '.$e->getTraceAsString());
-		$importLog = $this->logBySource[spl_object_hash($source)];
+        $importLog = $this->getLogEntryBySource($source);
 		$importLog->addError($e->getCode().' '.$e->getMessage(). ' in '.$e->getTraceAsString());
 	}	
 	
@@ -80,12 +81,20 @@ class ImportLogService {
 	 * @param Model\EventSource $source 
 	 */
 	public function importFinished(Model\EventSource $source) {
-		$importLog = $this->logBySource[spl_object_hash($source)];
+		$importLog = $this->getLogEntryBySource($source);
 		$importLog->setEndTime(new \DateTime());
-		$this->importLogRepository->add($importLog);		
-		
+		$this->importLogRepository->add($importLog);
 		unset($this->logBySource[spl_object_hash($source)]);
-	}			
-	
+	}
+
+    /**
+     * @param Model\EventSource $source
+     * @return Model\ImportLogEntry
+     */
+    public function getLogEntryBySource(Model\EventSource $source)
+    {
+        return $this->logBySource[spl_object_hash($source)];
+    }
+
 }
 ?>

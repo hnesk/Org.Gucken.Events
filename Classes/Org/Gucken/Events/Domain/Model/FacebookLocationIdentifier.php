@@ -24,7 +24,6 @@ namespace Org\Gucken\Events\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
-use Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier;
 
 /**
  * An identifier for a location on an external website or service

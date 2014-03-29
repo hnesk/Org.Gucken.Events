@@ -2,8 +2,11 @@
 
 namespace Org\Gucken\Events\Domain\Model\EventSource;
 
-use Org\Gucken\Events\Domain\Model\EventSource\AbstractEventSource,
-	Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface;
+use Org\Gucken\Events\Domain\Model\Location;
+use Org\Gucken\Events\Domain\Model\Type;
+use Type\Calendar\Event;
+use Type\Record\Collection;
+use Type\Record;
 use Type\Url,
 	Type\Xml;
 use Org\Gucken\Events\Annotations as Events,
@@ -16,39 +19,39 @@ class Ical extends AbstractEventSource implements EventSourceInterface {
 
 	/**
 	 * @Events\Configurable
-	 * @var \Org\Gucken\Events\Domain\Model\Location
+	 * @var Location
 	 */
 	protected $location;
 
 	/**
 	 * @Events\Configurable
-	 * @var \Org\Gucken\Events\Domain\Model\Type
+	 * @var Type
 	 */
 	protected $type;
 
 	/**
-	 * @param \Org\Gucken\Events\Domain\Model\Location $location
+	 * @param Location $location
 	 */
 	public function setLocation($location) {
 		$this->location = $location;
 	}
 
 	/**
-	 * @return \Org\Gucken\Events\Domain\Model\Location
+	 * @return Location
 	 */
 	public function getLocation() {
 		return $this->location;
 	}
 
 	/**
-	 * @param \Org\Gucken\Events\Domain\Model\Type $type
+	 * @param Type $type
 	 */
 	public function setType($type) {
 		$this->type = $type;
 	}
 
 	/**
-	 * @return \Org\Gucken\Events\Domain\Model\Type
+	 * @return Type
 	 */
 	public function getType() {
 		return $this->type;
@@ -56,7 +59,7 @@ class Ical extends AbstractEventSource implements EventSourceInterface {
 
 
 	/**
-	 * @return \Type\Record\Collection
+	 * @return Collection
 	 */
 	public function getEvents() {
 		return $this->getUrl()->load()->getContent()
@@ -64,13 +67,13 @@ class Ical extends AbstractEventSource implements EventSourceInterface {
 			->map(array($this,'getEvent'));
 	}
 
-	/**
-	 *
-	 * @param \Type\Calendar\Event $xml
-	 * @return \Type\Record
-	 */
-	public function getEvent(\Type\Calendar\Event $event) {
-		return new \Type\Record(array(
+    /**
+     *
+     * @param Event $event
+     * @return Record
+     */
+	public function getEvent(Event $event) {
+		return new Record(array(
 				'title' => $event->title(),
 				'date' => $event->startDate(),
 				'end' => $event->endDate(),

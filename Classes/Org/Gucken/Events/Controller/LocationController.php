@@ -22,12 +22,16 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Org\Gucken\Events\Domain\Model\BackendSession;
+use Org\Gucken\Events\Domain\Model\ExternalLocationIdentifierFactory;
 use Org\Gucken\Events\Domain\Model\Location;
 use Org\Gucken\Events\Domain\Model\EventSource;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
-use Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier;
+use Org\Gucken\Events\Domain\Model\LocationSearchRequest;
+use Org\Gucken\Events\Domain\Repository\LocationRepository;
 use TYPO3\Flow\Annotations as Flow;
 use Lastfm\Type\Venue as Venue;
+use TYPO3\Flow\Error\Message;
 
 /**
  * Standard controller for the Events package
@@ -38,21 +42,21 @@ class LocationController extends AbstractAdminController {
 
     /**
      *
-     * @var \Org\Gucken\Events\Domain\Repository\LocationRepository
+     * @var LocationRepository
      * @Flow\Inject
      */
     protected $locationRepository;
 
     /**
      *
-     * @var \Org\Gucken\Events\Domain\Model\ExternalLocationIdentifierFactory
+     * @var ExternalLocationIdentifierFactory
      * @Flow\Inject
      */
 	protected $identifierFactory;
 
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\BackendSession
+	 * @var BackendSession
 	 * @Flow\Inject
 	 */
 	protected $backendSession;
@@ -60,12 +64,12 @@ class LocationController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest
+	 * @param LocationSearchRequest $searchRequest
 	 * @param string $orderColumn
 	 * @param string $orderDirection
 	 * @param boolean $reset
 	 */
-    public function indexAction(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null, $reset = false) {
+    public function indexAction(LocationSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null, $reset = false) {
 		if ($reset) {
 			$searchRequest = $this->backendSession->setLocationSearchRequest();
 		} else {
@@ -80,7 +84,7 @@ class LocationController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location
+     * @param Location $location
      * @param string $type
 	 * @param int $position
      */
@@ -91,7 +95,7 @@ class LocationController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location
+     * @param Location $location
      * @Flow\IgnoreValidation("location")
      * @return void
      */
@@ -100,8 +104,8 @@ class LocationController extends AbstractAdminController {
     }
 
 	/**
-	 * @param Org\Gucken\Events\Domain\Model\EventSource $source
-	 * @param Org\Gucken\Events\Domain\Model\EventFactoid $factoid
+	 * @param EventSource $source
+	 * @param EventFactoid $factoid
 	 *
 	 */
 	public function addFromSourceAction(EventSource $source, EventFactoid $factoid) {
@@ -116,7 +120,7 @@ class LocationController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location
+     * @param Location $location
      */
     public function saveAction(Location $location) {
 		$location->setReviewed(true);
@@ -126,11 +130,11 @@ class LocationController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location
+     * @param Location $location
 	 * @Flow\IgnoreValidation("location")
      * @return void
      */
-    public function editAction(\Org\Gucken\Events\Domain\Model\Location $location) {
+    public function editAction(Location $location) {
         $this->view->assign('location', $location);
 		$externalIdentifiers = $this->identifierFactory->getIdentifierOptions();
         $this->view->assign('externalIdentifiers', $externalIdentifiers);
@@ -148,7 +152,7 @@ class LocationController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location
+     * @param Location $location
      */
     public function updateAction(Location $location) {
 		$location->removeEmptyRelations();
@@ -159,7 +163,7 @@ class LocationController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Location $location
+     * @param Location $location
      */
     public function deleteAction(Location $location) {
         $this->locationRepository->remove($location);

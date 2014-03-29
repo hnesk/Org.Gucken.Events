@@ -3,10 +3,16 @@ namespace Org\Gucken\Events\Tests\Unit\Service;
 
 use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
+use Org\Gucken\Events\Domain\Model\EventSource;
+use Org\Gucken\Events\Domain\Model\Location;
+use Org\Gucken\Events\Domain\Model\Type;
+use Org\Gucken\Events\Domain\Repository\EventRepository;
+use Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository;
 use Org\Gucken\Events\Service\ConvertEventFactoidService;
+use TYPO3\Flow\Tests\UnitTestCase;
 
 
-class ConvertEventFactoidServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
+class ConvertEventFactoidServiceTest extends UnitTestCase {
 	
 	/**
 	 *
@@ -15,10 +21,10 @@ class ConvertEventFactoidServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 	protected $service;
 	
 	public function setUp() {
-		$eventRepository = $this->getMock('Org\Gucken\Events\Domain\Repository\EventRepository');
+		$eventRepository = $this->getMock(EventRepository::class, array(),array(),'', false);
 		$eventRepository->expects($this->once())->method('add');
 		
-		$identityRepository = $this->getMock('Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository');
+		$identityRepository = $this->getMock(EventFactoidIdentityRepository::class, array(),array(),'', false);
 		$identityRepository->expects($this->once())->method('update');		
 		
 		$this->service = new ConvertEventFactoidService();
@@ -75,12 +81,12 @@ class ConvertEventFactoidServiceTest extends \TYPO3\Flow\Tests\UnitTestCase {
 		$factoid->setImportDateTime(new \DateTime());
 		$factoid->setShortDescription('short description');
 		$factoid->setDescription('Long description');
-		$factoid->setType(new \Org\Gucken\Events\Domain\Model\Type());
+		$factoid->setType(new Type());
 		$factoid->setUrl('http://www.example.com/');
 		
 		$identity = new EventFactoidIdentity();
-		$identity->setLocation(new \Org\Gucken\Events\Domain\Model\Location());
-		$identity->setSource(new \Org\Gucken\Events\Domain\Model\EventSource());
+		$identity->setLocation(new Location());
+		$identity->setSource(new EventSource());
 		$identity->setStartDateTime(new \DateTime());
 		$identity->addFactoid($factoid);
 		

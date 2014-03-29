@@ -67,15 +67,15 @@ class EventController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $searchRequest
+	 * @param EventSearchRequest $searchRequest
 	 * @param string $orderColumn
 	 * @param string $orderDirection
 	 * @param boolean $reset
 	 *
 	 */
-	public function indexAction(\Org\Gucken\Events\Domain\Model\EventSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null, $reset = false) {
+	public function indexAction(EventSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null, $reset = false) {
 		if ($reset) {
-			$this->backendSession->setEventSearchRequest(new \Org\Gucken\Events\Domain\Model\EventSearchRequest());
+			$this->backendSession->setEventSearchRequest(new EventSearchRequest());
 		} else {
 			$this->backendSession->updateEventSearchRequest($searchRequest, $orderColumn, $orderDirection);
 		}
@@ -88,14 +88,11 @@ class EventController extends AbstractAdminController {
 	}
 
 
-
-
-
-	/**
-	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event
-	 * @return void
-	 */
+    /**
+     *
+     * @param Event $event
+     * @return void
+     */
 	public function showAction(Event $event) {
 		$this->view->assign('event', $event);
 	}
@@ -137,7 +134,7 @@ class EventController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 * @param Event $event
 	 */
 	public function createAction(Event $event) {
 		$this->eventRepository->add($event);
@@ -154,7 +151,7 @@ class EventController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 * @param Event $event
 	 */
 	public function updateAction(Event $event) {
 		$this->eventRepository->update($event);
@@ -165,7 +162,7 @@ class EventController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param Org\Gucken\Events\Domain\Model\Event $event
+	 * @param Event $event
 	 */
 	public function deleteAction(Event $event) {
 		$this->eventRepository->remove($event);

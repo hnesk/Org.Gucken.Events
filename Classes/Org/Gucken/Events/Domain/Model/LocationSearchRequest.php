@@ -23,8 +23,7 @@ namespace Org\Gucken\Events\Domain\Model;
 
 
 use TYPO3\Flow\Annotations as Flow;
-use Org\Gucken\Events\Domain\Model\Location;
-use Org\Gucken\Events\Domain\Model\Type;
+use TYPO3\Flow\Persistence\QueryInterface;
 
 /**
  * An Event search request
@@ -60,7 +59,7 @@ class LocationSearchRequest extends AbstractSearchRequest {
 	 * @param string $orderColumn
 	 * @param string $orderDirection
 	 */
-	public function __construct($name = null, $reviewed = null, $city = null,$orderColumn = 'name', $orderDirection = \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING) {
+	public function __construct($name = null, $reviewed = null, $city = null,$orderColumn = 'name', $orderDirection = QueryInterface::ORDER_DESCENDING) {
 		$this->setName($name);
 		$this->setReviewed($reviewed);
 		$this->setCity($city);
@@ -119,10 +118,10 @@ class LocationSearchRequest extends AbstractSearchRequest {
 
 	/**
 	 *
-	 * @param \TYPO3\Flow\Persistence\QueryInterface $query
+	 * @param QueryInterface $query
 	 * @return array
 	 */
-	public function buildFilters(\TYPO3\Flow\Persistence\QueryInterface $query) {
+	public function buildFilters(QueryInterface $query) {
 		$conditions = array();
 
 		if ($this->getName()) {

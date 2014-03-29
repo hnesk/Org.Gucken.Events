@@ -9,7 +9,7 @@ use Org\Gucken\Events\Domain\Model\GeoCoordinates;
 /**
  * @Flow\Scope("singleton") 
  */
-class GoogleMapsGeoLocationService {
+class GoogleMapsGeoLocationService implements GeoLocationService {
 	
 	/**
 	 * 
@@ -17,8 +17,7 @@ class GoogleMapsGeoLocationService {
 	 * @return \Org\Gucken\Events\Domain\Model\GeoCoordinates
 	 */
 	public function locate(PostalAddress $address) {
-		return new GeoCoordinates(
-		);
+		return new GeoCoordinates(0,0,0);
 	}
 	
         /**
@@ -31,6 +30,7 @@ class GoogleMapsGeoLocationService {
          * @param       array           $conf                   config array with possible keys: baseUrl, apiKey, defaultCountryCode
          * @return      array                                           address data with keys: latitude, longitude, dunnoWhat (the 3rd parameter in the coordinates),countryCode,country,administrativeArea,subAdministrativeArea,locality,dependentLocality,thoroughfare,postalCode or null
          */
+    /*
         protected function _locate($thoroughfare='',$postalCode='',$locality='',$country='',$conf=array()) {
                 $baseUrl = $conf['baseUrl'] ? $conf['baseUrl'] : ($this->staticConfig['baseUrl'] ? $this->staticConfig['baseUrl'] : 'http://maps.google.com/maps/geo');
                 $apiKey  = $conf['apiKey']  ? $conf['apiKey']  : $this->staticConfig['apiKey'];
@@ -99,7 +99,7 @@ class GoogleMapsGeoLocationService {
                 }
                 return '-';
         }
-		
+	*/
 }
 
 ?>

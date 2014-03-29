@@ -1,7 +1,11 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
+use Org\Gucken\Events\Domain\Model\EventSource;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Persistence\QueryInterface;
+use TYPO3\Flow\Persistence\QueryResultInterface;
+use TYPO3\Flow\Persistence\Repository;
 
 /**
  * A repository for import log entries
@@ -11,18 +15,18 @@ use TYPO3\Flow\Annotations as Flow;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @Flow\Scope("singleton")
  */
-class ImportLogEntryRepository extends \TYPO3\Flow\Persistence\Repository {
+class ImportLogEntryRepository extends Repository {
 
-	protected $defaultOrderings = array(
-		'startTime' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING
-	);
+	protected $defaultOrderings = [
+		'startTime' => QueryInterface::ORDER_DESCENDING
+	];
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface 
+	 * @param EventSource $source
+	 * @return QueryResultInterface
 	 */
-	public function findLastBySource(\Org\Gucken\Events\Domain\Model\EventSource $source) {		
+	public function findLastBySource(EventSource $source) {
 		$query = $this->createQuery();
 		return $query->matching($query->equals('source', $source))
 				->setLimit(1)->execute()->getFirst();
@@ -31,11 +35,11 @@ class ImportLogEntryRepository extends \TYPO3\Flow\Persistence\Repository {
 	
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+	 * @param EventSource $source
 	 * @param \DateTime $start
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface 
+	 * @return QueryResultInterface
 	 */
-	public function findBySourceAndDate(\Org\Gucken\Events\Domain\Model\EventSource $source, \DateTime $start) {
+	public function findBySourceAndDate(EventSource $source, \DateTime $start) {
 		$query = $this->createQuery();
 		$conditions = array(
 			$query->equals('source', $source),
@@ -48,11 +52,11 @@ class ImportLogEntryRepository extends \TYPO3\Flow\Persistence\Repository {
 	
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+	 * @param EventSource $source
 	 * @param \DateTime $start
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface 
+	 * @return QueryResultInterface
 	 */
-	public function findWithErrorsBySourceAndDate(\Org\Gucken\Events\Domain\Model\EventSource $source, \DateTime $start) {
+	public function findWithErrorsBySourceAndDate(EventSource $source, \DateTime $start) {
 		$query = $this->createQuery();
 		$conditions = array(
 			$query->equals('source', $source),

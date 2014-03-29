@@ -5,6 +5,8 @@ namespace Org\Gucken\Events\Service;
 
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Domain\Repository;
+use Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository;
+use Org\Gucken\Events\Domain\Repository\EventRepository;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -14,29 +16,29 @@ class ConvertEventFactoidService {
 	
     /**
      *
-     * @var Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository
+     * @var EventFactoidIdentityRepository
      */
     protected $eventFactoidIdentityRepository;	
 
     /**
      *
-     * @var Org\Gucken\Events\Domain\Repository\EventRepository
+     * @var EventRepository
      */
     protected $eventRepository;
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository $eventFactoidIdentityRepository 
+	 * @param EventFactoidIdentityRepository $eventFactoidIdentityRepository
 	 */
-	public function injectFactoidIdentityRepository(\Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository $eventFactoidIdentityRepository) {
+	public function injectFactoidIdentityRepository(EventFactoidIdentityRepository $eventFactoidIdentityRepository) {
 		$this->eventFactoidIdentityRepository = $eventFactoidIdentityRepository;
 	} 
 	
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Repository\EventRepository $eventRepository 
+	 * @param EventRepository $eventRepository
 	 */
-	public function injectEventRepository(\Org\Gucken\Events\Domain\Repository\EventRepository $eventRepository) {
+	public function injectEventRepository(EventRepository $eventRepository) {
 		$this->eventRepository = $eventRepository;
 	}
 

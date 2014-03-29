@@ -2,9 +2,14 @@
 
 namespace Org\Gucken\Events\Domain\Repository;
 
-use TYPO3\Flow\Annotations as Flow;
+use Org\Gucken\Events\Domain\Model\EventFactoid;
+use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
 use Org\Gucken\Events\Domain\Model\EventSearchRequest;
+use TYPO3\Flow\Persistence\Repository;
+use TYPO3\Flow\Persistence\QueryInterface;
+use TYPO3\Flow\Persistence\QueryResultInterface;
 
+use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A repository for EventFactoids
@@ -13,17 +18,17 @@ use Org\Gucken\Events\Domain\Model\EventSearchRequest;
  *
  * @Flow\Scope("singleton")
  */
-class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository {
+class EventFactoidIdentityRepository extends Repository {
 
-    protected $defaultOrderings = array(
-        'startDateTime' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING,
-		'source' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING,
-    );
+    protected $defaultOrderings = [
+        'startDateTime' => QueryInterface::ORDER_ASCENDING,
+		'source' => QueryInterface::ORDER_ASCENDING,
+    ];
 
 	/**
 	 * @param \DateTime $startDateTime
 	 * @param \DateTime $endDateTime
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return QueryResultInterface
 	 */
 	public function findUnassignedBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null) {
 		return $this->_findBetween($startDateTime, $endDateTime, true);
@@ -31,7 +36,7 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 
 	/**
 	 * @param \DateTime $day
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return QueryResultInterface
 	 */
 	public function findUnassignedOn(\DateTime $day = null) {
 		$day = $day ? clone $day : new \DateTime();
@@ -46,7 +51,7 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 	/**
 	 * @param \DateTime $startDateTime
 	 * @param \DateTime $endDateTime
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return QueryResultInterface
 	 */
 	public function findBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null) {
 		return $this->_findBetween($startDateTime, $endDateTime);
@@ -55,7 +60,7 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 	/**
 	 *
 	 * @param \DateTime $startDateTime
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return QueryResultInterface
 	 */
 	public function findAfter(\DateTime $startDateTime = null) {
 		return $this->_findBetween($startDateTime);
@@ -65,7 +70,7 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 	 * @param \DateTime $startDateTime
 	 * @param \DateTime $endDateTime
 	 * @param boolean $unassignedOnly
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @return QueryResultInterface
 	 */
 	protected function _findBetween(\DateTime $startDateTime = null, \DateTime $endDateTime = null, $unassignedOnly = false) {
 		$startDateTime = $startDateTime ?: new \DateTime();
@@ -88,8 +93,8 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $searchRequest
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @param EventSearchRequest $searchRequest
+	 * @return QueryResultInterface
 	 */
 	public function findBySearchRequest(EventSearchRequest $searchRequest) {
 		$query = $this->createQuery();
@@ -102,10 +107,10 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid
-	 * @return \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+	 * @param EventFactoid $factoid
+	 * @return EventFactoidIdentity
 	 */
-	public function findOrCreateByEventFactoid(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid) {
+	public function findOrCreateByEventFactoid(EventFactoid $factoid) {
 		$identity = $this->findOneByEventFactoidProperties($factoid);
 		if (!$identity) {
 			$identity = $this->createByEventFactoid($factoid);
@@ -115,10 +120,10 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid
-	 * @return \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+	 * @param EventFactoid $factoid
+	 * @return EventFactoidIdentity
 	 */
-    public function findOneByEventFactoidProperties(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid) {
+    public function findOneByEventFactoidProperties(EventFactoid $factoid) {
 		$query = $this->createQuery();
 		return $query->matching($query->logicalAnd(array(
 			$query->equals('startDateTime', $factoid->getStartDateTime()),
@@ -127,11 +132,12 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 		)))->execute()->getFirst();
     }
 
-	/**
-	 * @return \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
-	 */
-	public function createByEventFactoid(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid) {
-		$identity = new \Org\Gucken\Events\Domain\Model\EventFactoidIdentity();
+    /**
+     * @param EventFactoid $factoid
+     * @return EventFactoidIdentity
+     */
+	public function createByEventFactoid(EventFactoid $factoid) {
+		$identity = new EventFactoidIdentity();
 		$identity->setStartDateTime($factoid->getStartDateTime());
 		$identity->setLocation($factoid->getLocation());
 		$identity->setSource($factoid->getSource());
@@ -143,7 +149,10 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 	}
 
 
-	public function persist(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $identity) {
+    /**
+     * @param EventFactoidIdentity $identity
+     */
+    public function persist(EventFactoidIdentity $identity) {
 		if ($this->persistenceManager->isNewObject($identity)) {
 			$this->add($identity);
 		} else {
@@ -151,7 +160,7 @@ class EventFactoidIdentityRepository extends \TYPO3\Flow\Persistence\Repository 
 		}
 	}
 
-	public function persistAll() {
+    public function persistAll() {
 		$this->persistenceManager->persistAll();
 	}
 

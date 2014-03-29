@@ -68,7 +68,7 @@ class DayOfMonthConditionTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \InvalidArgumentException
 	 */
 	public function testToConstructorThrownsExceptionWithBrokenRange() {
-		$c = new DayOfMonthCondition('1-murks,31');
+		new DayOfMonthCondition('1-murks,31');
 	}
 
 

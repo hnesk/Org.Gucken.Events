@@ -108,7 +108,7 @@ class DayOfWeekConditionTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \InvalidArgumentException
 	 */
 	public function testInvalidWeekdayStringThrowsException() {
-		$c = new DayOfWeekCondition('DIE');
+		new DayOfWeekCondition('DIE');
 	}
 	
 	
@@ -117,7 +117,7 @@ class DayOfWeekConditionTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \InvalidArgumentException
 	 */
 	public function testInvalidWeekdayNumberThrowsException() {
-		$c = new DayOfWeekCondition(0);
+		new DayOfWeekCondition(0);
 	}
 		
 }

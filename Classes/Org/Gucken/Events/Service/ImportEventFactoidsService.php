@@ -12,21 +12,21 @@ class ImportEventFactoidsService {
 	
     /**
      *
-     * @var Org\Gucken\Events\Domain\Repository\EventFactoidIdentityRepository
+     * @var Repository\EventFactoidIdentityRepository
      * @Flow\Inject
      */
     protected $eventFactoidIdentityRepository;	
 
     /**
      *
-     * @var Org\Gucken\Events\Domain\Repository\EventSourceRepository
+     * @var Repository\EventSourceRepository
      * @Flow\Inject
      */
     protected $eventSourceRepository;
 	
     /**
      *
-     * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
+     * @var Repository\ImportLogEntryRepository
      * @Flow\Inject
      */
     protected $importLogRepository;

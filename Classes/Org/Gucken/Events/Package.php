@@ -22,6 +22,9 @@ namespace Org\Gucken\Events;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use Org\Gucken\Events\Service\ImportEventFactoidsService;
+use Org\Gucken\Events\Service\ImportLogService;
+use TYPO3\Flow\Core\Bootstrap;
 use \TYPO3\Flow\Package\Package as BasePackage;
 
 /**
@@ -34,20 +37,23 @@ class Package extends BasePackage {
     /**
      * Invokes custom PHP code directly after the package manager has been initialized.
      *
-     * @param \TYPO3\Flow\Core\Bootstrap $bootstrap The current bootstrap
+     * @param Bootstrap $bootstrap The current bootstrap
      * @return void
      */
-    public function boot(\TYPO3\Flow\Core\Bootstrap $bootstrap) {
+    public function boot(Bootstrap $bootstrap) {
+        /** @noinspection PhpIncludeInspection */
         require_once $this->packagePath.'Resources/Private/PHP/pickup/app/init.php';
+        /** @noinspection PhpIncludeInspection */
 		require_once $this->packagePath.'Resources/Private/PHP/ToDate/bootstrap.php';
+        /** @noinspection PhpIncludeInspection */
 		require_once $this->packagePath.'Resources/Private/PHP/SG-iCalendar/SG_iCal.php';
 
 		$dispatcher = $bootstrap->getSignalSlotDispatcher();
 
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'importStarted', 'Org\Gucken\Events\Service\ImportLogService', 'importStarted');
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'factoidImported', 'Org\Gucken\Events\Service\ImportLogService', 'factoidImported');
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'exceptionThrown', 'Org\Gucken\Events\Service\ImportLogService', 'exceptionThrown');
-		$dispatcher->connect('Org\Gucken\Events\Service\ImportEventFactoidsService', 'importFinished', 'Org\Gucken\Events\Service\ImportLogService', 'importFinished');
+		$dispatcher->connect(ImportEventFactoidsService::class, 'importStarted'  , ImportLogService::class, 'importStarted');
+		$dispatcher->connect(ImportEventFactoidsService::class, 'factoidImported', ImportLogService::class, 'factoidImported');
+		$dispatcher->connect(ImportEventFactoidsService::class, 'exceptionThrown', ImportLogService::class, 'exceptionThrown');
+		$dispatcher->connect(ImportEventFactoidsService::class, 'importFinished' , ImportLogService::class, 'importFinished');
 
     }
 

@@ -44,7 +44,7 @@ class TypeKeyword {
     
     /**
      *
-     * @var \Org\Gucken\Events\Domain\Model\Type
+     * @var Type
      * @ORM\ManyToOne(inversedBy="keywords")
      */
     protected $type;
@@ -59,10 +59,10 @@ class TypeKeyword {
     /**
      *
      * @param string $keyword
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
+     * @param Type $type
 	 * @param string $typeId
      */
-    public function __construct($keyword, \Org\Gucken\Events\Domain\Model\Type $type, $typeId) {
+    public function __construct($keyword, Type $type, $typeId) {
         $this->keyword = $keyword;
         $this->type = $type;
 		$this->typeId = $typeId;

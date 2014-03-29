@@ -2,10 +2,11 @@
 namespace Org\Gucken\Events\ViewHelpers;
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper;
 
 /**
  */
-class AnchorViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractTagBasedViewHelper {
+class AnchorViewHelper extends AbstractTagBasedViewHelper {
 
 	protected $tagName = 'a';
 

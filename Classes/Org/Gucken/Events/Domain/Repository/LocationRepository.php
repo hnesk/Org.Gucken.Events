@@ -2,7 +2,12 @@
 
 namespace Org\Gucken\Events\Domain\Repository;
 
+use Org\Gucken\Events\Domain\Model\Location;
+use Org\Gucken\Events\Domain\Model\LocationSearchRequest;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Persistence\QueryInterface;
+use TYPO3\Flow\Persistence\QueryResultInterface;
+use TYPO3\Flow\Persistence\Repository;
 
 /**
  * A repository for Locations
@@ -13,18 +18,18 @@ use TYPO3\Flow\Annotations as Flow;
  *
  * @Flow\Scope("singleton")
  */
-class LocationRepository extends \TYPO3\Flow\Persistence\Repository {
+class LocationRepository extends Repository {
 
-    protected $defaultOrderings = array(
-        'name' => \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING
-    );
+    protected $defaultOrderings = [
+        'name' => QueryInterface::ORDER_ASCENDING
+    ];
 
 
     /**
      *
-     * @param sring $scheme
+     * @param string $scheme
      * @param string $id
-     * @return \Org\Gucken\Events\Domain\Model\Location
+     * @return Location
      */
     public function findOneByExternalId($scheme, $id) {
         $query = $this->createQuery();
@@ -38,8 +43,8 @@ class LocationRepository extends \TYPO3\Flow\Persistence\Repository {
 
     /**
      *
-     * @param sring $address
-     * @return \Org\Gucken\Events\Domain\Model\Location
+     * @param string $address
+     * @return Location
      */
     public function findOneByExactAdress($address) {
 		foreach ($this->findAll() as $location) {
@@ -53,10 +58,10 @@ class LocationRepository extends \TYPO3\Flow\Persistence\Repository {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest
-	 * @return \TYPO3\Flow\Persistence\QueryResultInterface
+	 * @param LocationSearchRequest $searchRequest
+	 * @return QueryResultInterface
 	 */
-	public function findBySearchRequest(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $searchRequest) {
+	public function findBySearchRequest(LocationSearchRequest $searchRequest) {
 		$query = $this->createQuery();
 		$query = $searchRequest->apply($query);
 		return $query->execute();
@@ -65,8 +70,8 @@ class LocationRepository extends \TYPO3\Flow\Persistence\Repository {
 
     /**
      *
-     * @param string $keyword
-     * @return \Org\Gucken\Events\Domain\Model\Location
+     * @param string $string
+     * @return Location
      */
     public function findOneByKeywordString($string) {
 		$sortedResults = $this->getResultHeapByKeywordString($string);
@@ -76,8 +81,9 @@ class LocationRepository extends \TYPO3\Flow\Persistence\Repository {
 
     /**
      *
-     * @param string $keyword
-     * @return \Org\Gucken\Events\Domain\Model\Location
+     * @param string $string
+     * @param int $minScore
+     * @return Location
      */
     public function findByKeywordString($string, $minScore = 1) {
 		$sortedResults = $this->getResultHeapByKeywordString($string);

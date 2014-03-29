@@ -23,6 +23,7 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
+use Type\Date;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -120,7 +121,7 @@ class Document  {
 		
 		$plainMetaData = $meta->getData();
 		foreach ($plainMetaData as $key => $value) {
-			if ($value instanceof \Type\Date) {
+			if ($value instanceof Date) {
 				$plainMetaData[$key] = $value->getNativeValue();
 			}
 		}
@@ -165,7 +166,7 @@ class Document  {
 	protected static function toDate($date) {
 		if ($date instanceof \DateTime) {
 			return $date;
-		} else if ($date instanceof \Type\Date) {
+		} else if ($date instanceof Date) {
 			return $date->getNativeValue();
 		} else if (is_string($date)) {
 			$dateObject = null;

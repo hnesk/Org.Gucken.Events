@@ -2,8 +2,22 @@
 
 namespace Org\Gucken\Events\Domain\Model;
 
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface;
+use Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository;
+use Org\Gucken\Rad\Service\ReflectionService as RadReflection;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Aop\Exception\InvalidArgumentException;
+use TYPO3\Flow\Object\ObjectManager;
+use TYPO3\Flow\Object\ObjectManagerInterface;
+use TYPO3\Flow\Property\PropertyMapper;
+use TYPO3\Flow\Reflection\ObjectAccess;
+use TYPO3\Flow\Reflection\ReflectionService;
+use TYPO3\Flow\Utility\TypeHandling;
+use TYPO3\Flow\Validation\ValidatorResolver;
 
 /*
  * This script belongs to the Flow package "Org.Gucken.Events".           *
@@ -75,62 +89,62 @@ class EventSource {
 
 	/**
      * @Flow\Inject
-     * @var \TYPO3\Flow\Property\PropertyMapper
+     * @var PropertyMapper
      */
     protected $propertyMapper;
 
     /**
      * @Flow\Inject
-     * @var Org\Gucken\Rad\Service\ReflectionService
+     * @var RadReflection
      */
     protected $repositoryReflectionService;
 
     /**
      * @Flow\Inject
-     * @var Org\Gucken\Events\Domain\Repository\ImportLogEntryRepository
+     * @var ImportLogEntryRepository
      */
     protected $importLogEntryRepository;
 
     /**
-     * @var \TYPO3\Flow\Reflection\ReflectionService
+     * @var ReflectionService
      */
     protected $reflectionService;
 
     /**
-     * @var \TYPO3\Flow\Object\ObjectManager
+     * @var ObjectManager
      */
     protected $objectManager;
 
 
 
 	/**
-	 * @param \TYPO3\Flow\Reflection\ReflectionService $reflectionService
+	 * @param ReflectionService $reflectionService
 	 */
-	public function injectReflectionService(\TYPO3\Flow\Reflection\ReflectionService $reflectionService) {
+	public function injectReflectionService(ReflectionService $reflectionService) {
 		$this->reflectionService = $reflectionService;
 	}
 
 	/**
-	 * @param \TYPO3\Flow\Object\ObjectManagerInterface $objectManager
+	 * @param ObjectManagerInterface $objectManager
 	 */
-	public function injectObjectManager(\TYPO3\Flow\Object\ObjectManagerInterface $objectManager) {
+	public function injectObjectManager(ObjectManagerInterface $objectManager) {
 		$this->objectManager = $objectManager;
 	}
 
 
 
 	/**
-	 * @var \TYPO3\Flow\Validation\ValidatorResolver
+	 * @var ValidatorResolver
 	 */
 	protected $validatorResolver;
 
 	/**
 	 * Injects the validator resolver
 	 *
-	 * @param \TYPO3\Flow\Validation\ValidatorResolver $validatorResolver
+	 * @param ValidatorResolver $validatorResolver
 	 * @return void
 	 */
-	public function injectValidatorResolver(\TYPO3\Flow\Validation\ValidatorResolver $validatorResolver) {
+	public function injectValidatorResolver(ValidatorResolver $validatorResolver) {
 		$this->validatorResolver = $validatorResolver;
 	}
     /**
@@ -170,6 +184,7 @@ class EventSource {
 
     /**
      *
+     * @param $key
      * @return string
      */
     public function getParameter($key) {
@@ -201,10 +216,11 @@ class EventSource {
 		return method_exists($this->getImplementation(), 'convertLocation');
 	}
 
-	/**
-	 *
-	 * @return Location
-	 */
+    /**
+     *
+     * @param EventFactoid $factoid
+     * @return Location
+     */
 	public function convertLocation(EventFactoid $factoid) {
 		return $this->getCanConvertLocation() ? $this->getImplementation()->convertLocation($factoid) : null;
 	}
@@ -235,16 +251,17 @@ class EventSource {
 
 
     /**
-     * @param string
+     * @param string $implementationClass
+     * @throws \TYPO3\Flow\Aop\Exception\InvalidArgumentException
      * @return void
      */
     public function setImplementationClass($implementationClass) {
         if (!\class_exists($implementationClass)) {
-            throw new \TYPO3\Flow\Aop\Exception\InvalidArgumentException('Argument needs to be a class name, "' . $implementationClass . '" given', 1314480311);
+            throw new InvalidArgumentException('Argument needs to be a class name, "' . $implementationClass . '" given', 1314480311);
         }
 		$implementation = $this->objectManager->get($implementationClass);
-		if (!$implementation instanceof \Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface) {
-            throw new \TYPO3\Flow\Aop\Exception\InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, ' . $implementationClass . ' given', 1314480281);
+		if (!$implementation instanceof EventSourceInterface) {
+            throw new InvalidArgumentException('Argument needs to implement Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface, ' . $implementationClass . ' given', 1314480281);
         }
         $this->implementationClass = $implementationClass;
     }
@@ -302,7 +319,7 @@ class EventSource {
 					$repository = $this->repositoryReflectionService->getRepositoryFor($type);
 					if ($repository && $repository->findByIdentifier($rawValue)) {
 						$value = $this->propertyMapper->convert($rawValue, $type);
-					} else if (\TYPO3\Flow\Utility\TypeHandling::isLiteral($type)) {
+					} else if (TypeHandling::isLiteral($type)) {
 						$value = $rawValue;
 					} else {
 						$value = $this->propertyMapper->convert($rawValue, $type);
@@ -311,7 +328,7 @@ class EventSource {
 					$value = '';
 				}
 			} else {
-                if (\TYPO3\Flow\Utility\TypeHandling::isLiteral($type)) {
+                if (TypeHandling::isLiteral($type)) {
                     $value = '';
                 } else {
                     $value = $this->objectManager->get($type);
@@ -341,10 +358,10 @@ class EventSource {
 
     /**
      *
-     * @return \Doctrine\Common\Collections\Collection<Org\Gucken\Events\Domain\Model\EventFactoid>
+     * @return Collection<Org\Gucken\Events\Domain\Model\EventFactoid>
      */
     public function getEventFactoids() {
-        $eventFactoids = new \Doctrine\Common\Collections\ArrayCollection();
+        $eventFactoids = new ArrayCollection();
         foreach ($this->getImplementation()->getEvents() as $eventFactoidRecord) {
             $eventFactoid = new EventFactoid($eventFactoidRecord);
             $eventFactoid->setSource($this);
@@ -355,7 +372,7 @@ class EventSource {
 
     /**
      *
-     * @return EventSourceImplementation
+     * @return EventSourceInterface
      */
     public function getImplementation() {
         // create object
@@ -363,7 +380,7 @@ class EventSource {
         // configure object
         foreach ($this->getParameterProperties() as $key => $property) {
 			try {
-				\TYPO3\Flow\Reflection\ObjectAccess::setProperty($implementation, $key, $property);
+				ObjectAccess::setProperty($implementation, $key, $property);
 			} catch (\Exception $e) {}
         }
         return $implementation;
@@ -393,8 +410,8 @@ class EventSource {
 	 * @param \DateTime $start
 	 * @return array
 	 */
-	public function getLogEntries() {
-		$start = new \DateTime('-2 weeks');
+	public function getLogEntries(\DateTime $start = null) {
+		$start = $start ?: new \DateTime('-2 weeks');
 		return $this->importLogEntryRepository->findBySourceAndDate($this, $start);
 	}
 

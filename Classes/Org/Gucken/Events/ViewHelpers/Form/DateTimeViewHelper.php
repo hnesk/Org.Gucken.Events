@@ -2,9 +2,10 @@
 namespace Org\Gucken\Events\ViewHelpers\Form;
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper;
 
 
-class DateTimeViewHelper extends \TYPO3\Fluid\ViewHelpers\Form\AbstractFormFieldViewHelper {
+class DateTimeViewHelper extends AbstractFormFieldViewHelper {
 
 	/**
 	 * @var string
@@ -97,7 +98,7 @@ class DateTimeViewHelper extends \TYPO3\Fluid\ViewHelpers\Form\AbstractFormField
 
 		$this->tag->addAttribute('type', $type);
 		$this->tag->addAttribute('name', $name.'[date]');
-		$this->tag->addAttribute('class', 'span1 datepicker');
+		$this->tag->addAttribute('class', 'span1 datepicker '.$class);
 
 		$this->tagDateHidden->setTagName('input');
 		$this->tagDateHidden->addAttribute('type', 'hidden');
@@ -143,7 +144,7 @@ class DateTimeViewHelper extends \TYPO3\Fluid\ViewHelpers\Form\AbstractFormField
 		$date = new \DateTime('1970-01-01T00:00');
 		while ($date->format('d') == 1) {
 			$values[$date->format($format)] = $date->format($format);
-			$date->modify('+30 minutes');
+			$date->modify($step);
 		}
 		return $values;
 	}

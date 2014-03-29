@@ -21,7 +21,8 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \Org\Gucken\Events\Domain\Model\Event;
+use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
+use Org\Gucken\Events\Domain\Model\EventProposal;
 use Org\Gucken\Events\Domain\Model\Location;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -60,15 +61,15 @@ class ProposalController extends BaseController {
 	}
 
 	/**
-	 * @param \Org\Gucken\Events\Domain\Model\EventProposal $proposal
+	 * @param EventProposal $proposal
 	 * @param boolean $chooseLocation
 	 * @Flow\IgnoreValidation("proposal")
 	 */
-	public function proposeAction(\Org\Gucken\Events\Domain\Model\EventProposal $proposal = null) {
+	public function proposeAction(EventProposal $proposal = null) {
 		if (is_null($proposal)) {
 			$tomorrowEvening = new \DateTime('1 day');
 			$tomorrowEvening->setTime(20, 0, 0);
-			$proposal = new \Org\Gucken\Events\Domain\Model\EventProposal();
+			$proposal = new EventProposal();
 			$proposal->setStartDateTime($tomorrowEvening);
 		}
 
@@ -81,7 +82,7 @@ class ProposalController extends BaseController {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventProposal $proposal
+	 * @param EventProposal $proposal
 	 * @param string $locationText
 	 *
 	 * @Flow\Validate(argumentName="proposal.startDateTime",type="Org\Gucken\Events\Domain\Validator\FutureValidator")
@@ -89,7 +90,7 @@ class ProposalController extends BaseController {
 	 * @Flow\Validate(argumentName="proposal.title",type="NotEmpty")
 	 * @Flow\Validate(argumentName="proposal.type",type="NotEmpty")
 	 */
-	public function validateAction(\Org\Gucken\Events\Domain\Model\EventProposal $proposal) {
+	public function validateAction(EventProposal $proposal) {
 		$location = $this->locationRepository->findOneByExactAdress($proposal->getLocationText());
 
 		if (!$location) {
@@ -120,9 +121,9 @@ class ProposalController extends BaseController {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity
+	 * @param EventFactoidIdentity $factoidIdentity
 	 */
-	public function displayFinishedAction(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
+	public function displayFinishedAction(EventFactoidIdentity $factoidIdentity) {
 		$this->view->assign('identity', $factoidIdentity);
 	}
 

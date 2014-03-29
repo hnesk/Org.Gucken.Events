@@ -88,10 +88,11 @@ class LastFm implements EventSourceInterface {
 		return $link;
 	}
 
-	/**
-	 *
-	 * @param Model\EventFactoid $factoid 
-	 */
+    /**
+     *
+     * @param Model\EventFactoid $factoid
+     * @return null|Model\Location
+     */
 	public function convertLocation(Model\EventFactoid $factoid) {
 		$location = null;
 		$proofXml = $factoid->getProofAsXml();

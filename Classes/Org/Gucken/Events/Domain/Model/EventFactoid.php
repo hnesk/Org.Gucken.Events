@@ -7,7 +7,9 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
+use Type\Record;
 use Type\Xml;
+use Type\Xml\Factory as XmlFactory;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -113,9 +115,9 @@ class EventFactoid {
 
 	/**
 	 *
-	 * @param \Type\Record $record
+	 * @param Record $record
 	 */
-    public function __construct(\Type\Record $record = null) {
+    public function __construct(Record $record = null) {
 		if ($record) {
 			$this->setTitle($record->getNative('title'));
 			$this->setStartDateTime($record->getNative('date'));
@@ -172,6 +174,7 @@ class EventFactoid {
      * Sets this Event factoid's start date time
      *
      * @param \DateTime $startDateTime The Event factoid's start date time
+     * @throws \InvalidArgumentException
      * @return void
      */
     public function setStartDateTime($startDateTime = null) {
@@ -349,13 +352,13 @@ class EventFactoid {
     }
 
 	/**
-	 * @return \Type\Xml
+	 * @return Xml
 	 */
 	public function getProofAsXml() {
 		$proofXml = null;
 		$proof = $this->getProof();
 		if (!empty($proof)) {
-			$proofXml = \Type\Xml\Factory::fromXmlString($proof);
+			$proofXml = XmlFactory::fromXmlString($proof);
 		}
 		return $proofXml;
 	}

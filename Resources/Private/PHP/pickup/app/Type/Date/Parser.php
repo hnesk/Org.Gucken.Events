@@ -90,7 +90,6 @@ class Parser {
 			'february' => 2,
 			'march' => 3,
 			'april' => 4,
-			'may' => 5,
 			'june' => 6,
 			'july' => 7,
 			'august' => 8,
@@ -103,7 +102,6 @@ class Parser {
 			'februar' => 2,
 			'märz' => 3,
 			'mÄrz' => 3,
-			'mai' => 5,
 			'juni' => 6,
 			'juli' => 7,
 			'sebtember' => 9,
@@ -396,7 +394,7 @@ class Parser {
 			$thisYear = clone \App::instance()->date();
 			$thisYear->setDate(intval(strftime('%Y')), intval($month), intval($day));
 			$nextYear = clone \App::instance()->date();
-			$nextYear->setDate(intval(1 + strftime('%Y')), intval($month), intval($day));
+			$nextYear->setDate(1 + intval(strftime('%Y')), intval($month), intval($day));
 
 			if ($this->rangeStart != -PHP_INT_MAX && $thisYear->getTimestamp() < $this->rangeStart) {
 				$this->date = $nextYear;

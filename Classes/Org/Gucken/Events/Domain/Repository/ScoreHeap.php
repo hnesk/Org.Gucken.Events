@@ -25,7 +25,7 @@ class ScoreHeap extends \SplHeap {
      * @param ScorableInterface $value2
      * @return int
      */
-	protected function compare(ScorableInterface $value1, ScorableInterface $value2) {
+	protected function compare($value1, $value2) {
 		return $value1->score($this->keywordLookup) - $value2->score($this->keywordLookup);
 	}
 

@@ -24,7 +24,6 @@ namespace Org\Gucken\Events\Controller;
 
 use Org\Gucken\Events\Domain\Model;
 use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Error\Message;
 use TYPO3\Flow\Mvc\Controller\ActionController;
 use TYPO3\Flow\Mvc\Controller\MvcPropertyMappingConfiguration;
 use TYPO3\Flow\Mvc\View\ViewInterface;

@@ -14,13 +14,18 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Property\Exception\TypeConverterException;
+use TYPO3\Flow\Property\PropertyMappingConfigurationInterface;
+use TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter;
+use TYPO3\Flow\Resource\ResourceManager;
+use TYPO3\Media\Domain\Model\Image;
 
 /**
  * An type converter for Image objects; which are uploaded using plupload
  *
  * @Flow\Scope("singleton")
  */
-class ImageTypeConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter {
+class ImageTypeConverter extends AbstractTypeConverter {
 
 	/**
 	 * @var array<string>
@@ -30,7 +35,7 @@ class ImageTypeConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractType
 	/**
 	 * @var string
 	 */
-	protected $targetType = 'TYPO3\Media\Domain\Model\Image';
+	protected $targetType = Image::class;
 
 	/**
 	 * @var integer
@@ -39,7 +44,7 @@ class ImageTypeConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractType
 
 	/**
 	 * @Flow\Inject
-	 * @var \TYPO3\Flow\Resource\ResourceManager
+	 * @var ResourceManager
 	 */
 	protected $resourceManager;
 
@@ -55,25 +60,26 @@ class ImageTypeConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractType
 		return (isset($source['type']) && $source['type'] === 'plupload');
 	}
 
-	/**
-	 * Converts the given string or array to a ResourcePointer object.
-	 *
-	 * If the input format is an array, this method assumes the resource to be a
-	 * fresh file upload and imports the temporary upload file through the
-	 * resource manager.
-	 *
-	 * @param array $source The upload info (expected keys: error, name, tmp_name)
-	 * @param string $targetType
-	 * @param array $convertedChildProperties
-	 * @param \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration
-	 * @return \TYPO3\Media\Domain\Model\Image An object or an instance of TYPO3\Flow\Error\Error if the input format is not supported or could not be converted for other reasons
-	 */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
+    /**
+     * Converts the given string or array to a ResourcePointer object.
+     *
+     * If the input format is an array, this method assumes the resource to be a
+     * fresh file upload and imports the temporary upload file through the
+     * resource manager.
+     *
+     * @param array $source The upload info (expected keys: error, name, tmp_name)
+     * @param string $targetType
+     * @param array $convertedChildProperties
+     * @param PropertyMappingConfigurationInterface $configuration
+     * @throws TypeConverterException
+     * @return Image An object or an instance of TYPO3\Flow\Error\Error if the input format is not supported or could not be converted for other reasons
+     */
+	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), PropertyMappingConfigurationInterface $configuration = NULL) {
 		$resource = $this->resourceManager->importUploadedResource($_FILES['file']);
 		if ($resource === FALSE) {
-			throw new \TYPO3\Flow\Property\Exception\TypeConverterException('Resource could not be converted.', 1316428994);
+			throw new TypeConverterException('Resource could not be converted.', 1316428994);
 		}
-		$image = new \TYPO3\Media\Domain\Model\Image($resource);
+		$image = new Image($resource);
 		$image->setTitle(''); // TODO: this should maybe be settable
 		return $image;
 	}

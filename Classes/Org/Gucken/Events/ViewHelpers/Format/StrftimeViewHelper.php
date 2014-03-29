@@ -2,6 +2,8 @@
 namespace Org\Gucken\Events\ViewHelpers\Format;
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3\Fluid\Core\ViewHelper\Exception;
 
 
 /**
@@ -59,22 +61,23 @@ use TYPO3\Flow\Annotations as Flow;
  *
  * @api
  */
-class StrftimeViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper {
+class StrftimeViewHelper extends AbstractViewHelper {
 
 	/**
 	 * @var boolean
 	 */
 	protected $escapingInterceptorEnabled = FALSE;
 
-	/**
-	 * Render the supplied DateTime object as a formatted date.
-	 *
-	 * @param mixed $date either a \DateTime object or a string that is accepted by \DateTime constructor
-	 * @param string $format Format String which is taken to format the Date/Time
-	 * @param string $locale Locale to use
-	 * @return string Formatted date
-	 * @api
-	 */
+    /**
+     * Render the supplied DateTime object as a formatted date.
+     *
+     * @param mixed $date either a \DateTime object or a string that is accepted by \DateTime constructor
+     * @param string $format Format String which is taken to format the Date/Time
+     * @param string $locale Locale to use
+     * @throws Exception
+     * @return string Formatted date
+     * @api
+     */
 	public function render($date = NULL, $format = 'Y-m-d',$locale = 'de_DE.utf8') {
 		if ($date === NULL) {
 			$date = $this->renderChildren();
@@ -86,7 +89,7 @@ class StrftimeViewHelper extends \TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper
 			try {
 				$date = new \DateTime($date);
 			} catch (\Exception $exception) {
-				throw new \TYPO3\Fluid\Core\ViewHelper\Exception('"' . $date . '" could not be parsed by \DateTime constructor.', 1241722579);
+				throw new Exception('"' . $date . '" could not be parsed by \DateTime constructor.', 1241722579);
 			}
 		}
 		$settedLocale = null;

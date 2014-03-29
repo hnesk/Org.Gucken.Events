@@ -25,8 +25,10 @@ use Org\Gucken\Events\Domain\Model\Event;
 use Org\Gucken\Events\Domain\Model\EventFactoid;
 use Org\Gucken\Events\Domain\Model\EventFactoidIdentity;
 
+use Org\Gucken\Events\Domain\Model\EventLink;
 use TYPO3\Flow\Annotations as Flow;
 use Lastfm\Type\Venue as Venue;
+use TYPO3\Flow\Error\Message;
 
 /**
  * Standard controller for the Events package
@@ -216,9 +218,9 @@ class FactoidConvertController extends AbstractAdminController {
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link
+	 * @param EventLink $link
 	 */
-    public function unlinkAction(\Org\Gucken\Events\Domain\Model\EventLink $link) {
+    public function unlinkAction(EventLink $link) {
 		$unlinkedIdentity = $this->convertService->unlink($link);
         $this->addFlashMessage('Faktoid-ID "'.$unlinkedIdentity.'" von Event gelöst', 'Obacht!', Message::SEVERITY_NOTICE);
 		$currentDate = $link->getEvent()->getStartDateTime();

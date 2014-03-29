@@ -22,7 +22,10 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
+use Type\Url;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Property\PropertyMappingConfigurationInterface;
+use TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter;
 
 /**
  * Converter which transforms from different input formats into DateTime objects.
@@ -33,7 +36,7 @@ use TYPO3\Flow\Annotations as Flow;
  * @api
  * @Flow\Scope("singleton")
  */
-class TypeUrlConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter {
+class TypeUrlConverter extends AbstractTypeConverter {
 
 	/**
 	 * @var array<string>
@@ -43,7 +46,7 @@ class TypeUrlConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeCo
 	/**
 	 * @var string
 	 */
-	protected $targetType = '\Type\Url';
+	protected $targetType = Url::class;
 
     /**
      * Converts $source to a \Type\Url
@@ -51,11 +54,11 @@ class TypeUrlConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeCo
      * @param string $source the string to be converted to a \Type\Url object
      * @param string $targetType must be "\Type\Url"
      * @param array $convertedChildProperties
-     * @param \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration
-     * @return \Type\Url
+     * @param PropertyMappingConfigurationInterface $configuration
+     * @return Url
      */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
-               return new \Type\Url($source);
+	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), PropertyMappingConfigurationInterface $configuration = NULL) {
+               return new Url($source);
 	}
 }
 ?>

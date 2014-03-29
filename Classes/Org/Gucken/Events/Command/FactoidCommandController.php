@@ -22,12 +22,13 @@ namespace Org\Gucken\Events\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Org\Gucken\Events\Domain\Model\Type as Type;
-use Org\Gucken\Events\Domain\Model\Location as Location;
-use Org\Gucken\Events\Domain\Model\PostalAddress as PostalAddress;
-use Org\Gucken\Events\Domain\Model\GeoCoordinates as GeoCoordinates;
+use Org\Gucken\Events\Domain\Model\EventFactoid;
+use Org\Gucken\Events\Domain\Model\EventSource;
+use Org\Gucken\Events\Domain\Repository\EventSourceRepository;
+use Org\Gucken\Events\Service\ImportEventFactoidsService;
 use TYPO3\Flow\Annotations as Flow;
-use TYPO3\Flow\Cli\CommandController as CommandController;
+use TYPO3\Flow\Cli\CommandController;
+use TYPO3\Flow\Error\Debugger;
 
 /**
  * Command controller for the Importer
@@ -38,13 +39,13 @@ class FactoidCommandController extends CommandController {
 
     /**
      * @Flow\Inject
-     * @var \Org\Gucken\Events\Service\ImportEventFactoidsService
+     * @var ImportEventFactoidsService
      */
     protected $importService;
 
     /**
      * @Flow\Inject
-     * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
+     * @var EventSourceRepository
      */
     protected $sourceRepository;
 
@@ -55,7 +56,6 @@ class FactoidCommandController extends CommandController {
      * @return string
      */
     public function importCommand($name) {
-        $message = '';
         $source = $this->sourceRepository->findOneByName($name);
         if (empty ($source)) {
             $message = sprintf('Source "%s" nout found',$name);
@@ -82,14 +82,12 @@ class FactoidCommandController extends CommandController {
      */
     public function showCommand($name, $filter = '') {
            $source = $this->sourceRepository->findOneByCode($name);
-           /* @var $source \Org\Gucken\Events\Domain\Model\EventSource */
-            var_dump($source);
-
            foreach ($source->getImplementation()->getEvents() as $factoid) {
+               /** @var $factoid EventFactoid */
                if ($filter && strpos($factoid->getTitle(),$filter) === false) {
                    continue;
                }
-               var_dump($factoid->getNativeValue());
+               $this->output(Debugger::renderDump($factoid, 0, true, true));
            }
 
 

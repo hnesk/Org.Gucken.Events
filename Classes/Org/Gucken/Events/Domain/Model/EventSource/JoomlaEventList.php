@@ -2,8 +2,6 @@
 
 namespace Org\Gucken\Events\Domain\Model\EventSource;
 
-use Org\Gucken\Events\Domain\Model\EventSource\AbstractEventSource,
-	Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface;
 use Type\Url,
 	Type\Xml;
 use Org\Gucken\Events\Annotations as Events,

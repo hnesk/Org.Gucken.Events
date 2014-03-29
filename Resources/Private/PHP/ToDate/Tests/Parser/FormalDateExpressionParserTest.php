@@ -3,7 +3,6 @@
 namespace ToDate\Parser;
 
 
-use ToDate\Parser\FormalDateExpressionParser;
 use ToDate\Condition;
 
 /**

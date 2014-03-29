@@ -64,11 +64,12 @@ class Facebook implements EventSourceInterface {
         return $this->type;
     }
 
-    
-	/**
-	 *
-	 * @param Model\EventFactoid $factoid 
-	 */
+
+    /**
+     *
+     * @param Model\EventFactoid $factoid
+     * @return Model\Location|null
+     */
 	public function convertLocation(Model\EventFactoid $factoid) {
 		$location = null;
 		return $location;

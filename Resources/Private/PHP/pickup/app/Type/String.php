@@ -27,7 +27,6 @@ class String extends \Type\Base {
             "\r",   // Commodore 8-bit machines, Acorn BBC, TRS-80, Apple II family, Mac OS up to version 9 and OS-9
             #"\n",   // Multics, Unix and Unix-like systems (GNU/Linux, AIX, Xenix, Mac OS X, FreeBSD, etc.), BeOS, Amiga, RISC OS, and others.
         );
-        $lineFeed = "\n";
         foreach ($lineFeeds as $lineFeed) {
             if (strpos($value, $lineFeed) !== false) {
                 return str_replace($lineFeed, "\n", $value);
@@ -237,7 +236,6 @@ class String extends \Type\Base {
             return $keepThisIfNotFound ? $this : new String();
         }
 
-        return new String($this->substring(0, (int) $this->indexOf($delimiter)));
     }
 
     /**

@@ -23,6 +23,7 @@ namespace Org\Gucken\Events\Domain\Model;
 
 
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Persistence\QueryInterface;
 
 /**
  * An abstract search request
@@ -48,10 +49,10 @@ abstract class AbstractSearchRequest {
 
 	/**
 	 *
-	 * @param \TYPO3\Flow\Persistence\QueryInterface $query
-	 * @return \TYPO3\Flow\Persistence\QueryInterface
+	 * @param QueryInterface $query
+	 * @return QueryInterface
 	 */
-	public function apply(\TYPO3\Flow\Persistence\QueryInterface $query) {
+	public function apply(QueryInterface $query) {
 
 
 		if ($this->getOrderColumn()) {
@@ -68,10 +69,10 @@ abstract class AbstractSearchRequest {
 	}
 
 	/**
-	 *  @param \TYPO3\Flow\Persistence\QueryInterface $query
+	 *  @param QueryInterface $query
 	 *  @return array
 	 */
-	abstract protected function buildFilters(\TYPO3\Flow\Persistence\QueryInterface $query);
+	abstract protected function buildFilters(QueryInterface $query);
 
 	/**
 	 *
@@ -105,7 +106,7 @@ abstract class AbstractSearchRequest {
 	 * @return string
 	 */
 	public function getOrderDirection() {
-		return $this->orderDirection ?: \TYPO3\Flow\Persistence\QueryInterface::ORDER_ASCENDING;
+		return $this->orderDirection ?: QueryInterface::ORDER_ASCENDING;
 	}
 
 	/**
@@ -116,11 +117,13 @@ abstract class AbstractSearchRequest {
 		$this->orderDirection = $orderDirection;
 	}
 
-	/**
-	 *
-	 * @param EventSearchRequest $searchRequest
-	 * @return EventSearchRequest
-	 */
+    /**
+     *
+     * @param AbstractSearchRequest $searchRequest
+     * @param string|null $orderColumn
+     * @param string|null $orderDirection
+     * @return AbstractSearchRequest
+     */
 	public function update(AbstractSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null) {
 		if ($searchRequest) {
 			$this->updateSearchRequest($searchRequest);

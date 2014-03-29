@@ -79,6 +79,11 @@ class BaseCollection extends \Type\Base implements \Iterator, \Countable, \Array
     }
 
 
+    /**
+     * @param string $separator
+     * @throws \Exception
+     * @return mixec
+     */
     public function join($separator = ', ') {
         throw new \Exception('You need to implement join in subclasses');
     }
@@ -90,7 +95,7 @@ class BaseCollection extends \Type\Base implements \Iterator, \Countable, \Array
      */
     public function values() {
         $newCollection = $this->newSelf();
-        foreach ($this->elements as $key => $element) {
+        foreach ($this->elements as $element) {
             $newCollection->addOne($element);
         }
         return $newCollection;
@@ -325,7 +330,7 @@ class BaseCollection extends \Type\Base implements \Iterator, \Countable, \Array
 
 
     public function store($name,$callback) {
-        foreach ($this as $k=>$element) {
+        foreach ($this as $element) {
             /* @var Type $element */
             $element->store($name, $callback);
         }
@@ -353,7 +358,9 @@ class BaseCollection extends \Type\Base implements \Iterator, \Countable, \Array
 
     /**
      *
-     * @param Closure $converter 
+     * @param \Closure $converter
+     * @param \Closure $keyConverter
+     * @return array
      */
     public function toArray($converter = null, $keyConverter = null) {
         if ($converter || $keyConverter) {

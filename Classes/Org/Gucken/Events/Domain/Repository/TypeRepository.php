@@ -1,7 +1,9 @@
 <?php
 namespace Org\Gucken\Events\Domain\Repository;
 
+use Org\Gucken\Events\Domain\Model\Location;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Persistence\Repository;
 
 /**
  * A repository for event Types
@@ -12,11 +14,11 @@ use TYPO3\Flow\Annotations as Flow;
  * 
  * @Flow\Scope("singleton")
  */
-class TypeRepository extends \TYPO3\Flow\Persistence\Repository {
+class TypeRepository extends Repository {
     /**
      *
-     * @param string $keyword 
-     * @return \Org\Gucken\Events\Domain\Model\Location
+     * @param string $string
+     * @return Location
      */
     public function findOneByKeywordString($string) {
 		$keywords = string($string)->asKeywords()->getNativeValue();

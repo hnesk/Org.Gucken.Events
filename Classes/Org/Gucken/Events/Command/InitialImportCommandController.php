@@ -102,15 +102,17 @@ class InitialImportCommandController extends CommandController {
 
 	}
 
-	/**
-	 *
-	 * @return array
-	 */
+    /**
+     *
+     * @param int|null $limit
+     * @return array
+     */
 	protected function getLocations($limit = null) {
 		$locations = array();
 		$tx_eventcollab_location = array();
-		include 'resource://Org.Gucken.Events/Private/PHP/Data/gehweg_typo3.php';
-		foreach ($tx_eventcollab_location as $key => $location) {
+        /** @noinspection PhpIncludeInspection */
+        include 'resource://Org.Gucken.Events/Private/PHP/Data/gehweg_typo3.php';
+		foreach ($tx_eventcollab_location as $location) {
 			if ($location['address'] && !$location['hidden'] && !$location['deleted'] && $location['pid'] != 0) {
 				$locations[] = $location;
 			}
@@ -127,8 +129,9 @@ class InitialImportCommandController extends CommandController {
 	protected function getTypes() {
 		$types = array();
 		$tx_eventcollab_type = array();
+        /** @noinspection PhpIncludeInspection */
 		include 'resource://Org.Gucken.Events/Private/PHP/Data/gehweg_typo3.php';
-		foreach ($tx_eventcollab_type as $key => $type) {
+		foreach ($tx_eventcollab_type as $type) {
 			if (!$type['hidden'] && !$type['deleted'] && $type['pid'] != 0) {
 				$types[] = $type;
 			}

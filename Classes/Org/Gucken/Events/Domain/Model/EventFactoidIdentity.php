@@ -79,6 +79,7 @@ class EventFactoidIdentity {
      * Sets this Event factoid's start date time
      *
      * @param \DateTime $startDateTime The Event factoid's start date time
+     * @throws \InvalidArgumentException
      * @return void
      */
     public function setStartDateTime($startDateTime = null) {

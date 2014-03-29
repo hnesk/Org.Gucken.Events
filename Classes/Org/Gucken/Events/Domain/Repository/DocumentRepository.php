@@ -2,7 +2,10 @@
 
 namespace Org\Gucken\Events\Domain\Repository;
 
+use Org\Gucken\Events\Domain\Model\Document;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Persistence\QueryInterface;
+use TYPO3\Flow\Persistence\Repository;
 
 /**
  * A repository for HTTP Documents or a: Cache
@@ -13,18 +16,18 @@ use TYPO3\Flow\Annotations as Flow;
  * 
  * @Flow\Scope("singleton")
  */
-class DocumentRepository extends \TYPO3\Flow\Persistence\Repository {
+class DocumentRepository extends Repository {
 
-	protected $defaultOrderings = array(
-		'localTime' =>  \TYPO3\Flow\Persistence\QueryInterface::ORDER_DESCENDING
-	);
-	
-	/**
-	 *
-	 * @param string $url
-	 * @param \DateTime $maxAge 
-	 * @return \Org\Gucken\Events\Domain\Model\Document
-	 */
+	protected $defaultOrderings = [
+		'localTime' =>  QueryInterface::ORDER_DESCENDING
+	];
+
+    /**
+     *
+     * @param string $url
+     * @param \DateTime $newerThanDate
+     * @return Document
+     */
 	public function findLatestByUrl($url, \DateTime $newerThanDate=null) {
 		$query = $this->createQuery();
 		

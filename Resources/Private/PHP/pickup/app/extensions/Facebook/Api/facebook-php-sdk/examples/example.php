@@ -53,7 +53,6 @@ if ($user) {
 } else {
   $loginUrl = $facebook->getLoginUrl(array(
 	  'redirect_uri' => 'http://projects.localhost/pickup/app/extensions/Facebook/api/facebook-php-sdk/examples/example.php',
-          'redirect_uri' => 'http://projects.localhost/pickup/app/extensions/Facebook/Api/facebook-php-sdk/examples/example.php',
    	  'scope' => 'manage_pages,offline_access'
   ));
 }

@@ -104,7 +104,7 @@ class Options implements \ArrayAccess, \IteratorAggregate, \Countable {
      */
     protected static function convertToArray($data) {
         $data = (array)$data;
-        foreach ($data as $k => &$v) {
+        foreach ($data as &$v) {
             if (\is_object($v)) {
                 $v = self::convertToArray($v);
             }

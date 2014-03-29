@@ -16,7 +16,7 @@ class FeatureInSetConditionTest extends \PHPUnit_Framework_TestCase {
 	 * @expectedException \InvalidArgumentException
 	 */
 	public function testConstructorThrowsExceptionWithInvalidFeature() {
-		$c = new FeatureInSetCondition('X',3);
+		new FeatureInSetCondition('X',3);
 	}
 	
 

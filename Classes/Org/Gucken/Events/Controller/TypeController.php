@@ -23,8 +23,8 @@ namespace Org\Gucken\Events\Controller;
  *                                                                        */
 
 use Org\Gucken\Events\Domain\Model\Type;
-use Org\Gucken\Events\Domain\Model\TypeKeyword;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Error\Message;
 
 /**
  * Standard controller for the Events package
@@ -53,7 +53,7 @@ class TypeController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Type $type
+     * @param Type $type
      * @Flow\IgnoreValidation("type")
      * @return void
      */
@@ -70,7 +70,7 @@ class TypeController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Type $type
+     * @param Type $type
      */
     public function saveAction(Type $type) {
         $this->typeRepository->add($type);
@@ -79,10 +79,10 @@ class TypeController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Type $type
+     * @param Type $type
      * @return void
      */
-    public function editAction($type) {
+    public function editAction(Type $type) {
         $this->view->assign('type', $type);
     }
 
@@ -97,7 +97,7 @@ class TypeController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Type $type
+     * @param Type $type
      */
     public function updateAction(Type $type) {
         $this->typeRepository->update($type);
@@ -107,7 +107,7 @@ class TypeController extends AbstractAdminController {
 
     /**
      *
-     * @param Org\Gucken\Events\Domain\Model\Type $type
+     * @param Type $type
      */
     public function deleteAction(Type $type) {
         $this->typeRepository->remove($type);

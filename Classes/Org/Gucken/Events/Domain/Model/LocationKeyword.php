@@ -44,7 +44,7 @@ class LocationKeyword {
     
     /**
      *
-     * @var Org\Gucken\Events\Domain\Model\Location
+     * @var Location
      * @ORM\ManyToOne(inversedBy="keywords")
      */
     protected $location;
@@ -59,10 +59,10 @@ class LocationKeyword {
     /**
      *
      * @param string $keyword
-     * @param Org\Gucken\Events\Domain\Model\Location $location 
+     * @param Location $location
 	 * @param string $locationId
      */
-    public function __construct($keyword, \Org\Gucken\Events\Domain\Model\Location $location, $locationId) {
+    public function __construct($keyword, Location $location, $locationId) {
         $this->keyword = (string)$keyword;
         $this->location = $location;
 		$this->locationId = $locationId;
@@ -81,7 +81,7 @@ class LocationKeyword {
     
     /**
      *
-     * @return Org\Gucken\Events\Domain\Model\Location
+     * @return Location
      */
     protected function getLocation() {
         return $this->location;

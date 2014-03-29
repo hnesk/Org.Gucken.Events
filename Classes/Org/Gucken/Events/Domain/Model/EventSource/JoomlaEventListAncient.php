@@ -2,8 +2,9 @@
 
 namespace Org\Gucken\Events\Domain\Model\EventSource;
 
-use Org\Gucken\Events\Domain\Model\EventSource\AbstractEventSource,
-	Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface;
+use Org\Gucken\Events\Domain\Model\Location;
+use Org\Gucken\Events\Domain\Model\Type;
+use Type\Record;
 use Type\Url,
 	Type\Xml;
 use Org\Gucken\Events\Annotations as Events,
@@ -16,39 +17,39 @@ class JoomlaEventListAncient extends AbstractEventSource implements EventSourceI
 
 	/**
 	 * @Events\Configurable
-	 * @var \Org\Gucken\Events\Domain\Model\Location
+	 * @var Location
 	 */
 	protected $location;
 
 	/**
 	 * @Events\Configurable
-	 * @var \Org\Gucken\Events\Domain\Model\Type
+	 * @var Type
 	 */
 	protected $type;
 
 	/**
-	 * @param \Org\Gucken\Events\Domain\Model\Location $location
+	 * @param Location $location
 	 */
 	public function setLocation($location) {
 		$this->location = $location;
 	}
 
 	/**
-	 * @return \Org\Gucken\Events\Domain\Model\Location
+	 * @return Location
 	 */
 	public function getLocation() {
 		return $this->location;
 	}
 
 	/**
-	 * @param \Org\Gucken\Events\Domain\Model\Type $type
+	 * @param Type $type
 	 */
 	public function setType($type) {
 		$this->type = $type;
 	}
 
 	/**
-	 * @return \Org\Gucken\Events\Domain\Model\Type
+	 * @return Type
 	 */
 	public function getType() {
 		return $this->type;
@@ -56,7 +57,7 @@ class JoomlaEventListAncient extends AbstractEventSource implements EventSourceI
 
 	/**
 	 *
-	 * @return \Type\Url\Collection
+	 * @return Url\Collection
 	 */
 	public function getUrls() {
 		return $this->getUrl()->load('badHtml')->getContent()
@@ -64,7 +65,7 @@ class JoomlaEventListAncient extends AbstractEventSource implements EventSourceI
 	}
 
 	/**
-	 * @return \Type\Record\Collection
+	 * @return Record\Collection
 	 */
 	public function getEvents() {
 		return $this->getUrls()->load('badHtml')->getContent()
@@ -74,14 +75,14 @@ class JoomlaEventListAncient extends AbstractEventSource implements EventSourceI
 	/**
 	 *
 	 * @param Xml $xml
-	 * @return \Type\Record 
+	 * @return Record
 	 */
 	public function getEvent(Xml $xml) {
 
 		$description = $xml->xpath('.//tr[8]/td')->asXml()->formattedText()->normalizeParagraphs();
 		$date = $xml->xpath('./table[@class="details"][1]//tr[2]/td[2]')->asString()->first()->normalizeSpace();
 		$title = $xml->xpath('./table[@class="details"][1]//tr[3]/td[2]')->asString()->first()->normalizeSpace();
-		return new \Type\Record(array(
+		return new Record(array(
 			'title' => $title,
 			'date' => $date->asDate('%d.%m.%Y \| %H[:.]%M'),
 			#'end' => $date->asDate('%d.%m.%Y \| [^-]+- %H.%M'),

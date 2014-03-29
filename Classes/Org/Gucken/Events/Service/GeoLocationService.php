@@ -10,8 +10,8 @@ interface GeoLocationService {
 	/**
 	 * fetches data from a geolocation service about an address
 	 * 
-	 * @param \Org\Gucken\Events\Domain\Model\PostalAddress $address
-	 * @return \Org\Gucken\Events\Domain\Model\GeoCoordinates 
+	 * @param PostalAddress $address
+	 * @return GeoCoordinates
 	 */
 	public function locate(PostalAddress $address);
 	

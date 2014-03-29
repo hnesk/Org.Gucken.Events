@@ -106,7 +106,7 @@ class App {
         }
         $config = $this->config;
         $keys = explode('/',$key);
-        foreach($keys as $level => $key) {
+        foreach($keys as $key) {
             if (!isset($config[$key])) {
                 return $default;
             }

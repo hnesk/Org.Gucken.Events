@@ -25,6 +25,7 @@ namespace Org\Gucken\Events\Domain\Model;
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
+
 /**
  * An identifier for a location on an external website or service
  *
@@ -46,7 +47,7 @@ abstract class ExternalLocationIdentifier {
     
     /**
      *
-     * @var Org\Gucken\Events\Domain\Model\Location
+     * @var Location
      * @ORM\ManyToOne(inversedBy="externalIdentifiers")
      */
     protected $location;
@@ -60,11 +61,11 @@ abstract class ExternalLocationIdentifier {
 
     /**
      *
-     * @param string $scheme
-     * @param string $id 
-     * @param Org\Gucken\Events\Domain\Model\Location $location 
+     * @param int|string $id
+     * @param Location $location
+     * @param string $label
      */
-    public function __construct($id = 0, \Org\Gucken\Events\Domain\Model\Location $location = null, $label = '') {
+    public function __construct($id = 0, Location $location = null, $label = '') {
         $this->id = $id;
         $this->location = $location;
 		$this->label = $label;
@@ -96,7 +97,7 @@ abstract class ExternalLocationIdentifier {
     
     /**
      *
-     * @return Org\Gucken\Events\Domain\Model\Location
+     * @return Location
      */
     protected function getLocation() {
         return $this->location;
@@ -104,9 +105,9 @@ abstract class ExternalLocationIdentifier {
     
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\Location $location 
+     * @param Location $location
      */
-    public function setLocation(\Org\Gucken\Events\Domain\Model\Location $location) {
+    public function setLocation(Location $location) {
         $this->location = $location;
     }
 	

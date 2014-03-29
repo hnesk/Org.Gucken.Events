@@ -34,106 +34,107 @@ use TYPO3\Flow\Annotations as Flow;
 class BackendSession {
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 * @var EventSearchRequest
 	 */
 	protected $eventSearchRequest;
 
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 * @var EventSearchRequest
 	 */
 	protected $factoidSearchRequest;
 
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Model\LocationSearchRequest
+	 * @var LocationSearchRequest
 	 */
 	protected $locationSearchRequest;
 
 	/**
 	 *
-	 * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 * @return EventSearchRequest
 	 */
 	public function getEventSearchRequest() {
-		return $this->eventSearchRequest  ?: new \Org\Gucken\Events\Domain\Model\EventSearchRequest();
+		return $this->eventSearchRequest  ?: new EventSearchRequest();
 	}
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $eventSearchRequest
-     * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 * @param EventSearchRequest $eventSearchRequest
+     * @return EventSearchRequest
      */
-	public function setEventSearchRequest(\Org\Gucken\Events\Domain\Model\EventSearchRequest $eventSearchRequest = null) {
-		$this->eventSearchRequest = $eventSearchRequest ?: new \Org\Gucken\Events\Domain\Model\EventSearchRequest();
+	public function setEventSearchRequest(EventSearchRequest $eventSearchRequest = null) {
+		$this->eventSearchRequest = $eventSearchRequest ?: new EventSearchRequest();
 		return $this->eventSearchRequest;
 	}
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $eventSearchRequest
+	 * @param EventSearchRequest $eventSearchRequest
 	 * @param string $orderColumn
 	 * @param string $orderDirection
-	 * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 * @return EventSearchRequest
 	 */
-	public function updateEventSearchRequest(\Org\Gucken\Events\Domain\Model\EventSearchRequest $eventSearchRequest = null, $orderColumn = '', $orderDirection = '') {
+	public function updateEventSearchRequest(EventSearchRequest $eventSearchRequest = null, $orderColumn = '', $orderDirection = '') {
 		return $this->setEventSearchRequest($this->getEventSearchRequest()->update($eventSearchRequest, $orderColumn, $orderDirection));
 	}
 
 
 	/**
 	 *
-	 * @return \Org\Gucken\Events\Domain\Model\LocationSearchRequest
+	 * @return LocationSearchRequest
 	 */
 	public function getLocationSearchRequest() {
-		return $this->locationSearchRequest  ?: new \Org\Gucken\Events\Domain\Model\LocationSearchRequest();
+		return $this->locationSearchRequest  ?: new LocationSearchRequest();
 	}
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\LocationSearchRequest $locationSearchRequest
-	 * @return \Org\Gucken\Events\Domain\Model\LocationSearchRequest
+	 * @param LocationSearchRequest $locationSearchRequest
+	 * @return LocationSearchRequest
 	 */
-	public function setLocationSearchRequest(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $locationSearchRequest = null) {
-		$this->locationSearchRequest = $locationSearchRequest ?: new \Org\Gucken\Events\Domain\Model\LocationSearchRequest();
+	public function setLocationSearchRequest(LocationSearchRequest $locationSearchRequest = null) {
+		$this->locationSearchRequest = $locationSearchRequest ?: new LocationSearchRequest();
 		return $this->locationSearchRequest;
 	}
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\LocationSearchRequest $locationSearchRequest
+	 * @param LocationSearchRequest $locationSearchRequest
 	 * @param string $orderColumn
 	 * @param string $orderDirection
-	 * @return \Org\Gucken\Events\Domain\Model\LocationSearchRequest
+	 * @return LocationSearchRequest
 	 */
-	public function updateLocationSearchRequest(\Org\Gucken\Events\Domain\Model\LocationSearchRequest $locationSearchRequest = null, $orderColumn = 'title', $orderDirection = '') {
+	public function updateLocationSearchRequest(LocationSearchRequest $locationSearchRequest = null, $orderColumn = 'title', $orderDirection = '') {
 		return $this->setLocationSearchRequest($this->getLocationSearchRequest()->update($locationSearchRequest, $orderColumn, $orderDirection));
 	}
 
 	/**
 	 *
-	 * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 * @return EventSearchRequest
 	 */
 	public function getFactoidSearchRequest() {
-		return $this->factoidSearchRequest ?: new \Org\Gucken\Events\Domain\Model\EventSearchRequest();
+		return $this->factoidSearchRequest ?: new EventSearchRequest();
 	}
 
-	/**
-	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest
-	 */
-	public function setFactoidSearchRequest(\Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest = null) {
-		$this->factoidSearchRequest = $factoidSearchRequest ?: new \Org\Gucken\Events\Domain\Model\EventSearchRequest();
+    /**
+     *
+     * @param EventSearchRequest $factoidSearchRequest
+     * @return EventSearchRequest
+     */
+	public function setFactoidSearchRequest(EventSearchRequest $factoidSearchRequest = null) {
+		$this->factoidSearchRequest = $factoidSearchRequest ?: new EventSearchRequest();
 		return $this->factoidSearchRequest;
 	}
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest
+	 * @param EventSearchRequest $factoidSearchRequest
 	 * @param string $orderColumn
 	 * @param string $orderDirection
-	 * @return \Org\Gucken\Events\Domain\Model\EventSearchRequest
+	 * @return EventSearchRequest
 	 */
-	public function updateFactoidSearchRequest(\Org\Gucken\Events\Domain\Model\EventSearchRequest $factoidSearchRequest = null, $orderColumn = '', $orderDirection = '') {
+	public function updateFactoidSearchRequest(EventSearchRequest $factoidSearchRequest = null, $orderColumn = '', $orderDirection = '') {
 		return $this->setFactoidSearchRequest($this->getFactoidSearchRequest()->update($factoidSearchRequest, $orderColumn, $orderDirection));
 	}
 

@@ -22,7 +22,12 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
+use ToDate\Condition\AbstractDateCondition;
+use ToDate\Condition\ErrorCondition;
+use ToDate\Parser\FormalDateExpressionParser;
 use TYPO3\Flow\Annotations as Flow;
+use TYPO3\Flow\Property\PropertyMappingConfigurationInterface;
+use TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter;
 
 /**
  * Converter which transform string to DateConditions.
@@ -31,7 +36,7 @@ use TYPO3\Flow\Annotations as Flow;
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  * @Flow\Scope("singleton")
  */
-class DateConditionConverter extends \TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter {
+class DateConditionConverter extends AbstractTypeConverter {
 
 	/**
 	 * @var array<string>
@@ -41,19 +46,21 @@ class DateConditionConverter extends \TYPO3\Flow\Property\TypeConverter\Abstract
 	/**
 	 * @var string
 	 */
-	protected $targetType = '\ToDate\Condition\AbstractDateCondition';
+	protected $targetType = AbstractDateCondition::class;
 
-	/**
-	 * Converts $source to a \Type\Url
-	 *
-	 * @param string $source the string to be converted to a \ToDate\Condition\DateConditionInterface object
-	 * @param string $targetType must be "\ToDate\Condition\AbstractDateCondition"
-	 * @return \ToDate\Condition\DateConditionInterface
-	 */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration = NULL) {
-		$parser = new \ToDate\Parser\FormalDateExpressionParser($source);
+    /**
+     * Converts $source to a DateConditionInterface
+     *
+     * @param string $source the string to be converted to a \ToDate\Condition\DateConditionInterface object
+     * @param string $targetType must be "\ToDate\Condition\AbstractDateCondition"
+     * @param array $convertedChildProperties
+     * @param \TYPO3\Flow\Property\PropertyMappingConfigurationInterface $configuration
+     * @return \ToDate\Condition\DateConditionInterface
+     */
+	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), PropertyMappingConfigurationInterface $configuration = NULL) {
+		$parser = new FormalDateExpressionParser($source);
 		$condition = $parser->parse();
-		return $condition ? $condition : new \ToDate\Condition\ErrorCondition("", $source);
+		return $condition ? $condition : new ErrorCondition("", $source);
 	}
 }
 ?>
