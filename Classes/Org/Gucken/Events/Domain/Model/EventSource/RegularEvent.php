@@ -2,10 +2,17 @@
 
 namespace Org\Gucken\Events\Domain\Model\EventSource;
 
+use Type\Record;
 use Type\Url;
 use Org\Gucken\Events\Domain\Model;
 use Org\Gucken\Events\Annotations as Events;
 use TYPO3\Flow\Annotations as Flow;
+
+use ToDate\Condition\AbstractDateCondition;
+use ToDate\Condition\DateConditionInterface;
+use ToDate\Iterator\ConditionIterator;
+use ToDate\Iterator\DayIterator;
+
 
 /**
  * @Flow\Scope("prototype")
@@ -24,15 +31,15 @@ class RegularEvent implements EventSourceInterface {
 	 * @Events\Configurable
 	 * @Flow\Validate(type="\Org\Gucken\Events\Domain\Validator\DateConditionValidator")
 	 * @Flow\Validate(type="NotEmpty")
-	 * @var \ToDate\Condition\AbstractDateCondition
+	 * @var DateConditionInterface
 	 */
 	protected $dateCondition;
-	
 
-	/**
-	 * @param Model\Event $event
-	 */
-	public function setBaseEvent($baseEvent) {
+
+    /**
+     * @param Model\Event $baseEvent
+     */
+	public function setBaseEvent(Model\Event $baseEvent) {
 		
 		$this->baseEvent = $baseEvent;
 	}
@@ -47,16 +54,16 @@ class RegularEvent implements EventSourceInterface {
 
 	/**
 	 *
-	 * @return \ToDate\Condition\AbstractDateCondition
+	 * @return AbstractDateCondition
 	 */
 	public function getDateCondition() {
 		return $this->dateCondition;
 	}
 	
 	/**
-	 * @param \ToDate\Condition\AbstractDateCondition $dateCondition 
+	 * @param AbstractDateCondition $dateCondition
 	 */
-	public function setDateCondition(\ToDate\Condition\AbstractDateCondition $dateCondition) {
+	public function setDateCondition(AbstractDateCondition $dateCondition) {
 		$this->dateCondition = $dateCondition;
 	}
 
@@ -64,23 +71,24 @@ class RegularEvent implements EventSourceInterface {
 	 *
 	 * @param Model\EventFactoidIdentity $factoidIdentity
 	 * @param \Org\Gucken\Events\Domain\Model\EventLink if set link will be updated else created
-	 * @return \Org\Gucken\Events\Domain\Model\LastFmEventLink 
+	 * @return \Org\Gucken\Events\Domain\Model\LastFmEventLink
 	 */
 	public function convertLink(Model\EventFactoidIdentity $factoidIdentity, $link = null) {
 		$link = $link ? : new Model\RegularEventLink();
 		$link->setUrl($this->getBaseEvent()->getUrl());
 		return $link;
-	}		
-	
-	/**
-	 *
-	 * @return \ToDate\Iterator\AbstractDateRangeIterator
-	 */
+	}
+
+    /**
+     *
+     * @param int $days
+     * @return \ToDate\Iterator\AbstractDateRangeIterator
+     */
 	public function getDateIterator($days = 50) {
 		$now = new \DateTime();
 		$later = clone $now;
-		$later->modify($days.' days');		
-		return  new \ToDate\Iterator\ConditionIterator(new \ToDate\Iterator\DayIterator($now, $later), $this->getDateCondition());
+		$later->modify($days.' days');
+		return  new ConditionIterator(new DayIterator($now, $later), $this->getDateCondition());
 	}
 	
 		
@@ -88,7 +96,7 @@ class RegularEvent implements EventSourceInterface {
 	 * @return \Type\Record\Collection
 	 */
 	public function getEvents() {
-		$result = new \Type\Record\Collection();
+		$result = new Record\Collection();
 		foreach ($this->getDateIterator() as $date) {
 			$result->addOne($this->getEvent($date));
 		}
@@ -98,14 +106,14 @@ class RegularEvent implements EventSourceInterface {
 	/**
 	 *
 	 * @param \DateTime $date
-	 * @return \Type\Record 
+	 * @return Record
 	 */
 	public function getEvent($date) {
 		$thisDate = clone $date;
 		$baseDate = $this->getBaseEvent()->getStartDateTime();
 		$thisDate->setTime($baseDate->format('H'), $baseDate->format('i'), $baseDate->format('s'));
 		
-		return new \Type\Record(array(
+		return new Record(array(
 			'title' => $this->baseEvent->getTitle(),
 			'date' => $thisDate,
 			'short' => (string) $this->baseEvent->getShortDescription(),

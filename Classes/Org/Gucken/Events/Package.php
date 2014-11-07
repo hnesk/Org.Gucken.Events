@@ -22,8 +22,8 @@ namespace Org\Gucken\Events;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Org\Gucken\Events\Service\ImportEventFactoidsService;
-use Org\Gucken\Events\Service\ImportLogService;
+use Org\Gucken\Events\Service\ImportEventFactoidsService as FactoidsService;
+use Org\Gucken\Events\Service\ImportLogService as LogService;
 use TYPO3\Flow\Core\Bootstrap;
 use \TYPO3\Flow\Package\Package as BasePackage;
 
@@ -44,16 +44,14 @@ class Package extends BasePackage {
         /** @noinspection PhpIncludeInspection */
         require_once $this->packagePath.'Resources/Private/PHP/pickup/app/init.php';
         /** @noinspection PhpIncludeInspection */
-		require_once $this->packagePath.'Resources/Private/PHP/ToDate/bootstrap.php';
-        /** @noinspection PhpIncludeInspection */
 		require_once $this->packagePath.'Resources/Private/PHP/SG-iCalendar/SG_iCal.php';
 
 		$dispatcher = $bootstrap->getSignalSlotDispatcher();
 
-		$dispatcher->connect(ImportEventFactoidsService::class, 'importStarted'  , ImportLogService::class, 'importStarted');
-		$dispatcher->connect(ImportEventFactoidsService::class, 'factoidImported', ImportLogService::class, 'factoidImported');
-		$dispatcher->connect(ImportEventFactoidsService::class, 'exceptionThrown', ImportLogService::class, 'exceptionThrown');
-		$dispatcher->connect(ImportEventFactoidsService::class, 'importFinished' , ImportLogService::class, 'importFinished');
+		$dispatcher->connect(FactoidsService::class, 'importStarted'  , LogService::class, 'importStarted');
+		$dispatcher->connect(FactoidsService::class, 'factoidImported', LogService::class, 'factoidImported');
+		$dispatcher->connect(FactoidsService::class, 'exceptionThrown', LogService::class, 'exceptionThrown');
+		$dispatcher->connect(FactoidsService::class, 'importFinished' , LogService::class, 'importFinished');
 
     }
 

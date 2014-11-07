@@ -22,7 +22,7 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  *                                                                        */
 
 use Doctrine\ORM\Mapping as ORM;
-use ToDate\Condition\AbstractDateCondition;
+use ToDate\Condition\DateConditionInterface;
 use ToDate\Condition\ErrorCondition;
 use ToDate\Parser\FormalDateExpressionParser;
 use TYPO3\Flow\Annotations as Flow;
@@ -46,7 +46,7 @@ class DateConditionConverter extends AbstractTypeConverter {
 	/**
 	 * @var string
 	 */
-	protected $targetType = AbstractDateCondition::class;
+	protected $targetType = DateConditionInterface::class;
 
     /**
      * Converts $source to a DateConditionInterface
