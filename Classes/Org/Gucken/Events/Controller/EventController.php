@@ -85,7 +85,7 @@ class EventController extends AbstractAdminController {
 		$this->view->assign('searchRequest', $this->backendSession->getEventSearchRequest());
 		$this->view->assign('locations', $this->addDummyEntry($this->locationRepository->findAll()));
 		$this->view->assign('types', $this->addDummyEntry($this->typeRepository->findAll()));
-	}
+    }
 
 
     /**

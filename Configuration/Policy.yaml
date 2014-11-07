@@ -13,9 +13,9 @@ resources:
     Org_Gucken_Events_Controller_Location: class(Org\Gucken\Events\Controller\LocationController)
     Org_Gucken_Events_Controller_Event: class(Org\Gucken\Events\Controller\EventController)
     Org_Gucken_Events_Controller_FactoidConvert: class(Org\Gucken\Events\Controller\FactoidConvertController)
-    Org_Gucken_Events_Actions_Create: 'method(Org\Gucken\Events\Controller\.*Controller->(initialize)?(add|save)Action())'
-    Org_Gucken_Events_Actions_Modify: 'method(Org\Gucken\Events\Controller\.*Controller->(initialize)?(edit|update)Action())'
-    Org_Gucken_Events_Actions_Delete: 'method(Org\Gucken\Events\Controller\.*Controller->(initialize)?delete.*Action())'
+    Org_Gucken_Events_Actions_Create: 'method(Org\Gucken\Events\Controller\.*Controller->(add|save)Action())'
+    Org_Gucken_Events_Actions_Modify: 'method(Org\Gucken\Events\Controller\.*Controller->(edit|update)Action())'
+    Org_Gucken_Events_Actions_Delete: 'method(Org\Gucken\Events\Controller\.*Controller->delete.*Action())'
 roles:
   Administrator:
     - ImportEditor

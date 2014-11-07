@@ -26,7 +26,13 @@ use Org\Gucken\Events\Domain\Model;
 
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+
 use TYPO3\Flow\Error\Message;
+use TYPO3\Flow\Reflection\ReflectionService;
+
+use Org\Gucken\Events\Domain\Repository\EventSourceRepository;
+use Org\Gucken\Events\Domain\Repository\TypeRepository;
+use Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface;
 
 /**
  * Standard controller for the Events package 
@@ -37,21 +43,21 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @var \TYPO3\Flow\Reflection\ReflectionService
+     * @var ReflectionService
      * @Flow\Inject
      */
     protected $reflectionService;
 
     /**
      *
-     * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
+     * @var EventSourceRepository
      * @Flow\Inject
      */
     protected $sourceRepository;
         
     /**
      *
-     * @var \Org\Gucken\Events\Domain\Repository\TypeRepository
+     * @var TypeRepository
      * @Flow\Inject
      */
     protected $typeRepository;
@@ -69,12 +75,13 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param Model\EventSource $source
      */
     public function viewAction(Model\EventSource $source) {
         $eventFactoids = array();
         try {
             $eventFactoids = $source->getEventFactoids();
+            $this->persistenceManager->persistAll();
         } catch (\Exception $e) {
             $this->addFlashMessage($e->getMessage(), $e->getCode(), Message::SEVERITY_ERROR);
         }
@@ -85,7 +92,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param Model\EventSource $source
      * @Flow\IgnoreValidation("source")
      * @return void
      */
@@ -98,7 +105,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param Model\EventSource $source
      */
     public function saveAction(Model\EventSource $source) {
 		$errors = $source->validate();
@@ -119,7 +126,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param Model\EventSource $source
      * @return void
      */
     public function editAction(Model\EventSource $source) {
@@ -130,7 +137,7 @@ class SourceController extends AbstractAdminController {
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param Model\EventSource $source
      */
     public function updateAction(Model\EventSource $source) {
 		$errors = $source->validate();
@@ -149,7 +156,7 @@ class SourceController extends AbstractAdminController {
     }
 
     /**
-     * @param \Org\Gucken\Events\Domain\Model\EventSource $source
+     * @param Model\EventSource $source
      */
     public function deleteAction(Model\EventSource $source) {
         $this->sourceRepository->remove($source);
@@ -168,7 +175,7 @@ class SourceController extends AbstractAdminController {
      */
     protected function getEventSourceImplementations($implementations = array('' => '---')) {
         return $this->getImplementationSelect(
-            'Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface',
+            EventSourceInterface::class,
             $implementations
         );        
     }

@@ -5,10 +5,9 @@
   name: 'Home'
   uriPattern: ''
   defaults:
-    '@package':    'Org.Gucken.Events'
     '@controller': 'Standard'
     '@action':     'index'
-    '@format':     'html'
+
 -
   name: 'Event'
   uriPattern: 'veranstaltungen/{event}'
@@ -21,13 +20,22 @@
     '@action':     'show'
 
 -
+  name: 'Test'
+  uriPattern:    'test'
+  defaults:
+    '@controller': 'Standard'
+    '@action':     'test'
+
+
+
+
+-
   name: 'static'
   uriPattern:    'meta/{page}(.{@format})'
   defaults:
     '@controller': 'Static'
     '@action': 'index'
     '@format': 'html'
-
 
 -
   name: 'Login'

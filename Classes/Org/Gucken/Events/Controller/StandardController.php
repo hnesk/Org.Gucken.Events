@@ -21,10 +21,12 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use \Org\Gucken\Events\Domain\Model\Event;
-
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+
+use Org\Gucken\Events\Domain\Repository\EventRepository;
+use Org\Gucken\Events\Property\TypeConverter\DateTimeConverter;
+use Org\Gucken\Events\Domain\Model\Event;
 
 /**
  * Standard controller for the Events package
@@ -34,7 +36,7 @@ use TYPO3\Flow\Annotations as Flow;
 class StandardController extends BaseController {
 	/**
 	 *
-	 * @var \Org\Gucken\Events\Domain\Repository\EventRepository
+	 * @var EventRepository
 	 * @Flow\Inject
 	 */
 	protected $eventRepository;
@@ -50,10 +52,32 @@ class StandardController extends BaseController {
 		$this->view->assign('events', $events);
 	}
 
+    /**
+     * Index action
+     *
+     * @param \DateTime $date
+     * @return void
+     */
+    public function testAction(\DateTime $date) {
+        $this->view->assign('date', $date);
+    }
+
+    /**
+     * Index action
+     *
+     * @return void
+     */
+    public function initializeTestAction() {
+        $date = $this->arguments->getArgument('date')->getPropertyMappingConfiguration();
+        $date->setTypeConverterOption(DateTimeConverter::class, DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+    }
+
+
+
 
 	/**
 	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Event $event
+	 * @param Event $event
 	 * @return string
 	 */
 	public function showAction(Event $event) {
