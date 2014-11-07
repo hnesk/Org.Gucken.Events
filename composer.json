@@ -3,7 +3,8 @@
     "type": "typo3-flow-package",
     "description": "",
     "require": {
-        "typo3/flow": "*"
+        "typo3/flow": "*",
+        "hnesk/todate": "~1.0"
     },
     "autoload": {
         "psr-0": {
