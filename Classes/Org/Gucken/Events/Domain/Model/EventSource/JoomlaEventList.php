@@ -2,6 +2,9 @@
 
 namespace Org\Gucken\Events\Domain\Model\EventSource;
 
+use Org\Gucken\Events\Domain\Model\Location;
+use Org\Gucken\Events\Domain\Model\Type;
+use Type\Record;
 use Type\Url,
     Type\Xml;
 use Org\Gucken\Events\Annotations as Events,
@@ -15,18 +18,18 @@ class JoomlaEventList extends AbstractEventSource implements EventSourceInterfac
 
     /**
      * @Events\Configurable
-     * @var \Org\Gucken\Events\Domain\Model\Location
+     * @var Location
      */
     protected $location;
 
     /**
      * @Events\Configurable
-     * @var \Org\Gucken\Events\Domain\Model\Type
+     * @var Type
      */
     protected $type;
 
     /**
-     * @param \Org\Gucken\Events\Domain\Model\Location $location
+     * @param Location $location
      */
     public function setLocation($location)
     {
@@ -34,7 +37,7 @@ class JoomlaEventList extends AbstractEventSource implements EventSourceInterfac
     }
 
     /**
-     * @return \Org\Gucken\Events\Domain\Model\Location
+     * @return Location
      */
     public function getLocation()
     {
@@ -42,7 +45,7 @@ class JoomlaEventList extends AbstractEventSource implements EventSourceInterfac
     }
 
     /**
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
+     * @param Type $type
      */
     public function setType($type)
     {
@@ -50,7 +53,7 @@ class JoomlaEventList extends AbstractEventSource implements EventSourceInterfac
     }
 
     /**
-     * @return \Org\Gucken\Events\Domain\Model\Type
+     * @return Type
      */
     public function getType()
     {
@@ -79,7 +82,7 @@ class JoomlaEventList extends AbstractEventSource implements EventSourceInterfac
     /**
      *
      * @param  Xml          $xml
-     * @return \Type\Record
+     * @return Record
      */
     public function getEvent(Xml $xml)
     {
@@ -93,7 +96,7 @@ class JoomlaEventList extends AbstractEventSource implements EventSourceInterfac
         $date = $xml->css('dl.event_info dd.when')->asString()->first()->normalizeSpace();
         $title = $xml->css('dl.event_info dd.title')->asString()->first()->normalizeSpace();
 
-        return new \Type\Record(
+        return new Record(
             array(
                 'title' => $title,
                 'date' => $date->asDate('%d.%m.%Y( %H[:.]%M h)?'),

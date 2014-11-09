@@ -74,12 +74,17 @@ abstract class ExternalLocationIdentifier
 
     abstract public function getSchemeLabel();
 
+    /**
+     * @param Location $location
+     * @return array|ExternalLocationIdentifier[]
+     */
     abstract public function getCandidates(Location $location);
 
     abstract public function getUrl();
 
     /**
      * Get the Location's id in the scheme
+     *
      *
      * @return string The Location's Id
      */

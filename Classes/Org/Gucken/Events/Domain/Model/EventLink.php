@@ -21,8 +21,6 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Org\Gucken\Events\Domain\Model;
-
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
@@ -40,14 +38,14 @@ abstract class EventLink
 {
     /**
      *
-     * @var \Org\Gucken\Events\Domain\Model\Event
+     * @var Event
      * @ORM\ManyToOne(inversedBy="links")
      */
     protected $event;
 
     /**
      *
-     * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+     * @var EventFactoidIdentity
      * @ORM\OneToOne
      *
      */
@@ -77,10 +75,10 @@ abstract class EventLink
 
     /**
      *
-     * @param  \Org\Gucken\Events\Domain\Model\Event $event The Event
+     * @param  Event $event The Event
      * @return void
      */
-    public function setEvent(\Org\Gucken\Events\Domain\Model\Event $event)
+    public function setEvent(Event $event)
     {
         $this->event = $event;
     }
@@ -88,7 +86,7 @@ abstract class EventLink
     /**
      * Get the Event
      *
-     * @return \Org\Gucken\Events\Domain\Model\Event The Event
+     * @return Event The Event
      */
     public function getEvent()
     {
@@ -97,16 +95,16 @@ abstract class EventLink
 
     /**
      *
-     * @param  \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoid
+     * @param EventFactoidIdentity $factoidIdentity
      * @return void
      */
-    public function setFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity)
+    public function setFactoidIdentity(EventFactoidIdentity $factoidIdentity)
     {
         $this->factoidIdentity = $factoidIdentity;
     }
 
     /**
-     * @return \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+     * @return EventFactoidIdentity
      */
     public function getFactoidIdentity()
     {

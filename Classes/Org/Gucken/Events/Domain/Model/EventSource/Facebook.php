@@ -4,6 +4,7 @@ namespace Org\Gucken\Events\Domain\Model\EventSource;
 
 use Org\Gucken\Events\Annotations as Events;
 use Org\Gucken\Events\Domain\Model\FacebookEventLink;
+use Type\Record;
 use TYPO3\Flow\Annotations as Flow;
 
 use Org\Gucken\Events\Domain\Model\EventFactoid;
@@ -109,11 +110,11 @@ class Facebook implements EventSourceInterface
     /**
      *
      * @param  FacebookEvent $event
-     * @return \Type\Record
+     * @return Record
      */
     public function getEvent(FacebookEvent $event)
     {
-        return new \Type\Record(
+        return new Record(
             array(
                 'title' => $event->getTitle(),
                 #'image' => $xml->css('img')->asUrl()->first(),

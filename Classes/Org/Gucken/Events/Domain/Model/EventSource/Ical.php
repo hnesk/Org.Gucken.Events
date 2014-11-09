@@ -5,6 +5,7 @@ namespace Org\Gucken\Events\Domain\Model\EventSource;
 use Org\Gucken\Events\Domain\Model\Location;
 use Org\Gucken\Events\Domain\Model\Type;
 use Type\Calendar\Event;
+use Type\Date;
 use Type\Record\Collection;
 use Type\Record;
 use Type\Url,
@@ -68,7 +69,7 @@ class Ical extends AbstractEventSource implements EventSourceInterface
     public function getEvents()
     {
         return $this->getUrl()->load()->getContent()
-            ->getEvents()->filterByDate(\Type\Date::ago(DAY), \Type\Date::in(4 * WEEK))
+            ->getEvents()->filterByDate(Date::ago(DAY), Date::in(4 * WEEK))
             ->map(array($this, 'getEvent'));
     }
 

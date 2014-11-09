@@ -9,8 +9,11 @@ namespace Org\Gucken\Events\Domain\Model;
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+
 /**
- * A Event factoids persitstent identity
+ * A Event factoids persistent identity
  *
  * @Flow\Scope("prototype")
  * @Flow\Entity
@@ -26,14 +29,14 @@ class EventFactoidIdentity
 
     /**
      * The location
-     * @var \Org\Gucken\Events\Domain\Model\Location
+     * @var Location
      * @ORM\ManyToOne
      */
     protected $location;
 
     /**
      * The source
-     * @var \Org\Gucken\Events\Domain\Model\EventSource
+     * @var EventSource
      * @ORM\ManyToOne
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
@@ -41,7 +44,7 @@ class EventFactoidIdentity
 
     /**
      * The link
-     * @var \Org\Gucken\Events\Domain\Model\EventLink
+     * @var EventLink
      * @ORM\OneToOne
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
@@ -55,14 +58,14 @@ class EventFactoidIdentity
     protected $shouldSkip;
 
     /**
-     * @var \Doctrine\Common\Collections\ArrayCollection<\Org\Gucken\Events\Domain\Model\EventFactoid>
+     * @var ArrayCollection<\Org\Gucken\Events\Domain\Model\EventFactoid>
      * @ORM\OneToMany(mappedBy="identity", cascade={"all"}, orphanRemoval=true)
      */
     protected $factoids;
 
     public function __construct()
     {
-        $this->factoids = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->factoids = new ArrayCollection();
     }
 
     /**
@@ -99,7 +102,7 @@ class EventFactoidIdentity
     /**
      * Get the Event factoid's location
      *
-     * @return \Org\Gucken\Events\Domain\Model\Location The Event factoid's location
+     * @return Location The Event factoid's location
      */
     public function getLocation()
     {
@@ -109,7 +112,7 @@ class EventFactoidIdentity
     /**
      * Sets this Event factoid's location
      *
-     * @param  \Org\Gucken\Events\Domain\Model\Location $location The Event factoid's location
+     * @param  Location $location The Event factoid's location
      * @return void
      */
     public function setLocation(Location $location = null)
@@ -120,7 +123,7 @@ class EventFactoidIdentity
     /**
      * Get the Event factoid's source
      *
-     * @return \Org\Gucken\Events\Domain\Model\EventSource The Event factoid's source
+     * @return EventSource The Event factoid's source
      */
     public function getSource()
     {
@@ -129,7 +132,7 @@ class EventFactoidIdentity
 
     /**
      *
-     * @return \Org\Gucken\Events\Domain\Model\EventLink
+     * @return EventLink
      */
     public function createLink()
     {
@@ -139,7 +142,7 @@ class EventFactoidIdentity
     }
 
     /**
-     * @return \Org\Gucken\Events\Domain\Model\EventLink
+     * @return EventLink
      */
     public function getLink()
     {
@@ -148,9 +151,9 @@ class EventFactoidIdentity
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventLink $link
+     * @param EventLink $link
      */
-    public function setLink(\Org\Gucken\Events\Domain\Model\EventLink $link = null)
+    public function setLink(EventLink $link = null)
     {
         $this->link = $link;
     }
@@ -158,7 +161,7 @@ class EventFactoidIdentity
     /**
      * Sets this Event factoid's source
      *
-     * @param  \Org\Gucken\Events\Domain\Model\EventSource $source The Event factoid's source
+     * @param  EventSource $source The Event factoid's source
      * @return void
      */
     public function setSource($source)
@@ -167,21 +170,25 @@ class EventFactoidIdentity
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection<\Org\Gucken\Events\Domain\Model\EventFactoid> $factoids
+     * @param Collection|EventFactoid[] $factoids
+     * @internal  $factoids
      */
-    public function setFactoids(\Doctrine\Common\Collections\ArrayCollection $factoids)
+    public function setFactoids(Collection $factoids)
     {
         $this->factoids = $factoids;
     }
 
     /**
-     * @return \Doctrine\Common\Collections\ArrayCollection<\Org\Gucken\Events\Domain\Model\EventFactoid>
+     * @return Collection|EventFactoid[]
      */
     public function getFactoids()
     {
         return $this->factoids;
     }
 
+    /**
+     * @return Collection|EventFactoid[]
+     */
     public function getSortedFactoids()
     {
         $factoids = $this->factoids->toArray();
@@ -192,14 +199,14 @@ class EventFactoidIdentity
             }
         );
 
-        return new \Doctrine\Common\Collections\ArrayCollection($factoids);
+        return new ArrayCollection($factoids);
     }
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid
+     * @param EventFactoid $factoid
      */
-    public function addFactoid(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid)
+    public function addFactoid(EventFactoid $factoid)
     {
         $factoid->setIdentity($this);
         if (!$factoid->getImportDateTime()) {
@@ -210,10 +217,10 @@ class EventFactoidIdentity
 
     /**
      *
-     * @param  \Org\Gucken\Events\Domain\Model\EventFactoid $factoid
-     * @return \Org\Gucken\Events\Domain\Model\EventFactoid
+     * @param  EventFactoid $factoid
+     * @return EventFactoid
      */
-    public function addFactoidIfNotExists(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid)
+    public function addFactoidIfNotExists(EventFactoid $factoid)
     {
         foreach ($this->factoids as $aFactoid) {
             /* @var $aFactoid EventFactoid */
@@ -229,7 +236,7 @@ class EventFactoidIdentity
 
     /**
      *
-     * @return \Org\Gucken\Events\Domain\Model\EventFactoid
+     * @return EventFactoid
      */
     public function getFactoid()
     {
@@ -249,9 +256,9 @@ class EventFactoidIdentity
 
     /**
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventFactoid $factoid
+     * @param EventFactoid $factoid
      */
-    public function removeFactoid(\Org\Gucken\Events\Domain\Model\EventFactoid $factoid)
+    public function removeFactoid(EventFactoid $factoid)
     {
         $this->factoids->removeElement($factoid);
     }

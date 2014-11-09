@@ -54,10 +54,11 @@ class LocationSearchRequest extends AbstractSearchRequest
 
     /**
      *
-     * @param string  $title
+     * @param string $name
      * @param integer $reviewed
-     * @param string  $orderColumn
-     * @param string  $orderDirection
+     * @param string|null $city
+     * @param string $orderColumn
+     * @param string $orderDirection
      */
     public function __construct(
         $name = null,
@@ -151,7 +152,7 @@ class LocationSearchRequest extends AbstractSearchRequest
 
     /**
      *
-     * @param  LocationSearchRequest $searchRequest
+     * @param  AbstractSearchRequest $searchRequest
      * @return LocationSearchRequest
      */
     public function updateSearchRequest(AbstractSearchRequest $searchRequest = null)

@@ -268,7 +268,7 @@ class Event
     /**
      * Setter for types
      *
-     * @param  \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Types> $types
+     * @param  Collection|Type[] $types
      * @return void
      */
     public function setTypes(Collection $types)
@@ -279,7 +279,7 @@ class Event
     /**
      * Adds a type
      *
-     * @param  \Org\Gucken\Events\Domain\Model\Type $type
+     * @param  Type $type
      * @return void
      */
     public function addType(Type $type = null)
@@ -292,7 +292,7 @@ class Event
     /**
      * Adds a type
      *
-     * @param  \Org\Gucken\Events\Domain\Model\Type $type
+     * @param  Type $type
      * @return void
      */
     public function addTypeIfNotExists(Type $type = null)
@@ -307,7 +307,7 @@ class Event
     /**
      * removes a type
      *
-     * @param  \Org\Gucken\Events\Domain\Model\Type $type
+     * @param  Type $type
      * @return void
      */
     public function removeType(Type $type)
@@ -318,7 +318,7 @@ class Event
     /**
      * Getter for types
      *
-     * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
+     * @return  Collection|Type[]
      */
     public function getTypes()
     {
@@ -338,7 +338,7 @@ class Event
     /**
      * Setter for links
      *
-     * @param  \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink> $links
+     * @param  Collection|EventLink[] $links
      * @return void
      */
     public function setLinks(Collection $links)
@@ -348,7 +348,7 @@ class Event
 
     /**
      * add a link
-     * @param \Org\Gucken\Events\Domain\Model\EventLink $link
+     * @param EventLink $link
      */
     public function addLink(EventLink $link = null)
     {
@@ -361,7 +361,7 @@ class Event
     /**
      * removes a link
      *
-     * @param  \Org\Gucken\Events\Domain\Model\EventLink $link
+     * @param  EventLink $link
      * @return void
      */
     public function removeLink(EventLink $link)
@@ -372,7 +372,7 @@ class Event
     /**
      * Getter for links
      *
-     * @return Collection<\Org\Gucken\Events\Domain\Model\EventLink>
+     * @return  Collection|EventLink[]
      */
     public function getLinks()
     {

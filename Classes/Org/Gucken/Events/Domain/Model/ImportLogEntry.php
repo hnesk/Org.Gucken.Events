@@ -113,7 +113,7 @@ class ImportLogEntry
     /**
      * Sets this Import history's date
      *
-     * @param  \DateTime $date The Import history's date
+     * @param  \DateTime $startTime The Import history's date
      * @return void
      */
     public function setStartTime($startTime)
@@ -134,7 +134,7 @@ class ImportLogEntry
     /**
      * Sets this Import history's end date
      *
-     * @param  \DateTime $date The Import history's end date
+     * @param  \DateTime $endTime The Import history's end date
      * @return void
      */
     public function setEndTime($endTime)
@@ -155,7 +155,7 @@ class ImportLogEntry
     /**
      * Sets this Import history's number of imported items
      *
-     * @param  integer $number The Import history's number of imported items
+     * @param  integer $importCount The Import history's number of imported items
      * @return void
      */
     public function setImportCount($importCount)
@@ -187,7 +187,7 @@ class ImportLogEntry
     /**
      * Sets this Import history's number of duplicated items
      *
-     * @param  integer $number The Import history's number of duplicated items
+     * @param  integer $duplicateCount The Import history's number of duplicated items
      * @return void
      */
     public function setDuplicateCount($duplicateCount)
@@ -249,7 +249,7 @@ class ImportLogEntry
     /**
      * Sets this Import history's errors
      *
-     * @param  array $messages The Import history's errors
+     * @param  array $errors The Import history's errors
      * @return void
      */
     public function setErrors(array $errors)

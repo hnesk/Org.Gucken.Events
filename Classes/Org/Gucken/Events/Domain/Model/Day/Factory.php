@@ -41,7 +41,8 @@ class Factory
     /**
      * builds a Day, unique by Date
      *
-     * @return \Org\Gucken\Events\Domain\Model\Day
+     * @param \DateTime $date
+     * @return Day
      */
     public function build(\DateTime $date = null)
     {

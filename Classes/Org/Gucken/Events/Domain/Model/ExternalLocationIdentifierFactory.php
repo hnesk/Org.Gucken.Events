@@ -24,6 +24,9 @@ namespace Org\Gucken\Events\Domain\Model;
 
 use TYPO3\Flow\Annotations as Flow;
 
+use TYPO3\Flow\Object\ObjectManagerInterface;
+use TYPO3\Flow\Reflection\ReflectionService;
+
 /**
  * An identifier for a location on an external website or service
  *
@@ -35,14 +38,14 @@ class ExternalLocationIdentifierFactory
 
     /**
      *
-     * @var \TYPO3\Flow\Object\ObjectManagerInterface
+     * @var ObjectManagerInterface
      * @Flow\Inject
      */
     protected $objectManager;
 
     /**
      *
-     * @var \TYPO3\Flow\Reflection\ReflectionService
+     * @var ReflectionService
      * @Flow\Inject
      */
     protected $reflectionService;
@@ -52,9 +55,7 @@ class ExternalLocationIdentifierFactory
         $options = array(
             '' => '---'
         );
-        $classNames = $this->reflectionService->getAllSubClassNamesForClass(
-            'Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier'
-        );
+        $classNames = $this->reflectionService->getAllSubClassNamesForClass(ExternalLocationIdentifier::class);
         foreach ($classNames as $className) {
             $identifierInstance = $this->objectManager->get($className);
             $options[$className] = $identifierInstance->getSchemeLabel();
@@ -65,9 +66,9 @@ class ExternalLocationIdentifierFactory
 
     /**
      *
-     * @param  string                                              $prototype
+     * @param  string                                              $prototypeClass
      * @param  Location                                            $location
-     * @return array<Org\Gucken\Events\ExternalLocationIdentifier>
+     * @return array|ExternalLocationIdentifier[]
      */
     public function getCandidatesForLocation($prototypeClass, Location $location)
     {

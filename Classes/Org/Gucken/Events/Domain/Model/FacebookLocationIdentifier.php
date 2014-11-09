@@ -24,6 +24,8 @@ namespace Org\Gucken\Events\Domain\Model;
 
 use TYPO3\Flow\Annotations as Flow;
 
+use Facebook\Type\Page\Collection\Factory as FacebookPagesFactory;
+
 /**
  * An identifier for a location on an external website or service
  *
@@ -61,8 +63,8 @@ class FacebookLocationIdentifier extends ExternalLocationIdentifier
     protected function getSearchResults(Location $location, $searchString)
     {
         $results = array();
-        foreach (\Facebook\Type\Page\Collection\Factory::fromString($searchString) as $venue) {
-            /* @var $venue \Lastfm\Type\Venue */
+        foreach (FacebookPagesFactory::fromString($searchString) as $venue) {
+            /* @var $venue \Facebook\Type\Page */
             $results[] = new self($venue->getId(), $location, (string) $venue);
         }
 
