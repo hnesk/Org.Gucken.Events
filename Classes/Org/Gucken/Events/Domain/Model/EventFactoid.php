@@ -20,8 +20,8 @@ use TYPO3\Flow\Annotations as Flow;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="model", type="string")
  */
-class EventFactoid {
-
+class EventFactoid
+{
 
     /**
      * The title
@@ -77,7 +77,6 @@ class EventFactoid {
      */
     protected $description;
 
-
     /**
      *
      * @var string
@@ -91,12 +90,12 @@ class EventFactoid {
      */
     protected $importDateTime;
 
-	/**
-	 *
-	 * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+    /**
+     *
+     * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
      * @ORM\ManyToOne(inversedBy="factoids")
-	 */
-	protected $identity;
+     */
+    protected $identity;
 
     /**
      * The location details varying by event (Room, etc)
@@ -104,42 +103,41 @@ class EventFactoid {
      */
     protected $locationDetail;
 
-
-	/**
-	 *
-	 * @var \Org\Gucken\Events\Domain\Model\EventSource
+    /**
+     *
+     * @var \Org\Gucken\Events\Domain\Model\EventSource
      * @Flow\Transient
-	 */
-	protected $source;
+     */
+    protected $source;
 
-
-	/**
-	 *
-	 * @param Record $record
-	 */
-    public function __construct(Record $record = null) {
-		if ($record) {
-			$this->setTitle($record->getNative('title'));
-			$this->setStartDateTime($record->getNative('date'));
-			$this->setEndDateTime($record->getNative('end'));
-			$this->setUrl((string) $record->getNative('url'));
-			$this->setShortDescription((string) $record->getNative('short'));
-			$description = $record->get('description');
-			if (trim((string) $description)) {
-				if ($description instanceof Xml) {
-					$description = $description->markdown()->normalizeSpaceKeepBreaks();
-				}
-			}
-			$this->setLocationDetail((string) $record->getNative('locationDetail'));
-			$this->setDescription((string) $description);
-			$this->setType($record->getNative('type'));
-			$this->setLocation($record->getNative('location'));
-			if ($record->get('proof')) {
-				$this->setProof($record->get('proof')->asXmlString());
-			} else {
-				$this->setProof('');
-			}
-		}
+    /**
+     *
+     * @param Record $record
+     */
+    public function __construct(Record $record = null)
+    {
+        if ($record) {
+            $this->setTitle($record->getNative('title'));
+            $this->setStartDateTime($record->getNative('date'));
+            $this->setEndDateTime($record->getNative('end'));
+            $this->setUrl((string) $record->getNative('url'));
+            $this->setShortDescription((string) $record->getNative('short'));
+            $description = $record->get('description');
+            if (trim((string) $description)) {
+                if ($description instanceof Xml) {
+                    $description = $description->markdown()->normalizeSpaceKeepBreaks();
+                }
+            }
+            $this->setLocationDetail((string) $record->getNative('locationDetail'));
+            $this->setDescription((string) $description);
+            $this->setType($record->getNative('type'));
+            $this->setLocation($record->getNative('location'));
+            if ($record->get('proof')) {
+                $this->setProof($record->get('proof')->asXmlString());
+            } else {
+                $this->setProof('');
+            }
+        }
     }
 
     /**
@@ -147,17 +145,19 @@ class EventFactoid {
      *
      * @return string The Event factoid's title
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
     /**
      * Sets this Event factoid's title
      *
-     * @param string $title The Event factoid's title
+     * @param  string $title The Event factoid's title
      * @return void
      */
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = (string) $title;
     }
 
@@ -166,41 +166,50 @@ class EventFactoid {
      *
      * @return \DateTime The Event factoid's start date time
      */
-    public function getStartDateTime() {
+    public function getStartDateTime()
+    {
         return $this->startDateTime;
     }
 
     /**
      * Sets this Event factoid's start date time
      *
-     * @param \DateTime $startDateTime The Event factoid's start date time
+     * @param  \DateTime                 $startDateTime The Event factoid's start date time
      * @throws \InvalidArgumentException
      * @return void
      */
-    public function setStartDateTime($startDateTime = null) {
+    public function setStartDateTime($startDateTime = null)
+    {
         if (!$startDateTime instanceof \DateTime) {
-            throw new \InvalidArgumentException(sprintf('"%s" is not an instance of DateTime but an %s', $startDateTime, is_object($startDateTime) ? get_class($startDateTime) : gettype($startDateTime)));
+            throw new \InvalidArgumentException(
+                sprintf(
+                    '"%s" is not an instance of DateTime but an %s',
+                    $startDateTime,
+                    is_object($startDateTime) ? get_class($startDateTime) : gettype($startDateTime)
+                )
+            );
         }
         $this->startDateTime = $startDateTime;
     }
-
 
     /**
      * Get the Event factoid's end date time
      *
      * @return \DateTime The Event factoid's end date time
      */
-    public function getEndDateTime() {
+    public function getEndDateTime()
+    {
         return $this->endDateTime;
     }
 
     /**
      * Sets this Event factoid's end date time
      *
-     * @param \DateTime $endDateTime The Event factoid's end date time
+     * @param  \DateTime $endDateTime The Event factoid's end date time
      * @return void
      */
-    public function setEndDateTime(\DateTime $endDateTime = null) {
+    public function setEndDateTime(\DateTime $endDateTime = null)
+    {
         $this->endDateTime = $endDateTime;
     }
 
@@ -209,17 +218,19 @@ class EventFactoid {
      *
      * @return \Org\Gucken\Events\Domain\Model\Location The Event factoid's location
      */
-    public function getLocation() {
+    public function getLocation()
+    {
         return $this->location;
     }
 
     /**
      * Sets this Event factoid's location
      *
-     * @param \Org\Gucken\Events\Domain\Model\Location $location The Event factoid's location
+     * @param  \Org\Gucken\Events\Domain\Model\Location $location The Event factoid's location
      * @return void
      */
-    public function setLocation(Location $location = null) {
+    public function setLocation(Location $location = null)
+    {
         $this->location = $location;
     }
 
@@ -228,17 +239,19 @@ class EventFactoid {
      *
      * @return \Org\Gucken\Events\Domain\Model\Type The Event factoid's type
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->type;
     }
 
     /**
      * Sets this Event factoid's type
      *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type The Event factoid's type
+     * @param  \Org\Gucken\Events\Domain\Model\Type $type The Event factoid's type
      * @return void
      */
-    public function setType(Type $type = null) {
+    public function setType(Type $type = null)
+    {
         $this->type = $type;
     }
 
@@ -247,17 +260,19 @@ class EventFactoid {
      *
      * @return string The Event factoid's url
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
     /**
      * Sets this Event factoid's url
      *
-     * @param string $url The Event factoid's url
+     * @param  string $url The Event factoid's url
      * @return void
      */
-    public function setUrl($url) {
+    public function setUrl($url)
+    {
         $this->url = $url;
     }
 
@@ -266,17 +281,19 @@ class EventFactoid {
      *
      * @return string The Event factoid's short description
      */
-    public function getShortDescription() {
+    public function getShortDescription()
+    {
         return $this->shortDescription;
     }
 
     /**
      * Sets this Event factoid's short description
      *
-     * @param string $shortDescription The Event factoid's short description
+     * @param  string $shortDescription The Event factoid's short description
      * @return void
      */
-    public function setShortDescription($shortDescription) {
+    public function setShortDescription($shortDescription)
+    {
         $this->shortDescription = (string) $shortDescription;
     }
 
@@ -285,17 +302,19 @@ class EventFactoid {
      *
      * @return string The Event factoid's description
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * Sets this Event factoid's description
      *
-     * @param string $description The Event factoid's description
+     * @param  string $description The Event factoid's description
      * @return void
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
@@ -304,17 +323,19 @@ class EventFactoid {
      *
      * @return \Org\Gucken\Events\Domain\Model\EventSource The Event factoid's source
      */
-    public function getSource() {
+    public function getSource()
+    {
         return $this->identity ? $this->identity->getSource() : $this->source;
     }
 
     /**
      * Sets this Event factoid's source
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventSource $source The Event factoid's source
+     * @param  \Org\Gucken\Events\Domain\Model\EventSource $source The Event factoid's source
      * @return void
      */
-    public function setSource($source) {
+    public function setSource($source)
+    {
         $this->source = $source;
     }
 
@@ -323,101 +344,121 @@ class EventFactoid {
      *
      * @return \DateTime The Event factoid's import date time
      */
-    public function getImportDateTime() {
+    public function getImportDateTime()
+    {
         return $this->importDateTime;
     }
 
     /**
      * Sets this Event factoid's import date time
      *
-     * @param \DateTime $importDateTime The Event factoid's import date time
+     * @param  \DateTime $importDateTime The Event factoid's import date time
      * @return void
      */
-    public function setImportDateTime($importDateTime) {
+    public function setImportDateTime($importDateTime)
+    {
         $this->importDateTime = $importDateTime;
     }
 
     /**
      * @param string
      */
-    public function setProof($proof) {
+    public function setProof($proof)
+    {
         $this->proof = $proof;
     }
 
     /**
      * @return string
      */
-    public function getProof() {
+    public function getProof()
+    {
         return $this->proof;
     }
 
-	/**
-	 * @return Xml
-	 */
-	public function getProofAsXml() {
-		$proofXml = null;
-		$proof = $this->getProof();
-		if (!empty($proof)) {
-			$proofXml = XmlFactory::fromXmlString($proof);
-		}
-		return $proofXml;
-	}
+    /**
+     * @return Xml
+     */
+    public function getProofAsXml()
+    {
+        $proofXml = null;
+        $proof = $this->getProof();
+        if (!empty($proof)) {
+            $proofXml = XmlFactory::fromXmlString($proof);
+        }
 
-	/**
-	 *
-	 * @param EventFactoidIdentity $identity
-	 */
-	public function setIdentity(EventFactoidIdentity $identity) {
-		$this->identity = $identity;
-	}
+        return $proofXml;
+    }
 
-	/**
-	 *
-	 * @return EventFactoidIdentity
-	 */
-	public function getIdentity() {
-		return $this->identity;
-	}
+    /**
+     *
+     * @param EventFactoidIdentity $identity
+     */
+    public function setIdentity(EventFactoidIdentity $identity)
+    {
+        $this->identity = $identity;
+    }
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getLocationDetail() {
-		return $this->locationDetail;
-	}
+    /**
+     *
+     * @return EventFactoidIdentity
+     */
+    public function getIdentity()
+    {
+        return $this->identity;
+    }
 
-	/**
-	 *
-	 * @param string $locationDetail
-	 */
-	public function setLocationDetail($locationDetail) {
-		$this->locationDetail = $locationDetail;
-	}
+    /**
+     *
+     * @return string
+     */
+    public function getLocationDetail()
+    {
+        return $this->locationDetail;
+    }
 
+    /**
+     *
+     * @param string $locationDetail
+     */
+    public function setLocationDetail($locationDetail)
+    {
+        $this->locationDetail = $locationDetail;
+    }
 
-	/**
-	 *
-	 * @param EventFactoid $factoid
-	 * @return bool
-	 */
-	public function equals(EventFactoid $factoid) {
-		foreach (array('startDateTime', 'endDateTime', 'title', 'shortDescription', 'description', 'source', 'location', 'type', 'url') as $identityProperty) {
-			if ($this->$identityProperty != $factoid->$identityProperty) {
-				return false;
-			}
-		}
-		return true;
-	}
+    /**
+     *
+     * @param  EventFactoid $factoid
+     * @return bool
+     */
+    public function equals(EventFactoid $factoid)
+    {
+        $identityProperties = array(
+            'startDateTime',
+            'endDateTime',
+            'title',
+            'shortDescription',
+            'description',
+            'source',
+            'location',
+            'type',
+            'url'
+        );
+        foreach ($identityProperties as $identityProperty) {
+            if ($this->$identityProperty != $factoid->$identityProperty) {
+                return false;
+            }
+        }
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		return $this->getTitle();
-	}
+        return true;
+    }
 
+    /**
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
 }
-
-?>

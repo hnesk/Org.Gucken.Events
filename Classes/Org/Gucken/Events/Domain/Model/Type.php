@@ -34,120 +34,129 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class Type implements ScorableInterface {
+class Type implements ScorableInterface
+{
 
-	/**
-	 * @var string
-	 */
-	protected $title;
+    /**
+     * @var string
+     */
+    protected $title;
 
-	/**
-	 * @var string
-	 */
-	protected $pluralTitle;
+    /**
+     * @var string
+     */
+    protected $pluralTitle;
 
-	/**
-	 * @var string
-	 */
-	protected $description;
-	
+    /**
+     * @var string
+     */
+    protected $description;
+
     /**
      * @var ArrayCollection<\Org\Gucken\Events\Domain\Model\TypeKeyword>
      * @ORM\OneToMany(mappedBy="type", cascade={"all"}, orphanRemoval=true)
      */
     protected $keywords;
-	
 
-	/**
-	 *
-	 * @param string $title
-	 * @param string $pluralTitle
-	 * @param string $description
-	 */
-	public function __construct($title='', $pluralTitle='', $description='') {
-		$this->title = $title;
-		$this->pluralTitle = $pluralTitle;
-		$this->description = $description;
-		$this->keywords = new ArrayCollection();
-	}
+    /**
+     *
+     * @param string $title
+     * @param string $pluralTitle
+     * @param string $description
+     */
+    public function __construct($title = '', $pluralTitle = '', $description = '')
+    {
+        $this->title = $title;
+        $this->pluralTitle = $pluralTitle;
+        $this->description = $description;
+        $this->keywords = new ArrayCollection();
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
-	
-	/**
-	 * @param string
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getPluralTitle() {
-		return $this->pluralTitle;
-	}
-	
-	/**
-	 *
-	 * @param string $pluralTitle 
-	 */
-	public function setPluralTitle($pluralTitle) {
-		$this->pluralTitle = $pluralTitle;
-	}
+    /**
+     * @param string
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-	
-	/**
-	 *
-	 * @param string $description 
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+    /**
+     * @return string
+     */
+    public function getPluralTitle()
+    {
+        return $this->pluralTitle;
+    }
 
-	public function __toString() {
-		return $this->title;
-	}
+    /**
+     *
+     * @param string $pluralTitle
+     */
+    public function setPluralTitle($pluralTitle)
+    {
+        $this->pluralTitle = $pluralTitle;
+    }
 
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     *
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    public function __toString()
+    {
+        return $this->title;
+    }
 
     /**
      * Setter for keywords
      *
-     * @param Collection $keywords
+     * @param  Collection $keywords
      * @return void
      */
-    public function setKeywords(Collection $keywords) {
+    public function setKeywords(Collection $keywords)
+    {
         $this->keywords = $keywords;
     }
-	
-	
+
     /**
      * Adds a keyword
      *
-     * @param TypeKeyword $keyword
+     * @param  TypeKeyword $keyword
      * @return void
      */
-    public function addKeyword(TypeKeyword $keyword) {
+    public function addKeyword(TypeKeyword $keyword)
+    {
         $this->keywords->add($keyword);
     }
 
     /**
      * removes a keyword
      *
-     * @param TypeKeyword $keyword
+     * @param  TypeKeyword $keyword
      * @return void
      */
-    public function removeKeyword(TypeKeyword $keyword) {
+    public function removeKeyword(TypeKeyword $keyword)
+    {
         $this->keywords->removeElement($keyword);
     }
 
@@ -156,56 +165,60 @@ class Type implements ScorableInterface {
      *
      * @return Collection
      */
-    public function getKeywords() {
+    public function getKeywords()
+    {
         return clone $this->keywords;
     }
-	
+
     /**
      * Getter for type keywords as an plain array
      *
      * @return array
      */
-    public function getKeywordArray() {
-		$keywords = array();
-		foreach ($this->keywords as $keyword) {
+    public function getKeywordArray()
+    {
+        $keywords = array();
+        foreach ($this->keywords as $keyword) {
             /** @var $keyword TypeKeyword */
-			$keywords[] = mb_strtolower($keyword->getKeyword(), 'utf-8');
-		}
-		return $keywords;
+            $keywords[] = mb_strtolower($keyword->getKeyword(), 'utf-8');
+        }
+
+        return $keywords;
     }
 
     /**
      *
-     * @param array $keywordLookup
+     * @param  array $keywordLookup
      * @return float
      */
-	public function score(array $keywordLookup) {
-		$score = 0;
-		foreach ($this->getKeywordArray() as $keyword) {
-			if (isset($keywordLookup[$keyword])) {
-				$score++;
-			}
-		}
-		return $score;
-	}
-	
-	/**
-	 * Helper function to remove empty keywords
-	 */
-	public function removeEmptyKeywords() {
-        foreach ($this->keywords as $key =>$typeKeyword) {
+    public function score(array $keywordLookup)
+    {
+        $score = 0;
+        foreach ($this->getKeywordArray() as $keyword) {
+            if (isset($keywordLookup[$keyword])) {
+                $score++;
+            }
+        }
+
+        return $score;
+    }
+
+    /**
+     * Helper function to remove empty keywords
+     */
+    public function removeEmptyKeywords()
+    {
+        foreach ($this->keywords as $key => $typeKeyword) {
             /** @var $typeKeyword TypeKeyword */
             if (trim($typeKeyword->getKeyword()) === '') {
                 $this->keywords->remove($key);
             }
         }
-	}
-	
-	
-	public function removeEmptyRelations() {
-		$this->removeEmptyKeywords();
-	}
-	
-}
+    }
 
-?>
+    public function removeEmptyRelations()
+    {
+        $this->removeEmptyKeywords();
+    }
+
+}

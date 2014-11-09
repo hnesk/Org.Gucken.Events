@@ -25,7 +25,6 @@ namespace Org\Gucken\Events\Domain\Model;
 use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
-
 /**
  * An identifier for a location on an external website or service
  *
@@ -35,106 +34,112 @@ use TYPO3\Flow\Annotations as Flow;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="scheme", type="string")
  */
-abstract class ExternalLocationIdentifier {
+abstract class ExternalLocationIdentifier
+{
 
     /**
      * The external Id
-     * 
+     *
      * @var string
-     * @Flow\Validate(type="StringLength", options={ "minimum"=0, "maximum"=255 })     * 
+     * @Flow\Validate(type="StringLength", options={ "minimum"=0, "maximum"=255 })     *
      */
     protected $id;
-    
+
     /**
      *
      * @var Location
      * @ORM\ManyToOne(inversedBy="externalIdentifiers")
      */
     protected $location;
-	
-	/**
-	 *
-	 * @var string
+
+    /**
+     *
+     * @var string
      * @ORM\Column(nullable=true)
-	 */
-	protected $label;
+     */
+    protected $label;
 
     /**
      *
      * @param int|string $id
-     * @param Location $location
-     * @param string $label
+     * @param Location   $location
+     * @param string     $label
      */
-    public function __construct($id = 0, Location $location = null, $label = '') {
+    public function __construct($id = 0, Location $location = null, $label = '')
+    {
         $this->id = $id;
         $this->location = $location;
-		$this->label = $label;
+        $this->label = $label;
     }
-    
-	abstract public function getSchemeLabel();
-	
-	abstract public function getCandidates(Location $location);
-	
-	abstract public function getUrl(); 
+
+    abstract public function getSchemeLabel();
+
+    abstract public function getCandidates(Location $location);
+
+    abstract public function getUrl();
 
     /**
      * Get the Location's id in the scheme
      *
-     * @return string The Location's Id 
+     * @return string The Location's Id
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
-    
+
     /**
      *
-     * @param string $id 
+     * @param string $id
      */
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
     }
-    
-    
+
     /**
      *
      * @return Location
      */
-    protected function getLocation() {
+    protected function getLocation()
+    {
         return $this->location;
     }
-    
+
     /**
      *
      * @param Location $location
      */
-    public function setLocation(Location $location) {
+    public function setLocation(Location $location)
+    {
         $this->location = $location;
     }
-	
-	/**
-	 *
-	 * @return string
-	 */
-	public function getLabel() {
-		return $this->label;
-	}
-
-	/**
-	 *
-	 * @param string $label 
-	 */
-	public function setLabel($label) {
-		$this->label = $label;
-	}
 
     /**
      *
      * @return string
      */
-    public function __toString() {
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     *
+     * @param string $label
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function __toString()
+    {
         return $this->getSchemeLabel() . ':' . $this->getId();
     }
 
 }
-
-?>

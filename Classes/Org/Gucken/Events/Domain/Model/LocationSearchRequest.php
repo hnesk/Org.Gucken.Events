@@ -21,7 +21,6 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Persistence\QueryInterface;
 
@@ -32,137 +31,147 @@ use TYPO3\Flow\Persistence\QueryInterface;
  * @Flow\Scope("prototype")
  *
  */
-class LocationSearchRequest extends AbstractSearchRequest {
+class LocationSearchRequest extends AbstractSearchRequest
+{
 
-	/**
-	 *
-	 * @var string
-	 */
-	protected $name;
+    /**
+     *
+     * @var string
+     */
+    protected $name;
 
-	/**
-	 *
-	 * @var string
-	 */
-	protected $city;
+    /**
+     *
+     * @var string
+     */
+    protected $city;
 
-	/**
-	 *
-	 * @var integer
-	 */
-	protected $reviewed;
+    /**
+     *
+     * @var integer
+     */
+    protected $reviewed;
 
-	/**
-	 *
-	 * @param string $title
-	 * @param integer $reviewed
-	 * @param string $orderColumn
-	 * @param string $orderDirection
-	 */
-	public function __construct($name = null, $reviewed = null, $city = null,$orderColumn = 'name', $orderDirection = QueryInterface::ORDER_DESCENDING) {
-		$this->setName($name);
-		$this->setReviewed($reviewed);
-		$this->setCity($city);
-		$this->setOrder($orderColumn, $orderDirection);
-	}
+    /**
+     *
+     * @param string  $title
+     * @param integer $reviewed
+     * @param string  $orderColumn
+     * @param string  $orderDirection
+     */
+    public function __construct(
+        $name = null,
+        $reviewed = null,
+        $city = null,
+        $orderColumn = 'name',
+        $orderDirection = QueryInterface::ORDER_DESCENDING
+    ) {
+        $this->setName($name);
+        $this->setReviewed($reviewed);
+        $this->setCity($city);
+        $this->setOrder($orderColumn, $orderDirection);
+    }
 
+    /**
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getName() {
-		return $this->name;
-	}
+    /**
+     *
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
-	/**
-	 *
-	 * @param string $name
-	 */
-	public function setName($name) {
-		$this->name = $name;
-	}
+    /**
+     *
+     * @return integer
+     */
+    public function getReviewed()
+    {
+        return $this->reviewed;
+    }
 
-	/**
-	 *
-	 * @return integer
-	 */
-	public function getReviewed() {
-		return $this->reviewed;
-	}
+    /**
+     *
+     * @param integer $reviewed
+     */
+    public function setReviewed($reviewed)
+    {
+        $this->reviewed = $reviewed;
+    }
 
-	/**
-	 *
-	 * @param integer $reviewed
-	 */
-	public function setReviewed($reviewed) {
-		$this->reviewed = $reviewed;
-	}
+    /**
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getCity() {
-		return $this->city;
-	}
+    /**
+     *
+     * @param string $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
 
-	/**
-	 *
-	 * @param string $city
-	 */
-	public function setCity($city) {
-		$this->city = $city;
-	}
+    /**
+     *
+     * @param  QueryInterface $query
+     * @return array
+     */
+    public function buildFilters(QueryInterface $query)
+    {
+        $conditions = array();
 
+        if ($this->getName()) {
+            $conditions[] = $query->like('name', $this->getName());
+        }
 
-	/**
-	 *
-	 * @param QueryInterface $query
-	 * @return array
-	 */
-	public function buildFilters(QueryInterface $query) {
-		$conditions = array();
+        if ($this->getReviewed()) {
+            $conditions[] = $query->equals('reviewed', $this->getReviewed() < 0 ? false : true);
+        }
+        if ($this->getCity()) {
+            $conditions[] = $query->equals('address.addressLocality', $this->getCity());
+        }
 
-		if ($this->getName()) {
-			$conditions[] = $query->like('name', $this->getName());
-		}
+        return $conditions;
+    }
 
-		if ($this->getReviewed()) {
-			$conditions[] = $query->equals('reviewed', $this->getReviewed() < 0 ? false : true);
-		}
-		if ($this->getCity()) {
-			$conditions[] = $query->equals('address.addressLocality', $this->getCity());
-		}
+    /**
+     *
+     * @param  LocationSearchRequest $searchRequest
+     * @return LocationSearchRequest
+     */
+    public function updateSearchRequest(AbstractSearchRequest $searchRequest = null)
+    {
+        $this->setName($searchRequest->getName());
+        $this->setReviewed($searchRequest->getReviewed());
+        $this->setCity($searchRequest->getCity());
 
+        return $this;
+    }
 
-		return $conditions;
-	}
-
-	/**
-	 *
-	 * @param LocationSearchRequest $searchRequest
-	 * @return LocationSearchRequest
-	 */
-	public function updateSearchRequest(AbstractSearchRequest $searchRequest = null) {
-		$this->setName($searchRequest->getName());
-		$this->setReviewed($searchRequest->getReviewed());
-		$this->setCity($searchRequest->getCity());
-
-		return $this;
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		return
-			($this->getName() ? ', passend auf "'.$this->getName().'"' : '').
-			($this->getReviewed() ? ($this->getReviewed() > 0 ? ' mit' : ' ohne').' Review' : '')
-		;
-	}
-
+    /**
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return
+            ($this->getName() ? ', passend auf "' . $this->getName() . '"' : '') .
+            ($this->getReviewed() ? ($this->getReviewed() > 0 ? ' mit' : ' ohne') . ' Review' : '');
+    }
 
 }
-?>

@@ -21,7 +21,6 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -31,113 +30,137 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("session")
  *
  */
-class BackendSession {
-	/**
-	 *
-	 * @var EventSearchRequest
-	 */
-	protected $eventSearchRequest;
-
-	/**
-	 *
-	 * @var EventSearchRequest
-	 */
-	protected $factoidSearchRequest;
-
-	/**
-	 *
-	 * @var LocationSearchRequest
-	 */
-	protected $locationSearchRequest;
-
-	/**
-	 *
-	 * @return EventSearchRequest
-	 */
-	public function getEventSearchRequest() {
-		return $this->eventSearchRequest  ?: new EventSearchRequest();
-	}
-
-	/**
-	 *
-	 * @param EventSearchRequest $eventSearchRequest
-     * @return EventSearchRequest
+class BackendSession
+{
+    /**
+     *
+     * @var EventSearchRequest
      */
-	public function setEventSearchRequest(EventSearchRequest $eventSearchRequest = null) {
-		$this->eventSearchRequest = $eventSearchRequest ?: new EventSearchRequest();
-		return $this->eventSearchRequest;
-	}
-
-	/**
-	 *
-	 * @param EventSearchRequest $eventSearchRequest
-	 * @param string $orderColumn
-	 * @param string $orderDirection
-	 * @return EventSearchRequest
-	 */
-	public function updateEventSearchRequest(EventSearchRequest $eventSearchRequest = null, $orderColumn = '', $orderDirection = '') {
-		return $this->setEventSearchRequest($this->getEventSearchRequest()->update($eventSearchRequest, $orderColumn, $orderDirection));
-	}
-
-
-	/**
-	 *
-	 * @return LocationSearchRequest
-	 */
-	public function getLocationSearchRequest() {
-		return $this->locationSearchRequest  ?: new LocationSearchRequest();
-	}
-
-	/**
-	 *
-	 * @param LocationSearchRequest $locationSearchRequest
-	 * @return LocationSearchRequest
-	 */
-	public function setLocationSearchRequest(LocationSearchRequest $locationSearchRequest = null) {
-		$this->locationSearchRequest = $locationSearchRequest ?: new LocationSearchRequest();
-		return $this->locationSearchRequest;
-	}
-
-	/**
-	 *
-	 * @param LocationSearchRequest $locationSearchRequest
-	 * @param string $orderColumn
-	 * @param string $orderDirection
-	 * @return LocationSearchRequest
-	 */
-	public function updateLocationSearchRequest(LocationSearchRequest $locationSearchRequest = null, $orderColumn = 'title', $orderDirection = '') {
-		return $this->setLocationSearchRequest($this->getLocationSearchRequest()->update($locationSearchRequest, $orderColumn, $orderDirection));
-	}
-
-	/**
-	 *
-	 * @return EventSearchRequest
-	 */
-	public function getFactoidSearchRequest() {
-		return $this->factoidSearchRequest ?: new EventSearchRequest();
-	}
+    protected $eventSearchRequest;
 
     /**
      *
-     * @param EventSearchRequest $factoidSearchRequest
+     * @var EventSearchRequest
+     */
+    protected $factoidSearchRequest;
+
+    /**
+     *
+     * @var LocationSearchRequest
+     */
+    protected $locationSearchRequest;
+
+    /**
+     *
      * @return EventSearchRequest
      */
-	public function setFactoidSearchRequest(EventSearchRequest $factoidSearchRequest = null) {
-		$this->factoidSearchRequest = $factoidSearchRequest ?: new EventSearchRequest();
-		return $this->factoidSearchRequest;
-	}
+    public function getEventSearchRequest()
+    {
+        return $this->eventSearchRequest ?: new EventSearchRequest();
+    }
 
-	/**
-	 *
-	 * @param EventSearchRequest $factoidSearchRequest
-	 * @param string $orderColumn
-	 * @param string $orderDirection
-	 * @return EventSearchRequest
-	 */
-	public function updateFactoidSearchRequest(EventSearchRequest $factoidSearchRequest = null, $orderColumn = '', $orderDirection = '') {
-		return $this->setFactoidSearchRequest($this->getFactoidSearchRequest()->update($factoidSearchRequest, $orderColumn, $orderDirection));
-	}
+    /**
+     *
+     * @param  EventSearchRequest $eventSearchRequest
+     * @return EventSearchRequest
+     */
+    public function setEventSearchRequest(EventSearchRequest $eventSearchRequest = null)
+    {
+        $this->eventSearchRequest = $eventSearchRequest ?: new EventSearchRequest();
 
+        return $this->eventSearchRequest;
+    }
 
+    /**
+     *
+     * @param  EventSearchRequest $eventSearchRequest
+     * @param  string             $orderColumn
+     * @param  string             $orderDirection
+     * @return EventSearchRequest
+     */
+    public function updateEventSearchRequest(
+        EventSearchRequest $eventSearchRequest = null,
+        $orderColumn = '',
+        $orderDirection = ''
+    ) {
+        return $this->setEventSearchRequest(
+            $this->getEventSearchRequest()->update($eventSearchRequest, $orderColumn, $orderDirection)
+        );
+    }
+
+    /**
+     *
+     * @return LocationSearchRequest
+     */
+    public function getLocationSearchRequest()
+    {
+        return $this->locationSearchRequest ?: new LocationSearchRequest();
+    }
+
+    /**
+     *
+     * @param  LocationSearchRequest $locationSearchRequest
+     * @return LocationSearchRequest
+     */
+    public function setLocationSearchRequest(LocationSearchRequest $locationSearchRequest = null)
+    {
+        $this->locationSearchRequest = $locationSearchRequest ?: new LocationSearchRequest();
+
+        return $this->locationSearchRequest;
+    }
+
+    /**
+     *
+     * @param  LocationSearchRequest $locationSearchRequest
+     * @param  string                $orderColumn
+     * @param  string                $orderDirection
+     * @return LocationSearchRequest
+     */
+    public function updateLocationSearchRequest(
+        LocationSearchRequest $locationSearchRequest = null,
+        $orderColumn = 'title',
+        $orderDirection = ''
+    ) {
+        return $this->setLocationSearchRequest(
+            $this->getLocationSearchRequest()->update($locationSearchRequest, $orderColumn, $orderDirection)
+        );
+    }
+
+    /**
+     *
+     * @return EventSearchRequest
+     */
+    public function getFactoidSearchRequest()
+    {
+        return $this->factoidSearchRequest ?: new EventSearchRequest();
+    }
+
+    /**
+     *
+     * @param  EventSearchRequest $factoidSearchRequest
+     * @return EventSearchRequest
+     */
+    public function setFactoidSearchRequest(EventSearchRequest $factoidSearchRequest = null)
+    {
+        $this->factoidSearchRequest = $factoidSearchRequest ?: new EventSearchRequest();
+
+        return $this->factoidSearchRequest;
+    }
+
+    /**
+     *
+     * @param  EventSearchRequest $factoidSearchRequest
+     * @param  string             $orderColumn
+     * @param  string             $orderDirection
+     * @return EventSearchRequest
+     */
+    public function updateFactoidSearchRequest(
+        EventSearchRequest $factoidSearchRequest = null,
+        $orderColumn = '',
+        $orderDirection = ''
+    ) {
+        return $this->setFactoidSearchRequest(
+            $this->getFactoidSearchRequest()->update($factoidSearchRequest, $orderColumn, $orderDirection)
+        );
+    }
 }
-?>

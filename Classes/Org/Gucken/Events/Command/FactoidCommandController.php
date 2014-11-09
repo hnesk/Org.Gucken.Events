@@ -22,11 +22,12 @@ namespace Org\Gucken\Events\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\Flow\Annotations as Flow;
+
 use Org\Gucken\Events\Domain\Model\EventFactoid;
-use Org\Gucken\Events\Domain\Model\EventSource;
 use Org\Gucken\Events\Domain\Repository\EventSourceRepository;
 use Org\Gucken\Events\Service\ImportEventFactoidsService;
-use TYPO3\Flow\Annotations as Flow;
+
 use TYPO3\Flow\Cli\CommandController;
 use TYPO3\Flow\Error\Debugger;
 
@@ -35,7 +36,8 @@ use TYPO3\Flow\Error\Debugger;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class FactoidCommandController extends CommandController {
+class FactoidCommandController extends CommandController
+{
 
     /**
      * @Flow\Inject
@@ -49,51 +51,48 @@ class FactoidCommandController extends CommandController {
      */
     protected $sourceRepository;
 
-
     /**
      * Import factoids from given source
      * @param $name string
      * @return string
      */
-    public function importCommand($name) {
+    public function importCommand($name)
+    {
         $source = $this->sourceRepository->findOneByName($name);
         if (empty ($source)) {
-            $message = sprintf('Source "%s" nout found',$name);
+            $message = sprintf('Source "%s" nout found', $name);
         } else {
             $count = $this->importService->importSource($source);
             $message = sprintf('imported %d factoids for source "%s" ', $count, $name);
         }
-        return $message.PHP_EOL;
+
+        return $message . PHP_EOL;
     }
 
     /**
      * Imports factoids from all sources
      * @return string
      */
-    public function importAllCommand() {
+    public function importAllCommand()
+    {
         $count = $this->importService->import();
-        $this->outputLine('imported %d Factoids',array($count));
+        $this->outputLine('imported %d Factoids', array($count));
     }
 
     /**
      * Show factoids for one source
-     * @param string $name source name
+     * @param string $name   source name
      * @param string $filter optionally filter by title
      */
-    public function showCommand($name, $filter = '') {
-           $source = $this->sourceRepository->findOneByCode($name);
-           foreach ($source->getImplementation()->getEvents() as $factoid) {
-               /** @var $factoid EventFactoid */
-               if ($filter && strpos($factoid->getTitle(),$filter) === false) {
-                   continue;
-               }
-               $this->output(Debugger::renderDump($factoid, 0, true, true));
-           }
-
-
+    public function showCommand($name, $filter = '')
+    {
+        $source = $this->sourceRepository->findOneByCode($name);
+        foreach ($source->getImplementation()->getEvents() as $factoid) {
+            /** @var $factoid EventFactoid */
+            if ($filter && strpos($factoid->getTitle(), $filter) === false) {
+                continue;
+            }
+            $this->output(Debugger::renderDump($factoid, 0, true, true));
+        }
     }
-
-
 }
-
-?>

@@ -21,12 +21,11 @@ namespace Org\Gucken\Events\Domain\Model;
  *                                                                        *
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
+use Doctrine\ORM\Mapping as ORM;
+use TYPO3\Flow\Annotations as Flow;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\ORM\Mapping as ORM;
-use Org\Gucken\Events\Domain\Model\ScorableInterface;
-use TYPO3\Flow\Annotations as Flow;
 
 /**
  * A Location
@@ -35,7 +34,8 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class Location implements ScorableInterface {
+class Location implements ScorableInterface
+{
 
     /**
      * The name
@@ -55,13 +55,11 @@ class Location implements ScorableInterface {
      */
     protected $url;
 
-
     /**
      * Is this location reviewed
      * @var boolean
      */
     protected $reviewed;
-
 
     /**
      * The address
@@ -89,7 +87,6 @@ class Location implements ScorableInterface {
      */
     protected $keywords;
 
-
     /**
      * The fax number
      * @var string
@@ -108,15 +105,16 @@ class Location implements ScorableInterface {
      */
     protected $email;
 
-	/**
-	 *
-	 * @var string
-	 */
-	protected $code;
+    /**
+     *
+     * @var string
+     */
+    protected $code;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->externalIdentifiers = new ArrayCollection();
-		$this->keywords = new ArrayCollection();
+        $this->keywords = new ArrayCollection();
     }
 
     /**
@@ -124,17 +122,19 @@ class Location implements ScorableInterface {
      *
      * @return string The Location's name
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
     /**
      * Sets this Location's name
      *
-     * @param string $name The Location's name
+     * @param  string $name The Location's name
      * @return void
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
     }
 
@@ -143,17 +143,19 @@ class Location implements ScorableInterface {
      *
      * @return string The Location's description
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
     /**
      * Sets this Location's description
      *
-     * @param string $description The Location's description
+     * @param  string $description The Location's description
      * @return void
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
@@ -162,17 +164,19 @@ class Location implements ScorableInterface {
      *
      * @return string The Location's url
      */
-    public function getUrl() {
+    public function getUrl()
+    {
         return $this->url;
     }
 
     /**
      * Sets this Location's url
      *
-     * @param string $url The Location's url
+     * @param  string $url The Location's url
      * @return void
      */
-    public function setUrl($url) {
+    public function setUrl($url)
+    {
         $this->url = $url;
     }
 
@@ -181,17 +185,19 @@ class Location implements ScorableInterface {
      *
      * @return PostalAddress The Location's address
      */
-    public function getAddress() {
+    public function getAddress()
+    {
         return $this->address;
     }
 
     /**
      * Sets this Location's address
      *
-     * @param PostalAddress $address The Location's address
+     * @param  PostalAddress $address The Location's address
      * @return void
      */
-    public function setAddress(PostalAddress $address = null) {
+    public function setAddress(PostalAddress $address = null)
+    {
         $this->address = $address;
     }
 
@@ -200,17 +206,19 @@ class Location implements ScorableInterface {
      *
      * @return GeoCoordinates The Location's geo
      */
-    public function getGeo() {
+    public function getGeo()
+    {
         return $this->geo;
     }
 
     /**
      * Sets this Location's geo
      *
-     * @param GeoCoordinates $geo The Location's geo
+     * @param  GeoCoordinates $geo The Location's geo
      * @return void
      */
-    public function setGeo(GeoCoordinates $geo = null) {
+    public function setGeo(GeoCoordinates $geo = null)
+    {
         $this->geo = $geo;
     }
 
@@ -219,17 +227,19 @@ class Location implements ScorableInterface {
      *
      * @return string The Location's fax number
      */
-    public function getFaxNumber() {
+    public function getFaxNumber()
+    {
         return $this->faxNumber;
     }
 
     /**
      * Sets this Location's fax number
      *
-     * @param string $faxNumber The Location's fax number
+     * @param  string $faxNumber The Location's fax number
      * @return void
      */
-    public function setFaxNumber($faxNumber) {
+    public function setFaxNumber($faxNumber)
+    {
         $this->faxNumber = $faxNumber;
     }
 
@@ -238,17 +248,19 @@ class Location implements ScorableInterface {
      *
      * @return string The Location's telephone
      */
-    public function getTelephone() {
+    public function getTelephone()
+    {
         return $this->telephone;
     }
 
     /**
      * Sets this Location's telephone
      *
-     * @param string $telephone The Location's telephone
+     * @param  string $telephone The Location's telephone
      * @return void
      */
-    public function setTelephone($telephone) {
+    public function setTelephone($telephone)
+    {
         $this->telephone = $telephone;
     }
 
@@ -257,37 +269,41 @@ class Location implements ScorableInterface {
      *
      * @return string The Location's email
      */
-    public function getEmail() {
+    public function getEmail()
+    {
         return $this->email;
     }
 
     /**
      * Sets this Location's email
      *
-     * @param string $email The Location's email
+     * @param  string $email The Location's email
      * @return void
      */
-    public function setEmail($email) {
+    public function setEmail($email)
+    {
         $this->email = $email;
     }
 
     /**
      * Setter for extenal identifiers
      *
-     * @param Collection $externalIdentifiers
+     * @param  Collection $externalIdentifiers
      * @return void
      */
-    public function setExternalIdentifiers(Collection $externalIdentifiers) {
+    public function setExternalIdentifiers(Collection $externalIdentifiers)
+    {
         $this->externalIdentifiers = $externalIdentifiers;
     }
 
     /**
      * Adds a location identifier
      *
-     * @param ExternalLocationIdentifier $externalIdentifier
+     * @param  ExternalLocationIdentifier $externalIdentifier
      * @return void
      */
-    public function addExternalIdentifier(ExternalLocationIdentifier $externalIdentifier) {
+    public function addExternalIdentifier(ExternalLocationIdentifier $externalIdentifier)
+    {
         $externalIdentifier->setLocation($this);
         $this->externalIdentifiers->add($externalIdentifier);
     }
@@ -295,12 +311,12 @@ class Location implements ScorableInterface {
     /**
      * Adds a location identifier
      *
-     * @param ExternalLocationIdentifier $externalIdentifier
+     * @param  ExternalLocationIdentifier $externalIdentifier
      * @return void
      */
-    public function removeExternalIdentifier(ExternalLocationIdentifier $externalIdentifier) {
-        $this->externalIdentifiers->removeElement($externalIdentifier);
-        ;
+    public function removeExternalIdentifier(ExternalLocationIdentifier $externalIdentifier)
+    {
+        $this->externalIdentifiers->removeElement($externalIdentifier);;
     }
 
     /**
@@ -308,36 +324,39 @@ class Location implements ScorableInterface {
      *
      * @return Collection<\Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier>
      */
-    public function getExternalIdentifiers() {
+    public function getExternalIdentifiers()
+    {
         return clone $this->externalIdentifiers;
     }
 
-	/**
-	 *
-	 * @return int
-	 */
-	public function getExternalIdentifierCount() {
-		return count($this->externalIdentifiers);
-	}
-
+    /**
+     *
+     * @return int
+     */
+    public function getExternalIdentifierCount()
+    {
+        return count($this->externalIdentifiers);
+    }
 
     /**
      * Setter for keywords
      *
-     * @param Collection $keywords
+     * @param  Collection $keywords
      * @return void
      */
-    public function setKeywords(Collection $keywords) {
+    public function setKeywords(Collection $keywords)
+    {
         $this->keywords = $keywords;
     }
 
     /**
      * Adds a keyword
      *
-     * @param LocationKeyword $keyword
+     * @param  LocationKeyword $keyword
      * @return void
      */
-    public function addKeyword(LocationKeyword $keyword) {
+    public function addKeyword(LocationKeyword $keyword)
+    {
         #$keyword->setLocation($this);
         $this->keywords->add($keyword);
     }
@@ -345,21 +364,22 @@ class Location implements ScorableInterface {
     /**
      * Adds a keyword
      *
-     * @param string $keyword
+     * @param  string $keyword
      * @return void
      */
-    public function addKeywordAsString($keyword) {
+    public function addKeywordAsString($keyword)
+    {
         $this->addKeyword(new LocationKeyword($keyword, $this, $this->getName()));
     }
-
 
     /**
      * removes a keyword
      *
-     * @param LocationKeyword $keyword
+     * @param  LocationKeyword $keyword
      * @return void
      */
-    public function removeKeyword(LocationKeyword $keyword) {
+    public function removeKeyword(LocationKeyword $keyword)
+    {
         $this->keywords->removeElement($keyword);
     }
 
@@ -368,125 +388,131 @@ class Location implements ScorableInterface {
      *
      * @return Collection<LocationKeyword>
      */
-    public function getKeywords() {
+    public function getKeywords()
+    {
         return clone $this->keywords;
     }
 
+    /**
+     *
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getCode() {
-		return $this->code;
-	}
-
-	/**
-	 *
-	 * @param string $code
-	 */
-	public function setCode($code) {
-		$this->code = $code;
-	}
-
+    /**
+     *
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
 
     /**
      * Getter for location keywords as an plain array
      *
      * @return array
      */
-    public function getKeywordArray() {
-		$keywords = array();
-		foreach ($this->keywords as $keyword) {
+    public function getKeywordArray()
+    {
+        $keywords = array();
+        foreach ($this->keywords as $keyword) {
             /** @var $keyword LocationKeyword */
-			$keywords[] = mb_strtolower($keyword->getKeyword(), 'utf-8');
-		}
-		return $keywords;
+            $keywords[] = mb_strtolower($keyword->getKeyword(), 'utf-8');
+        }
+
+        return $keywords;
     }
 
-	/**
-	 *
-	 * @param array $keywordLookup
-	 * @return float
-	 */
-	public function score(array $keywordLookup) {
-		$score = 0;
-		foreach ($this->getKeywordArray() as $keyword) {
-			if (isset($keywordLookup[$keyword])) {
-				$score++;
-			}
-		}
-		return $score;
-	}
+    /**
+     *
+     * @param  array $keywordLookup
+     * @return float
+     */
+    public function score(array $keywordLookup)
+    {
+        $score = 0;
+        foreach ($this->getKeywordArray() as $keyword) {
+            if (isset($keywordLookup[$keyword])) {
+                $score++;
+            }
+        }
 
+        return $score;
+    }
 
-	/**
-	 * Helper function to remove empty keywords
-	 */
-	public function removeEmptyKeywords() {
-        foreach ($this->keywords as $key =>$locationKeyword) {
+    /**
+     * Helper function to remove empty keywords
+     */
+    public function removeEmptyKeywords()
+    {
+        foreach ($this->keywords as $key => $locationKeyword) {
             /** @var $locationKeyword LocationKeyword */
             if (trim($locationKeyword->getKeyword()) === '') {
                 $this->keywords->remove($key);
             }
         }
-	}
+    }
 
-	/**
-	 * Helper function to remove empty Location ids
-	 */
-	public function removeEmptyExternalIdentifier() {
-        foreach ($this->externalIdentifiers as $key =>$externalIdentifier) {
+    /**
+     * Helper function to remove empty Location ids
+     */
+    public function removeEmptyExternalIdentifier()
+    {
+        foreach ($this->externalIdentifiers as $key => $externalIdentifier) {
             /** @var $externalIdentifier ExternalLocationIdentifier */
             if (trim($externalIdentifier->getSchemeLabel()) === '') {
                 $this->externalIdentifiers->remove($key);
             }
         }
-	}
+    }
 
-	/**
-	 *
-	 */
-	public function removeEmptyRelations() {
-		$this->removeEmptyExternalIdentifier();
-		$this->removeEmptyKeywords();
-	}
+    /**
+     *
+     */
+    public function removeEmptyRelations()
+    {
+        $this->removeEmptyExternalIdentifier();
+        $this->removeEmptyKeywords();
+    }
 
+    /**
+     *
+     * @return boolean
+     */
+    public function isReviewed()
+    {
+        return $this->reviewed;
+    }
 
-	/**
-	 *
-	 * @return boolean
-	 */
-	public function isReviewed() {
-		return $this->reviewed;
-	}
+    /**
+     *
+     * @return boolean
+     */
+    public function getReviewed()
+    {
+        return $this->reviewed;
+    }
 
-
-	/**
-	 *
-	 * @return boolean
-	 */
-	public function getReviewed() {
-		return $this->reviewed;
-	}
-
-	/**
-	 *
-	 * @param boolean $reviewed
-	 */
-	public function setReviewed($reviewed) {
-		$this->reviewed = $reviewed;
-	}
-
+    /**
+     *
+     * @param boolean $reviewed
+     */
+    public function setReviewed($reviewed)
+    {
+        $this->reviewed = $reviewed;
+    }
 
     /**
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->getName() . ' - ' . $this->getAddress();
     }
 
 }
-
-?>

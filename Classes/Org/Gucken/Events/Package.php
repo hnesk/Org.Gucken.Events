@@ -32,29 +32,27 @@ use \TYPO3\Flow\Package\Package as BasePackage;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class Package extends BasePackage {
+class Package extends BasePackage
+{
 
     /**
      * Invokes custom PHP code directly after the package manager has been initialized.
      *
-     * @param Bootstrap $bootstrap The current bootstrap
+     * @param  Bootstrap $bootstrap The current bootstrap
      * @return void
      */
-    public function boot(Bootstrap $bootstrap) {
+    public function boot(Bootstrap $bootstrap)
+    {
         /** @noinspection PhpIncludeInspection */
-        require_once $this->packagePath.'Resources/Private/PHP/pickup/app/init.php';
+        require_once $this->packagePath . 'Resources/Private/PHP/pickup/app/init.php';
         /** @noinspection PhpIncludeInspection */
-		require_once $this->packagePath.'Resources/Private/PHP/SG-iCalendar/SG_iCal.php';
+        require_once $this->packagePath . 'Resources/Private/PHP/SG-iCalendar/SG_iCal.php';
 
-		$dispatcher = $bootstrap->getSignalSlotDispatcher();
+        $dispatcher = $bootstrap->getSignalSlotDispatcher();
 
-		$dispatcher->connect(FactoidsService::class, 'importStarted'  , LogService::class, 'importStarted');
-		$dispatcher->connect(FactoidsService::class, 'factoidImported', LogService::class, 'factoidImported');
-		$dispatcher->connect(FactoidsService::class, 'exceptionThrown', LogService::class, 'exceptionThrown');
-		$dispatcher->connect(FactoidsService::class, 'importFinished' , LogService::class, 'importFinished');
-
+        $dispatcher->connect(FactoidsService::class, 'importStarted', LogService::class, 'importStarted');
+        $dispatcher->connect(FactoidsService::class, 'factoidImported', LogService::class, 'factoidImported');
+        $dispatcher->connect(FactoidsService::class, 'exceptionThrown', LogService::class, 'exceptionThrown');
+        $dispatcher->connect(FactoidsService::class, 'importFinished', LogService::class, 'importFinished');
     }
-
 }
-
-?>

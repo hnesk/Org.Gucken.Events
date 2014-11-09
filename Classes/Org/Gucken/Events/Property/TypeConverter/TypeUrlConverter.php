@@ -21,7 +21,6 @@ namespace Org\Gucken\Events\Property\TypeConverter;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Doctrine\ORM\Mapping as ORM;
 use Type\Url;
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Property\PropertyMappingConfigurationInterface;
@@ -36,29 +35,34 @@ use TYPO3\Flow\Property\TypeConverter\AbstractTypeConverter;
  * @api
  * @Flow\Scope("singleton")
  */
-class TypeUrlConverter extends AbstractTypeConverter {
+class TypeUrlConverter extends AbstractTypeConverter
+{
 
-	/**
-	 * @var array<string>
-	 */
-	protected $sourceTypes = array('string');
+    /**
+     * @var array<string>
+     */
+    protected $sourceTypes = array('string');
 
-	/**
-	 * @var string
-	 */
-	protected $targetType = Url::class;
+    /**
+     * @var string
+     */
+    protected $targetType = Url::class;
 
     /**
      * Converts $source to a \Type\Url
      *
-     * @param string $source the string to be converted to a \Type\Url object
-     * @param string $targetType must be "\Type\Url"
-     * @param array $convertedChildProperties
-     * @param PropertyMappingConfigurationInterface $configuration
+     * @param  string                                $source                   the string to be converted to a \Type\Url object
+     * @param  string                                $targetType               must be "\Type\Url"
+     * @param  array                                 $convertedChildProperties
+     * @param  PropertyMappingConfigurationInterface $configuration
      * @return Url
      */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), PropertyMappingConfigurationInterface $configuration = NULL) {
-               return new Url($source);
-	}
+    public function convertFrom(
+        $source,
+        $targetType,
+        array $convertedChildProperties = array(),
+        PropertyMappingConfigurationInterface $configuration = null
+    ) {
+        return new Url($source);
+    }
 }
-?>

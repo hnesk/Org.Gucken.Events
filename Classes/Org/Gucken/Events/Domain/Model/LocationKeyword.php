@@ -26,75 +26,76 @@ use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
- * An tag for a location 
+ * An tag for a location
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @Flow\Scope("prototype")
  * @Flow\ValueObject
  */
-class LocationKeyword {
+class LocationKeyword
+{
 
     /**
-     * The keyword 
-     * 
+     * The keyword
+     *
      * @var string
-     * @Flow\Validate(type="StringLength", options={ "minimum"=1, "maximum"=255 })     * 
+     * @Flow\Validate(type="StringLength", options={ "minimum"=1, "maximum"=255 })     *
      */
     protected $keyword;
-    
+
     /**
      *
      * @var Location
      * @ORM\ManyToOne(inversedBy="keywords")
      */
     protected $location;
-	
-	/**
-	 * This is only to allow non unqiue values, because flows valueobject hashgeneration doesn't work yet
-	 * TYPO3\Flow\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
-	 * @var string
-	 */
-	protected $locationId;
+
+    /**
+     * This is only to allow non unqiue values, because flows valueobject hashgeneration doesn't work yet
+     * TYPO3\Flow\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
+     * @var string
+     */
+    protected $locationId;
 
     /**
      *
-     * @param string $keyword
+     * @param string   $keyword
      * @param Location $location
-	 * @param string $locationId
+     * @param string   $locationId
      */
-    public function __construct($keyword, Location $location, $locationId) {
-        $this->keyword = (string)$keyword;
+    public function __construct($keyword, Location $location, $locationId)
+    {
+        $this->keyword = (string) $keyword;
         $this->location = $location;
-		$this->locationId = $locationId;
+        $this->locationId = $locationId;
     }
-
 
     /**
      * Get the keyword
      *
-     * @return string 
+     * @return string
      */
-    public function getKeyword() {
+    public function getKeyword()
+    {
         return $this->keyword;
     }
-        
-    
+
     /**
      *
      * @return Location
      */
-    protected function getLocation() {
+    protected function getLocation()
+    {
         return $this->location;
     }
-    
+
     /**
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->keyword;
     }
-    
-}
 
-?>
+}

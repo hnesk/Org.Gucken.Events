@@ -26,65 +26,66 @@ use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
- * An tag for a type 
+ * An tag for a type
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @Flow\Scope("prototype")
  * @Flow\ValueObject
  */
-class TypeKeyword {
+class TypeKeyword
+{
 
     /**
-     * The keyword 
-     * 
+     * The keyword
+     *
      * @var string
-     * @Flow\Validate(type="StringLength", options={ "minimum"=1, "maximum"=255 })     * 
+     * @Flow\Validate(type="StringLength", options={ "minimum"=1, "maximum"=255 })     *
      */
     protected $keyword;
-    
+
     /**
      *
      * @var Type
      * @ORM\ManyToOne(inversedBy="keywords")
      */
     protected $type;
-	
-	/**
-	 * This is only to allow non unqiue values, because Flows valueobject hashgeneration doesn't work yet
-	 * TYPO3\Flow\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
-	 * @var string
-	 */
-	protected $typeId;
+
+    /**
+     * This is only to allow non unqiue values, because Flows valueobject hashgeneration doesn't work yet
+     * TYPO3\Flow\Persistence\Aspect\PersistenceMagicAspect::generateValueHash
+     * @var string
+     */
+    protected $typeId;
 
     /**
      *
      * @param string $keyword
-     * @param Type $type
-	 * @param string $typeId
+     * @param Type   $type
+     * @param string $typeId
      */
-    public function __construct($keyword, Type $type, $typeId) {
+    public function __construct($keyword, Type $type, $typeId)
+    {
         $this->keyword = $keyword;
         $this->type = $type;
-		$this->typeId = $typeId;
+        $this->typeId = $typeId;
     }
-
 
     /**
      * Get the keyword
      *
-     * @return string 
+     * @return string
      */
-    public function getKeyword() {
+    public function getKeyword()
+    {
         return $this->keyword;
     }
-                
+
     /**
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->keyword;
-    }   
+    }
 }
-
-?>

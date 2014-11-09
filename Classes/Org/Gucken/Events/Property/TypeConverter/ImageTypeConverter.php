@@ -1,7 +1,6 @@
 <?php
 namespace Org\Gucken\Events\Property\TypeConverter;
 
-
 /*                                                                        *
  * This script orginally belongs to the Flow package  "TYPO3.Neos"        *
  * and has be adapted for Org.Gucken.Events.                              *
@@ -25,40 +24,42 @@ use TYPO3\Media\Domain\Model\Image;
  *
  * @Flow\Scope("singleton")
  */
-class ImageTypeConverter extends AbstractTypeConverter {
+class ImageTypeConverter extends AbstractTypeConverter
+{
 
-	/**
-	 * @var array<string>
-	 */
-	protected $sourceTypes = array('array');
+    /**
+     * @var array<string>
+     */
+    protected $sourceTypes = array('array');
 
-	/**
-	 * @var string
-	 */
-	protected $targetType = Image::class;
+    /**
+     * @var string
+     */
+    protected $targetType = Image::class;
 
-	/**
-	 * @var integer
-	 */
-	protected $priority = 2;
+    /**
+     * @var integer
+     */
+    protected $priority = 2;
 
-	/**
-	 * @Flow\Inject
-	 * @var ResourceManager
-	 */
-	protected $resourceManager;
+    /**
+     * @Flow\Inject
+     * @var ResourceManager
+     */
+    protected $resourceManager;
 
-	/**
-	 * We only convert stuff being uploaded using plupload.
-	 *
-	 * @param mixed $source the source data
-	 * @param string $targetType the type to convert to.
-	 * @return boolean TRUE if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
-	 * @api
-	 */
-	public function canConvertFrom($source, $targetType) {
-		return (isset($source['type']) && $source['type'] === 'plupload');
-	}
+    /**
+     * We only convert stuff being uploaded using plupload.
+     *
+     * @param  mixed   $source     the source data
+     * @param  string  $targetType the type to convert to.
+     * @return boolean TRUE if this TypeConverter can convert from $source to $targetType, FALSE otherwise.
+     * @api
+     */
+    public function canConvertFrom($source, $targetType)
+    {
+        return (isset($source['type']) && $source['type'] === 'plupload');
+    }
 
     /**
      * Converts the given string or array to a ResourcePointer object.
@@ -67,22 +68,26 @@ class ImageTypeConverter extends AbstractTypeConverter {
      * fresh file upload and imports the temporary upload file through the
      * resource manager.
      *
-     * @param array $source The upload info (expected keys: error, name, tmp_name)
-     * @param string $targetType
-     * @param array $convertedChildProperties
-     * @param PropertyMappingConfigurationInterface $configuration
+     * @param  array                                 $source                   The upload info (expected keys: error, name, tmp_name)
+     * @param  string                                $targetType
+     * @param  array                                 $convertedChildProperties
+     * @param  PropertyMappingConfigurationInterface $configuration
      * @throws TypeConverterException
-     * @return Image An object or an instance of TYPO3\Flow\Error\Error if the input format is not supported or could not be converted for other reasons
+     * @return Image                                 An object or an instance of TYPO3\Flow\Error\Error if the input format is not supported or could not be converted for other reasons
      */
-	public function convertFrom($source, $targetType, array $convertedChildProperties = array(), PropertyMappingConfigurationInterface $configuration = NULL) {
-		$resource = $this->resourceManager->importUploadedResource($_FILES['file']);
-		if ($resource === FALSE) {
-			throw new TypeConverterException('Resource could not be converted.', 1316428994);
-		}
-		$image = new Image($resource);
-		$image->setTitle(''); // TODO: this should maybe be settable
-		return $image;
-	}
-}
+    public function convertFrom(
+        $source,
+        $targetType,
+        array $convertedChildProperties = array(),
+        PropertyMappingConfigurationInterface $configuration = null
+    ) {
+        $resource = $this->resourceManager->importUploadedResource($_FILES['file']);
+        if ($resource === false) {
+            throw new TypeConverterException('Resource could not be converted.', 1316428994);
+        }
+        $image = new Image($resource);
+        $image->setTitle(''); // TODO: this should maybe be settable
 
-?>
+        return $image;
+    }
+}

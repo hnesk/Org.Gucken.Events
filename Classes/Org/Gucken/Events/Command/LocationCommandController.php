@@ -22,9 +22,11 @@ namespace Org\Gucken\Events\Command;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
+use TYPO3\Flow\Annotations as Flow;
+
 use Org\Gucken\Events\Domain\Model\Location as Location;
 use Org\Gucken\Events\Domain\Repository\LocationRepository;
-use TYPO3\Flow\Annotations as Flow;
+
 use TYPO3\Flow\Cli\CommandController as CommandController;
 
 /**
@@ -32,8 +34,8 @@ use TYPO3\Flow\Cli\CommandController as CommandController;
  *
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class LocationCommandController extends CommandController {
-
+class LocationCommandController extends CommandController
+{
 
     /**
      * @Flow\Inject
@@ -43,36 +45,37 @@ class LocationCommandController extends CommandController {
 
     /**
      * Search locations by keywords
-	 *
+     *
      * @param string $searchString
      */
-    public function searchCommand($searchString) {
+    public function searchCommand($searchString)
+    {
         $location = $this->locationRepository->findOneByKeywordString($searchString);
-		$this->outputLocation($location);
+        $this->outputLocation($location);
     }
 
     /**
      * List locations
      *
      */
-    public function listCommand() {
+    public function listCommand()
+    {
         $locations = $this->locationRepository->findAll();
-		foreach ($locations as $location) {
-			$this->outputLocation($location);
-		}
+        foreach ($locations as $location) {
+            $this->outputLocation($location);
+        }
     }
 
-
-	protected function outputLocation(Location $location) {
-		if ($location) {
-			$this->outputLine(sprintf(
-					'%-30s: %-50s',
-					$location->getName().' '.$location->getAddress()->getAddressLocality(),
-					implode(', ', $location->getKeywords()->toArray())
-			));
-		}
-	}
-
+    protected function outputLocation(Location $location)
+    {
+        if ($location) {
+            $this->outputLine(
+                sprintf(
+                    '%-30s: %-50s',
+                    $location->getName() . ' ' . $location->getAddress()->getAddressLocality(),
+                    implode(', ', $location->getKeywords()->toArray())
+                )
+            );
+        }
+    }
 }
-
-?>

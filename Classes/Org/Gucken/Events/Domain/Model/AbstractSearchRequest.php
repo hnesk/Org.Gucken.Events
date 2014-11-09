@@ -21,7 +21,6 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-
 use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Flow\Persistence\QueryInterface;
 
@@ -32,110 +31,116 @@ use TYPO3\Flow\Persistence\QueryInterface;
  * @Flow\Scope("prototype")
  *
  */
-abstract class AbstractSearchRequest {
-
-	/**
-	 *
-	 * @var string
-	 */
-	protected $orderColumn;
-
-	/**
-	 *
-	 * @var string
-	 * @Flow\Validate(type="RegularExpression", options={ "regularExpression"="#ASC|DESC#"})
-	 */
-	protected $orderDirection;
-
-	/**
-	 *
-	 * @param QueryInterface $query
-	 * @return QueryInterface
-	 */
-	public function apply(QueryInterface $query) {
-
-
-		if ($this->getOrderColumn()) {
-			$query->setOrderings(array($this->getOrderColumn() => $this->getOrderDirection()));
-		}
-
-		$conditions = $this->buildFilters($query);
-
-		if (count($conditions) > 0) {
-			return $query->matching($query->logicalAnd($conditions));
-		} else {
-			return $query;
-		}
-	}
-
-	/**
-	 *  @param QueryInterface $query
-	 *  @return array
-	 */
-	abstract protected function buildFilters(QueryInterface $query);
-
-	/**
-	 *
-	 * @param string $column
-	 * @param string $direction
-	 *
-	 */
-	public function setOrder($column, $direction) {
-		$this->setOrderColumn($column);
-		$this->setOrderDirection($direction);
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getOrderColumn() {
-		return $this->orderColumn;
-	}
-
-	/**
-	 *
-	 * @param string $orderColumn
-	 */
-	public function setOrderColumn($orderColumn) {
-		$this->orderColumn = $orderColumn;
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getOrderDirection() {
-		return $this->orderDirection ?: QueryInterface::ORDER_ASCENDING;
-	}
-
-	/**
-	 *
-	 * @param string $orderDirection
-	 */
-	public function setOrderDirection($orderDirection) {
-		$this->orderDirection = $orderDirection;
-	}
+abstract class AbstractSearchRequest
+{
 
     /**
      *
-     * @param AbstractSearchRequest $searchRequest
-     * @param string|null $orderColumn
-     * @param string|null $orderDirection
+     * @var string
+     */
+    protected $orderColumn;
+
+    /**
+     *
+     * @var string
+     * @Flow\Validate(type="RegularExpression", options={ "regularExpression"="#ASC|DESC#"})
+     */
+    protected $orderDirection;
+
+    /**
+     *
+     * @param  QueryInterface $query
+     * @return QueryInterface
+     */
+    public function apply(QueryInterface $query)
+    {
+
+        if ($this->getOrderColumn()) {
+            $query->setOrderings(array($this->getOrderColumn() => $this->getOrderDirection()));
+        }
+
+        $conditions = $this->buildFilters($query);
+
+        if (count($conditions) > 0) {
+            return $query->matching($query->logicalAnd($conditions));
+        } else {
+            return $query;
+        }
+    }
+
+    /**
+     * @param  QueryInterface $query
+     * @return array
+     */
+    abstract protected function buildFilters(QueryInterface $query);
+
+    /**
+     *
+     * @param string $column
+     * @param string $direction
+     *
+     */
+    public function setOrder($column, $direction)
+    {
+        $this->setOrderColumn($column);
+        $this->setOrderDirection($direction);
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getOrderColumn()
+    {
+        return $this->orderColumn;
+    }
+
+    /**
+     *
+     * @param string $orderColumn
+     */
+    public function setOrderColumn($orderColumn)
+    {
+        $this->orderColumn = $orderColumn;
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getOrderDirection()
+    {
+        return $this->orderDirection ?: QueryInterface::ORDER_ASCENDING;
+    }
+
+    /**
+     *
+     * @param string $orderDirection
+     */
+    public function setOrderDirection($orderDirection)
+    {
+        $this->orderDirection = $orderDirection;
+    }
+
+    /**
+     *
+     * @param  AbstractSearchRequest $searchRequest
+     * @param  string|null           $orderColumn
+     * @param  string|null           $orderDirection
      * @return AbstractSearchRequest
      */
-	public function update(AbstractSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null) {
-		if ($searchRequest) {
-			$this->updateSearchRequest($searchRequest);
-		}
+    public function update(AbstractSearchRequest $searchRequest = null, $orderColumn = null, $orderDirection = null)
+    {
+        if ($searchRequest) {
+            $this->updateSearchRequest($searchRequest);
+        }
 
-		if ($orderColumn) {
-			$this->setOrder($orderColumn, $orderDirection);
-		}
-		return $this;
-	}
+        if ($orderColumn) {
+            $this->setOrder($orderColumn, $orderDirection);
+        }
 
-	abstract protected function updateSearchRequest(AbstractSearchRequest $searchRequest);
+        return $this;
+    }
 
+    abstract protected function updateSearchRequest(AbstractSearchRequest $searchRequest);
 }
-?>

@@ -22,16 +22,19 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Org\Gucken\Events\Domain\Model\Type;
 use TYPO3\Flow\Annotations as Flow;
+
+use Org\Gucken\Events\Domain\Model\Type;
+
 use TYPO3\Flow\Error\Message;
 
 /**
- * Standard controller for the Events package
+ * Type admin controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class TypeController extends AbstractAdminController {
+class TypeController extends AbstractAdminController
+{
 
     /**
      *
@@ -40,81 +43,84 @@ class TypeController extends AbstractAdminController {
      */
     protected $typeRepository;
 
-
     /**
      * Index action
      *
      * @return void
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $types = $this->typeRepository->findAll();
         $this->view->assign('types', $types);
     }
 
     /**
      *
-     * @param Type $type
+     * @param  Type $type
      * @Flow\IgnoreValidation("type")
      * @return void
      */
-    public function addAction(Type $type = null) {
+    public function addAction(Type $type = null)
+    {
         $this->view->assign('type', $type);
     }
-	/**
-	 * @return void
-	 */
-    public function initializeSaveAction() {
-		$this->allowForProperty('type', 'keywords.*', self::CREATION);
-		$this->preprocessProperty('type', 'keywords.*', 'keyword');
-    }
 
     /**
-     *
-     * @param Type $type
-     */
-    public function saveAction(Type $type) {
-        $this->typeRepository->add($type);
-        $this->redirect('edit',null, null, array('type' => $type));
-    }
-
-    /**
-     *
-     * @param Type $type
      * @return void
      */
-    public function editAction(Type $type) {
-        $this->view->assign('type', $type);
-    }
-
-
-	/**
-	 * @return void
-	 */
-    public function initializeUpdateAction() {
-		$this->allowForProperty('type', 'keywords.*', self::CREATION);
-		$this->preprocessProperty('type', 'keywords.*', 'keyword');
+    public function initializeSaveAction()
+    {
+        $this->allowForProperty('type', 'keywords.*', self::CREATION);
+        $this->preprocessProperty('type', 'keywords.*', 'keyword');
     }
 
     /**
      *
      * @param Type $type
      */
-    public function updateAction(Type $type) {
+    public function saveAction(Type $type)
+    {
+        $this->typeRepository->add($type);
+        $this->redirect('edit', null, null, array('type' => $type));
+    }
+
+    /**
+     *
+     * @param  Type $type
+     * @return void
+     */
+    public function editAction(Type $type)
+    {
+        $this->view->assign('type', $type);
+    }
+
+    /**
+     * @return void
+     */
+    public function initializeUpdateAction()
+    {
+        $this->allowForProperty('type', 'keywords.*', self::CREATION);
+        $this->preprocessProperty('type', 'keywords.*', 'keyword');
+    }
+
+    /**
+     *
+     * @param Type $type
+     */
+    public function updateAction(Type $type)
+    {
         $this->typeRepository->update($type);
         $this->redirect('index');
     }
 
-
     /**
      *
      * @param Type $type
      */
-    public function deleteAction(Type $type) {
+    public function deleteAction(Type $type)
+    {
         $this->typeRepository->remove($type);
         $this->addFlashMessage($type . ' wurde gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
         $this->redirect('index');
     }
-
 }
-
-?>

@@ -21,25 +21,20 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Doctrine\ORM\Mapping as ORM;
-use TYPO3\Flow\Annotations as Flow;
-
 /**
- * Standard controller for the Events package
+ * Controller for static pages
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class StaticController extends AbstractAdminController {
-
-	/**
-	 *
-	 * @param string $page
+class StaticController extends AbstractAdminController
+{
+    /**
+     *
+     * @param  string $page
      * @return string
      */
-	public function indexAction($page) {
-		return $this->view->render($page);
-	}
-
+    public function indexAction($page)
+    {
+        return $this->view->render($page);
+    }
 }
-
-?>

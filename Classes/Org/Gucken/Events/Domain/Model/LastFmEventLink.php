@@ -23,7 +23,6 @@ namespace Org\Gucken\Events\Domain\Model;
 
 use Org\Gucken\Events\Domain\Model;
 
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -32,11 +31,12 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class LastFmEventLink extends EventLink {
-		
-	public function getIcon() {
-		return 'lastfm.png';
-	}
-	
+class LastFmEventLink extends EventLink
+{
+
+    public function getIcon()
+    {
+        return 'lastfm.png';
+    }
+
 }
-?>

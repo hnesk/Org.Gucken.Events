@@ -3,34 +3,34 @@
 namespace Org\Gucken\Events\Domain\Model\EventSource;
 
 use Type\Url,
-	Type\Xml;
+    Type\Xml;
 use Org\Gucken\Events\Annotations as Events,
-	TYPO3\Flow\Annotations as Flow;
+    TYPO3\Flow\Annotations as Flow;
 
 /**
  * @Flow\Scope("prototype")
  */
-class GoogleCalendar extends Ical implements EventSourceInterface {
+class GoogleCalendar extends Ical implements EventSourceInterface
+{
 
-	/**
-	 * @Events\Configurable
-	 * @var string
-	 */
-	protected $calendar;
+    /**
+     * @Events\Configurable
+     * @var string
+     */
+    protected $calendar;
 
-	/**
-	 *
-	 * @param string $calendar
-	 */
-	public function setCalendar($calendar) {
-		$this->calendar = $calendar;
-	}
+    /**
+     *
+     * @param string $calendar
+     */
+    public function setCalendar($calendar)
+    {
+        $this->calendar = $calendar;
+    }
 
-	public function getUrl() {
-		return 'http://www.google.com/calendar/ical/'.  rawurlencode($this->calendar).'/public/basic.ics';
-	}
-
+    public function getUrl()
+    {
+        return 'http://www.google.com/calendar/ical/' . rawurlencode($this->calendar) . '/public/basic.ics';
+    }
 
 }
-
-?>

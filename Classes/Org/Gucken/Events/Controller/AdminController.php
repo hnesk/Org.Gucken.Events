@@ -21,21 +21,19 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-
 /**
  * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class AdminController extends AbstractAdminController {
-	/**
-	 * Index action, shows the admin dashboard
-	 *
-	 * @return void
-	 */
-	public function indexAction() {
-
-
-	}
+class AdminController extends AbstractAdminController
+{
+    /**
+     * Index action, shows the admin dashboard
+     *
+     * @return void
+     */
+    public function indexAction()
+    {
+    }
 }
-?>

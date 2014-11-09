@@ -35,272 +35,283 @@ use TYPO3\Media\Domain\Model\Image;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class Event {
+class Event
+{
 
-	/**
-	 * The title
-	 * @var string
-	 * @Flow\Validate(type="NotEmpty")
-	 */
-	protected $title;
+    /**
+     * The title
+     * @var string
+     * @Flow\Validate(type="NotEmpty")
+     */
+    protected $title;
 
-	/**
-	 * The start date and time
-	 * @var \DateTime
-	 * @Flow\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
-	 * @Flow\Validate(type="NotEmpty")
-	 */
-	protected $startDateTime;
+    /**
+     * The start date and time
+     * @var \DateTime
+     * @Flow\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
+     * @Flow\Validate(type="NotEmpty")
+     */
+    protected $startDateTime;
 
-	/**
-	 * The end date and time
-	 * @var \DateTime
-	 * @Flow\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
+    /**
+     * The end date and time
+     * @var \DateTime
+     * @Flow\Validate(type="DateTimeRange", option={"earliestDate" = "P1D/now", "latestDate" = "now/P365D"})
      * @ORM\Column(nullable=true)
-	 */
-	protected $endDateTime;
+     */
+    protected $endDateTime;
 
+    /**
+     * The location
+     * @var \Org\Gucken\Events\Domain\Model\Location
+     * @ORM\ManyToOne
+     * @Flow\Validate(type="NotEmpty")
+     */
+    protected $location;
 
-	/**
-	 * The location
-	 * @var \Org\Gucken\Events\Domain\Model\Location
-	 * @ORM\ManyToOne
-	 * @Flow\Validate(type="NotEmpty")
-	 */
-	protected $location;
-
-	/**
-	 * Event specific location details
-	 *
-	 * @var string
+    /**
+     * Event specific location details
+     *
+     * @var string
      * @ORM\Column(nullable=true)
-	 */
-	protected $locationDetail;
+     */
+    protected $locationDetail;
 
-	/**
-	 * The type
-	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
-	 * @ORM\ManyToMany
-	 * @Flow\Validate(type="NotEmpty")
-	 */
-	protected $types;
+    /**
+     * The type
+     * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
+     * @ORM\ManyToMany
+     * @Flow\Validate(type="NotEmpty")
+     */
+    protected $types;
 
-	/**
-	 * Links to the original sources
-	 * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink>
-	 * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
-	 */
-	protected $links;
+    /**
+     * Links to the original sources
+     * @var \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink>
+     * @ORM\OneToMany(mappedBy="event", cascade={"all"}, orphanRemoval=true)
+     */
+    protected $links;
 
+    /**
+     * Markdown version of the description
+     *
+     * @ORM\Column(type="text",nullable=true)
+     * @var string
+     */
+    protected $description;
 
-	/**
-	 * Markdown version of the description
-	 *
-	 * @ORM\Column(type="text",nullable=true)
-	 * @var string
-	 */
-	protected $description;
+    /**
+     * Markdown version of the description
+     *
+     * @ORM\Column(type="text", nullable=true)
+     * @var string
+     */
+    protected $shortDescription;
 
-	/**
-	 * Markdown version of the description
-	 *
-	 * @ORM\Column(type="text", nullable=true)
-	 * @var string
-	 */
-	protected $shortDescription;
+    /**
+     * The url
+     *
+     * @var string
+     */
+    protected $url;
 
-	/**
-	 * The url
-	 *
-	 * @var string
-	 */
-	protected $url;
-
-	/**
-	 *
-	 * @var \TYPO3\Media\Domain\Model\Image
-	 * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
+    /**
+     *
+     * @var \TYPO3\Media\Domain\Model\Image
+     * @ORM\OneToOne(cascade={"all"}, orphanRemoval=true)
      * @ORM\JoinColumn(name="image", referencedColumnName="persistence_object_identifier", nullable=true)
-	 */
-	protected $image;
+     */
+    protected $image;
 
+    /**
+     *
+     * @var \Org\Gucken\Events\Domain\Model\Day\Factory
+     * @Flow\Inject
+     */
+    protected $dayFactory;
 
-	/**
-	 *
-	 * @var \Org\Gucken\Events\Domain\Model\Day\Factory
-	 * @Flow\Inject
-	 */
-	protected $dayFactory;
+    public function __construct()
+    {
+        $this->types = new ArrayCollection();
+        $this->factoidIdentitys = new ArrayCollection();
+        $this->links = new ArrayCollection();
+    }
 
-	public function __construct() {
-		$this->types = new ArrayCollection();
-		$this->factoidIdentitys = new ArrayCollection();
-		$this->links = new ArrayCollection();
-	}
+    /**
+     * Get the Event's title
+     *
+     * @return string The Event's title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Get the Event's title
-	 *
-	 * @return string The Event's title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Sets this Event's title
+     *
+     * @param  string $title The Event's title
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * Sets this Event's title
-	 *
-	 * @param string $title The Event's title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Get the Event's date
+     *
+     * @return \DateTime The Event's start date
+     */
+    public function getStartDateTime()
+    {
+        return $this->startDateTime;
+    }
 
-	/**
-	 * Get the Event's date
-	 *
-	 * @return \DateTime The Event's start date
-	 */
-	public function getStartDateTime() {
-		return $this->startDateTime;
-	}
+    /**
+     * Sets this Event's start date
+     *
+     * @param  \DateTime $startDateTime The Event's date
+     * @return void
+     */
+    public function setStartDateTime(\DateTime $startDateTime)
+    {
+        $this->startDateTime = $startDateTime;
+    }
 
-	/**
-	 * Sets this Event's start date
-	 *
-	 * @param \DateTime $startDateTime The Event's date
-	 * @return void
-	 */
-	public function setStartDateTime(\DateTime $startDateTime) {
-		$this->startDateTime = $startDateTime;
-	}
+    /**
+     * Get the Event's end date
+     *
+     * @return \DateTime The Event's end date
+     */
+    public function getEndDateTime()
+    {
+        return $this->endDateTime;
+    }
 
-	/**
-	 * Get the Event's end date
-	 *
-	 * @return \DateTime The Event's end date
-	 */
-	public function getEndDateTime() {
-		return $this->endDateTime;
-	}
+    /**
+     * Sets this Event's end date
+     *
+     * @param  \DateTime $endDateTime The Event's end date
+     * @return void
+     */
+    public function setEndDateTime(\DateTime $endDateTime = null)
+    {
+        $this->endDateTime = $endDateTime;
+    }
 
-	/**
-	 * Sets this Event's end date
-	 *
-	 * @param \DateTime $endDateTime The Event's end date
-	 * @return void
-	 */
-	public function setEndDateTime(\DateTime $endDateTime = null) {
-		$this->endDateTime = $endDateTime;
-	}
+    /**
+     * @return \Org\Gucken\Events\Domain\Model\Day
+     */
+    public function getDay()
+    {
+        return $this->dayFactory->build($this->startDateTime);
+    }
 
+    /**
+     * Get the Event's location
+     *
+     * @return \Org\Gucken\Events\Domain\Model\Location The Event's location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
 
-	/**
-	 * @return \Org\Gucken\Events\Domain\Model\Day
-	 */
-	public function getDay() {
-		return $this->dayFactory->build($this->startDateTime);
-	}
+    /**
+     * Sets this Event's location
+     *
+     * @param  \Org\Gucken\Events\Domain\Model\Location $location The Event's location
+     * @return void
+     */
+    public function setLocation(Location $location)
+    {
+        $this->location = $location;
+    }
 
+    /**
+     *
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
-	/**
-	 * Get the Event's location
-	 *
-	 * @return \Org\Gucken\Events\Domain\Model\Location The Event's location
-	 */
-	public function getLocation() {
-		return $this->location;
-	}
+    /**
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * Sets this Event's location
-	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Location $location The Event's location
-	 * @return void
-	 */
-	public function setLocation(Location $location) {
-		$this->location = $location;
-	}
+    /**
+     *
+     * @param string $shortDescription
+     */
+    public function setShortDescription($shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+    }
 
-
-	/**
-	 *
-	 * @param string $description
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
-	 *
-	 * @param string $shortDescription
-	 */
-	public function setShortDescription($shortDescription) {
-		$this->shortDescription = $shortDescription;
-	}
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function getShortDescription() {
-		return $this->shortDescription;
-	}
-
+    /**
+     *
+     * @return string
+     */
+    public function getShortDescription()
+    {
+        return $this->shortDescription;
+    }
 
     /**
      * Setter for types
      *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Types> $types
+     * @param  \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Types> $types
      * @return void
      */
-    public function setTypes(Collection $types) {
+    public function setTypes(Collection $types)
+    {
         $this->types = $types;
     }
 
     /**
      * Adds a type
      *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
+     * @param  \Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function addType(Type $type = null) {
-		if ($type) {
-			$this->types->add($type);
-		}
+    public function addType(Type $type = null)
+    {
+        if ($type) {
+            $this->types->add($type);
+        }
     }
 
     /**
      * Adds a type
      *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
+     * @param  \Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function addTypeIfNotExists(Type $type = null) {
-		if ($type) {
-			if (!$this->types->contains($type)) {
-				$this->types->add($type);
-			}
-		}
+    public function addTypeIfNotExists(Type $type = null)
+    {
+        if ($type) {
+            if (!$this->types->contains($type)) {
+                $this->types->add($type);
+            }
+        }
     }
-
 
     /**
      * removes a type
      *
-     * @param \Org\Gucken\Events\Domain\Model\Type $type
+     * @param  \Org\Gucken\Events\Domain\Model\Type $type
      * @return void
      */
-    public function removeType(Type $type) {
+    public function removeType(Type $type)
+    {
         $this->types->removeElement($type);
     }
 
@@ -309,7 +320,8 @@ class Event {
      *
      * @return \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\Type>
      */
-    public function getTypes() {
+    public function getTypes()
+    {
         return clone $this->types;
     }
 
@@ -318,39 +330,42 @@ class Event {
      *
      * @return Type
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->types->first();
     }
-
 
     /**
      * Setter for links
      *
-     * @param \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink> $links
+     * @param  \Doctrine\Common\Collections\Collection<\Org\Gucken\Events\Domain\Model\EventLink> $links
      * @return void
      */
-    public function setLinks(Collection $links) {
+    public function setLinks(Collection $links)
+    {
         $this->links = $links;
     }
 
-	/**
-	 * add a link
-	 * @param \Org\Gucken\Events\Domain\Model\EventLink $link
-	 */
-    public function addLink(EventLink $link = null) {
-		if ($link) {
-			$link->setEvent($this);
-			$this->links->add($link);
-		}
+    /**
+     * add a link
+     * @param \Org\Gucken\Events\Domain\Model\EventLink $link
+     */
+    public function addLink(EventLink $link = null)
+    {
+        if ($link) {
+            $link->setEvent($this);
+            $this->links->add($link);
+        }
     }
 
     /**
      * removes a link
      *
-     * @param \Org\Gucken\Events\Domain\Model\EventLink $link
+     * @param  \Org\Gucken\Events\Domain\Model\EventLink $link
      * @return void
      */
-    public function removeLink(EventLink $link) {
+    public function removeLink(EventLink $link)
+    {
         $this->links->removeElement($link);
     }
 
@@ -359,51 +374,55 @@ class Event {
      *
      * @return Collection<\Org\Gucken\Events\Domain\Model\EventLink>
      */
-    public function getLinks() {
+    public function getLinks()
+    {
         return clone $this->links;
     }
 
+    /**
+     *
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
 
-	/**
-	 *
-	 * @param string $url
-	 */
-	public function setUrl($url) {
-		$this->url = $url;
-	}
+    /**
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getUrl() {
-		return $this->url;
-	}
+    /**
+     *
+     * @return \TYPO3\Media\Domain\Model\Image
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
 
-	/**
-	 *
-	 * @return \TYPO3\Media\Domain\Model\Image
-	 */
-	public function getImage() {
-		return $this->image;
-	}
+    /**
+     *
+     * @param \TYPO3\Media\Domain\Model\Image $image
+     */
+    public function setImage(Image $image)
+    {
+        $this->image = $image;
+    }
 
-	/**
-	 *
-	 * @param \TYPO3\Media\Domain\Model\Image $image
-	 */
-	public function setImage(Image $image) {
-		$this->image = $image;
-	}
-
-
-	/**
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		return $this->getTitle().' '.$this->getStartDateTime()->format('d.m.Y H:i'). ($this->location ? ' @ '.$this->location->getName() : '');
-	}
+    /**
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getTitle() . ' ' . $this->getStartDateTime()->format(
+            'd.m.Y H:i'
+        ) . ($this->location ? ' @ ' . $this->location->getName() : '');
+    }
 }
-
-?>

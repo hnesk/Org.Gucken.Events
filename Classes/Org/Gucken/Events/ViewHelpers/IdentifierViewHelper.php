@@ -7,36 +7,39 @@ use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
  */
-class IdentifierViewHelper extends AbstractViewHelper {
-	
-	/**
-	 *
-	 * @var PersistenceManagerInterface
-	 */
-	protected $persistenceManager;
-	
-	/**
-	 * Injects the Flow Persistence Manager
-	 *
-	 * @param PersistenceManagerInterface $persistenceManager
-	 * @return void
-	 */
-	public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager) {
-		$this->persistenceManager = $persistenceManager;
-	}
-	/**
-	 * Set the template variable given as $as to the current account
-	 *
-	 * @param object $object
-	 * @return string
-	 */
-	protected function render($object) {
-		if (is_null($object)) {
-			return '';
-		} else {
-			return $this->persistenceManager->getIdentifierByObject($object);
-		}
-	}
+class IdentifierViewHelper extends AbstractViewHelper
+{
+
+    /**
+     *
+     * @var PersistenceManagerInterface
+     */
+    protected $persistenceManager;
+
+    /**
+     * Injects the Flow Persistence Manager
+     *
+     * @param  PersistenceManagerInterface $persistenceManager
+     * @return void
+     */
+    public function injectPersistenceManager(PersistenceManagerInterface $persistenceManager)
+    {
+        $this->persistenceManager = $persistenceManager;
+    }
+
+    /**
+     * Set the template variable given as $as to the current account
+     *
+     * @param  object $object
+     * @return string
+     */
+    protected function render($object)
+    {
+        if (is_null($object)) {
+            return '';
+        } else {
+            return $this->persistenceManager->getIdentifierByObject($object);
+        }
+    }
 
 }
-?>

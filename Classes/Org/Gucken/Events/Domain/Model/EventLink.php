@@ -34,105 +34,115 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="type", type="string")
- * 
+ *
  */
-abstract class EventLink {	
-	/**
-	 *
-	 * @var \Org\Gucken\Events\Domain\Model\Event
-	 * @ORM\ManyToOne(inversedBy="links")
-	 */
-	protected $event;
-	
-	/**
-	 *
-	 * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
-	 * @ORM\OneToOne
-	 * 
-	 */
-	protected $factoidIdentity;
+abstract class EventLink
+{
+    /**
+     *
+     * @var \Org\Gucken\Events\Domain\Model\Event
+     * @ORM\ManyToOne(inversedBy="links")
+     */
+    protected $event;
 
-	/**
-	 * @var string
-	 */
-	protected $url;
-		
+    /**
+     *
+     * @var \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+     * @ORM\OneToOne
+     *
+     */
+    protected $factoidIdentity;
 
-	/**
-	 * Get the event link type
-	 *
-	 * @return string The event link type
-	 */
-	public function getType() {
-		return get_class($this);
-	}
-	
-	public function getClass() {
-		$qualifiedType = explode('\\',$this->getType());
-		return strtolower(end($qualifiedType));
-	}
-	
-	/**
-	 *
-	 * @param \Org\Gucken\Events\Domain\Model\Event $event The Event
-	 * @return void
-	 */
-	public function setEvent(\Org\Gucken\Events\Domain\Model\Event $event) {
-		$this->event= $event;
-	}			
+    /**
+     * @var string
+     */
+    protected $url;
 
-	/**
-	 * Get the Event
-	 *
-	 * @return \Org\Gucken\Events\Domain\Model\Event The Event
-	 */
-	public function getEvent() {
-		return $this->event;
-	}
+    /**
+     * Get the event link type
+     *
+     * @return string The event link type
+     */
+    public function getType()
+    {
+        return get_class($this);
+    }
 
-	/**
-	 *
-	 * @param \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoid 
-	 * @return void
-	 */
-	public function setFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity) {
-		$this->factoidIdentity = $factoidIdentity;
-	}	
-	
-	/**
-	 * @return \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
-	 */
-	public function getFactoidIdentity() {
-		return $this->factoidIdentity;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getUrl() {
-		return $this->url;
-	}
-	
-	/**
-	 * @param string $url
-	 */
-	public function setUrl($url) {
-		$this->url = $url;
-	}
-	
-	/**
-	 * @return string
-	 */
-	public function getIcon() {
-		return 'web.png';
-	}
+    public function getClass()
+    {
+        $qualifiedType = explode('\\', $this->getType());
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function __toString() {
-		return $this->getUrl();
-	}
+        return strtolower(end($qualifiedType));
+    }
+
+    /**
+     *
+     * @param  \Org\Gucken\Events\Domain\Model\Event $event The Event
+     * @return void
+     */
+    public function setEvent(\Org\Gucken\Events\Domain\Model\Event $event)
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * Get the Event
+     *
+     * @return \Org\Gucken\Events\Domain\Model\Event The Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     *
+     * @param  \Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoid
+     * @return void
+     */
+    public function setFactoidIdentity(\Org\Gucken\Events\Domain\Model\EventFactoidIdentity $factoidIdentity)
+    {
+        $this->factoidIdentity = $factoidIdentity;
+    }
+
+    /**
+     * @return \Org\Gucken\Events\Domain\Model\EventFactoidIdentity
+     */
+    public function getFactoidIdentity()
+    {
+        return $this->factoidIdentity;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIcon()
+    {
+        return 'web.png';
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getUrl();
+    }
 }
-?>

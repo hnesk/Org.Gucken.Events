@@ -18,98 +18,104 @@ use TYPO3\Flow\Persistence\Repository;
  *
  * @Flow\Scope("singleton")
  */
-class LocationRepository extends Repository {
+class LocationRepository extends Repository
+{
 
     protected $defaultOrderings = [
         'name' => QueryInterface::ORDER_ASCENDING
     ];
 
-
     /**
      *
-     * @param string $scheme
-     * @param string $id
+     * @param  string   $scheme
+     * @param  string   $id
      * @return Location
      */
-    public function findOneByExternalId($scheme, $id) {
+    public function findOneByExternalId($scheme, $id)
+    {
         $query = $this->createQuery();
-        $query->matching($query->logicalAnd(
-        #    $query->equals('externalIdentifiers.scheme', $scheme),
-            $query->equals('externalIdentifiers.id', (string)$id)
-        ));
+        $query->matching(
+            $query->logicalAnd(
+            #    $query->equals('externalIdentifiers.scheme', $scheme),
+                $query->equals('externalIdentifiers.id', (string) $id)
+            )
+        );
 
         return $query->execute()->getFirst();
     }
 
     /**
      *
-     * @param string $address
+     * @param  string   $address
      * @return Location
      */
-    public function findOneByExactAdress($address) {
-		foreach ($this->findAll() as $location) {
-			if ($address === (string) $location) {
-				return $location;
-			}
-		}
-		return NULL;
-    }
+    public function findOneByExactAdress($address)
+    {
+        foreach ($this->findAll() as $location) {
+            if ($address === (string) $location) {
+                return $location;
+            }
+        }
 
-
-	/**
-	 *
-	 * @param LocationSearchRequest $searchRequest
-	 * @return QueryResultInterface
-	 */
-	public function findBySearchRequest(LocationSearchRequest $searchRequest) {
-		$query = $this->createQuery();
-		$query = $searchRequest->apply($query);
-		return $query->execute();
-	}
-
-
-    /**
-     *
-     * @param string $string
-     * @return Location
-     */
-    public function findOneByKeywordString($string) {
-		$sortedResults = $this->getResultHeapByKeywordString($string);
-		return $sortedResults->isEmpty() ? null : $sortedResults->top();
-    }
-
-
-    /**
-     *
-     * @param string $string
-     * @param int $minScore
-     * @return Location
-     */
-    public function findByKeywordString($string, $minScore = 1) {
-		$sortedResults = $this->getResultHeapByKeywordString($string);
-		return $sortedResults->getBest($minScore);
+        return null;
     }
 
     /**
      *
-     * @param string $string
+     * @param  LocationSearchRequest $searchRequest
+     * @return QueryResultInterface
+     */
+    public function findBySearchRequest(LocationSearchRequest $searchRequest)
+    {
+        $query = $this->createQuery();
+        $query = $searchRequest->apply($query);
+
+        return $query->execute();
+    }
+
+    /**
+     *
+     * @param  string   $string
+     * @return Location
+     */
+    public function findOneByKeywordString($string)
+    {
+        $sortedResults = $this->getResultHeapByKeywordString($string);
+
+        return $sortedResults->isEmpty() ? null : $sortedResults->top();
+    }
+
+    /**
+     *
+     * @param  string   $string
+     * @param  int      $minScore
+     * @return Location
+     */
+    public function findByKeywordString($string, $minScore = 1)
+    {
+        $sortedResults = $this->getResultHeapByKeywordString($string);
+
+        return $sortedResults->getBest($minScore);
+    }
+
+    /**
+     *
+     * @param  string    $string
      * @return ScoreHeap
      */
-    protected function getResultHeapByKeywordString($string) {
-		$keywords = string($string)->asKeywords()->getNativeValue();
+    protected function getResultHeapByKeywordString($string)
+    {
+        $keywords = string($string)->asKeywords()->getNativeValue();
 
         $query = $this->createQuery();
         $results = $query->matching($query->in('keywords.keyword', $keywords))->execute();
 
-		$sortedResults = new ScoreHeap($keywords);
-		foreach ($results as $result) {
-			$sortedResults->insert($result);
-		}
+        $sortedResults = new ScoreHeap($keywords);
+        foreach ($results as $result) {
+            $sortedResults->insert($result);
+        }
 
-		return $sortedResults;
+        return $sortedResults;
     }
 
-
 }
-
-?>

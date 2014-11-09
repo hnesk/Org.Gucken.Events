@@ -22,10 +22,12 @@ namespace Org\Gucken\Events\Controller;
  *                                                                        */
 
 use TYPO3\Flow\Annotations as Flow;
+
 use TYPO3\Flow\Error\Error;
 use TYPO3\Flow\Error\Notice;
 use TYPO3\Flow\Mvc\ActionRequest;
 use TYPO3\Flow\Mvc\View\ViewInterface;
+
 use TYPO3\Flow\Security\Authentication\Controller\AbstractAuthenticationController;
 use TYPO3\Flow\Security\Exception\AuthenticationRequiredException;
 
@@ -34,21 +36,23 @@ use TYPO3\Flow\Security\Exception\AuthenticationRequiredException;
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class AccountController extends AbstractAuthenticationController {
+class AccountController extends AbstractAuthenticationController
+{
 
-
-	/**
-	 * Index action shows login form
-	 *
-	 * @return void
-	 */
-	public function indexAction() {
-	}
+    /**
+     * Index action shows login form
+     *
+     * @return void
+     */
+    public function indexAction()
+    {
+    }
 
     /**
      *
      */
-    public function logoutAction() {
+    public function logoutAction()
+    {
         parent::logoutAction();
         $this->flashMessageContainer->addMessage(new Notice('Du hast Dich abgemeldet.'));
         $this->redirect('index', 'standard');
@@ -59,7 +63,8 @@ class AccountController extends AbstractAuthenticationController {
      *
      * @param ViewInterface $view
      */
-    public function initializeView(ViewInterface $view) {
+    public function initializeView(ViewInterface $view)
+    {
         /* @var $view \TYPO3\Fluid\View\TemplateView */
         $currentView = $this->settings['currentView'];
         $view->setLayoutRootPath($this->settings['views'][$currentView]['layoutRootPath']);
@@ -68,26 +73,27 @@ class AccountController extends AbstractAuthenticationController {
         $view->assign('skinPackage', $this->settings['views'][$currentView]['skinPackage']);
     }
 
-
-    protected function onAuthenticationFailure(AuthenticationRequiredException $exception = NULL)
+    protected function onAuthenticationFailure(AuthenticationRequiredException $exception = null)
     {
-        $this->flashMessageContainer->addMessage(new Error('Falscher Benutzername und/oder Passwort!', ($exception === NULL ? 1347016771 : $exception->getCode())));
+        $this->flashMessageContainer->addMessage(
+            new Error(
+                'Falscher Benutzername und/oder Passwort!',
+                ($exception === null ? 1347016771 : $exception->getCode())
+            )
+        );
     }
 
     /**
      * Is called if authentication was successful.
      *
-     * @param ActionRequest $originalRequest The request that was intercepted by the security framework, NULL if there was none
+     * @param  ActionRequest $originalRequest The request that was intercepted by the security framework, NULL if there was none
      * @return void
      */
-    protected function onAuthenticationSuccess(ActionRequest $originalRequest = NULL)
+    protected function onAuthenticationSuccess(ActionRequest $originalRequest = null)
     {
-        if ($originalRequest !== NULL) {
+        if ($originalRequest !== null) {
             $this->redirectToRequest($originalRequest);
         }
         $this->redirect('index', 'admin');
     }
-
-
 }
-?>

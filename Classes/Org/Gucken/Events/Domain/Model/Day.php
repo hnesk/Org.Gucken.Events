@@ -32,29 +32,30 @@ use TYPO3\Flow\Annotations as Flow;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @Flow\Scope("prototype")
  */
-class Day {
-	/**
-	 *
-	 * @var \DateTime
-	 */
-	protected $date;
+class Day
+{
+    /**
+     *
+     * @var \DateTime
+     */
+    protected $date;
 
-	/**
-	 *
-	 * @param \DateTime $date
-	 */
-	public function __construct(\DateTime $date = null) {
-		$date = $date ?: new \DateTime('0000-00-00');
-		$this->date = new \DateTime($date->format('Y-m-d'), $date->getTimezone());
-	}
+    /**
+     *
+     * @param \DateTime $date
+     */
+    public function __construct(\DateTime $date = null)
+    {
+        $date = $date ?: new \DateTime('0000-00-00');
+        $this->date = new \DateTime($date->format('Y-m-d'), $date->getTimezone());
+    }
 
-	/**
-	 *
-	 * @return \DateTime
-	 */
-	public function getDate() {
-		return $this->date;
-	}
-
+    /**
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
 }
-?>

@@ -21,21 +21,33 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-
 /**
  * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-abstract class AbstractAdminController extends BaseController {
-	/**
-	 */
-	public function redirectIfHtml($actionName, $controllerName = NULL, $packageKey = NULL, array $arguments = NULL, $delay = 0, $statusCode = 303, $format = NULL) {
-		if ($this->isHtmlRequest()) {
-			$this->redirect($actionName, $controllerName, $packageKey, $arguments, $delay, $statusCode, $format);
-		}
-
-	}
-
+abstract class AbstractAdminController extends BaseController
+{
+    /**
+     * @param string      $actionName
+     * @param string|null $controllerName
+     * @param string|null $packageKey
+     * @param array|null  $arguments
+     * @param int         $delay
+     * @param int         $statusCode
+     * @param string|null $format
+     */
+    public function redirectIfHtml(
+        $actionName,
+        $controllerName = null,
+        $packageKey = null,
+        array $arguments = null,
+        $delay = 0,
+        $statusCode = 303,
+        $format = null
+    ) {
+        if ($this->isHtmlRequest()) {
+            $this->redirect($actionName, $controllerName, $packageKey, $arguments, $delay, $statusCode, $format);
+        }
+    }
 }
-?>

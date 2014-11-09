@@ -22,7 +22,6 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -31,52 +30,57 @@ use TYPO3\Flow\Annotations as Flow;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @Flow\Scope("singleton")
  */
-class ExternalLocationIdentifierFactory {
+class ExternalLocationIdentifierFactory
+{
 
-	/**
-	 *
-	 * @var \TYPO3\Flow\Object\ObjectManagerInterface
-	 * @Flow\Inject 
-	 */
-	protected $objectManager;
-	
-	/**
-	 *
-	 * @var \TYPO3\Flow\Reflection\ReflectionService
-	 * @Flow\Inject 
-	 */
-	protected $reflectionService;
-	
-	public function getIdentifierOptions() {
-		$options = array(
-			'' => '---'
-		);
-		$classNames = $this->reflectionService->getAllSubClassNamesForClass('Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier');
-		foreach ($classNames as $className) {
-			$identifierInstance = $this->objectManager->get($className);
-			$options[$className] = $identifierInstance->getSchemeLabel();
-		}
-		return $options;
-	}
-	
-	/**
-	 *
-	 * @param string $prototype
-	 * @param Location $location
-	 * @return array<Org\Gucken\Events\ExternalLocationIdentifier>
-	 */
-	public function getCandidatesForLocation($prototypeClass, Location $location) {
-		$result = array();
-		if ($prototypeClass) {
-			$identifierMasterInstance = $this->objectManager->get($prototypeClass);
-			if ($identifierMasterInstance) {
-				/* @var $identifierMasterInstance ExternalLocationIdentifier */
-				$result = $identifierMasterInstance->getCandidates($location);
-			}
-		}
-		return $result;
-	}
-	
+    /**
+     *
+     * @var \TYPO3\Flow\Object\ObjectManagerInterface
+     * @Flow\Inject
+     */
+    protected $objectManager;
+
+    /**
+     *
+     * @var \TYPO3\Flow\Reflection\ReflectionService
+     * @Flow\Inject
+     */
+    protected $reflectionService;
+
+    public function getIdentifierOptions()
+    {
+        $options = array(
+            '' => '---'
+        );
+        $classNames = $this->reflectionService->getAllSubClassNamesForClass(
+            'Org\Gucken\Events\Domain\Model\ExternalLocationIdentifier'
+        );
+        foreach ($classNames as $className) {
+            $identifierInstance = $this->objectManager->get($className);
+            $options[$className] = $identifierInstance->getSchemeLabel();
+        }
+
+        return $options;
+    }
+
+    /**
+     *
+     * @param  string                                              $prototype
+     * @param  Location                                            $location
+     * @return array<Org\Gucken\Events\ExternalLocationIdentifier>
+     */
+    public function getCandidatesForLocation($prototypeClass, Location $location)
+    {
+        $result = array();
+        if ($prototypeClass) {
+            $identifierMasterInstance = $this->objectManager->get($prototypeClass);
+            if ($identifierMasterInstance) {
+                /* @var $identifierMasterInstance ExternalLocationIdentifier */
+                $result = $identifierMasterInstance->getCandidates($location);
+            }
+        }
+
+        return $result;
+    }
+
 }
-
-?>

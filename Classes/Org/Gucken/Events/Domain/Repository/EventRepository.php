@@ -16,82 +16,92 @@ use TYPO3\Flow\Persistence\QueryResultInterface;
  *
  * @Flow\Scope("singleton")
  */
-class EventRepository extends Repository {
+class EventRepository extends Repository
+{
 
-
-	protected $midnightHour = 0;
+    protected $midnightHour = 0;
 
     protected $defaultOrderings = [
         'startDateTime' => QueryInterface::ORDER_ASCENDING,
     ];
 
-	public function injectSettings($settings) {
-		$this->midnightHour = $settings['midnightHour'];
-	}
+    public function injectSettings($settings)
+    {
+        $this->midnightHour = $settings['midnightHour'];
+    }
 
-	/**
-	 * @param \DateTime $day
-	 * @return QueryResultInterface
-	 */
-	public function findOn(\DateTime $day = null) {
-		$day = $day ? clone $day : new \DateTime();
-		$day->setTime(0,0,0);
-		$day->modify('+'.$this->midnightHour.' hours');
-		$nextDay = clone $day;
-		$nextDay->modify('+1 day');
-		return $this->findBetween($day, $nextDay);
-	}
+    /**
+     * @param  \DateTime            $day
+     * @return QueryResultInterface
+     */
+    public function findOn(\DateTime $day = null)
+    {
+        $day = $day ? clone $day : new \DateTime();
+        $day->setTime(0, 0, 0);
+        $day->modify('+' . $this->midnightHour . ' hours');
+        $nextDay = clone $day;
+        $nextDay->modify('+1 day');
 
-	/**
-	 *
-	 * @param EventSearchRequest $searchRequest
-	 * @return QueryResultInterface
-	 */
-	public function findBySearchRequest(EventSearchRequest $searchRequest) {
-		$query = $this->createQuery();
-		$query = $searchRequest->apply($query);
-		return $query->execute();
-	}
-
-	/**
-	 *
-	 * @param \DateTime $startDateTime
-	 * @param \DateTime $endDateTime
-	 * @return QueryResultInterface
-	 */
-	public function findBetween(\DateTime $startDateTime = null, $endDateTime = null) {
-		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
-		$startDateTime->setTime(0,0,0);
-		$startDateTime->modify('+'.$this->midnightHour.' hours');
-		if (empty($endDateTime)) {
-			$endDateTime = clone $startDateTime;
-			$endDateTime->modify('+1 month');
-		}
-
-		$query = $this->createQuery();
-		return $query->matching($query->logicalAnd(
-			$query->greaterThanOrEqual('startDateTime', $startDateTime),
-			$query->lessThanOrEqual('startDateTime', $endDateTime)
-		))->execute();
-	}
-
+        return $this->findBetween($day, $nextDay);
+    }
 
     /**
      *
-     * @param \DateTime $startDateTime
+     * @param  EventSearchRequest   $searchRequest
      * @return QueryResultInterface
      */
-	public function findAfter(\DateTime $startDateTime = null) {
-		$startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
-		$startDateTime->setTime(0, 0, 0);
-		$startDateTime->modify('+'.$this->midnightHour.' hours');
-		$query = $this->createQuery();
-		return $query->matching($query->greaterThanOrEqual('startDateTime', $startDateTime))->execute();
-	}
+    public function findBySearchRequest(EventSearchRequest $searchRequest)
+    {
+        $query = $this->createQuery();
+        $query = $searchRequest->apply($query);
 
-	public function persistAll() {
-		$this->persistenceManager->persistAll();
-	}
+        return $query->execute();
+    }
+
+    /**
+     *
+     * @param  \DateTime            $startDateTime
+     * @param  \DateTime            $endDateTime
+     * @return QueryResultInterface
+     */
+    public function findBetween(\DateTime $startDateTime = null, $endDateTime = null)
+    {
+        $startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
+        $startDateTime->setTime(0, 0, 0);
+        $startDateTime->modify('+' . $this->midnightHour . ' hours');
+        if (empty($endDateTime)) {
+            $endDateTime = clone $startDateTime;
+            $endDateTime->modify('+1 month');
+        }
+
+        $query = $this->createQuery();
+
+        return $query->matching(
+            $query->logicalAnd(
+                $query->greaterThanOrEqual('startDateTime', $startDateTime),
+                $query->lessThanOrEqual('startDateTime', $endDateTime)
+            )
+        )->execute();
+    }
+
+    /**
+     *
+     * @param  \DateTime            $startDateTime
+     * @return QueryResultInterface
+     */
+    public function findAfter(\DateTime $startDateTime = null)
+    {
+        $startDateTime = $startDateTime ? clone $startDateTime : new \DateTime();
+        $startDateTime->setTime(0, 0, 0);
+        $startDateTime->modify('+' . $this->midnightHour . ' hours');
+        $query = $this->createQuery();
+
+        return $query->matching($query->greaterThanOrEqual('startDateTime', $startDateTime))->execute();
+    }
+
+    public function persistAll()
+    {
+        $this->persistenceManager->persistAll();
+    }
 
 }
-?>

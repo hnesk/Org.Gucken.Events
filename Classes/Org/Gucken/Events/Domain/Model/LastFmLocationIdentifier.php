@@ -22,8 +22,9 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
+
+use Lastfm\Type\Venue\Collection\Factory as VenuesFactory;
 
 /**
  * An identifier for a location on an external website or service
@@ -32,31 +33,33 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class LastFmLocationIdentifier extends ExternalLocationIdentifier {
+class LastFmLocationIdentifier extends ExternalLocationIdentifier
+{
 
-	public function getSchemeLabel() {
-		return 'Last.fm-ID';
-	}
-	
-	/**
-	 *
-	 * @param Location $location
-	 * @return array<LastFmLocationIdentifier>
-	 */
-	public function getCandidates(Location $location) {
-		$results = array();
-		$searchString = $location->getName().' '.$location->getAddress()->getAddressLocality();            
-        foreach (\Lastfm\Type\Venue\Collection\Factory::fromString($searchString) as $venue) {
-			/* @var $venue \Lastfm\Type\Venue */			
-			$results[] = new self($venue->getId(), $location, (string)$venue);
-		}
-		return $results;
-	}
-	
-	public function getUrl() {
-		return 'http://www.last.fm/venue/'.$this->getId();
-	}
+    public function getSchemeLabel()
+    {
+        return 'Last.fm-ID';
+    }
 
+    /**
+     *
+     * @param  Location                        $location
+     * @return array<LastFmLocationIdentifier>
+     */
+    public function getCandidates(Location $location)
+    {
+        $results = array();
+        $searchString = $location->getName() . ' ' . $location->getAddress()->getAddressLocality();
+        foreach (VenuesFactory::fromString($searchString) as $venue) {
+            /* @var $venue \Lastfm\Type\Venue */
+            $results[] = new self($venue->getId(), $location, (string) $venue);
+        }
+
+        return $results;
+    }
+
+    public function getUrl()
+    {
+        return 'http://www.last.fm/venue/' . $this->getId();
+    }
 }
-
-?>

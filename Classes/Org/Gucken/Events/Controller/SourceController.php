@@ -22,9 +22,6 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Org\Gucken\Events\Domain\Model;
-
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 use TYPO3\Flow\Error\Message;
@@ -33,13 +30,15 @@ use TYPO3\Flow\Reflection\ReflectionService;
 use Org\Gucken\Events\Domain\Repository\EventSourceRepository;
 use Org\Gucken\Events\Domain\Repository\TypeRepository;
 use Org\Gucken\Events\Domain\Model\EventSource\EventSourceInterface;
+use Org\Gucken\Events\Domain\Model\EventSource;
 
 /**
- * Standard controller for the Events package 
+ * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class SourceController extends AbstractAdminController {
+class SourceController extends AbstractAdminController
+{
 
     /**
      *
@@ -54,7 +53,7 @@ class SourceController extends AbstractAdminController {
      * @Flow\Inject
      */
     protected $sourceRepository;
-        
+
     /**
      *
      * @var TypeRepository
@@ -62,22 +61,23 @@ class SourceController extends AbstractAdminController {
      */
     protected $typeRepository;
 
-
     /**
      * Index action
      *
      * @return void
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         $sources = $this->sourceRepository->findAll();
         $this->view->assign('sources', $sources);
     }
 
     /**
      *
-     * @param Model\EventSource $source
+     * @param EventSource $source
      */
-    public function viewAction(Model\EventSource $source) {
+    public function viewAction(EventSource $source)
+    {
         $eventFactoids = array();
         try {
             $eventFactoids = $source->getEventFactoids();
@@ -87,107 +87,110 @@ class SourceController extends AbstractAdminController {
         }
 
         $this->view->assign('eventFactoids', $eventFactoids);
-        $this->view->assign('source', $source);         
+        $this->view->assign('source', $source);
     }
 
     /**
      *
-     * @param Model\EventSource $source
+     * @param  EventSource $source
      * @Flow\IgnoreValidation("source")
      * @return void
      */
-    public function addAction(Model\EventSource $source = null) {
-		$source = $source ?: new Model\EventSource();
+    public function addAction(EventSource $source = null)
+    {
+        $source = $source ?: new EventSource();
         $this->view->assign('source', $source);
         $this->view->assign('types', $this->typeRepository->findAll());
-        $this->view->assign('implementations',$this->getEventSourceImplementations());
+        $this->view->assign('implementations', $this->getEventSourceImplementations());
     }
 
     /**
      *
-     * @param Model\EventSource $source
+     * @param EventSource $source
      */
-    public function saveAction(Model\EventSource $source) {
-		$errors = $source->validate();
-		/* @var $errors \TYPO3\Flow\Error\Result */
-		if ($errors->hasErrors()) {
-			foreach ($errors->getFlattenedErrors() as $errorArray) {
-				foreach ($errorArray as $error) {
-					$this->flashMessageContainer->addMessage($error);
-				}
-			}
-			$this->errorAction();
-		} else {		
-			$this->sourceRepository->add($source);
-			$this->redirect('edit', NULL, NULL, array('source'=>$source));
-		}
+    public function saveAction(EventSource $source)
+    {
+        $errors = $source->validate();
+        /* @var $errors \TYPO3\Flow\Error\Result */
+        if ($errors->hasErrors()) {
+            foreach ($errors->getFlattenedErrors() as $errorArray) {
+                foreach ($errorArray as $error) {
+                    $this->flashMessageContainer->addMessage($error);
+                }
+            }
+            $this->errorAction();
+        } else {
+            $this->sourceRepository->add($source);
+            $this->redirect('edit', null, null, array('source' => $source));
+        }
     }
-
 
     /**
      *
-     * @param Model\EventSource $source
+     * @param  EventSource $source
      * @return void
      */
-    public function editAction(Model\EventSource $source) {
+    public function editAction(EventSource $source)
+    {
         $this->view->assign('source', $source);
         $this->view->assign('types', $this->typeRepository->findAll());
-        $this->view->assign('implementations',$this->getEventSourceImplementations());
+        $this->view->assign('implementations', $this->getEventSourceImplementations());
     }
 
     /**
      *
-     * @param Model\EventSource $source
+     * @param EventSource $source
      */
-    public function updateAction(Model\EventSource $source) {
-		$errors = $source->validate();
-		/* @var $errors \TYPO3\Flow\Error\Result */
-		if ($errors->hasErrors()) {
-			foreach ($errors->getFlattenedErrors() as $errorArray) {
-				foreach ($errorArray as $error) {
-					$this->flashMessageContainer->addMessage($error);
-				}
-			}
-			$this->errorAction();
-		} else {
-			$this->sourceRepository->update($source);
-			$this->redirect('index');
-		}         
+    public function updateAction(EventSource $source)
+    {
+        $errors = $source->validate();
+        /* @var $errors \TYPO3\Flow\Error\Result */
+        if ($errors->hasErrors()) {
+            foreach ($errors->getFlattenedErrors() as $errorArray) {
+                foreach ($errorArray as $error) {
+                    $this->flashMessageContainer->addMessage($error);
+                }
+            }
+            $this->errorAction();
+        } else {
+            $this->sourceRepository->update($source);
+            $this->redirect('index');
+        }
     }
 
     /**
-     * @param Model\EventSource $source
+     * @param EventSource $source
      */
-    public function deleteAction(Model\EventSource $source) {
+    public function deleteAction(EventSource $source)
+    {
         $this->sourceRepository->remove($source);
         $this->addFlashMessage($source . ' wurde gelöscht', 'Obacht!', Message::SEVERITY_NOTICE);
         $this->redirect('index');
-    }	
+    }
 
-	
-	
-	
     /**
      * gets an array of class names implementing EventSourceImplementation
      *
-     * @param array $implementations Initial implementation array
+     * @param  array $implementations Initial implementation array
      * @return array
      */
-    protected function getEventSourceImplementations($implementations = array('' => '---')) {
+    protected function getEventSourceImplementations($implementations = array('' => '---'))
+    {
         return $this->getImplementationSelect(
             EventSourceInterface::class,
             $implementations
-        );        
+        );
     }
 
     /**
      * gets an array of class names implementing an given interface
-     * 
-     * @param string $interface
-     * @param array $implementations Initial implementation array
+     *
+     * @param  string $interface
+     * @param  array  $implementations Initial implementation array
      * @return array
      */
-    protected function getImplementationSelect($interface, $implementations = array()) {
+    protected function getImplementationSelect($interface, $implementations = array())
+    {
         foreach ($this->reflectionService->getAllImplementationClassNamesForInterface($interface) as $className) {
             $readableClassName = $className;
             if (($modelNameStartPosition = \strpos($className, 'Domain\Model')) !== false) {
@@ -195,9 +198,7 @@ class SourceController extends AbstractAdminController {
             }
             $implementations[$className] = $readableClassName;
         }
+
         return $implementations;
     }
-
 }
-
-?>

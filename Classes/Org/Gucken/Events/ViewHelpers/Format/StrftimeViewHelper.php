@@ -1,10 +1,8 @@
 <?php
 namespace Org\Gucken\Events\ViewHelpers\Format;
 
-use TYPO3\Flow\Annotations as Flow;
 use TYPO3\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\Fluid\Core\ViewHelper\Exception;
-
 
 /**
  * Formats a \DateTime object.
@@ -61,47 +59,49 @@ use TYPO3\Fluid\Core\ViewHelper\Exception;
  *
  * @api
  */
-class StrftimeViewHelper extends AbstractViewHelper {
+class StrftimeViewHelper extends AbstractViewHelper
+{
 
-	/**
-	 * @var boolean
-	 */
-	protected $escapingInterceptorEnabled = FALSE;
+    /**
+     * @var boolean
+     */
+    protected $escapingInterceptorEnabled = false;
 
     /**
      * Render the supplied DateTime object as a formatted date.
      *
-     * @param mixed $date either a \DateTime object or a string that is accepted by \DateTime constructor
-     * @param string $format Format String which is taken to format the Date/Time
-     * @param string $locale Locale to use
+     * @param  mixed     $date   either a \DateTime object or a string that is accepted by \DateTime constructor
+     * @param  string    $format Format String which is taken to format the Date/Time
+     * @param  string    $locale Locale to use
      * @throws Exception
-     * @return string Formatted date
+     * @return string    Formatted date
      * @api
      */
-	public function render($date = NULL, $format = 'Y-m-d',$locale = 'de_DE.utf8') {
-		if ($date === NULL) {
-			$date = $this->renderChildren();
-			if ($date === NULL) {
-				return '';
-			}
-		}
-		if (!$date instanceof \DateTime) {
-			try {
-				$date = new \DateTime($date);
-			} catch (\Exception $exception) {
-				throw new Exception('"' . $date . '" could not be parsed by \DateTime constructor.', 1241722579);
-			}
-		}
-		$settedLocale = null;
-		$currentLocale =  setlocale(LC_TIME, 0);
-		if ($locale !==  $currentLocale) {
-			$settedLocale = setlocale(LC_TIME, $locale);
-		}
-		$timeString = strftime($format, $date->getTimestamp());
-		if ($settedLocale) {
-			setlocale(LC_TIME, $currentLocale);
-		}
-		return $timeString;
-	}
+    public function render($date = null, $format = 'Y-m-d', $locale = 'de_DE.utf8')
+    {
+        if ($date === null) {
+            $date = $this->renderChildren();
+            if ($date === null) {
+                return '';
+            }
+        }
+        if (!$date instanceof \DateTime) {
+            try {
+                $date = new \DateTime($date);
+            } catch (\Exception $exception) {
+                throw new Exception('"' . $date . '" could not be parsed by \DateTime constructor.', 1241722579);
+            }
+        }
+        $settedLocale = null;
+        $currentLocale = setlocale(LC_TIME, 0);
+        if ($locale !== $currentLocale) {
+            $settedLocale = setlocale(LC_TIME, $locale);
+        }
+        $timeString = strftime($format, $date->getTimestamp());
+        if ($settedLocale) {
+            setlocale(LC_TIME, $currentLocale);
+        }
+
+        return $timeString;
+    }
 }
-?>

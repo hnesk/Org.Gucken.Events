@@ -22,7 +22,6 @@ namespace Org\Gucken\Events\Domain\Model;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -32,41 +31,47 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class FacebookLocationIdentifier extends ExternalLocationIdentifier {
+class FacebookLocationIdentifier extends ExternalLocationIdentifier
+{
 
-	public function getSchemeLabel() {
-		return 'Facebook-ID';
-	}
+    public function getSchemeLabel()
+    {
+        return 'Facebook-ID';
+    }
 
-	public function getCandidates(Location $location) {
-		$results = $this->getSearchResults($location, $location->getName().' '.$location->getAddress()->getAddressLocality());
-		if (count($results) === 0) {
-			$results = $this->getSearchResults($location, $location->getName());
-		}
-		return $results;				
-	}
-	
-	/**
-	 *
-	 * @param Location $location
-	 * @param string $searchString
-	 * @return array
-	 */
-	protected function getSearchResults(Location $location, $searchString) {
-		$results = array();
-		foreach (\Facebook\Type\Page\Collection\Factory::fromString($searchString) as $venue) {
-			/* @var $venue \Lastfm\Type\Venue */			
-			$results[] = new self($venue->getId(), $location, (string)$venue);
-		}
-		return $results;
-	}
-	
-	public function getUrl() {
-		return 'http://www.facebook.com/'.$this->getId();
-	}
-	
-	
+    public function getCandidates(Location $location)
+    {
+        $results = $this->getSearchResults(
+            $location,
+            $location->getName() . ' ' . $location->getAddress()->getAddressLocality()
+        );
+        if (count($results) === 0) {
+            $results = $this->getSearchResults($location, $location->getName());
+        }
+
+        return $results;
+    }
+
+    /**
+     *
+     * @param  Location $location
+     * @param  string   $searchString
+     * @return array
+     */
+    protected function getSearchResults(Location $location, $searchString)
+    {
+        $results = array();
+        foreach (\Facebook\Type\Page\Collection\Factory::fromString($searchString) as $venue) {
+            /* @var $venue \Lastfm\Type\Venue */
+            $results[] = new self($venue->getId(), $location, (string) $venue);
+        }
+
+        return $results;
+    }
+
+    public function getUrl()
+    {
+        return 'http://www.facebook.com/' . $this->getId();
+    }
 
 }
-
-?>

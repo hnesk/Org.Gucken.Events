@@ -23,7 +23,6 @@ namespace Org\Gucken\Events\Domain\Model;
 
 use Org\Gucken\Events\Domain\Model;
 
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
 /**
@@ -32,49 +31,48 @@ use TYPO3\Flow\Annotations as Flow;
  * @Flow\Scope("prototype")
  * @Flow\Entity
  */
-class EventProposal extends EventFactoid {
+class EventProposal extends EventFactoid
+{
 
-	/**
-	 *
-	 * @var string
-	 * @Flow\Validate(type="NotEmpty")
-	 */
-	protected $locationText;
+    /**
+     *
+     * @var string
+     * @Flow\Validate(type="NotEmpty")
+     */
+    protected $locationText;
 
+    /**
+     *
+     * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
+     * @Flow\Inject
+     */
+    protected $sourceRepository;
 
-	/**
-	 *
-	 * @var \Org\Gucken\Events\Domain\Repository\EventSourceRepository
-	 * @Flow\Inject
-	 */
-	protected $sourceRepository;
+    /**
+     *
+     */
+    public function initializeObject()
+    {
+        $this->setSource($this->sourceRepository->findOneByCode('manual'));
 
-	/**
-	 *
-	 */
-	public function initializeObject() {
-		$this->setSource($this->sourceRepository->findOneByCode('manual'));
+    }
 
-	}
+    /**
+     *
+     * @return string
+     */
+    public function getLocationText()
+    {
+        return $this->locationText;
+    }
 
-	/**
-	 *
-	 * @return string
-	 */
-	public function getLocationText() {
-		return $this->locationText;
-	}
-
-	/**
-	 *
-	 * @param string $locationText
-	 */
-	public function setLocationText($locationText) {
-		$this->locationText = $locationText;
-	}
-
-
+    /**
+     *
+     * @param string $locationText
+     */
+    public function setLocationText($locationText)
+    {
+        $this->locationText = $locationText;
+    }
 
 }
-
-?>

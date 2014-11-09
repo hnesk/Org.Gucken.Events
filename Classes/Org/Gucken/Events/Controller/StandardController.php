@@ -21,44 +21,45 @@ namespace Org\Gucken\Events\Controller;
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
 
-use Doctrine\ORM\Mapping as ORM;
 use TYPO3\Flow\Annotations as Flow;
 
+use Org\Gucken\Events\Domain\Model\Event;
 use Org\Gucken\Events\Domain\Repository\EventRepository;
 use Org\Gucken\Events\Property\TypeConverter\DateTimeConverter;
-use Org\Gucken\Events\Domain\Model\Event;
 
 /**
  * Standard controller for the Events package
  *
  * @license http://www.gnu.org/licenses/lgpl.html GNU Lesser General Public License, version 3 or later
  */
-class StandardController extends BaseController {
-	/**
-	 *
-	 * @var EventRepository
-	 * @Flow\Inject
-	 */
-	protected $eventRepository;
-
-
-	/**
-	 * Index action
-	 *
-	 * @return void
-	 */
-	public function indexAction() {
-		$events = $this->eventRepository->findBetween(new \DateTime('today'), new \DateTime('+14 days'));
-		$this->view->assign('events', $events);
-	}
+class StandardController extends BaseController
+{
+    /**
+     *
+     * @var EventRepository
+     * @Flow\Inject
+     */
+    protected $eventRepository;
 
     /**
      * Index action
      *
-     * @param \DateTime $date
      * @return void
      */
-    public function testAction(\DateTime $date) {
+    public function indexAction()
+    {
+        $events = $this->eventRepository->findBetween(new \DateTime('today'), new \DateTime('+14 days'));
+        $this->view->assign('events', $events);
+    }
+
+    /**
+     * Index action
+     *
+     * @param  \DateTime $date
+     * @return void
+     */
+    public function testAction(\DateTime $date)
+    {
         $this->view->assign('date', $date);
     }
 
@@ -67,31 +68,24 @@ class StandardController extends BaseController {
      *
      * @return void
      */
-    public function initializeTestAction() {
+    public function initializeTestAction()
+    {
         $date = $this->arguments->getArgument('date')->getPropertyMappingConfiguration();
         $date->setTypeConverterOption(DateTimeConverter::class, DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
     }
 
-
-
-
-	/**
-	 *
-	 * @param Event $event
-	 * @return string
-	 */
-	public function showAction(Event $event) {
-		$this->view->assign('event', $event);
-		if ($this->isHtmlRequest()) {
-			return $this->view->render('show');
-		} else {
-			return $this->view->render('single');
-		}
-
-	}
-
-
-
+    /**
+     *
+     * @param  Event  $event
+     * @return string
+     */
+    public function showAction(Event $event)
+    {
+        $this->view->assign('event', $event);
+        if ($this->isHtmlRequest()) {
+            return $this->view->render('show');
+        } else {
+            return $this->view->render('single');
+        }
+    }
 }
-
-?>
